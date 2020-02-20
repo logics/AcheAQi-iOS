@@ -15,6 +15,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        if #available(iOS 13.0, *) {
+            let appearance = UINavigationBarAppearance()
+            appearance.backgroundColor = #colorLiteral(red: 0.7960784314, green: 0.6235294118, blue: 0.07450980392, alpha: 1) // #colorLiteral(red: 0.3843137255, green: 0.6235294118, blue: 0.6745098039, alpha: 1)
+            appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
+            appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
+            appearance.shadowImage = UIImage()
+            appearance.shadowColor = .clear
+
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().standardAppearance = appearance
+            UINavigationBar.appearance().compactAppearance = appearance
+            UINavigationBar.appearance().scrollEdgeAppearance = appearance
+            UINavigationBar.appearance().shadowImage = UIImage()
+        } else {
+            UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0.7960784314, green: 0.6235294118, blue: 0.07450980392, alpha: 1) // #colorLiteral(red: 0.3843137255, green: 0.6235294118, blue: 0.6745098039, alpha: 1)
+            UINavigationBar.appearance().isTranslucent = false
+        }
+
         return true
     }
 

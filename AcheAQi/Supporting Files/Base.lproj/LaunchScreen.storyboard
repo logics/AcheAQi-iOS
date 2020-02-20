@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15509"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="EHf-IW-A2E">
+            <objects>
+                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="city" translatesAutoresizingMaskIntoConstraints="NO" id="N3f-U4-qKP">
+                                <rect key="frame" x="0.0" y="607" width="414" height="289"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="N3f-U4-qKP" secondAttribute="height" multiplier="414:289" id="65w-4Z-0z2"/>
+                                </constraints>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logoLaunch" translatesAutoresizingMaskIntoConstraints="NO" id="7Fu-sJ-u6b">
+                                <rect key="frame" x="43.5" y="304" width="327" height="263"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="263" id="9pN-gJ-slL"/>
+                                    <constraint firstAttribute="width" constant="327" id="bUw-yO-qCz"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" name="sky"/>
+                        <constraints>
+                            <constraint firstItem="7Fu-sJ-u6b" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="18e-pM-bTs"/>
+                            <constraint firstAttribute="bottom" secondItem="N3f-U4-qKP" secondAttribute="bottom" id="Ec6-CE-O9u"/>
+                            <constraint firstItem="N3f-U4-qKP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="JvU-hz-kpy"/>
+                            <constraint firstItem="N3f-U4-qKP" firstAttribute="top" secondItem="7Fu-sJ-u6b" secondAttribute="bottom" constant="40" id="Yzj-Fh-Zme"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="N3f-U4-qKP" secondAttribute="trailing" id="fQF-2S-Dz9"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="52.173913043478265" y="375"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="city" width="414" height="289"/>
+        <image name="logoLaunch" width="327" height="263"/>
+        <namedColor name="sky">
+            <color red="0.83137254901960789" green="0.95686274509803926" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>
