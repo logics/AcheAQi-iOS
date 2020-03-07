@@ -7,46 +7,50 @@
 //
 
 import UIKit
+import CoreLocation
+import AlamofireImage
 
 private let reuseIdentifier = "ProdutoCell"
+private let headerViewID = "HeaderView"
 
-class MainCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class MainCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIPopoverPresentationControllerDelegate {
 
+    @IBOutlet weak var flowLayout: UICollectionViewFlowLayout!
+    @IBOutlet weak var filterButton: UIBarButtonItem!
+    
     var searchController: UISearchController!
     var resultsController: MainResultsTableController!
-
     var produtos: [Produto] = []
+    var filters = Filters()
+    var currentLocation: CLLocationCoordinate2D?
+    var isUpdatingLocation: Bool = false
+    
+    lazy var locationManager: CLLocationManager = {
+        let locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization()
+        
+        return locationManager
+    }()
+
+    // MARK: - VC Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup Views
         setupSearchBar()
+        setupRefreshControl()
         
-        produtos.append(Produto(id: 1,
-                                empresa: Empresa(id: 1, nome: "Teste", telefone: "", logomarca: "", cep: "", logradouro: "", cidade: "", bairro: "", numero: 1, complemento: "", estado: "", latitude: 1, longitude: 1, createdAt: "", updatedAt: "", status: true),
-                                categoria: Categoria(id: 1, banner: "", nome: "Laser", createdAt: "", updatedAt: ""),
-                                nome: "Churrasqueira Steakhouse Grill Polishop",
-                                banner: "",
-                                createdAt: "",
-                                updatedAt: "",
-                                foto: "",
-                                descricao: "",
-                                mostraValor: true,
-                                valor: 120.95))
+        // Define Layout Settings
+        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
         
-        produtos.append(Produto(id: 2,
-                                empresa: Empresa(id: 1, nome: "Teste", telefone: "", logomarca: "", cep: "", logradouro: "", cidade: "", bairro: "", numero: 1, complemento: "", estado: "", latitude: 1, longitude: 1, createdAt: "", updatedAt: "", status: true),
-                                categoria: Categoria(id: 1, banner: "", nome: "Laser", createdAt: "", updatedAt: ""),
-                                nome: "Churrasqueira Elétrica Grill Polishop",
-                                banner: "",
-                                createdAt: "",
-                                updatedAt: "",
-                                foto: "",
-                                descricao: "",
-                                mostraValor: true,
-                                valor: 150.99))
-
+        // Reload Data
+        collectionView.beginRefreshing()
     }
+    
+    // MARK: Private Functions
     
     private func setupSearchBar() {
         
@@ -60,26 +64,16 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self // Monitor when the search button is tapped.
         
-        
-        
         let searchBar = searchController.searchBar
-//        searchBar.setImage(#imageLiteral(resourceName: "searchBarIcon.pdf"), for: .search, state: .normal)
         
         if let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField {
-//            textFieldInsideSearchBar.textColor = .white
-            textFieldInsideSearchBar.backgroundColor = .white // UIColor.black.withAlphaComponent(0.3)
-//            textFieldInsideSearchBar.tintColor = .white
+            textFieldInsideSearchBar.backgroundColor = .white
             textFieldInsideSearchBar.layer.cornerRadius = 18
             textFieldInsideSearchBar.layer.masksToBounds = true
             
             let attrString = NSAttributedString(string: "Informe um produto", attributes: [.foregroundColor: UIColor.white])
             
             textFieldInsideSearchBar.attributedPlaceholder = attrString
-            
-//            if let textFieldInsideSearchBarLabel = textFieldInsideSearchBar.value(forKey: "placeholderLabel") as? UILabel {
-//                textFieldInsideSearchBarLabel.textColor = .white
-//                textFieldInsideSearchBarLabel.tintColor = .white
-//            }
         }
         searchController.hidesNavigationBarDuringPresentation = false
         
@@ -88,16 +82,81 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         definesPresentationContext = true
     }
 
-    /*
+    private func setupRefreshControl() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchRemoteData), for: .valueChanged)
+        
+        collectionView.refreshControl = refreshControl
+    }
+    
+    private func startMySignificantLocationChanges() {
+        if !CLLocationManager.significantLocationChangeMonitoringAvailable() {
+            // The device does not support this service.
+            locationManager.startUpdatingLocation()
+            return
+        }
+        locationManager.startMonitoringSignificantLocationChanges()
+        
+        isUpdatingLocation = true
+    }
+    
+    @objc private func fetchRemoteData() {
+        var params = [String: Any]()
+        
+        if filters.count > 0 {
+            if filters.useLocation, let location = currentLocation {
+                params["order[distance]"] = String(format: "ASC:%ld,%ld", location.latitude, location.longitude)
+            }
+            
+            for categoria in filters.categorias {
+                params["categoria.nome[]"] = categoria.nome
+            }
+        }
+        
+        API.fetchProdutos(page: 1, params: params) { response in
+            
+            if let errorMsg = response.errorMessage {
+                AlertController.showAlert(message: errorMsg)
+            }
+            
+            self.produtos = response.result.value ?? Produtos()
+            self.collectionView.reloadData()
+            
+            self.collectionView.endRefreshing()
+        }
+    }
+    
+    // MARK: - IBActions
+    
+    @IBAction func openFilter(_ sender: UIBarButtonItem) {
+        let filtroVC = self.storyboard!.instantiateViewController(identifier: "MainFiltroViewController") as! FiltroTableViewController
+        filtroVC.filters = self.filters
+        filtroVC.filtroDelegate = self
+        
+        let vc = UINavigationController(rootViewController: filtroVC)
+        vc.navigationBar.barTintColor = .clear
+        vc.navigationBar.backgroundColor = .clear
+        
+        vc.modalPresentationStyle = .popover
+        
+        let popover: UIPopoverPresentationController = vc.popoverPresentationController!
+        popover.permittedArrowDirections = .up
+        popover.barButtonItem = sender
+        popover.delegate = self
+        
+        present(vc, animated: true, completion: nil)
+    }
+    
+    // MARK: - UIAdaptivePresentationControllerDelegate
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
+    }
+
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
+        
     }
-    */
-
 }
 
 // MARK - Collection View Delegate and Datasource
@@ -108,7 +167,6 @@ extension MainCollectionViewController {
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return produtos.count
@@ -121,6 +179,8 @@ extension MainCollectionViewController {
         
         cell.nomeLabel.text = produto.nome
         cell.valorLabel.text = "R$ " + produto.valor.description
+                
+        cell.imageView.af_setImage(withURL: URL(wsURLWithPath: produto.foto))
     
         return cell
     }
@@ -142,15 +202,6 @@ extension MainCollectionViewController {
     */
 
     /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
     override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
     
     }
@@ -158,15 +209,33 @@ extension MainCollectionViewController {
     
     // MARK: - UICollectionViewDelegateFlowLayout
         
-    //    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    //        let width = CGFloat((collectionView.frame.width / 2))
-    //        let height = CGFloat(width * 1.5)
-    //
-    ////        return CGSize(width: width, height: height)
-    //        return CGSize(width: 190.0, height: 228.0)
-    //    }
-
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return ProdutoCollectionViewCell.sizeForCell()
+    }
 }
+
+
+// MARK: - Filter Delegate
+
+extension MainCollectionViewController: MainFiltroDelegate {
+    func didChangeFilters(filters: Filters) {
+        self.filters = filters
+        
+        let badge = filters.count > 0 ? String(filters.count) : nil
+        
+        self.filterButton.setBadge(text: badge)
+        
+        if filters.useLocation, isUpdatingLocation == false {
+            startMySignificantLocationChanges()
+        }
+        
+        // Update Results
+        DispatchQueue.main.async {
+            self.collectionView.beginRefreshing()
+        }
+    }
+}
+
 
 // MARK: - Search Results Delegate
 
@@ -238,5 +307,25 @@ extension MainCollectionViewController: UITableViewDelegate {
         }
         
         print(searchString ?? "")
+    }
+}
+
+// MARK: - Location Manager Delegate
+
+extension MainCollectionViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        if status == .authorizedWhenInUse {
+            locationManager.requestLocation()
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first {
+            currentLocation = location.coordinate
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print("Falha no LocationManager error:: \(error)")
     }
 }

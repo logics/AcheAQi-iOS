@@ -17,9 +17,21 @@ class ProdutoCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.contentView.translatesAutoresizingMaskIntoConstraints = false
+        self.translatesAutoresizingMaskIntoConstraints = false
         
-        let screenWidth = UIScreen.main.bounds.size.width
-        widthAnchor.constraint(equalToConstant: (screenWidth / 2) - 2).isActive = true
+        let size = ProdutoCollectionViewCell.sizeForCell()
+        
+        widthAnchor.constraint(equalToConstant: size.width).isActive = true
+        heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        
+        layoutIfNeeded()
+    }
+    
+    static func sizeForCell() -> CGSize {
+        
+        let width = (UIScreen.main.bounds.size.width / 2) - 2
+        let height = CGFloat(width * 1.3)
+
+        return CGSize(width: width, height: height)
     }
 }

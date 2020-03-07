@@ -24,15 +24,15 @@ import Alamofire
 // MARK: - Empresa
 class Empresa: Codable {
     let id: Int
-    let nome, telefone, logomarca, cep: String
-    let logradouro, cidade, bairro: String
-    let numero: Int
-    let complemento, estado: String
-    let latitude, longitude: Int
+    let nome, telefone, cep: String
+    let logradouro, estado, cidade, bairro: String
+    let numero: Int?
+    let latitude, longitude: Double
     let createdAt, updatedAt: String
     let status: Bool
+    let logomarca, complemento: String?
 
-    init(id: Int, nome: String, telefone: String, logomarca: String, cep: String, logradouro: String, cidade: String, bairro: String, numero: Int, complemento: String, estado: String, latitude: Int, longitude: Int, createdAt: String, updatedAt: String, status: Bool) {
+    init(id: Int, nome: String, telefone: String, logomarca: String?, cep: String, logradouro: String, cidade: String, bairro: String, numero: Int?, complemento: String?, estado: String, latitude: Double, longitude: Double, createdAt: String, updatedAt: String, status: Bool) {
         self.id = id
         self.nome = nome
         self.telefone = telefone
@@ -83,8 +83,8 @@ extension Empresa {
         numero: Int? = nil,
         complemento: String? = nil,
         estado: String? = nil,
-        latitude: Int? = nil,
-        longitude: Int? = nil,
+        latitude: Double? = nil,
+        longitude: Double? = nil,
         createdAt: String? = nil,
         updatedAt: String? = nil,
         status: Bool? = nil

@@ -14,12 +14,13 @@ class Produto: NSObject, Codable {
     let id: Int
     let empresa: Empresa
     let categoria: Categoria
-    let nome, banner, createdAt, updatedAt: String
-    let foto, descricao: String
+    let nome, createdAt, updatedAt: String
+    let banner, descricao: String?
+    let foto: String
     let mostraValor: Bool
     let valor: Float
 
-    init(id: Int, empresa: Empresa, categoria: Categoria, nome: String, banner: String, createdAt: String, updatedAt: String, foto: String, descricao: String, mostraValor: Bool, valor: Float) {
+    init(id: Int, empresa: Empresa, categoria: Categoria, nome: String, banner: String?, createdAt: String, updatedAt: String, foto: String, descricao: String?, mostraValor: Bool, valor: Float) {
         self.id = id
         self.empresa = empresa
         self.categoria = categoria
@@ -107,4 +108,3 @@ extension Produto {
         return String(data: try self.jsonData(), encoding: encoding)
     }
 }
-

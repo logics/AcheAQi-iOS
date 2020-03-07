@@ -25,14 +25,22 @@ import Alamofire
 // MARK: - Categoria
 class Categoria: Codable {
     let id: Int
-    let banner, nome, createdAt, updatedAt: String
+    let nome, createdAt, updatedAt: String
+    let banner: String?
 
-    init(id: Int, banner: String, nome: String, createdAt: String, updatedAt: String) {
+    init(id: Int, banner: String?, nome: String, createdAt: String, updatedAt: String) {
         self.id = id
         self.banner = banner
         self.nome = nome
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+    }
+}
+
+// MARK: Categoria Equatable
+extension Categoria: Equatable {
+    static func == (lhs: Categoria, rhs: Categoria) -> Bool {
+        return lhs.id == rhs.id
     }
 }
 

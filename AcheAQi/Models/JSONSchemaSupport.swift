@@ -66,6 +66,8 @@ extension DataRequest {
             guard let data = data else {
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
+            
+            let type = T.self
 
             return Result { try newJSONDecoder().decode(T.self, from: data) }
         }
@@ -87,7 +89,7 @@ extension DataRequest {
     }
     
     @discardableResult
-    func responseProdutos(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<Categorias>) -> Void) -> Self {
+    func responseCategorias(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<Categorias>) -> Void) -> Self {
         return responseDecodable(queue: queue, completionHandler: completionHandler)
     }
 }

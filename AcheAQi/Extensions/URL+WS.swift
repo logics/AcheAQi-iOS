@@ -10,7 +10,13 @@ import Foundation
 
 extension URL {
     init(wsURLWithPath path: String) {
-        self = URL(string: Constants.baseAPIURL + "/" + path)!
+        var urlPath = path
+        
+        if path.length > 0, path.prefix(1) != "/" {
+            urlPath = "/" + path
+        }
+        
+        self = URL(string: Constants.baseAPIURL + urlPath)!
     }
 }
 
