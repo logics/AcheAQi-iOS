@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A3398EBF2417C7BE00C3712B /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3398EBE2417C7BE00C3712B /* MyButton.swift */; };
 		A339A62624085381007970F6 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A339A62524085381007970F6 /* MainHeaderView.swift */; };
 		A35588CA2412CB2300DED77E /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35588C92412CB2300DED77E /* UICollectionViewExtension.swift */; };
 		A35588CE2412DAA200DED77E /* Alert.xib in Resources */ = {isa = PBXBuildFile; fileRef = A35588CC2412DAA100DED77E /* Alert.xib */; };
@@ -66,9 +67,12 @@
 		A3D07CAB23F6D9BD000EFED7 /* GradientPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D07CAA23F6D9BC000EFED7 /* GradientPoint.swift */; };
 		A3E924A323FB021100AD4149 /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E924A223FB021100AD4149 /* MainCollectionViewController.swift */; };
 		A3E924A523FB28F500AD4149 /* ProdutoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E924A423FB28F500AD4149 /* ProdutoCollectionViewCell.swift */; };
+		A3F50F862416BE6E00FD387B /* DetalheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F50F852416BE6E00FD387B /* DetalheViewController.swift */; };
+		A3F50F902416E49200FD387B /* MaterialDesignWidgets in Frameworks */ = {isa = PBXBuildFile; productRef = A3F50F8F2416E49200FD387B /* MaterialDesignWidgets */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A3398EBE2417C7BE00C3712B /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
 		A339A62524085381007970F6 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		A35588C92412CB2300DED77E /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		A35588CC2412DAA100DED77E /* Alert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Alert.xib; sourceTree = "<group>"; };
@@ -127,6 +131,7 @@
 		A3D07CAA23F6D9BC000EFED7 /* GradientPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientPoint.swift; sourceTree = "<group>"; };
 		A3E924A223FB021100AD4149 /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		A3E924A423FB28F500AD4149 /* ProdutoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProdutoCollectionViewCell.swift; sourceTree = "<group>"; };
+		A3F50F852416BE6E00FD387B /* DetalheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalheViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -135,6 +140,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3D07C8623F4CD0F000EFED7 /* Alamofire in Frameworks */,
+				A3F50F902416E49200FD387B /* MaterialDesignWidgets in Frameworks */,
 				A390986323FD7E0C0068E997 /* AlamofireImage in Frameworks */,
 				A39098A923FDA8010068E997 /* Spring in Frameworks */,
 			);
@@ -208,6 +214,7 @@
 				A37A72D323F81DE800DD6C16 /* NavigationViewController.swift */,
 				A3E924A623FB28FC00AD4149 /* Main */,
 				A35588D02412DAAF00DED77E /* Alert */,
+				A3F50F872416BE7900FD387B /* Detalhe */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -218,6 +225,7 @@
 				A3D07C8C23F6D76C000EFED7 /* AvatarView.swift */,
 				A3D07C8A23F6D76C000EFED7 /* CustomView.swift */,
 				A3D07C8B23F6D76C000EFED7 /* GradientButton.swift */,
+				A3398EBE2417C7BE00C3712B /* MyButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -295,6 +303,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		A3F50F872416BE7900FD387B /* Detalhe */ = {
+			isa = PBXGroup;
+			children = (
+				A3F50F852416BE6E00FD387B /* DetalheViewController.swift */,
+			);
+			path = Detalhe;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -316,6 +332,7 @@
 				A3D07C8523F4CD0F000EFED7 /* Alamofire */,
 				A390986223FD7E0C0068E997 /* AlamofireImage */,
 				A39098A823FDA8010068E997 /* Spring */,
+				A3F50F8F2416E49200FD387B /* MaterialDesignWidgets */,
 			);
 			productName = AcheAQi;
 			productReference = A3D07C6D23F33E27000EFED7 /* AcheAQi.app */;
@@ -349,6 +366,7 @@
 				A3D07C8423F4CD0E000EFED7 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A390986123FD7E0C0068E997 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				A39098A723FDA8010068E997 /* XCRemoteSwiftPackageReference "Spring" */,
+				A3F50F8E2416E49200FD387B /* XCRemoteSwiftPackageReference "MaterialDesignWidgetsiOSLite" */,
 			);
 			productRefGroup = A3D07C6E23F33E27000EFED7 /* Products */;
 			projectDirPath = "";
@@ -401,6 +419,7 @@
 				A35588CF2412DAA200DED77E /* AlertController.swift in Sources */,
 				A3D07C8F23F6D76C000EFED7 /* GradientButton.swift in Sources */,
 				A3740472240ED45F0093C6B9 /* Constants.swift in Sources */,
+				A3F50F862416BE6E00FD387B /* DetalheViewController.swift in Sources */,
 				A3D07C8D23F6D76C000EFED7 /* CustomView.swift in Sources */,
 				A3740481240ED5520093C6B9 /* StringExtension.swift in Sources */,
 				A3740488240ED5520093C6B9 /* UIView+Shadow.swift in Sources */,
@@ -420,6 +439,7 @@
 				A3D07C7123F33E27000EFED7 /* AppDelegate.swift in Sources */,
 				A37EAC2723FDB03800FF0F7C /* JSONSchemaSupport.swift in Sources */,
 				A35B7C8F24099BCB00B709DC /* Filters.swift in Sources */,
+				A3398EBF2417C7BE00C3712B /* MyButton.swift in Sources */,
 				A374047A240ED5520093C6B9 /* NSNotification+Convenience.swift in Sources */,
 				A374047F240ED5520093C6B9 /* String+QRBarCode.swift in Sources */,
 				A3E924A523FB28F500AD4149 /* ProdutoCollectionViewCell.swift in Sources */,
@@ -677,6 +697,14 @@
 				minimumVersion = 4.9.1;
 			};
 		};
+		A3F50F8E2416E49200FD387B /* XCRemoteSwiftPackageReference "MaterialDesignWidgetsiOSLite" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/romeugodoi/MaterialDesignWidgetsiOSLite";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.0.11;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -694,6 +722,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A3D07C8423F4CD0E000EFED7 /* XCRemoteSwiftPackageReference "Alamofire" */;
 			productName = Alamofire;
+		};
+		A3F50F8F2416E49200FD387B /* MaterialDesignWidgets */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3F50F8E2416E49200FD387B /* XCRemoteSwiftPackageReference "MaterialDesignWidgetsiOSLite" */;
+			productName = MaterialDesignWidgets;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

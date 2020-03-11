@@ -12,6 +12,7 @@ import AlamofireImage
 
 private let reuseIdentifier = "ProdutoCell"
 private let headerViewID = "HeaderView"
+private let segueShowProduto = "Show Produto Detalhe Segue"
 
 class MainCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIPopoverPresentationControllerDelegate {
 
@@ -24,6 +25,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     var filters = Filters()
     var currentLocation: CLLocationCoordinate2D?
     var isUpdatingLocation: Bool = false
+    var produtoSelected: Produto?
     
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -48,6 +50,13 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         // Reload Data
         collectionView.beginRefreshing()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        navigationController?.view.setNeedsLayout()
+        navigationController?.view.layoutIfNeeded()
     }
     
     // MARK: Private Functions
@@ -201,11 +210,11 @@ extension MainCollectionViewController {
     }
     */
 
-    /*
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        produtoSelected = produtos[indexPath.item]
+        
+        performSegue(withIdentifier: segueShowProduto, sender: self)
     }
-    */
     
     // MARK: - UICollectionViewDelegateFlowLayout
         
