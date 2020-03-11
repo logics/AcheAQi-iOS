@@ -32,24 +32,10 @@ class DetalheViewController: UIViewController {
         
         originalImageHeight = imageHeightConstraint.constant
         scrollView.delegate = self
-        
-        
-//        showMapaButton.imageView.image = UIImage(systemName: "mappin.and.ellipse")
-//        whatsAppButton.imageView.image = UIImage(systemName: "mappin.and.ellipse")
-//        telButton.imageView.image = UIImage(systemName: "phone.fill.arrow.up.right")
-//
-//        showMapaButton.label.text = "Como chegar"
-//        whatsAppButton.label.text = "Entre no chat"
-//        telButton.label.text = "Ligar"
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    @IBAction func openMap(_ sender: UIControl) {
         
-        descricaoLabel.sizeToFit()
-    }
-    
-    @IBAction func openMap(_ sender: Any) {
     }
     
     @IBAction func openWhatsApp(_ sender: Any) {
@@ -57,20 +43,10 @@ class DetalheViewController: UIViewController {
     
     @IBAction func call(_ sender: Any) {
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension DetalheViewController: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let offset = scrollView.contentOffset.y
@@ -90,8 +66,6 @@ extension DetalheViewController: UIScrollViewDelegate {
             imageHeightConstraint.constant = originalImageHeight
         }
         
-        print(currentTop)
-        
-//        imageTopConstraint.constant = currentTop
+        imageTopConstraint.constant = currentTop
     }
 }

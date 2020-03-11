@@ -239,7 +239,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="churrasqueira" translatesAutoresizingMaskIntoConstraints="NO" id="zg9-NL-wZI">
-                                                    <rect key="frame" x="4" y="4" width="152.00000000000011" height="129"/>
+                                                    <rect key="frame" x="4" y="4" width="152" height="129"/>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -321,41 +321,41 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="0iV-Yu-zof">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
-                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Sec-J5-Bx1" userLabel="Stack View Global">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1351"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWl-5f-ju8" userLabel="View Foto" customClass="DesignableView" customModule="Spring">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWl-5f-ju8" userLabel="View Foto" customClass="DesignableView" customModule="Spring">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="churrasqueira" translatesAutoresizingMaskIntoConstraints="NO" id="Ons-QB-1gC">
                                                 <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
-                                                <subviews>
-                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="churrasqueira" translatesAutoresizingMaskIntoConstraints="NO" id="Ons-QB-1gC">
-                                                        <rect key="frame" x="0.0" y="0.0" width="414.00000000000011" height="220"/>
-                                                    </imageView>
-                                                </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="220" id="2gh-u1-eU3"/>
-                                                    <constraint firstItem="Ons-QB-1gC" firstAttribute="leading" secondItem="zWl-5f-ju8" secondAttribute="leading" id="FWZ-yw-xk1"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Ons-QB-1gC" secondAttribute="trailing" id="MBP-El-Wy5"/>
-                                                    <constraint firstItem="Ons-QB-1gC" firstAttribute="top" secondItem="zWl-5f-ju8" secondAttribute="top" id="Vk1-jF-P7x"/>
-                                                    <constraint firstAttribute="bottom" secondItem="Ons-QB-1gC" secondAttribute="bottom" id="oYr-WN-2y5"/>
-                                                </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                                                        <real key="value" value="5"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
-                                                        <real key="value" value="0.14999999999999999"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetY">
-                                                        <real key="value" value="2"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
-                                            </view>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="220" id="2gh-u1-eU3"/>
+                                            <constraint firstItem="Ons-QB-1gC" firstAttribute="leading" secondItem="zWl-5f-ju8" secondAttribute="leading" id="FWZ-yw-xk1"/>
+                                            <constraint firstAttribute="trailing" secondItem="Ons-QB-1gC" secondAttribute="trailing" id="MBP-El-Wy5"/>
+                                            <constraint firstItem="Ons-QB-1gC" firstAttribute="top" secondItem="zWl-5f-ju8" secondAttribute="top" id="Vk1-jF-P7x"/>
+                                            <constraint firstAttribute="bottom" secondItem="Ons-QB-1gC" secondAttribute="bottom" id="oYr-WN-2y5"/>
+                                        </constraints>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                <real key="value" value="0.14999999999999999"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetY">
+                                                <real key="value" value="2"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                    </view>
+                                    <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="Sec-J5-Bx1" userLabel="Stack View Global">
+                                        <rect key="frame" x="0.0" y="235" width="414" height="1351"/>
+                                        <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="ykh-6P-U9a" userLabel="Stack View Interno">
-                                                <rect key="frame" x="15" y="235" width="384" height="1116"/>
+                                                <rect key="frame" x="15" y="0.0" width="384" height="1351"/>
                                                 <subviews>
                                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="t8b-XZ-Q9D" userLabel="Stack View Botoes">
                                                         <rect key="frame" x="0.0" y="0.0" width="384" height="70"/>
@@ -433,11 +433,11 @@
                                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OZv-iF-l1V">
                                                                                 <rect key="frame" x="8" y="8" width="102" height="54"/>
                                                                                 <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="dAu-6Z-OAS">
-                                                                                        <rect key="frame" x="39" y="0.0" width="24" height="33"/>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" image="whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="dAu-6Z-OAS">
+                                                                                        <rect key="frame" x="27" y="0.0" width="48" height="33"/>
                                                                                         <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                                                     </imageView>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WhatsApp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LiR-kl-rIC">
+                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="WhatsApp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LiR-kl-rIC">
                                                                                         <rect key="frame" x="17.5" y="37" width="67.5" height="17"/>
                                                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -558,7 +558,7 @@
                                                         </constraints>
                                                     </stackView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kLw-iz-vws" userLabel="Box Conteudo" customClass="DesignableView" customModule="Spring">
-                                                        <rect key="frame" x="0.0" y="85" width="384" height="1031"/>
+                                                        <rect key="frame" x="0.0" y="85" width="384" height="1266"/>
                                                         <subviews>
                                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="2m0-6s-vt6">
                                                                 <rect key="frame" x="12" y="8" width="360" height="985.5"/>
@@ -706,13 +706,15 @@ SteakHouse Grill é mais uma supernovidade que você só encontra aqui, na Polis
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="Sec-J5-Bx1" firstAttribute="width" secondItem="VCR-Cn-t2r" secondAttribute="width" id="0FT-XO-tGT"/>
+                                    <constraint firstItem="zWl-5f-ju8" firstAttribute="leading" secondItem="7qe-vV-2QR" secondAttribute="leading" id="5UO-T5-W7j"/>
                                     <constraint firstItem="VCR-Cn-t2r" firstAttribute="trailing" secondItem="ykh-6P-U9a" secondAttribute="trailing" constant="15" id="7o6-M4-Jgh"/>
                                     <constraint firstItem="Sec-J5-Bx1" firstAttribute="trailing" secondItem="7qe-vV-2QR" secondAttribute="trailing" id="8L9-3k-HzS"/>
-                                    <constraint firstItem="Sec-J5-Bx1" firstAttribute="top" secondItem="7qe-vV-2QR" secondAttribute="top" id="8fM-ej-rIX"/>
-                                    <constraint firstItem="zWl-5f-ju8" firstAttribute="width" secondItem="VCR-Cn-t2r" secondAttribute="width" id="Cyw-MO-WwI"/>
+                                    <constraint firstItem="zWl-5f-ju8" firstAttribute="trailing" secondItem="7qe-vV-2QR" secondAttribute="trailing" id="S4C-3v-LKF"/>
                                     <constraint firstItem="Sec-J5-Bx1" firstAttribute="leading" secondItem="7qe-vV-2QR" secondAttribute="leading" id="TWb-Bt-dS0"/>
                                     <constraint firstItem="Sec-J5-Bx1" firstAttribute="bottom" secondItem="7qe-vV-2QR" secondAttribute="bottom" id="UbN-zU-j77"/>
                                     <constraint firstItem="Sec-J5-Bx1" firstAttribute="height" secondItem="VCR-Cn-t2r" secondAttribute="height" multiplier="1.56729" placeholder="YES" id="Uvj-Lb-MVR"/>
+                                    <constraint firstItem="zWl-5f-ju8" firstAttribute="width" secondItem="VCR-Cn-t2r" secondAttribute="width" id="bd1-Eh-jpG"/>
+                                    <constraint firstItem="Sec-J5-Bx1" firstAttribute="top" secondItem="zWl-5f-ju8" secondAttribute="bottom" constant="15" id="gxn-Fk-3v8"/>
                                     <constraint firstItem="ykh-6P-U9a" firstAttribute="leading" secondItem="VCR-Cn-t2r" secondAttribute="leading" constant="15" id="nah-0j-HYr"/>
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="7qe-vV-2QR"/>
@@ -721,6 +723,7 @@ SteakHouse Grill é mais uma supernovidade que você só encontra aqui, na Polis
                         </subviews>
                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="zWl-5f-ju8" firstAttribute="top" secondItem="7qe-vV-2QR" secondAttribute="top" id="IgA-SZ-yaj"/>
                             <constraint firstItem="0iV-Yu-zof" firstAttribute="trailing" secondItem="f2R-M5-VxS" secondAttribute="trailing" id="UB6-G8-9TH"/>
                             <constraint firstItem="0iV-Yu-zof" firstAttribute="top" secondItem="Vpn-YY-yKc" secondAttribute="top" id="W3t-fL-iIO"/>
                             <constraint firstItem="0iV-Yu-zof" firstAttribute="leading" secondItem="f2R-M5-VxS" secondAttribute="leading" id="eYZ-vl-TKt"/>
@@ -733,6 +736,7 @@ SteakHouse Grill é mais uma supernovidade que você só encontra aqui, na Polis
                         <outlet property="descricaoLabel" destination="P5N-Du-iPZ" id="6Bo-y8-qmh"/>
                         <outlet property="empresaLabel" destination="3re-ON-7Yk" id="ZO9-7a-LGa"/>
                         <outlet property="imageHeightConstraint" destination="2gh-u1-eU3" id="AhF-Mn-ctz"/>
+                        <outlet property="imageTopConstraint" destination="IgA-SZ-yaj" id="zcz-iB-WLC"/>
                         <outlet property="imageView" destination="Ons-QB-1gC" id="VJA-UX-MlC"/>
                         <outlet property="nomeProdutoLabel" destination="L0G-0K-NQQ" id="iTP-oc-vsB"/>
                         <outlet property="scrollView" destination="0iV-Yu-zof" id="QI8-MY-0LM"/>
