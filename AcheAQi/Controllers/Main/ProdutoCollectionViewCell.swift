@@ -14,24 +14,25 @@ class ProdutoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var valorLabel: UILabel!
     @IBOutlet weak var nomeLabel: UILabel!
     
+    static var width = (UIScreen.main.bounds.size.width / 2) - 1
+    
+    lazy var widthConstraint: NSLayoutConstraint = {
+        let width = contentView.widthAnchor.constraint(equalToConstant: ProdutoCollectionViewCell.width)
+        width.isActive = true
+        return width
+    }()
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         self.translatesAutoresizingMaskIntoConstraints = false
-        
-        let size = ProdutoCollectionViewCell.sizeForCell()
-        
-        widthAnchor.constraint(equalToConstant: size.width).isActive = true
-        heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        contentView.translatesAutoresizingMaskIntoConstraints = false
         
         layoutIfNeeded()
     }
     
-    static func sizeForCell() -> CGSize {
-        
-        let width = (UIScreen.main.bounds.size.width / 2) - 2
-        let height = CGFloat(width * 1.3)
-
-        return CGSize(width: width, height: height)
+    override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
+        widthConstraint.constant = ProdutoCollectionViewCell.width
+        return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: (ProdutoCollectionViewCell.width * 1.2)))
     }
 }

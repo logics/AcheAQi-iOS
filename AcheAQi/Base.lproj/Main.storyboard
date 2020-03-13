@@ -208,9 +208,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="4" minimumInteritemSpacing="0.0" id="nRL-Ww-7KR">
+                        <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="nRL-Ww-7KR">
                             <size key="itemSize" width="180" height="240"/>
-                            <size key="estimatedItemSize" width="180" height="228"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -223,23 +222,26 @@
                                     <rect key="frame" x="0.0" y="0.0" width="180" height="240"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kn0-3R-wz0" customClass="DesignableView" customModule="Spring">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kn0-3R-wz0" customClass="DesignableView" customModule="Spring">
                                             <rect key="frame" x="10" y="10" width="160" height="220"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R$ 699,99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkN-OF-l9F">
-                                                    <rect key="frame" x="8" y="137" width="144" height="20.5"/>
+                                                    <rect key="frame" x="8" y="154" width="144" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Churrasqueira Steakhouse Grill Polishop" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAl-rv-a0M">
-                                                    <rect key="frame" x="8" y="161.5" width="144" height="50.5"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Churrasqueira Steakhouse Grill Polishop" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAl-rv-a0M">
+                                                    <rect key="frame" x="8" y="178.5" width="144" height="33.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="churrasqueira" translatesAutoresizingMaskIntoConstraints="NO" id="zg9-NL-wZI">
-                                                    <rect key="frame" x="4" y="4" width="152" height="129"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="zg9-NL-wZI">
+                                                    <rect key="frame" x="4" y="21" width="152" height="129"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="zg9-NL-wZI" secondAttribute="height" multiplier="152:129" id="Sje-NB-l2j"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -251,7 +253,7 @@
                                                 <constraint firstItem="GAl-rv-a0M" firstAttribute="leading" secondItem="Kn0-3R-wz0" secondAttribute="leading" constant="8" id="Pgw-2s-oD0"/>
                                                 <constraint firstItem="zg9-NL-wZI" firstAttribute="leading" secondItem="Kn0-3R-wz0" secondAttribute="leading" constant="4" id="U7x-vi-TMp"/>
                                                 <constraint firstAttribute="bottom" secondItem="GAl-rv-a0M" secondAttribute="bottom" constant="8" id="WGv-ff-nMI"/>
-                                                <constraint firstItem="zg9-NL-wZI" firstAttribute="top" secondItem="Kn0-3R-wz0" secondAttribute="top" constant="4" id="cPV-3P-Xwc"/>
+                                                <constraint firstItem="zg9-NL-wZI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Kn0-3R-wz0" secondAttribute="top" constant="4" id="cPV-3P-Xwc"/>
                                                 <constraint firstItem="ZkN-OF-l9F" firstAttribute="leading" secondItem="Kn0-3R-wz0" secondAttribute="leading" constant="8" id="j10-7h-9YA"/>
                                                 <constraint firstAttribute="trailing" secondItem="ZkN-OF-l9F" secondAttribute="trailing" constant="8" id="qf8-KP-x8z"/>
                                             </constraints>
@@ -318,7 +320,7 @@
                     <view key="view" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vpn-YY-yKc">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" translatesAutoresizingMaskIntoConstraints="NO" id="0iV-Yu-zof">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0iV-Yu-zof">
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWl-5f-ju8" userLabel="View Foto" customClass="DesignableView" customModule="Spring">
@@ -363,32 +365,25 @@
                                                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KLk-Zm-CWz" userLabel="Maps View" customClass="DesignableView" customModule="Spring">
                                                                 <rect key="frame" x="0.0" y="0.0" width="118" height="70"/>
                                                                 <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="h0H-W2-SzR">
+                                                                        <rect key="frame" x="8" y="8" width="102" height="54"/>
+                                                                        <subviews>
+                                                                            <imageView clipsSubviews="YES" contentMode="scaleAspectFit" image="mappin.and.ellipse" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JDi-e5-dH6">
+                                                                                <rect key="frame" x="37.5" y="0.0" width="27.5" height="33"/>
+                                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
+                                                                            </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Como chegar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9x1-hp-5P3">
+                                                                                <rect key="frame" x="7.5" y="37" width="87" height="17"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </stackView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hR3-v1-7Gb" customClass="UIControl">
                                                                         <rect key="frame" x="0.0" y="0.0" width="118" height="70"/>
-                                                                        <subviews>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="h0H-W2-SzR">
-                                                                                <rect key="frame" x="8" y="8" width="102" height="54"/>
-                                                                                <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="mappin.and.ellipse" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="JDi-e5-dH6">
-                                                                                        <rect key="frame" x="37.5" y="0.0" width="27.5" height="33"/>
-                                                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
-                                                                                    </imageView>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Como chegar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9x1-hp-5P3">
-                                                                                        <rect key="frame" x="7.5" y="37" width="87" height="17"/>
-                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        <nil key="highlightedColor"/>
-                                                                                    </label>
-                                                                                </subviews>
-                                                                            </stackView>
-                                                                        </subviews>
                                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstItem="h0H-W2-SzR" firstAttribute="leading" secondItem="hR3-v1-7Gb" secondAttribute="leading" constant="8" id="4Qa-6Q-6Up"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="h0H-W2-SzR" secondAttribute="bottom" constant="8" id="TPW-O9-iVU"/>
-                                                                            <constraint firstItem="h0H-W2-SzR" firstAttribute="top" secondItem="hR3-v1-7Gb" secondAttribute="top" constant="8" id="VOS-gv-6mo"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="h0H-W2-SzR" secondAttribute="trailing" constant="8" id="hdR-i5-cdK"/>
-                                                                        </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                 <real key="value" value="19"/>
@@ -402,7 +397,11 @@
                                                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
                                                                     <constraint firstItem="hR3-v1-7Gb" firstAttribute="top" secondItem="KLk-Zm-CWz" secondAttribute="top" id="3qd-vV-Ljd"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="h0H-W2-SzR" secondAttribute="bottom" constant="8" id="IS8-2p-Hwh"/>
                                                                     <constraint firstAttribute="bottom" secondItem="hR3-v1-7Gb" secondAttribute="bottom" id="Uhj-fA-Pa9"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="h0H-W2-SzR" secondAttribute="trailing" constant="8" id="eJL-gM-qqo"/>
+                                                                    <constraint firstItem="h0H-W2-SzR" firstAttribute="leading" secondItem="KLk-Zm-CWz" secondAttribute="leading" constant="8" id="fPW-Ke-vWk"/>
+                                                                    <constraint firstItem="h0H-W2-SzR" firstAttribute="top" secondItem="KLk-Zm-CWz" secondAttribute="top" constant="8" id="lnB-0J-sp1"/>
                                                                     <constraint firstAttribute="trailing" secondItem="hR3-v1-7Gb" secondAttribute="trailing" id="ltU-hl-jDK"/>
                                                                     <constraint firstItem="hR3-v1-7Gb" firstAttribute="leading" secondItem="KLk-Zm-CWz" secondAttribute="leading" id="pSN-gv-C33"/>
                                                                 </constraints>
@@ -427,47 +426,44 @@
                                                             <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cp1-lr-AWL" userLabel="WhatsApp View" customClass="DesignableView" customModule="Spring">
                                                                 <rect key="frame" x="133" y="0.0" width="118" height="70"/>
                                                                 <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OZv-iF-l1V">
+                                                                        <rect key="frame" x="8" y="8" width="102" height="54"/>
+                                                                        <subviews>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" image="whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="dAu-6Z-OAS">
+                                                                                <rect key="frame" x="27" y="0.0" width="48" height="33"/>
+                                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
+                                                                            </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="WhatsApp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LiR-kl-rIC">
+                                                                                <rect key="frame" x="17.5" y="37" width="67.5" height="17"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </stackView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ftS-4c-UMX" customClass="UIControl">
                                                                         <rect key="frame" x="0.0" y="0.0" width="118" height="70"/>
-                                                                        <subviews>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OZv-iF-l1V">
-                                                                                <rect key="frame" x="8" y="8" width="102" height="54"/>
-                                                                                <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" image="whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="dAu-6Z-OAS">
-                                                                                        <rect key="frame" x="27" y="0.0" width="48" height="33"/>
-                                                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
-                                                                                    </imageView>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="WhatsApp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LiR-kl-rIC">
-                                                                                        <rect key="frame" x="17.5" y="37" width="67.5" height="17"/>
-                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        <nil key="highlightedColor"/>
-                                                                                    </label>
-                                                                                </subviews>
-                                                                            </stackView>
-                                                                        </subviews>
                                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="trailing" secondItem="OZv-iF-l1V" secondAttribute="trailing" constant="8" id="4oR-AQ-Rtf"/>
-                                                                            <constraint firstAttribute="bottom" secondItem="OZv-iF-l1V" secondAttribute="bottom" constant="8" id="SGk-L1-9qd"/>
-                                                                            <constraint firstItem="OZv-iF-l1V" firstAttribute="top" secondItem="ftS-4c-UMX" secondAttribute="top" constant="8" id="WOQ-hq-eLL"/>
-                                                                            <constraint firstItem="OZv-iF-l1V" firstAttribute="leading" secondItem="ftS-4c-UMX" secondAttribute="leading" constant="8" id="Z2r-Xh-igL"/>
-                                                                        </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                 <real key="value" value="19"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
-                                                                            <action selector="openMap:" destination="qmI-OO-dtK" eventType="touchUpInside" id="s1t-Lf-m98"/>
+                                                                            <action selector="openWhatsApp:" destination="qmI-OO-dtK" eventType="touchUpInside" id="5ln-00-Z0M"/>
                                                                         </connections>
                                                                     </view>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemGreenColor" red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
+                                                                    <constraint firstItem="OZv-iF-l1V" firstAttribute="top" secondItem="Cp1-lr-AWL" secondAttribute="top" constant="8" id="0bL-C9-nXg"/>
                                                                     <constraint firstItem="ftS-4c-UMX" firstAttribute="leading" secondItem="Cp1-lr-AWL" secondAttribute="leading" id="GAO-bL-4ON"/>
+                                                                    <constraint firstItem="OZv-iF-l1V" firstAttribute="leading" secondItem="Cp1-lr-AWL" secondAttribute="leading" constant="8" id="L8j-Oh-zsB"/>
                                                                     <constraint firstItem="ftS-4c-UMX" firstAttribute="top" secondItem="Cp1-lr-AWL" secondAttribute="top" id="ML0-xY-m9L"/>
+                                                                    <constraint firstAttribute="bottom" secondItem="OZv-iF-l1V" secondAttribute="bottom" constant="8" id="Yll-IO-55S"/>
                                                                     <constraint firstAttribute="trailing" secondItem="ftS-4c-UMX" secondAttribute="trailing" id="bm4-dI-kAc"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="OZv-iF-l1V" secondAttribute="trailing" constant="8" id="fai-eX-YfY"/>
                                                                     <constraint firstAttribute="bottom" secondItem="ftS-4c-UMX" secondAttribute="bottom" id="q96-8t-LkX"/>
                                                                 </constraints>
                                                                 <userDefinedRuntimeAttributes>
@@ -491,46 +487,43 @@
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aBn-KY-Mha" userLabel="Tel View" customClass="DesignableView" customModule="Spring">
                                                                 <rect key="frame" x="266" y="0.0" width="118" height="70"/>
                                                                 <subviews>
+                                                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Rz6-7P-N4h">
+                                                                        <rect key="frame" x="8" y="8" width="102" height="54"/>
+                                                                        <subviews>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="phone.fill.arrow.up.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4pa-Aq-wpx">
+                                                                                <rect key="frame" x="36.5" y="2" width="29.5" height="29.5"/>
+                                                                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
+                                                                            </imageView>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ligar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0Ud-ee-Bl6">
+                                                                                <rect key="frame" x="35" y="37" width="32.5" height="17"/>
+                                                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                <nil key="highlightedColor"/>
+                                                                            </label>
+                                                                        </subviews>
+                                                                    </stackView>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OiC-e7-ZLs" customClass="UIControl">
                                                                         <rect key="frame" x="0.0" y="0.0" width="118" height="70"/>
-                                                                        <subviews>
-                                                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Rz6-7P-N4h">
-                                                                                <rect key="frame" x="8" y="8" width="102" height="54"/>
-                                                                                <subviews>
-                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="phone.fill.arrow.up.right" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="4pa-Aq-wpx">
-                                                                                        <rect key="frame" x="36.5" y="2" width="29.5" height="29.5"/>
-                                                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
-                                                                                    </imageView>
-                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ligar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0Ud-ee-Bl6">
-                                                                                        <rect key="frame" x="35" y="37" width="32.5" height="17"/>
-                                                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                                        <nil key="highlightedColor"/>
-                                                                                    </label>
-                                                                                </subviews>
-                                                                            </stackView>
-                                                                        </subviews>
                                                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                        <constraints>
-                                                                            <constraint firstAttribute="bottom" secondItem="Rz6-7P-N4h" secondAttribute="bottom" constant="8" id="NKf-0x-FVE"/>
-                                                                            <constraint firstItem="Rz6-7P-N4h" firstAttribute="leading" secondItem="OiC-e7-ZLs" secondAttribute="leading" constant="8" id="Nxr-VO-s5p"/>
-                                                                            <constraint firstItem="Rz6-7P-N4h" firstAttribute="top" secondItem="OiC-e7-ZLs" secondAttribute="top" constant="8" id="TX3-TH-yA6"/>
-                                                                            <constraint firstAttribute="trailing" secondItem="Rz6-7P-N4h" secondAttribute="trailing" constant="8" id="xBA-Ul-joj"/>
-                                                                        </constraints>
                                                                         <userDefinedRuntimeAttributes>
                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                 <real key="value" value="19"/>
                                                                             </userDefinedRuntimeAttribute>
                                                                         </userDefinedRuntimeAttributes>
                                                                         <connections>
-                                                                            <action selector="openMap:" destination="qmI-OO-dtK" eventType="touchUpInside" id="js8-id-wYF"/>
+                                                                            <action selector="call:" destination="qmI-OO-dtK" eventType="touchUpInside" id="9Hn-No-4lH"/>
                                                                         </connections>
                                                                     </view>
                                                                 </subviews>
                                                                 <color key="backgroundColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <constraints>
+                                                                    <constraint firstAttribute="bottom" secondItem="Rz6-7P-N4h" secondAttribute="bottom" constant="8" id="92H-6Y-Po8"/>
                                                                     <constraint firstAttribute="bottom" secondItem="OiC-e7-ZLs" secondAttribute="bottom" id="N5S-Ww-dK0"/>
                                                                     <constraint firstAttribute="trailing" secondItem="OiC-e7-ZLs" secondAttribute="trailing" id="VYO-6c-SFx"/>
+                                                                    <constraint firstItem="Rz6-7P-N4h" firstAttribute="top" secondItem="aBn-KY-Mha" secondAttribute="top" constant="8" id="Vrm-w7-Vnu"/>
+                                                                    <constraint firstAttribute="trailing" secondItem="Rz6-7P-N4h" secondAttribute="trailing" constant="8" id="cmO-Gu-Hpp"/>
+                                                                    <constraint firstItem="Rz6-7P-N4h" firstAttribute="leading" secondItem="aBn-KY-Mha" secondAttribute="leading" constant="8" id="hdo-hi-697"/>
                                                                     <constraint firstItem="OiC-e7-ZLs" firstAttribute="leading" secondItem="aBn-KY-Mha" secondAttribute="leading" id="qnm-U5-nUI"/>
                                                                     <constraint firstItem="OiC-e7-ZLs" firstAttribute="top" secondItem="aBn-KY-Mha" secondAttribute="top" id="s7Y-g6-GNJ"/>
                                                                 </constraints>
@@ -655,14 +648,14 @@
                                                                                 <subviews>
                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P5N-Du-iPZ" userLabel="Descricao">
                                                                                         <rect key="frame" x="0.0" y="0.0" width="360" height="609"/>
-                                                                                        <mutableString key="text">O churrasco feito na brasa tem um sabor especial, mas o processo pode ser muito complicado!
+                                                                                        <string key="text">O churrasco feito na brasa tem um sabor especial, mas o processo pode ser muito complicado!
 SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de forma mais fácil e em qualquer lugar... Sem precisar de habilidade, sem fazer sujeira e sem bagunça!
 Rápida e econômica, basta uma pequena quantidade de carvão e álcool em gel para acender. Em poucos minutos, o braseiro está pronto para começar a receber os primeiros cortes!
 Com um inovador Sistema Elétrico de Ventilação, você pode controlar a intensidade do seu braseiro, enquanto sua grelha antiaderente de revestimento duplo retém o calor de maneira uniforme, para garantir, em minutos, o seu churrasco completo, grelhado na temperatura e no ponto certos para cada tipo de carne, até para legumes ou frutas delicados!
 Além disso, SteakHouse Grill possui um preparo inteligente, onde a gordura da carne é retida por um coletor estrategicamente posicionado que impede que a gordura entre em contato direto com o carvão, evitando o excesso de fumaça e garantindo uma alimentação mais saudável para você e sua família!
 SteakHouse Grill é supercompacta e portátil, pois conta com uma exclusiva bolsa para transporte, para guardá-la com segurança e levá-la para onde quiser! Ela pode ser usada dentro de casa, na sua varanda e até na casa de veraneio!
 Graças à sua grelha antiaderente, na hora de limpar é simples e fácil, diferentemente de churrasqueiras com grelha comuns!
-SteakHouse Grill é mais uma supernovidade que você só encontra aqui, na Polishop!</mutableString>
+SteakHouse Grill é mais uma supernovidade que você só encontra aqui, na Polishop!</string>
                                                                                         <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                                                         <color key="textColor" red="0.22352941179999999" green="0.22352941179999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                                                         <nil key="highlightedColor"/>
@@ -711,7 +704,7 @@ SteakHouse Grill é mais uma supernovidade que você só encontra aqui, na Polis
                                     <constraint firstItem="Sec-J5-Bx1" firstAttribute="trailing" secondItem="7qe-vV-2QR" secondAttribute="trailing" id="8L9-3k-HzS"/>
                                     <constraint firstItem="zWl-5f-ju8" firstAttribute="trailing" secondItem="7qe-vV-2QR" secondAttribute="trailing" id="S4C-3v-LKF"/>
                                     <constraint firstItem="Sec-J5-Bx1" firstAttribute="leading" secondItem="7qe-vV-2QR" secondAttribute="leading" id="TWb-Bt-dS0"/>
-                                    <constraint firstItem="Sec-J5-Bx1" firstAttribute="bottom" secondItem="7qe-vV-2QR" secondAttribute="bottom" id="UbN-zU-j77"/>
+                                    <constraint firstItem="Sec-J5-Bx1" firstAttribute="bottom" secondItem="7qe-vV-2QR" secondAttribute="bottom" constant="-12" id="UbN-zU-j77"/>
                                     <constraint firstItem="Sec-J5-Bx1" firstAttribute="height" secondItem="VCR-Cn-t2r" secondAttribute="height" multiplier="1.56729" placeholder="YES" id="Uvj-Lb-MVR"/>
                                     <constraint firstItem="zWl-5f-ju8" firstAttribute="width" secondItem="VCR-Cn-t2r" secondAttribute="width" id="bd1-Eh-jpG"/>
                                     <constraint firstItem="Sec-J5-Bx1" firstAttribute="top" secondItem="zWl-5f-ju8" secondAttribute="bottom" constant="15" id="gxn-Fk-3v8"/>
@@ -734,16 +727,21 @@ SteakHouse Grill é mais uma supernovidade que você só encontra aqui, na Polis
                     <navigationItem key="navigationItem" title="Churrasqueira Steakhouse Grill Polishop" id="iNh-ly-yOc"/>
                     <connections>
                         <outlet property="descricaoLabel" destination="P5N-Du-iPZ" id="6Bo-y8-qmh"/>
+                        <outlet property="disponivelLabel" destination="uw2-CB-Wgc" id="Rmo-Jb-FKd"/>
                         <outlet property="empresaLabel" destination="3re-ON-7Yk" id="ZO9-7a-LGa"/>
+                        <outlet property="enderecoLabel" destination="rmH-5T-KIr" id="fIy-Su-jJU"/>
                         <outlet property="imageHeightConstraint" destination="2gh-u1-eU3" id="AhF-Mn-ctz"/>
                         <outlet property="imageTopConstraint" destination="IgA-SZ-yaj" id="zcz-iB-WLC"/>
                         <outlet property="imageView" destination="Ons-QB-1gC" id="VJA-UX-MlC"/>
+                        <outlet property="mapsBtnContainer" destination="KLk-Zm-CWz" id="NQt-ki-IQM"/>
                         <outlet property="nomeProdutoLabel" destination="L0G-0K-NQQ" id="iTP-oc-vsB"/>
                         <outlet property="scrollView" destination="0iV-Yu-zof" id="QI8-MY-0LM"/>
                         <outlet property="showMapaButton" destination="hR3-v1-7Gb" id="UPK-A6-hrB"/>
+                        <outlet property="telBtnContainer" destination="aBn-KY-Mha" id="nBY-kX-Bds"/>
                         <outlet property="telButton" destination="OiC-e7-ZLs" id="dga-Ko-H0e"/>
                         <outlet property="valorLabel" destination="ThW-eM-xOP" id="KRC-jY-wF4"/>
                         <outlet property="whatsAppButton" destination="ftS-4c-UMX" id="KNH-ph-Id1"/>
+                        <outlet property="zapBtnContainer" destination="Cp1-lr-AWL" id="YEy-6M-LoG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CT7-WV-Fe7" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -752,6 +750,7 @@ SteakHouse Grill é mais uma supernovidade que você só encontra aqui, na Polis
         </scene>
     </scenes>
     <resources>
+        <image name="Placeholder" width="152" height="129"/>
         <image name="churrasqueira" width="506" height="436"/>
         <image name="filter" width="24" height="24"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>

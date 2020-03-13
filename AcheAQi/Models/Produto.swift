@@ -17,10 +17,10 @@ class Produto: NSObject, Codable {
     let nome, createdAt, updatedAt: String
     let banner, descricao: String?
     let foto: String
-    let mostraValor: Bool
+    let mostraValor, emEstoque: Bool
     let valor: Float
 
-    init(id: Int, empresa: Empresa, categoria: Categoria, nome: String, banner: String?, createdAt: String, updatedAt: String, foto: String, descricao: String?, mostraValor: Bool, valor: Float) {
+    init(id: Int, empresa: Empresa, categoria: Categoria, nome: String, banner: String?, createdAt: String, updatedAt: String, foto: String, descricao: String?, emEstoque: Bool, mostraValor: Bool, valor: Float) {
         self.id = id
         self.empresa = empresa
         self.categoria = categoria
@@ -30,6 +30,7 @@ class Produto: NSObject, Codable {
         self.updatedAt = updatedAt
         self.foto = foto
         self.descricao = descricao
+        self.emEstoque = emEstoque
         self.mostraValor = mostraValor
         self.valor = valor
     }
@@ -43,6 +44,7 @@ class Produto: NSObject, Codable {
         case updatedAt
         case foto
         case descricao
+        case emEstoque
         case mostraValor
         case valor
     }
@@ -58,7 +60,7 @@ class Produto: NSObject, Codable {
 extension Produto {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Produto.self, from: data)
-        self.init(id: me.id, empresa: me.empresa, categoria: me.categoria, nome: me.nome, banner: me.banner, createdAt: me.createdAt, updatedAt: me.updatedAt, foto: me.foto, descricao: me.descricao, mostraValor: me.mostraValor, valor: me.valor)
+        self.init(id: me.id, empresa: me.empresa, categoria: me.categoria, nome: me.nome, banner: me.banner, createdAt: me.createdAt, updatedAt: me.updatedAt, foto: me.foto, descricao: me.descricao, emEstoque: me.emEstoque, mostraValor: me.mostraValor, valor: me.valor)
     }
 
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -82,6 +84,7 @@ extension Produto {
         updatedAt: String? = nil,
         foto: String? = nil,
         descricao: String? = nil,
+        emEstoque: Bool? = nil,
         mostraValor: Bool? = nil,
         valor: Float? = nil
     ) -> Produto {
@@ -95,6 +98,7 @@ extension Produto {
             updatedAt: updatedAt ?? self.updatedAt,
             foto: foto ?? self.foto,
             descricao: descricao ?? self.descricao,
+            emEstoque: emEstoque ?? self.emEstoque,
             mostraValor: mostraValor ?? self.mostraValor,
             valor: valor ?? self.valor
         )

@@ -35,8 +35,8 @@
                                         <rect key="frame" x="0.0" y="0.0" width="325" height="52"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Titulo" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HdX-mk-FV8">
-                                                <rect key="frame" x="44" y="16" width="237" height="20.5"/>
-                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                                                <rect key="frame" x="44" y="14" width="237" height="24"/>
+                                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -88,7 +88,7 @@
                                                         <subviews>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y3x-60-hzN">
                                                                 <rect key="frame" x="0.0" y="0.0" width="325" height="38"/>
-                                                                <color key="backgroundColor" name="greenCity"/>
+                                                                <color key="backgroundColor" name="yellowLogo"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="38" id="2WU-Qq-yp5"/>
                                                                 </constraints>
@@ -174,8 +174,8 @@
         </view>
     </objects>
     <resources>
-        <namedColor name="greenCity">
-            <color red="0.3843137254901961" green="0.62352941176470589" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        <namedColor name="yellowLogo">
+            <color red="0.79607843137254897" green="0.62352941176470589" blue="0.074509803921568626" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

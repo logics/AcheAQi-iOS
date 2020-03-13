@@ -24,7 +24,7 @@ import Alamofire
 // MARK: - Empresa
 class Empresa: Codable {
     let id: Int
-    let nome, telefone, cep: String
+    let nome, telefone, whatsapp, cep: String
     let logradouro, estado, cidade, bairro: String
     let numero: Int?
     let latitude, longitude: Double
@@ -32,10 +32,11 @@ class Empresa: Codable {
     let status: Bool
     let logomarca, complemento: String?
 
-    init(id: Int, nome: String, telefone: String, logomarca: String?, cep: String, logradouro: String, cidade: String, bairro: String, numero: Int?, complemento: String?, estado: String, latitude: Double, longitude: Double, createdAt: String, updatedAt: String, status: Bool) {
+    init(id: Int, nome: String, telefone: String, whatsapp: String, logomarca: String?, cep: String, logradouro: String, cidade: String, bairro: String, numero: Int?, complemento: String?, estado: String, latitude: Double, longitude: Double, createdAt: String, updatedAt: String, status: Bool) {
         self.id = id
         self.nome = nome
         self.telefone = telefone
+        self.whatsapp = whatsapp
         self.logomarca = logomarca
         self.cep = cep
         self.logradouro = logradouro
@@ -50,6 +51,22 @@ class Empresa: Codable {
         self.updatedAt = updatedAt
         self.status = status
     }
+    
+    func enderecoCompleto() -> String {
+        var address = logradouro
+        
+        if let nr = numero {
+            address = String(format: "%@, %d", address, nr)
+        }
+        
+        if let complemento = self.complemento {
+            address = String(format: "%@, %@", address, complemento)
+        }
+        
+        address = String(format: "%@, %@, %@, %@ - %@", address, cep, bairro, cidade, estado)
+        
+        return address
+    }
 }
 
 // MARK: Empresa convenience initializers and mutators
@@ -57,7 +74,7 @@ class Empresa: Codable {
 extension Empresa {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Empresa.self, from: data)
-        self.init(id: me.id, nome: me.nome, telefone: me.telefone, logomarca: me.logomarca, cep: me.cep, logradouro: me.logradouro, cidade: me.cidade, bairro: me.bairro, numero: me.numero, complemento: me.complemento, estado: me.estado, latitude: me.latitude, longitude: me.longitude, createdAt: me.createdAt, updatedAt: me.updatedAt, status: me.status)
+        self.init(id: me.id, nome: me.nome, telefone: me.telefone, whatsapp: me.whatsapp, logomarca: me.logomarca, cep: me.cep, logradouro: me.logradouro, cidade: me.cidade, bairro: me.bairro, numero: me.numero, complemento: me.complemento, estado: me.estado, latitude: me.latitude, longitude: me.longitude, createdAt: me.createdAt, updatedAt: me.updatedAt, status: me.status)
     }
 
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -75,6 +92,7 @@ extension Empresa {
         id: Int? = nil,
         nome: String? = nil,
         telefone: String? = nil,
+        whatsapp: String? = nil,
         logomarca: String? = nil,
         cep: String? = nil,
         logradouro: String? = nil,
@@ -93,6 +111,7 @@ extension Empresa {
             id: id ?? self.id,
             nome: nome ?? self.nome,
             telefone: telefone ?? self.telefone,
+            whatsapp: whatsapp ?? self.whatsapp,
             logomarca: logomarca ?? self.logomarca,
             cep: cep ?? self.cep,
             logradouro: logradouro ?? self.logradouro,

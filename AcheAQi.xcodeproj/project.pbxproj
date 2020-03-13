@@ -54,6 +54,8 @@
 		A37EAC2F23FF0DE500FF0F7C /* MainResultsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EAC2E23FF0DE500FF0F7C /* MainResultsTableController.swift */; };
 		A390986323FD7E0C0068E997 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = A390986223FD7E0C0068E997 /* AlamofireImage */; };
 		A39098A923FDA8010068E997 /* Spring in Frameworks */ = {isa = PBXBuildFile; productRef = A39098A823FDA8010068E997 /* Spring */; };
+		A3942C50241A478600AACEC7 /* Karte in Frameworks */ = {isa = PBXBuildFile; productRef = A3942C4F241A478600AACEC7 /* Karte */; };
+		A3942C52241A594300AACEC7 /* String+PhoneCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3942C51241A594300AACEC7 /* String+PhoneCall.swift */; };
 		A3D07C7123F33E27000EFED7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D07C7023F33E27000EFED7 /* AppDelegate.swift */; };
 		A3D07C7323F33E27000EFED7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D07C7223F33E27000EFED7 /* SceneDelegate.swift */; };
 		A3D07C7823F33E27000EFED7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D07C7623F33E27000EFED7 /* Main.storyboard */; };
@@ -93,6 +95,7 @@
 		A37EAC2A23FDB14A00FF0F7C /* Categoria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categoria.swift; sourceTree = "<group>"; };
 		A37EAC2C23FDB6C000FF0F7C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
 		A37EAC2E23FF0DE500FF0F7C /* MainResultsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResultsTableController.swift; sourceTree = "<group>"; };
+		A3942C51241A594300AACEC7 /* String+PhoneCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PhoneCall.swift"; sourceTree = "<group>"; };
 		A3D07C6D23F33E27000EFED7 /* AcheAQi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcheAQi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D07C7023F33E27000EFED7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D07C7223F33E27000EFED7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -139,6 +142,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A3942C50241A478600AACEC7 /* Karte in Frameworks */,
 				A3D07C8623F4CD0F000EFED7 /* Alamofire in Frameworks */,
 				A3F50F902416E49200FD387B /* MaterialDesignWidgets in Frameworks */,
 				A390986323FD7E0C0068E997 /* AlamofireImage in Frameworks */,
@@ -259,6 +263,7 @@
 				A3D07C9B23F6D94B000EFED7 /* UIView+Xib.swift */,
 				A3D07C9F23F6D94C000EFED7 /* URL+WS.swift */,
 				A3740492240EDD760093C6B9 /* UIBarButtonItemExtension.swift */,
+				A3942C51241A594300AACEC7 /* String+PhoneCall.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -269,8 +274,8 @@
 				A3E924A223FB021100AD4149 /* MainCollectionViewController.swift */,
 				A3E924A423FB28F500AD4149 /* ProdutoCollectionViewCell.swift */,
 				A37EAC2E23FF0DE500FF0F7C /* MainResultsTableController.swift */,
-				A35B7C902409A28D00B709DC /* Filtros */,
 				A339A62524085381007970F6 /* MainHeaderView.swift */,
+				A35B7C902409A28D00B709DC /* Filtros */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 				A390986223FD7E0C0068E997 /* AlamofireImage */,
 				A39098A823FDA8010068E997 /* Spring */,
 				A3F50F8F2416E49200FD387B /* MaterialDesignWidgets */,
+				A3942C4F241A478600AACEC7 /* Karte */,
 			);
 			productName = AcheAQi;
 			productReference = A3D07C6D23F33E27000EFED7 /* AcheAQi.app */;
@@ -367,6 +373,7 @@
 				A390986123FD7E0C0068E997 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				A39098A723FDA8010068E997 /* XCRemoteSwiftPackageReference "Spring" */,
 				A3F50F8E2416E49200FD387B /* XCRemoteSwiftPackageReference "MaterialDesignWidgetsiOSLite" */,
+				A3942C4E241A478600AACEC7 /* XCRemoteSwiftPackageReference "Karte" */,
 			);
 			productRefGroup = A3D07C6E23F33E27000EFED7 /* Products */;
 			projectDirPath = "";
@@ -454,6 +461,7 @@
 				A3740474240ED5520093C6B9 /* Array+Convenience.swift in Sources */,
 				A3740487240ED5520093C6B9 /* UITapGestureRecognizer+Label.swift in Sources */,
 				A3740486240ED5520093C6B9 /* UITableViewExtension.swift in Sources */,
+				A3942C52241A594300AACEC7 /* String+PhoneCall.swift in Sources */,
 				A3740478240ED5520093C6B9 /* DictionaryExtension.swift in Sources */,
 				A3740483240ED5520093C6B9 /* UIDeviceExtension.swift in Sources */,
 				A3740485240ED5520093C6B9 /* UIPickerExtension.swift in Sources */,
@@ -689,6 +697,14 @@
 				minimumVersion = 1.0.6;
 			};
 		};
+		A3942C4E241A478600AACEC7 /* XCRemoteSwiftPackageReference "Karte" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kiliankoe/Karte";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.1.0;
+			};
+		};
 		A3D07C8423F4CD0E000EFED7 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -717,6 +733,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A39098A723FDA8010068E997 /* XCRemoteSwiftPackageReference "Spring" */;
 			productName = Spring;
+		};
+		A3942C4F241A478600AACEC7 /* Karte */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3942C4E241A478600AACEC7 /* XCRemoteSwiftPackageReference "Karte" */;
+			productName = Karte;
 		};
 		A3D07C8523F4CD0F000EFED7 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

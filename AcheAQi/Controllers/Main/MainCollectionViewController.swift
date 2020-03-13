@@ -45,16 +45,23 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         setupSearchBar()
         setupRefreshControl()
         
-        // Define Layout Settings
-        flowLayout.estimatedItemSize = UICollectionViewFlowLayout.automaticSize
-        
         // Reload Data
         collectionView.beginRefreshing()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        // Para corrigir bug na NavBar quando passa de uma com SerchBar para outra que não tem SearchBar na NavBar
+        navigationController?.view.setNeedsLayout()
+        navigationController?.view.layoutIfNeeded()
+        
+        super.viewWillAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
+        // Para corrigir bug na NavBar quando passa de uma com SerchBar para outra que não tem SearchBar na NavBar
         navigationController?.view.setNeedsLayout()
         navigationController?.view.layoutIfNeeded()
     }
@@ -164,14 +171,21 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        switch segue.identifier {
+        case segueShowProduto:
+            let vc = segue.destination as! DetalheViewController
+            vc.produto = produtoSelected
+            vc.userLocation = currentLocation
+        default:
+            break
+        }
     }
 }
 
 // MARK - Collection View Delegate and Datasource
 extension MainCollectionViewController {
 
-    // MARK: UICollectionViewDataSource
+    // MARK: - UICollectionViewDataSource
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -186,29 +200,17 @@ extension MainCollectionViewController {
     
         let produto = produtos[indexPath.row]
         
+        cell.valorLabel.text = produto.valor.toCurrency() ?? "R$ --,--"
         cell.nomeLabel.text = produto.nome
-        cell.valorLabel.text = "R$ " + produto.valor.description
-                
-        cell.imageView.af_setImage(withURL: URL(wsURLWithPath: produto.foto))
+        
+        cell.nomeLabel.sizeToFit()
+
+        cell.imageView.af_setImage(withURL: URL(wsURLWithPath: produto.foto), placeholderImage: #imageLiteral(resourceName: "Placeholder"))
     
         return cell
     }
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
+    // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         produtoSelected = produtos[indexPath.item]
@@ -218,9 +220,22 @@ extension MainCollectionViewController {
     
     // MARK: - UICollectionViewDelegateFlowLayout
         
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return ProdutoCollectionViewCell.sizeForCell()
+    /*override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        flowLayout.estimatedItemSize = CGSize(width: (view.bounds.size.width / 2) - 1, height: 10)
+        super.traitCollectionDidChange(previousTraitCollection)
     }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        flowLayout.estimatedItemSize = CGSize(width: (view.bounds.size.width / 2) - 1, height: 10)
+        flowLayout.invalidateLayout()
+        super.viewWillTransition(to: size, with: coordinator)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+
+        return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    }*/
 }
 
 
