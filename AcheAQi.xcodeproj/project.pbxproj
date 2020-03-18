@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		A3398EBF2417C7BE00C3712B /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3398EBE2417C7BE00C3712B /* MyButton.swift */; };
-		A339A62624085381007970F6 /* MainHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A339A62524085381007970F6 /* MainHeaderView.swift */; };
 		A35588CA2412CB2300DED77E /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35588C92412CB2300DED77E /* UICollectionViewExtension.swift */; };
 		A35588CE2412DAA200DED77E /* Alert.xib in Resources */ = {isa = PBXBuildFile; fileRef = A35588CC2412DAA100DED77E /* Alert.xib */; };
 		A35588CF2412DAA200DED77E /* AlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35588CD2412DAA100DED77E /* AlertController.swift */; };
@@ -75,7 +74,6 @@
 
 /* Begin PBXFileReference section */
 		A3398EBE2417C7BE00C3712B /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
-		A339A62524085381007970F6 /* MainHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainHeaderView.swift; sourceTree = "<group>"; };
 		A35588C92412CB2300DED77E /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		A35588CC2412DAA100DED77E /* Alert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Alert.xib; sourceTree = "<group>"; };
 		A35588CD2412DAA100DED77E /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
@@ -166,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				A35B7C8C24098F4E00B709DC /* FiltroTableViewController.swift */,
+				A37EAC2E23FF0DE500FF0F7C /* MainResultsTableController.swift */,
 				A35B7C912409A3D800B709DC /* UseLocationFilterCell.swift */,
 			);
 			path = Filtros;
@@ -273,8 +272,6 @@
 			children = (
 				A3E924A223FB021100AD4149 /* MainCollectionViewController.swift */,
 				A3E924A423FB28F500AD4149 /* ProdutoCollectionViewCell.swift */,
-				A37EAC2E23FF0DE500FF0F7C /* MainResultsTableController.swift */,
-				A339A62524085381007970F6 /* MainHeaderView.swift */,
 				A35B7C902409A28D00B709DC /* Filtros */,
 			);
 			path = Main;
@@ -442,7 +439,6 @@
 				A3740475240ED5520093C6B9 /* DataResponse+WS.swift in Sources */,
 				A3E924A323FB021100AD4149 /* MainCollectionViewController.swift in Sources */,
 				A3740484240ED5520093C6B9 /* UIImage+Convenience.swift in Sources */,
-				A339A62624085381007970F6 /* MainHeaderView.swift in Sources */,
 				A3D07C7123F33E27000EFED7 /* AppDelegate.swift in Sources */,
 				A37EAC2723FDB03800FF0F7C /* JSONSchemaSupport.swift in Sources */,
 				A35B7C8F24099BCB00B709DC /* Filters.swift in Sources */,

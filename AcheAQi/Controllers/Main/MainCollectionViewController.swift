@@ -75,7 +75,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         searchController = UISearchController(searchResultsController: resultsController)
         searchController.delegate = self
-        searchController.searchResultsUpdater = self
+        searchController.searchResultsUpdater = resultsController
         searchController.searchBar.autocapitalizationType = .none
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self // Monitor when the search button is tapped.
@@ -327,10 +327,8 @@ extension MainCollectionViewController: UITableViewDelegate {
         searchController.searchBar.endEditing(true)
         
         searchController.dismiss(animated: true) {
-            
+            self.searchController.searchBar
         }
-        
-        print(searchString ?? "")
     }
 }
 
