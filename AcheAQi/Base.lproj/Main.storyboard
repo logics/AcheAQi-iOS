@@ -326,17 +326,44 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zWl-5f-ju8" userLabel="View Foto" customClass="DesignableView" customModule="Spring">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="churrasqueira" translatesAutoresizingMaskIntoConstraints="NO" id="Ons-QB-1gC">
-                                                <rect key="frame" x="0.0" y="0.0" width="414.00000000000011" height="220"/>
-                                            </imageView>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZh-aJ-JPd">
+                                                <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dvw-7P-rCc">
+                                                        <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="churrasqueira" translatesAutoresizingMaskIntoConstraints="NO" id="2Ef-oq-VER">
+                                                                <rect key="frame" x="0.0" y="0.0" width="414" height="220"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="Dvw-7P-rCc" firstAttribute="bottom" secondItem="2yN-7q-GtW" secondAttribute="bottom" id="6lb-d4-L5m"/>
+                                                    <constraint firstItem="Dvw-7P-rCc" firstAttribute="leading" secondItem="2yN-7q-GtW" secondAttribute="leading" id="dZe-Ei-Tfb"/>
+                                                    <constraint firstItem="Dvw-7P-rCc" firstAttribute="top" secondItem="2yN-7q-GtW" secondAttribute="top" id="rLp-xL-JTb"/>
+                                                    <constraint firstItem="Dvw-7P-rCc" firstAttribute="trailing" secondItem="2yN-7q-GtW" secondAttribute="trailing" id="rbS-Bn-IuT"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="contentLayoutGuide" id="2yN-7q-GtW"/>
+                                                <viewLayoutGuide key="frameLayoutGuide" id="bn0-2R-GIB"/>
+                                            </scrollView>
+                                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="3" translatesAutoresizingMaskIntoConstraints="NO" id="M0y-fq-khZ">
+                                                <rect key="frame" x="187.5" y="193" width="39" height="37"/>
+                                                <color key="pageIndicatorTintColor" white="0.33000000000000002" alpha="0.25" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="currentPageIndicatorTintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </pageControl>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="2gh-u1-eU3"/>
-                                            <constraint firstItem="Ons-QB-1gC" firstAttribute="leading" secondItem="zWl-5f-ju8" secondAttribute="leading" id="FWZ-yw-xk1"/>
-                                            <constraint firstAttribute="trailing" secondItem="Ons-QB-1gC" secondAttribute="trailing" id="MBP-El-Wy5"/>
-                                            <constraint firstItem="Ons-QB-1gC" firstAttribute="top" secondItem="zWl-5f-ju8" secondAttribute="top" id="Vk1-jF-P7x"/>
-                                            <constraint firstAttribute="bottom" secondItem="Ons-QB-1gC" secondAttribute="bottom" id="oYr-WN-2y5"/>
+                                            <constraint firstAttribute="bottom" secondItem="WZh-aJ-JPd" secondAttribute="bottom" id="4SP-7f-cAV"/>
+                                            <constraint firstItem="2Ef-oq-VER" firstAttribute="width" secondItem="zWl-5f-ju8" secondAttribute="width" id="9SX-DX-fAN"/>
+                                            <constraint firstItem="WZh-aJ-JPd" firstAttribute="leading" secondItem="zWl-5f-ju8" secondAttribute="leading" id="GkF-pX-f04"/>
+                                            <constraint firstAttribute="bottom" secondItem="M0y-fq-khZ" secondAttribute="bottom" constant="-10" id="Lrs-AA-SbA"/>
+                                            <constraint firstItem="M0y-fq-khZ" firstAttribute="centerX" secondItem="zWl-5f-ju8" secondAttribute="centerX" id="OD8-hm-OxL"/>
+                                            <constraint firstAttribute="trailing" secondItem="WZh-aJ-JPd" secondAttribute="trailing" id="SAW-MT-lWs"/>
+                                            <constraint firstItem="WZh-aJ-JPd" firstAttribute="top" secondItem="zWl-5f-ju8" secondAttribute="top" id="nlx-lF-1yB"/>
+                                            <constraint firstItem="2Ef-oq-VER" firstAttribute="height" secondItem="zWl-5f-ju8" secondAttribute="height" id="vpG-hF-OIt"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
@@ -429,13 +456,13 @@
                                                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="OZv-iF-l1V">
                                                                         <rect key="frame" x="8" y="8" width="102" height="54"/>
                                                                         <subviews>
-                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="dAu-6Z-OAS">
-                                                                                <rect key="frame" x="39" y="0.0" width="24" height="33"/>
+                                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" image="whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="dAu-6Z-OAS">
+                                                                                <rect key="frame" x="27" y="0.0" width="48" height="48"/>
                                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                                             </imageView>
-                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WhatsApp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LiR-kl-rIC">
-                                                                                <rect key="frame" x="17.5" y="37" width="67.5" height="17"/>
+                                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="WhatsApp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LiR-kl-rIC">
+                                                                                <rect key="frame" x="17.5" y="52" width="67.5" height="2"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>
@@ -730,9 +757,13 @@ SteakHouse Grill é mais uma supernovidade que você só encontra aqui, na Polis
                         <outlet property="disponivelLabel" destination="uw2-CB-Wgc" id="Rmo-Jb-FKd"/>
                         <outlet property="empresaLabel" destination="3re-ON-7Yk" id="ZO9-7a-LGa"/>
                         <outlet property="enderecoLabel" destination="rmH-5T-KIr" id="fIy-Su-jJU"/>
+                        <outlet property="fotosPageControl" destination="M0y-fq-khZ" id="kln-MT-J3S"/>
+                        <outlet property="fotosScrollView" destination="WZh-aJ-JPd" id="8BD-l9-IxF"/>
+                        <outlet property="fotosStackView" destination="Dvw-7P-rCc" id="mqw-vR-tHl"/>
+                        <outlet property="headerFotos" destination="zWl-5f-ju8" id="8eO-iT-SF1"/>
                         <outlet property="imageHeightConstraint" destination="2gh-u1-eU3" id="AhF-Mn-ctz"/>
                         <outlet property="imageTopConstraint" destination="IgA-SZ-yaj" id="zcz-iB-WLC"/>
-                        <outlet property="imageView" destination="Ons-QB-1gC" id="VJA-UX-MlC"/>
+                        <outlet property="imageView" destination="2Ef-oq-VER" id="3PK-xh-SLk"/>
                         <outlet property="mapsBtnContainer" destination="KLk-Zm-CWz" id="NQt-ki-IQM"/>
                         <outlet property="nomeProdutoLabel" destination="L0G-0K-NQQ" id="iTP-oc-vsB"/>
                         <outlet property="scrollView" destination="0iV-Yu-zof" id="QI8-MY-0LM"/>

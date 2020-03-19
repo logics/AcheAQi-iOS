@@ -15,7 +15,10 @@ import Karte
 
 class DetalheViewController: UIViewController {
 
+    @IBOutlet weak var headerFotos: DesignableView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var fotosScrollView: UIScrollView!
+    @IBOutlet weak var fotosPageControl: UIPageControl!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var empresaLabel: UILabel!
     @IBOutlet weak var enderecoLabel: UILabel!
@@ -31,6 +34,7 @@ class DetalheViewController: UIViewController {
     @IBOutlet weak var mapsBtnContainer: DesignableView!
     @IBOutlet weak var zapBtnContainer: DesignableView!
     @IBOutlet weak var telBtnContainer: DesignableView!
+    @IBOutlet weak var fotosStackView: UIStackView!
     
     var originalImageHeight: CGFloat!
     var produto: Produto! {
@@ -56,7 +60,13 @@ class DetalheViewController: UIViewController {
     
     fileprivate func setupViews() {
         
-        imageView.af_setImage(withURL: URL(wsURLWithPath: produto.foto), placeholderImage: #imageLiteral(resourceName: "Placeholder.pdf"))
+        setupFotos()
+        
+        fotosPageControl.numberOfPages = produto.fotos.count
+        fotosPageControl.currentPage = 0
+        
+        fotosScrollView.delegate = self
+
         title = produto.nome
         nomeProdutoLabel.text = produto.nome
         valorLabel.text = produto.valor.toCurrency()
@@ -64,6 +74,30 @@ class DetalheViewController: UIViewController {
         empresaLabel.text = empresa.nome
         enderecoLabel.text = empresa.enderecoCompleto()
         descricaoLabel.text = produto.descricao
+    }
+    
+    fileprivate func setupFotos() {
+        imageView.removeFromSuperview()
+        
+        for foto in produto.fotos {
+            let fotoImgView = fotoImageView(with: foto)
+            
+            fotosStackView.addArrangedSubview(fotoImgView)
+            
+            fotoImgView.widthAnchor.constraint(equalTo: headerFotos.widthAnchor, multiplier: 1).isActive = true
+            fotoImgView.heightAnchor.constraint(equalTo: headerFotos.heightAnchor, multiplier: 1).isActive = true
+        }
+    }
+    
+    fileprivate func fotoImageView(with foto: Foto) -> UIImageView {
+        
+        let imgV = UIImageView(frame: headerFotos.frame)
+        imgV.translatesAutoresizingMaskIntoConstraints = false
+        imgV.contentMode = .scaleAspectFit
+        imgV.clipsToBounds = true
+        imgV.af_setImage(withURL: URL(wsURLWithPath: foto.path), placeholderImage: #imageLiteral(resourceName: "Placeholder.pdf"))
+
+        return imgV
     }
     
     // MARK: - IBActions
@@ -119,23 +153,30 @@ extension DetalheViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let offset = scrollView.contentOffset.y
-
-        let defaultTop = CGFloat(0)
-
-        // If we have not scrolled too high then stick to default y pos
-        var currentTop = defaultTop
-
-        if offset < 0 { // Whenever we go too high run this code block
-
-            // The new top (y position) of the imageview
-            currentTop = offset
-
-            imageHeightConstraint.constant = originalImageHeight - offset
-        } else {
-            imageHeightConstraint.constant = originalImageHeight
+        if scrollView == self.scrollView {
+            
+            let offset = scrollView.contentOffset.y
+            
+            let defaultTop = CGFloat(0)
+            
+            // If we have not scrolled too high then stick to default y pos
+            var currentTop = defaultTop
+            
+            if offset < 0 { // Whenever we go too high run this code block
+                
+                // The new top (y position) of the imageview
+                currentTop = offset
+                
+                imageHeightConstraint.constant = originalImageHeight - offset
+            } else {
+                imageHeightConstraint.constant = originalImageHeight
+            }
+            
+            imageTopConstraint.constant = currentTop
         }
-        
-        imageTopConstraint.constant = currentTop
+        else if scrollView == self.fotosScrollView {
+            let pageIndex = round(scrollView.contentOffset.x/view.frame.width)
+            fotosPageControl.currentPage = Int(pageIndex)
+        }
     }
 }

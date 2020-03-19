@@ -16,11 +16,11 @@ class Produto: NSObject, Codable {
     let categoria: Categoria
     let nome, createdAt, updatedAt: String
     let banner, descricao: String?
-    let foto: String
     let mostraValor, emEstoque: Bool
     let valor: Float
+    let fotos: Fotos
 
-    init(id: Int, empresa: Empresa, categoria: Categoria, nome: String, banner: String?, createdAt: String, updatedAt: String, foto: String, descricao: String?, emEstoque: Bool, mostraValor: Bool, valor: Float) {
+    init(id: Int, empresa: Empresa, categoria: Categoria, nome: String, banner: String?, createdAt: String, updatedAt: String, descricao: String?, emEstoque: Bool, mostraValor: Bool, valor: Float, fotos: Fotos?) {
         self.id = id
         self.empresa = empresa
         self.categoria = categoria
@@ -28,11 +28,11 @@ class Produto: NSObject, Codable {
         self.banner = banner
         self.createdAt = createdAt
         self.updatedAt = updatedAt
-        self.foto = foto
         self.descricao = descricao
         self.emEstoque = emEstoque
         self.mostraValor = mostraValor
         self.valor = valor
+        self.fotos = fotos ?? Fotos()
     }
     enum CodingKeys: String, CodingKey {
         case id
@@ -42,11 +42,11 @@ class Produto: NSObject, Codable {
         case banner
         case createdAt
         case updatedAt
-        case foto
         case descricao
         case emEstoque
         case mostraValor
         case valor
+        case fotos
     }
 
     /// NSPredicate expression keys for searching.
@@ -60,7 +60,7 @@ class Produto: NSObject, Codable {
 extension Produto {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Produto.self, from: data)
-        self.init(id: me.id, empresa: me.empresa, categoria: me.categoria, nome: me.nome, banner: me.banner, createdAt: me.createdAt, updatedAt: me.updatedAt, foto: me.foto, descricao: me.descricao, emEstoque: me.emEstoque, mostraValor: me.mostraValor, valor: me.valor)
+        self.init(id: me.id, empresa: me.empresa, categoria: me.categoria, nome: me.nome, banner: me.banner, createdAt: me.createdAt, updatedAt: me.updatedAt, descricao: me.descricao, emEstoque: me.emEstoque, mostraValor: me.mostraValor, valor: me.valor, fotos: me.fotos)
     }
 
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -82,11 +82,11 @@ extension Produto {
         banner: String? = nil,
         createdAt: String? = nil,
         updatedAt: String? = nil,
-        foto: String? = nil,
         descricao: String? = nil,
         emEstoque: Bool? = nil,
         mostraValor: Bool? = nil,
-        valor: Float? = nil
+        valor: Float? = nil,
+        fotos: Fotos? = nil
     ) -> Produto {
         return Produto(
             id: id ?? self.id,
@@ -96,11 +96,11 @@ extension Produto {
             banner: banner ?? self.banner,
             createdAt: createdAt ?? self.createdAt,
             updatedAt: updatedAt ?? self.updatedAt,
-            foto: foto ?? self.foto,
             descricao: descricao ?? self.descricao,
             emEstoque: emEstoque ?? self.emEstoque,
             mostraValor: mostraValor ?? self.mostraValor,
-            valor: valor ?? self.valor
+            valor: valor ?? self.valor,
+            fotos: fotos ?? self.fotos
         )
     }
 

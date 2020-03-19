@@ -12,6 +12,7 @@ import Alamofire
 typealias Empresas = [Empresa]
 typealias Produtos = [Produto]
 typealias Categorias = [Categoria]
+typealias Fotos = [Foto]
 
 // MARK: - Helper functions for creating encoders and decoders
 
@@ -63,6 +64,11 @@ extension DataRequest {
     
     @discardableResult
     func responseCategorias(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<Categorias>) -> Void) -> Self {
+        return responseDecodable(queue: queue, completionHandler: completionHandler)
+    }
+    
+    @discardableResult
+    func responseFotos(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<Fotos>) -> Void) -> Self {
         return responseDecodable(queue: queue, completionHandler: completionHandler)
     }
 }
