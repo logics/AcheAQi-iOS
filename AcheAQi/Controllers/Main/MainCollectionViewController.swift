@@ -212,14 +212,7 @@ extension MainCollectionViewController {
     
         let produto = produtos[indexPath.row]
         
-        cell.valorLabel.text = produto.valor.toCurrency() ?? "R$ --,--"
-        cell.nomeLabel.text = produto.nome
-        
-        cell.nomeLabel.sizeToFit()
-
-        if let path = produto.fotos.first?.path {
-            cell.imageView.af_setImage(withURL: URL(wsURLWithPath: path), placeholderImage: #imageLiteral(resourceName: "Placeholder"))
-        }
+        cell.produto = produto
     
         return cell
     }

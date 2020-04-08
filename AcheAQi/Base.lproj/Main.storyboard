@@ -209,53 +209,65 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="tertiarySystemGroupedBackgroundColor" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="nRL-Ww-7KR">
-                            <size key="itemSize" width="180" height="240"/>
+                            <size key="itemSize" width="180" height="250"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ProdutoCell" id="NAw-Jj-auK" customClass="ProdutoCollectionViewCell" customModule="AcheAQi" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="180" height="240"/>
+                                <rect key="frame" x="0.0" y="0.0" width="180" height="250"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="qxq-zW-TsO">
-                                    <rect key="frame" x="0.0" y="0.0" width="180" height="240"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="180" height="250"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kn0-3R-wz0" customClass="DesignableView" customModule="Spring">
-                                            <rect key="frame" x="10" y="10" width="160" height="220"/>
+                                            <rect key="frame" x="10" y="10" width="160" height="230"/>
                                             <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="zg9-NL-wZI">
+                                                    <rect key="frame" x="0.0" y="0.0" width="160" height="136"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="zg9-NL-wZI" secondAttribute="height" multiplier="152:129" id="Sje-NB-l2j"/>
+                                                    </constraints>
+                                                </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="R$ 699,99" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZkN-OF-l9F">
-                                                    <rect key="frame" x="8" y="154" width="144" height="20.5"/>
+                                                    <rect key="frame" x="8" y="140" width="144" height="20.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Churrasqueira Steakhouse Grill Polishop" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GAl-rv-a0M">
-                                                    <rect key="frame" x="8" y="178.5" width="144" height="33.5"/>
+                                                    <rect key="frame" x="8" y="164.5" width="144" height="38.5"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
                                                     <color key="textColor" cocoaTouchSystemColor="viewFlipsideBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalCompressionResistancePriority="749" image="Placeholder" translatesAutoresizingMaskIntoConstraints="NO" id="zg9-NL-wZI">
-                                                    <rect key="frame" x="4" y="21" width="152" height="129"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Por: Polishop" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XKD-51-oc7">
+                                                    <rect key="frame" x="8" y="205" width="144" height="17"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" secondItem="zg9-NL-wZI" secondAttribute="height" multiplier="152:129" id="Sje-NB-l2j"/>
+                                                        <constraint firstAttribute="height" constant="17" id="YP1-kT-XYY"/>
                                                     </constraints>
-                                                </imageView>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
+                                                <constraint firstItem="XKD-51-oc7" firstAttribute="top" secondItem="GAl-rv-a0M" secondAttribute="bottom" constant="2" id="9DY-I2-dcy"/>
                                                 <constraint firstAttribute="trailing" secondItem="GAl-rv-a0M" secondAttribute="trailing" constant="8" id="FVQ-N2-mFz"/>
-                                                <constraint firstAttribute="trailing" secondItem="zg9-NL-wZI" secondAttribute="trailing" constant="4" id="GDk-he-Rys"/>
+                                                <constraint firstAttribute="trailing" secondItem="zg9-NL-wZI" secondAttribute="trailing" id="GDk-he-Rys"/>
                                                 <constraint firstItem="GAl-rv-a0M" firstAttribute="top" secondItem="ZkN-OF-l9F" secondAttribute="bottom" constant="4" id="JOJ-xO-ea9"/>
+                                                <constraint firstAttribute="trailing" secondItem="XKD-51-oc7" secondAttribute="trailing" constant="8" id="MNf-UV-HF5"/>
                                                 <constraint firstItem="ZkN-OF-l9F" firstAttribute="top" secondItem="zg9-NL-wZI" secondAttribute="bottom" constant="4" id="N3K-u3-ebi"/>
                                                 <constraint firstItem="GAl-rv-a0M" firstAttribute="leading" secondItem="Kn0-3R-wz0" secondAttribute="leading" constant="8" id="Pgw-2s-oD0"/>
-                                                <constraint firstItem="zg9-NL-wZI" firstAttribute="leading" secondItem="Kn0-3R-wz0" secondAttribute="leading" constant="4" id="U7x-vi-TMp"/>
-                                                <constraint firstAttribute="bottom" secondItem="GAl-rv-a0M" secondAttribute="bottom" constant="8" id="WGv-ff-nMI"/>
-                                                <constraint firstItem="zg9-NL-wZI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Kn0-3R-wz0" secondAttribute="top" constant="4" id="cPV-3P-Xwc"/>
+                                                <constraint firstItem="zg9-NL-wZI" firstAttribute="leading" secondItem="Kn0-3R-wz0" secondAttribute="leading" id="U7x-vi-TMp"/>
+                                                <constraint firstItem="zg9-NL-wZI" firstAttribute="top" secondItem="Kn0-3R-wz0" secondAttribute="top" id="cPV-3P-Xwc"/>
                                                 <constraint firstItem="ZkN-OF-l9F" firstAttribute="leading" secondItem="Kn0-3R-wz0" secondAttribute="leading" constant="8" id="j10-7h-9YA"/>
+                                                <constraint firstItem="XKD-51-oc7" firstAttribute="leading" secondItem="Kn0-3R-wz0" secondAttribute="leading" constant="8" id="mCa-UP-xMg"/>
                                                 <constraint firstAttribute="trailing" secondItem="ZkN-OF-l9F" secondAttribute="trailing" constant="8" id="qf8-KP-x8z"/>
+                                                <constraint firstAttribute="bottom" secondItem="XKD-51-oc7" secondAttribute="bottom" constant="8" id="xDU-xt-vGO"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
@@ -283,8 +295,9 @@
                                         <constraint firstItem="Kn0-3R-wz0" firstAttribute="top" secondItem="qxq-zW-TsO" secondAttribute="top" constant="10" id="ssf-8Y-4C6"/>
                                     </constraints>
                                 </collectionViewCellContentView>
-                                <size key="customSize" width="180" height="240"/>
+                                <size key="customSize" width="180" height="250"/>
                                 <connections>
+                                    <outlet property="empresaLabel" destination="XKD-51-oc7" id="jh1-ID-awS"/>
                                     <outlet property="imageView" destination="zg9-NL-wZI" id="Pw9-o8-OiQ"/>
                                     <outlet property="nomeLabel" destination="GAl-rv-a0M" id="B8z-a0-8Op"/>
                                     <outlet property="valorLabel" destination="ZkN-OF-l9F" id="iLT-Gk-IyQ"/>
@@ -457,12 +470,12 @@
                                                                         <rect key="frame" x="8" y="8" width="102" height="54"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" image="whatsapp" translatesAutoresizingMaskIntoConstraints="NO" id="dAu-6Z-OAS">
-                                                                                <rect key="frame" x="27" y="0.0" width="48" height="48"/>
+                                                                                <rect key="frame" x="27" y="0.0" width="48" height="33"/>
                                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="WhatsApp" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="LiR-kl-rIC">
-                                                                                <rect key="frame" x="17.5" y="52" width="67.5" height="2"/>
+                                                                                <rect key="frame" x="17.5" y="37" width="67.5" height="17"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>

@@ -7,12 +7,29 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class ProdutoCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var valorLabel: UILabel!
     @IBOutlet weak var nomeLabel: UILabel!
+    @IBOutlet weak var empresaLabel: UILabel!
+    
+    var produto: Produto! {
+        didSet {
+            valorLabel.text = produto.valor.toCurrency() ?? "R$ --,--"
+            nomeLabel.text = produto.nome
+            empresaLabel.text = String(format: "Por: %@", produto.empresa.nome)
+            
+            nomeLabel.sizeToFit()
+
+            if let path = produto.fotos.first?.path {
+                self.imageView.af_setImage(withURL: URL(wsURLWithPath: path), placeholderImage: #imageLiteral(resourceName: "Placeholder"))
+            }
+
+        }
+    }
     
     static var width = (UIScreen.main.bounds.size.width / 2) - 1
     
@@ -41,6 +58,6 @@ class ProdutoCollectionViewCell: UICollectionViewCell {
     
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
         widthConstraint.constant = ProdutoCollectionViewCell.width
-        return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: (ProdutoCollectionViewCell.width * 1.2)))
+        return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: (ProdutoCollectionViewCell.width * 1.8)))
     }
 }
