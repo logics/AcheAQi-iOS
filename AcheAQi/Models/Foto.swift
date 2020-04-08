@@ -13,12 +13,14 @@ class Foto: Codable {
     let id: Int
     let path: String
     let createdAt, updatedAt: Date
+    let position: Int
 
-    init(id: Int, path: String, createdAt: Date, updatedAt: Date) {
+    init(id: Int, path: String, createdAt: Date, updatedAt: Date, position: Int) {
         self.id = id
         self.path = path
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        self.position = position
     }
 }
 
@@ -27,7 +29,7 @@ class Foto: Codable {
 extension Foto {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Foto.self, from: data)
-        self.init(id: me.id, path: me.path, createdAt: me.createdAt, updatedAt: me.updatedAt)
+        self.init(id: me.id, path: me.path, createdAt: me.createdAt, updatedAt: me.updatedAt, position: me.position)
     }
 
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -45,13 +47,15 @@ extension Foto {
         id: Int? = nil,
         path: String? = nil,
         createdAt: Date? = nil,
-        updatedAt: Date? = nil
+        updatedAt: Date? = nil,
+        position: Int = 1
     ) -> Foto {
         return Foto(
             id: id ?? self.id,
             path: path ?? self.path,
             createdAt: createdAt ?? self.createdAt,
-            updatedAt: updatedAt ?? self.updatedAt
+            updatedAt: updatedAt ?? self.updatedAt,
+            position: position
         )
     }
 

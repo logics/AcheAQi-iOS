@@ -26,6 +26,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     var currentLocation: CLLocationCoordinate2D?
     var isUpdatingLocation: Bool = false
     var produtoSelected: Produto?
+    var searchTerm: String = ""
     
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -66,17 +67,17 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         navigationController?.view.layoutIfNeeded()
     }
     
-    // MARK: Private Functions
+    // MARK: - Private Functions
     
     private func setupSearchBar() {
         
         resultsController = self.storyboard?.instantiateViewController(withIdentifier: "MainResultsTableController") as? MainResultsTableController
         resultsController.tableView.delegate = self
         
-        searchController = UISearchController(searchResultsController: resultsController)
+        searchController = UISearchController(searchResultsController: nil)
         searchController.delegate = self
-        searchController.searchResultsUpdater = resultsController
-        searchController.searchBar.autocapitalizationType = .none
+        searchController.searchResultsUpdater = self //resultsController
+        searchController.searchBar.autocapitalizationType = .sentences
         searchController.obscuresBackgroundDuringPresentation = false
         searchController.searchBar.delegate = self // Monitor when the search button is tapped.
         
@@ -87,7 +88,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
             textFieldInsideSearchBar.layer.cornerRadius = 18
             textFieldInsideSearchBar.layer.masksToBounds = true
             
-            let attrString = NSAttributedString(string: "Informe um produto", attributes: [.foregroundColor: UIColor.white])
+            let attrString = NSAttributedString(string: "Procure no AcheAQi", attributes: [.foregroundColor: UIColor.white])
             
             textFieldInsideSearchBar.attributedPlaceholder = attrString
         }
@@ -125,8 +126,19 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
             }
             
             for categoria in filters.categorias {
-                params["categoria.nome[]"] = categoria.nome
+                params["categoria.nome"] = categoria.nome
             }
+        }
+        
+        if searchTerm.count > 2 {
+            
+            /// Se o usuário já tiver selecionado uma ou mais categorias no Filtro, não preicsa usar este termo para filtrar por categoria
+            if filters.categorias.count == 0 {
+                params["categoria.nome"] = searchTerm
+            }
+            
+            params["nome"] = searchTerm
+            params["empresa.nome"] = searchTerm
         }
         
         API.fetchProdutos(page: 1, params: params) { response in
@@ -205,7 +217,9 @@ extension MainCollectionViewController {
         
         cell.nomeLabel.sizeToFit()
 
-        cell.imageView.af_setImage(withURL: URL(wsURLWithPath: produto.foto), placeholderImage: #imageLiteral(resourceName: "Placeholder"))
+        if let path = produto.fotos.first?.path {
+            cell.imageView.af_setImage(withURL: URL(wsURLWithPath: path), placeholderImage: #imageLiteral(resourceName: "Placeholder"))
+        }
     
         return cell
     }
@@ -217,25 +231,6 @@ extension MainCollectionViewController {
         
         performSegue(withIdentifier: segueShowProduto, sender: self)
     }
-    
-    // MARK: - UICollectionViewDelegateFlowLayout
-        
-    /*override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
-        flowLayout.estimatedItemSize = CGSize(width: (view.bounds.size.width / 2) - 1, height: 10)
-        super.traitCollectionDidChange(previousTraitCollection)
-    }
-
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        flowLayout.estimatedItemSize = CGSize(width: (view.bounds.size.width / 2) - 1, height: 10)
-        flowLayout.invalidateLayout()
-        super.viewWillTransition(to: size, with: coordinator)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-
-        return cell.contentView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
-    }*/
 }
 
 
@@ -264,56 +259,25 @@ extension MainCollectionViewController: MainFiltroDelegate {
 // MARK: - Search Results Delegate
 
 extension MainCollectionViewController: UISearchControllerDelegate, UISearchResultsUpdating, UISearchBarDelegate {
+    
     func updateSearchResults(for searchController: UISearchController) {
-        // Update the filtered array based on the search text.
-        let searchResults = produtos.map { $0.nome }
-
+        
         // Strip out all the leading and trailing spaces.
         let whitespaceCharacterSet = CharacterSet.whitespaces
-        let strippedString = searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
+        let term = searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
         
-        let filteredResults = searchResults.filter { $0.contains(strippedString) }
-
-        // Apply the filtered results to the search results table.
-        if let resultsController = searchController.searchResultsController as? MainResultsTableController {
-            resultsController.results = filteredResults
-            resultsController.tableView.reloadData()
+        if term != searchTerm {
+            searchTerm = term
+            fetchRemoteData()
         }
     }
     
-    private func findMatches(searchString: String) -> NSCompoundPredicate {
-        /** Each searchString creates an OR predicate for: name, yearIntroduced, introPrice.
-            Example if searchItems contains "Gladiolus 51.99 2001":
-                name CONTAINS[c] "gladiolus"
-                name CONTAINS[c] "gladiolus", yearIntroduced ==[c] 2001, introPrice ==[c] 51.99
-                name CONTAINS[c] "ginger", yearIntroduced ==[c] 2007, introPrice ==[c] 49.98
-        */
-        var searchItemsPredicate = [NSPredicate]()
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         
-        /** Below we use NSExpression represent expressions in our predicates.
-            NSPredicate is made up of smaller, atomic parts:
-            two NSExpressions (a left-hand value and a right-hand value).
-        */
-        
-        // Product title matching.
-        let titleExpression = NSExpression(forKeyPath: Produto.ExpressionKeys.nome.rawValue)
-        let searchStringExpression = NSExpression(forConstantValue: searchString)
-        
-        let titleSearchComparisonPredicate =
-        NSComparisonPredicate(leftExpression: titleExpression,
-                              rightExpression: searchStringExpression,
-                              modifier: .direct,
-                              type: .contains,
-                              options: [.caseInsensitive, .diacriticInsensitive])
-        
-        searchItemsPredicate.append(titleSearchComparisonPredicate)
-                
-        let finalCompoundPredicate = NSCompoundPredicate(orPredicateWithSubpredicates: searchItemsPredicate)
-
-        //Swift.debugPrint("search predicate = \(String(describing: finalCompoundPredicate))")
-        return finalCompoundPredicate
+        if searchTerm == "" {
+            searchController.isActive = false
+        }
     }
-
 }
 
 // MARK: - Table View Delegate
@@ -327,7 +291,7 @@ extension MainCollectionViewController: UITableViewDelegate {
         searchController.searchBar.endEditing(true)
         
         searchController.dismiss(animated: true) {
-            self.searchController.searchBar
+            self.searchController.searchBar.text = searchString
         }
     }
 }

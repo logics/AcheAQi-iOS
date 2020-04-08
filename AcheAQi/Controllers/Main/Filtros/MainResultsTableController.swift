@@ -75,6 +75,7 @@ class MainResultsTableController: UITableViewController {
 }
 
 extension MainResultsTableController: UISearchResultsUpdating {
+    
     func updateSearchResults(for searchController: UISearchController) {
         
         guard let searchString = searchController.searchBar.text else { return }

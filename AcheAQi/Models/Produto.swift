@@ -34,6 +34,7 @@ class Produto: NSObject, Codable {
         self.valor = valor
         self.fotos = fotos ?? Fotos()
     }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case empresa
