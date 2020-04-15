@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     private func setupCustomAppearance() {
         if #available(iOS 13.0, *) {
             let appearance = UINavigationBarAppearance()
-            appearance.backgroundColor = #colorLiteral(red: 0.7960784314, green: 0.6235294118, blue: 0.07450980392, alpha: 1) // #colorLiteral(red: 0.3843137255, green: 0.6235294118, blue: 0.6745098039, alpha: 1)
+            appearance.backgroundColor = UIColor(named: "backgroundNavBar")
             appearance.titleTextAttributes = [.foregroundColor: UIColor.white]
             appearance.largeTitleTextAttributes = [.foregroundColor: UIColor.white]
             appearance.shadowImage = UIImage()
@@ -53,7 +53,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().shadowImage = UIImage()
         } else {
             UINavigationBar.appearance().tintColor = .white
-            UINavigationBar.appearance().barTintColor = #colorLiteral(red: 0.7960784314, green: 0.6235294118, blue: 0.07450980392, alpha: 1) // #colorLiteral(red: 0.3843137255, green: 0.6235294118, blue: 0.6745098039, alpha: 1)
+            UINavigationBar.appearance().barTintColor = UIColor(named: "backgroundNavBar")
             UINavigationBar.appearance().isTranslucent = false
         }
     }

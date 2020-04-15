@@ -57,6 +57,7 @@
 		A39098A923FDA8010068E997 /* Spring in Frameworks */ = {isa = PBXBuildFile; productRef = A39098A823FDA8010068E997 /* Spring */; };
 		A3942C50241A478600AACEC7 /* Karte in Frameworks */ = {isa = PBXBuildFile; productRef = A3942C4F241A478600AACEC7 /* Karte */; };
 		A3942C52241A594300AACEC7 /* String+PhoneCall.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3942C51241A594300AACEC7 /* String+PhoneCall.swift */; };
+		A3C96CFC24463F1E004ACB88 /* UIView+Corners.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C96CFB24463F1E004ACB88 /* UIView+Corners.swift */; };
 		A3D07C7123F33E27000EFED7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D07C7023F33E27000EFED7 /* AppDelegate.swift */; };
 		A3D07C7323F33E27000EFED7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D07C7223F33E27000EFED7 /* SceneDelegate.swift */; };
 		A3D07C7823F33E27000EFED7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D07C7623F33E27000EFED7 /* Main.storyboard */; };
@@ -98,6 +99,7 @@
 		A37EAC2E23FF0DE500FF0F7C /* MainResultsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResultsTableController.swift; sourceTree = "<group>"; };
 		A38226942423A4470051D2D8 /* Foto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foto.swift; sourceTree = "<group>"; };
 		A3942C51241A594300AACEC7 /* String+PhoneCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PhoneCall.swift"; sourceTree = "<group>"; };
+		A3C96CFB24463F1E004ACB88 /* UIView+Corners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Corners.swift"; sourceTree = "<group>"; };
 		A3D07C6D23F33E27000EFED7 /* AcheAQi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AcheAQi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A3D07C7023F33E27000EFED7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		A3D07C7223F33E27000EFED7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -263,6 +265,7 @@
 				A35588C92412CB2300DED77E /* UICollectionViewExtension.swift */,
 				A3D07CA223F6D94C000EFED7 /* UITapGestureRecognizer+Label.swift */,
 				A3D07CA823F6D94D000EFED7 /* UIView+Shadow.swift */,
+				A3C96CFB24463F1E004ACB88 /* UIView+Corners.swift */,
 				A3D07C9B23F6D94B000EFED7 /* UIView+Xib.swift */,
 				A3D07C9F23F6D94C000EFED7 /* URL+WS.swift */,
 				A3740492240EDD760093C6B9 /* UIBarButtonItemExtension.swift */,
@@ -459,6 +462,7 @@
 				A3740482240ED5520093C6B9 /* UICollectionViewCell+Animations.swift in Sources */,
 				A35B7C922409A3D800B709DC /* UseLocationFilterCell.swift in Sources */,
 				A374048F240ED7320093C6B9 /* KeychainItemAccessibility.swift in Sources */,
+				A3C96CFC24463F1E004ACB88 /* UIView+Corners.swift in Sources */,
 				A3740493240EDD760093C6B9 /* UIBarButtonItemExtension.swift in Sources */,
 				A3740474240ED5520093C6B9 /* Array+Convenience.swift in Sources */,
 				A3740487240ED5520093C6B9 /* UITapGestureRecognizer+Label.swift in Sources */,

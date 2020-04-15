@@ -84,7 +84,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         let searchBar = searchController.searchBar
         
         if let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField {
-            textFieldInsideSearchBar.backgroundColor = .white
+            textFieldInsideSearchBar.backgroundColor = UIColor(named: "inputBG")
             textFieldInsideSearchBar.layer.cornerRadius = 18
             textFieldInsideSearchBar.layer.masksToBounds = true
             

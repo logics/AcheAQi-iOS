@@ -16,6 +16,20 @@ class CustomView: UIView {
     private var gradient = CAGradientLayer()
     
     @IBInspectable
+    var cornerTop: Bool = true {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    @IBInspectable
+    var cornerBottom: Bool = true {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+    
+    @IBInspectable
     override var backgroundColor: UIColor? {
         get {
             return UIColor.clear
@@ -37,7 +51,9 @@ class CustomView: UIView {
     @IBInspectable
     var cornerRadius: CGFloat = 0.0 {
         didSet {
-            layer.cornerRadius = cornerRadius
+
+            
+            
             self.setNeedsDisplay()
         }
     }
@@ -110,6 +126,7 @@ class CustomView: UIView {
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
         self.makeBgGradient()
+        layoutView()
     }
     
     let containerView = UIView()
@@ -136,7 +153,18 @@ class CustomView: UIView {
         layer.shadowRadius = 4.0
         
         // set the cornerRadius of the containerView's layer
-        containerView.layer.cornerRadius = cornerRadius
+        if cornerTop && cornerBottom {
+            layer.cornerRadius = cornerRadius
+        }
+        else if cornerTop {
+            layer.cornerRadius = 0.0
+            roundCorners(corners: [.topLeft, .topRight], radius: cornerRadius)
+        }
+        else if cornerBottom {
+            layer.cornerRadius = 0.0
+            roundCorners(corners: [.bottomLeft, .bottomRight], radius: cornerRadius)
+        }
+
         containerView.layer.masksToBounds = true
         
         containerView.removeFromSuperview()
@@ -156,5 +184,8 @@ class CustomView: UIView {
         containerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         containerView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+    }
 }
-
