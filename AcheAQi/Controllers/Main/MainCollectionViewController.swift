@@ -125,8 +125,8 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
                 params["order[distance]"] = String(format: "ASC:%ld,%ld", location.latitude, location.longitude)
             }
             
-            for categoria in filters.categorias {
-                params["categoria.nome"] = categoria.nome
+            if filters.categorias.count > 0 {
+                params["categoria.nome"] = filters.categorias.map { return $0.nome }
             }
         }
         
@@ -220,9 +220,12 @@ extension MainCollectionViewController {
     // MARK: - UICollectionViewDelegate
 
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        produtoSelected = produtos[indexPath.item]
+        let cell = collectionView.cellForItem(at: indexPath)
         
-        performSegue(withIdentifier: segueShowProduto, sender: self)
+        cell?.animatePop(completionHandler: { finished in
+            self.produtoSelected = self.produtos[indexPath.item]            
+            self.performSegue(withIdentifier: segueShowProduto, sender: self)
+        })
     }
 }
 

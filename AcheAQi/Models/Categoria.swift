@@ -26,11 +26,11 @@ import Alamofire
 class Categoria: Codable {
     let id: Int
     let nome, createdAt, updatedAt: String
-    let banner: String?
+    let foto: String?
 
-    init(id: Int, banner: String?, nome: String, createdAt: String, updatedAt: String) {
+    init(id: Int, foto: String?, nome: String, createdAt: String, updatedAt: String) {
         self.id = id
-        self.banner = banner
+        self.foto = foto
         self.nome = nome
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -49,7 +49,7 @@ extension Categoria: Equatable {
 extension Categoria {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Categoria.self, from: data)
-        self.init(id: me.id, banner: me.banner, nome: me.nome, createdAt: me.createdAt, updatedAt: me.updatedAt)
+        self.init(id: me.id, foto: me.foto, nome: me.nome, createdAt: me.createdAt, updatedAt: me.updatedAt)
     }
 
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -65,14 +65,14 @@ extension Categoria {
 
     func with(
         id: Int? = nil,
-        banner: String? = nil,
+        foto: String? = nil,
         nome: String? = nil,
         createdAt: String? = nil,
         updatedAt: String? = nil
     ) -> Categoria {
         return Categoria(
             id: id ?? self.id,
-            banner: banner ?? self.banner,
+            foto: foto ?? self.foto,
             nome: nome ?? self.nome,
             createdAt: createdAt ?? self.createdAt,
             updatedAt: updatedAt ?? self.updatedAt

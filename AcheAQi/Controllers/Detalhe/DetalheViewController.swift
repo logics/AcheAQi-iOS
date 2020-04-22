@@ -21,9 +21,12 @@ class DetalheViewController: UIViewController {
     @IBOutlet weak var fotosPageControl: UIPageControl!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var empresaLabel: UILabel!
+    @IBOutlet weak var marcaLabel: UILabel!
     @IBOutlet weak var enderecoLabel: UILabel!
     @IBOutlet weak var nomeProdutoLabel: UILabel!
+    @IBOutlet weak var oldValueLabel: UILabel!
     @IBOutlet weak var valorLabel: UILabel!
+    @IBOutlet weak var percLabel: UILabel!
     @IBOutlet weak var disponivelLabel: UILabel!
     @IBOutlet weak var descricaoLabel: UILabel!
     @IBOutlet weak var showMapaButton: UIControl!
@@ -55,25 +58,28 @@ class DetalheViewController: UIViewController {
         
         setupViews()
     }
-    
+
     // MARK: - Private Functions
     
     fileprivate func setupViews() {
         
         setupFotos()
-        
-        fotosPageControl.numberOfPages = produto.fotos.count
-        fotosPageControl.currentPage = 0
-        
-        fotosScrollView.delegate = self
 
         title = produto.nome
         nomeProdutoLabel.text = produto.nome
-        valorLabel.text = produto.valor.toCurrency()
+        marcaLabel.text = produto.marca?.nome ?? "--"
+        oldValueLabel.text = String(format: "De: %@ por:", produto.valor.toCurrency() ?? "--")
+        valorLabel.text = produto.valorAtual.toCurrency()
+        percLabel.text = String(format: "%@%@", produto.percClean, "% OFF")
         disponivelLabel.text = produto.emEstoque ? "Estoque disponível" : "Indisponível"
         empresaLabel.text = empresa.nome
         enderecoLabel.text = empresa.enderecoCompleto()
         descricaoLabel.text = produto.descricao
+        
+        if !produto.emPromocao {
+            oldValueLabel.removeFromSuperview()
+            percLabel.removeFromSuperview()
+        }
     }
     
     fileprivate func setupFotos() {
@@ -87,6 +93,11 @@ class DetalheViewController: UIViewController {
             fotoImgView.widthAnchor.constraint(equalTo: headerFotos.widthAnchor, multiplier: 1).isActive = true
             fotoImgView.heightAnchor.constraint(equalTo: headerFotos.heightAnchor, multiplier: 1).isActive = true
         }
+        
+        fotosPageControl.numberOfPages = produto.fotos.count
+        fotosPageControl.currentPage = 0
+        
+        fotosScrollView.delegate = self
     }
     
     fileprivate func fotoImageView(with foto: Foto) -> UIImageView {

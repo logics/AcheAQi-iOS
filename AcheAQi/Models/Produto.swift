@@ -14,16 +14,28 @@ class Produto: NSObject, Codable {
     let id: Int
     let empresa: Empresa
     let categoria: Categoria
+    let marca: Marca?
     let nome, createdAt, updatedAt: String
     let banner, descricao: String?
     let mostraValor, emEstoque: Bool
     let valor: Float
-    let fotos: Fotos
+    let emPromocao: Bool
+    let percDesconto, valorPromocional: Float?
+    var fotos: Fotos
+    
+    var percClean: String {
+        return ((percDesconto ?? 0.0) * 100.0).rounded().clean
+    }
+    
+    var valorAtual: Float {
+        return emPromocao ? (valorPromocional ?? valor) : valor
+    }
 
-    init(id: Int, empresa: Empresa, categoria: Categoria, nome: String, banner: String?, createdAt: String, updatedAt: String, descricao: String?, emEstoque: Bool, mostraValor: Bool, valor: Float, fotos: Fotos?) {
+    init(id: Int, empresa: Empresa, categoria: Categoria, marca: Marca?, nome: String, banner: String?, createdAt: String, updatedAt: String, descricao: String?, emEstoque: Bool, mostraValor: Bool, valor: Float, emPromocao: Bool, percDesconto: Float?, valorPromocional: Float?, fotos: Fotos?) {
         self.id = id
         self.empresa = empresa
         self.categoria = categoria
+        self.marca = marca
         self.nome = nome
         self.banner = banner
         self.createdAt = createdAt
@@ -32,6 +44,9 @@ class Produto: NSObject, Codable {
         self.emEstoque = emEstoque
         self.mostraValor = mostraValor
         self.valor = valor
+        self.emPromocao = emPromocao
+        self.percDesconto = percDesconto
+        self.valorPromocional = valorPromocional
         self.fotos = fotos ?? Fotos()
     }
     
@@ -39,6 +54,7 @@ class Produto: NSObject, Codable {
         case id
         case empresa
         case categoria
+        case marca
         case nome
         case banner
         case createdAt
@@ -47,6 +63,9 @@ class Produto: NSObject, Codable {
         case emEstoque
         case mostraValor
         case valor
+        case emPromocao
+        case percDesconto
+        case valorPromocional
         case fotos
     }
 
@@ -61,7 +80,7 @@ class Produto: NSObject, Codable {
 extension Produto {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Produto.self, from: data)
-        self.init(id: me.id, empresa: me.empresa, categoria: me.categoria, nome: me.nome, banner: me.banner, createdAt: me.createdAt, updatedAt: me.updatedAt, descricao: me.descricao, emEstoque: me.emEstoque, mostraValor: me.mostraValor, valor: me.valor, fotos: me.fotos)
+        self.init(id: me.id, empresa: me.empresa, categoria: me.categoria, marca: me.marca, nome: me.nome, banner: me.banner, createdAt: me.createdAt, updatedAt: me.updatedAt, descricao: me.descricao, emEstoque: me.emEstoque, mostraValor: me.mostraValor, valor: me.valor, emPromocao: me.emPromocao, percDesconto: me.percDesconto, valorPromocional: me.valorPromocional, fotos: me.fotos)
     }
 
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -79,6 +98,7 @@ extension Produto {
         id: Int? = nil,
         empresa: Empresa? = nil,
         categoria: Categoria? = nil,
+        marca: Marca? = nil,
         nome: String? = nil,
         banner: String? = nil,
         createdAt: String? = nil,
@@ -87,12 +107,16 @@ extension Produto {
         emEstoque: Bool? = nil,
         mostraValor: Bool? = nil,
         valor: Float? = nil,
+        emPromocao: Bool = false,
+        percDesconto: Float? = nil,
+        valorPromocional: Float? = nil,
         fotos: Fotos? = nil
     ) -> Produto {
         return Produto(
             id: id ?? self.id,
             empresa: empresa ?? self.empresa,
             categoria: categoria ?? self.categoria,
+            marca: marca ?? self.marca,
             nome: nome ?? self.nome,
             banner: banner ?? self.banner,
             createdAt: createdAt ?? self.createdAt,
@@ -101,6 +125,9 @@ extension Produto {
             emEstoque: emEstoque ?? self.emEstoque,
             mostraValor: mostraValor ?? self.mostraValor,
             valor: valor ?? self.valor,
+            emPromocao: emPromocao,
+            percDesconto: percDesconto ?? self.percDesconto,
+            valorPromocional: valorPromocional ?? self.valorPromocional,
             fotos: fotos ?? self.fotos
         )
     }

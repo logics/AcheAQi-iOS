@@ -15,19 +15,23 @@ class ProdutoCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var valorLabel: UILabel!
     @IBOutlet weak var nomeLabel: UILabel!
     @IBOutlet weak var empresaLabel: UILabel!
+    @IBOutlet weak var percView: CustomView!
+    @IBOutlet weak var percLabel: UILabel!
     
     var produto: Produto! {
         didSet {
-            valorLabel.text = produto.valor.toCurrency() ?? "R$ --,--"
+            valorLabel.text = produto.valorAtual.toCurrency() ?? "R$ --,--"
             nomeLabel.text = produto.nome
             empresaLabel.text = String(format: "Por: %@", produto.empresa.nome)
+            percLabel.text = String(format: "%@%@", produto.percClean, "% OFF")
+            
+            percView.isHidden = !produto.emPromocao
             
             nomeLabel.sizeToFit()
 
             if let path = produto.fotos.first?.path {
                 self.imageView.af_setImage(withURL: URL(wsURLWithPath: path), placeholderImage: #imageLiteral(resourceName: "Placeholder"))
             }
-
         }
     }
     
