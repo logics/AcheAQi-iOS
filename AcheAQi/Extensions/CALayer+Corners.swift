@@ -37,6 +37,7 @@ extension CALayer {
             contentLayer.masksToBounds = true
             contentLayer.shouldRasterize = shouldRasterize
             contentLayer.rasterizationScale = UIScreen.main.scale
+                        
 
             switch contentMode {
             case .scaleAspectFit: contentLayer.contentsGravity = .resizeAspect

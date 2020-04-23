@@ -10,9 +10,12 @@ import UIKit
 
 class DesignableImageView: UIImageView {
     
+    var maskedCorners = CACornerMask()
+    
     @IBInspectable
     var cornerTL: Bool = false {
         didSet {
+            maskedCorners.insert(.layerMinXMinYCorner)
             self.setNeedsDisplay()
         }
     }
@@ -20,6 +23,7 @@ class DesignableImageView: UIImageView {
     @IBInspectable
     var cornerTR: Bool = false {
         didSet {
+            maskedCorners.insert(.layerMaxXMinYCorner)
             self.setNeedsDisplay()
         }
     }
@@ -27,6 +31,7 @@ class DesignableImageView: UIImageView {
     @IBInspectable
     var cornerBL: Bool = false {
         didSet {
+            maskedCorners.insert(.layerMinXMaxYCorner)
             self.setNeedsDisplay()
         }
     }
@@ -34,6 +39,7 @@ class DesignableImageView: UIImageView {
     @IBInspectable
     var cornerBR: Bool = false {
         didSet {
+            maskedCorners.insert(.layerMaxXMaxYCorner)
             self.setNeedsDisplay()
         }
     }
@@ -108,26 +114,10 @@ class DesignableImageView: UIImageView {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        // set the cornerRadius of the containerView's layer
-        var maskedCorners = CACornerMask()
-        
-        if cornerTL {
-            maskedCorners.insert(.layerMinXMinYCorner)
+        if cornerRadius > 0, shadowColor != .clear {
+            // set the cornerRadius of the containerView's layer
+            layer.addShadowIfNeeded(width: maskedCorners, radius: cornerRadius, contentMode: contentMode)
+            image = nil
         }
-        if cornerTR {
-            maskedCorners.insert(.layerMaxXMinYCorner)
-        }
-        if cornerBL {
-            maskedCorners.insert(.layerMinXMaxYCorner)
-        }
-        if cornerBR {
-            maskedCorners.insert(.layerMaxXMaxYCorner)
-        }
-        
-        layer.shouldRasterize = true
-        layer.rasterizationScale = UIScreen.main.scale
-        layer.maskedCorners = maskedCorners
-        
-        layer.addShadowIfNeeded(width: maskedCorners, radius: cornerRadius, contentMode: contentMode)
     }
 }

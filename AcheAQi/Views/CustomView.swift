@@ -52,13 +52,6 @@ class CustomView: UIView {
     }
     
     @IBInspectable
-    var isBgGradientColor: Bool = false {
-        didSet {
-            self.setNeedsDisplay()
-        }
-    }
-    
-    @IBInspectable
     var cornerRadius: CGFloat = 0.0 {
         didSet {
             layer.cornerRadius = cornerRadius
@@ -106,6 +99,13 @@ class CustomView: UIView {
     }
     
     @IBInspectable
+    var isBgGradientColor: Bool = false {
+        didSet {
+            self.setNeedsDisplay()
+        }
+    }
+
+    @IBInspectable
     var startColor: UIColor = UIColor.clear {
         didSet {
             self.setNeedsDisplay()
@@ -127,7 +127,7 @@ class CustomView: UIView {
     }
     
     @IBInspectable
-    var bgHorizontalGradient = false {
+    var bgHorizontalGradient: Bool = false {
         didSet {
             self.setNeedsDisplay()
         }
