@@ -3,6 +3,16 @@
     {
       "idiom" : "universal",
       "filename" : "city.pdf"
+    },
+    {
+      "idiom" : "universal",
+      "filename" : "city-noite.pdf",
+      "appearances" : [
+        {
+          "appearance" : "luminosity",
+          "value" : "dark"
+        }
+      ]
     }
   ],
   "info" : {

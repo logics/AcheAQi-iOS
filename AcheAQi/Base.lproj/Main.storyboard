@@ -276,7 +276,7 @@
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2d5-uR-epC">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="47"/>
-                                    <color key="backgroundColor" name="yellowLogo"/>
+                                    <color key="backgroundColor" name="backgroundNavBar"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="BTJ-af-H8f">
                                     <rect key="frame" x="20" y="5" width="374" height="115.5"/>
@@ -362,7 +362,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" name="systemBackground"/>
                                                     <constraints>
                                                         <constraint firstItem="hsZ-Yu-8IO" firstAttribute="centerY" secondItem="h1R-5l-e9Q" secondAttribute="centerY" id="2QW-FA-Ycx"/>
                                                         <constraint firstItem="cWe-c0-cik" firstAttribute="leading" secondItem="hsZ-Yu-8IO" secondAttribute="trailing" constant="12" id="Bu1-pB-UiH"/>
@@ -419,7 +419,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" name="systemBackground"/>
                                                     <constraints>
                                                         <constraint firstItem="yhR-Zt-idY" firstAttribute="leading" secondItem="FCK-GH-Cwl" secondAttribute="leading" constant="12" id="2XX-07-ZzF"/>
                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="vCz-c4-fn3" secondAttribute="trailing" constant="12" id="Ba8-xn-cFZ"/>
@@ -476,7 +476,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" name="systemBackground"/>
                                                     <constraints>
                                                         <constraint firstItem="8xP-wN-FSa" firstAttribute="centerY" secondItem="zcy-HZ-KYR" secondAttribute="centerY" id="2SR-Sz-YE2"/>
                                                         <constraint firstItem="wfx-aT-va6" firstAttribute="leading" secondItem="zcy-HZ-KYR" secondAttribute="leading" constant="12" id="696-Dh-poG"/>
@@ -533,7 +533,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <color key="backgroundColor" name="systemBackground"/>
                                                     <constraints>
                                                         <constraint firstItem="hhS-iX-WaZ" firstAttribute="centerY" secondItem="bKA-CE-lWt" secondAttribute="centerY" id="4zn-Ib-hUo"/>
                                                         <constraint firstItem="5Wd-H2-h6Y" firstAttribute="leading" secondItem="bKA-CE-lWt" secondAttribute="leading" constant="12" id="ElN-kI-S10"/>
@@ -591,23 +591,31 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" image="city" translatesAutoresizingMaskIntoConstraints="NO" id="5db-kb-D8D">
-                            <rect key="frame" x="0.0" y="-281" width="411" height="578"/>
+                            <rect key="frame" x="0.0" y="8" width="411" height="289"/>
                         </imageView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6q2-Ax-GYQ">
+                            <rect key="frame" x="0.0" y="297" width="411" height="0.0"/>
+                            <color key="backgroundColor" name="backgroundGrouped"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <constraints>
+                        <constraint firstItem="yvR-Na-62Y" firstAttribute="trailing" secondItem="6q2-Ax-GYQ" secondAttribute="trailing" id="71Q-eh-Q9P"/>
                         <constraint firstAttribute="bottom" secondItem="5db-kb-D8D" secondAttribute="bottom" id="Avx-We-4it"/>
                         <constraint firstItem="5db-kb-D8D" firstAttribute="trailing" secondItem="yvR-Na-62Y" secondAttribute="trailing" id="QXR-at-PFA"/>
+                        <constraint firstItem="6q2-Ax-GYQ" firstAttribute="top" secondItem="5db-kb-D8D" secondAttribute="bottom" id="XVH-o2-TWf"/>
+                        <constraint firstItem="6q2-Ax-GYQ" firstAttribute="leading" secondItem="yvR-Na-62Y" secondAttribute="leading" id="YCW-HF-ePe"/>
+                        <constraint firstItem="yvR-Na-62Y" firstAttribute="bottom" secondItem="6q2-Ax-GYQ" secondAttribute="bottom" id="nCh-6C-Mbp"/>
                         <constraint firstItem="5db-kb-D8D" firstAttribute="leading" secondItem="U8M-a4-F2d" secondAttribute="leading" id="uyg-8h-Plz"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="yvR-Na-62Y"/>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="isBgGradientColor" value="YES"/>
                         <userDefinedRuntimeAttribute type="color" keyPath="startColor">
-                            <color key="value" name="backgroundGrouped"/>
+                            <color key="value" name="skyGradientTop"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="endColor">
-                            <color key="value" name="sky"/>
+                            <color key="value" name="skyGradientBottom"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="boolean" keyPath="bgHorizontalGradient" value="NO"/>
                     </userDefinedRuntimeAttributes>
@@ -1548,8 +1556,11 @@ SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de 
         <namedColor name="secondaryFont">
             <color red="0.22400000691413879" green="0.22400000691413879" blue="0.22400000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <namedColor name="sky">
+        <namedColor name="skyGradientBottom">
             <color red="0.83137254901960789" green="0.95686274509803926" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="skyGradientTop">
+            <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="systemBackground">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
