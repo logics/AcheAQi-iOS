@@ -139,6 +139,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
             
             params["nome"] = searchTerm
             params["empresa.nome"] = searchTerm
+            params["marca.nome"] = searchTerm
         }
         
         API.fetchProdutos(page: 1, params: params) { response in
