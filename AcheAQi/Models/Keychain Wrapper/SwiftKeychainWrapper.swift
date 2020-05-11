@@ -143,7 +143,7 @@ open class KeychainWrapper {
     // MARK: Public Getters
     
     open func integer(forKey key: String, withAccessibility accessibility: KeychainItemAccessibility? = nil) -> Int? {
-        guard let numberValue = object(forKey: key, withAccessibility: accessibility) as? NSNumber else {
+        guard let numberValue = object(forKey: key, ofClass: NSNumber.self, withAccessibility: accessibility) as? NSNumber else {
             return nil
         }
         
@@ -151,7 +151,7 @@ open class KeychainWrapper {
     }
     
     open func float(forKey key: String, withAccessibility accessibility: KeychainItemAccessibility? = nil) -> Float? {
-        guard let numberValue = object(forKey: key, withAccessibility: accessibility) as? NSNumber else {
+        guard let numberValue = object(forKey: key, ofClass: NSNumber.self, withAccessibility: accessibility) as? NSNumber else {
             return nil
         }
         
@@ -159,7 +159,7 @@ open class KeychainWrapper {
     }
     
     open func double(forKey key: String, withAccessibility accessibility: KeychainItemAccessibility? = nil) -> Double? {
-        guard let numberValue = object(forKey: key, withAccessibility: accessibility) as? NSNumber else {
+        guard let numberValue = object(forKey: key, ofClass: NSNumber.self, withAccessibility: accessibility) as? NSNumber else {
             return nil
         }
         
@@ -167,7 +167,7 @@ open class KeychainWrapper {
     }
     
     open func bool(forKey key: String, withAccessibility accessibility: KeychainItemAccessibility? = nil) -> Bool? {
-        guard let numberValue = object(forKey: key, withAccessibility: accessibility) as? NSNumber else {
+        guard let numberValue = object(forKey: key, ofClass: NSNumber.self, withAccessibility: accessibility) as? NSNumber else {
             return nil
         }
         
@@ -190,14 +190,15 @@ open class KeychainWrapper {
     /// Returns an object that conforms to NSCoding for a specified key.
     ///
     /// - parameter forKey: The key to lookup data for.
+    /// - parameter ofClass: The object class type.
     /// - parameter withAccessibility: Optional accessibility to use when retrieving the keychain item.
     /// - returns: The decoded object associated with the key if it exists. If no data exists, or the data found cannot be decoded, returns nil.
-    open func object(forKey key: String, withAccessibility accessibility: KeychainItemAccessibility? = nil) -> NSCoding? {
+    open func object(forKey key: String, ofClass cls: AnyClass, withAccessibility accessibility: KeychainItemAccessibility? = nil) -> NSCoding? {
         guard let keychainData = data(forKey: key, withAccessibility: accessibility) else {
             return nil
         }
         
-        return NSKeyedUnarchiver.unarchiveObject(with: keychainData) as? NSCoding
+        return try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [cls], from: keychainData) as? NSCoding
     }
     
     
@@ -283,9 +284,12 @@ open class KeychainWrapper {
     /// - parameter withAccessibility: Optional accessibility to use when setting the keychain item.
     /// - returns: True if the save was successful, false otherwise.
     @discardableResult open func set(_ value: NSCoding, forKey key: String, withAccessibility accessibility: KeychainItemAccessibility? = nil) -> Bool {
-        let data = NSKeyedArchiver.archivedData(withRootObject: value)
+//        let data = NSKeyedArchiver.archivedData(withRootObject: value)
+        if let data = try? NSKeyedArchiver.archivedData(withRootObject: value, requiringSecureCoding: true) {
+            return set(data, forKey: key, withAccessibility: accessibility)
+        }
         
-        return set(data, forKey: key, withAccessibility: accessibility)
+        return false
     }
     
     /// Save a Data object to the keychain associated with a specified key. If data already exists for the given key, the data will be overwritten with the new value.
