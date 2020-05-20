@@ -30,7 +30,7 @@ class ProdutoCollectionViewCell: UICollectionViewCell {
             nomeLabel.sizeToFit()
 
             if let path = produto.fotos.first?.path {
-                self.imageView.af_setImage(withURL: URL(wsURLWithPath: path), placeholderImage: #imageLiteral(resourceName: "Placeholder"))
+                self.imageView.af_setImage(withURL: URL(wsURLWithPath: path), placeholderImage: #imageLiteral(resourceName: "Placeholder"), imageTransition: .crossDissolve(0.2))
             }
         }
     }

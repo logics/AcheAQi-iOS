@@ -30,7 +30,7 @@ struct Constants {
     static let APIURL = baseAPIURL + "/api/" + apiVersion
     
     static let API_LOGIN_URL = baseAPIURL + "/api/login_check"
-    static let USER_TOKEN_TO_CREATE = "e29797b6e51f82262cea841d53f28eee1102796c"
+    static let USER_TOKEN_TO_CREATE = "sa@ZSrE95ALHxoiQz!ecD8t8VPZwWYxAw$eQVVRA"
     
     static let privacyURL = baseAPIURL + "/terms/privacy?inApp=1"
     static let termsURL = baseAPIURL + "/terms/service?inApp=1"

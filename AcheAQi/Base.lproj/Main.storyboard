@@ -62,7 +62,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="119.5" height="117"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="churrasqueira" translatesAutoresizingMaskIntoConstraints="NO" id="8ek-Cv-LjD">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="119.5" height="117"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="119.50000000000011" height="117"/>
                                                                 </imageView>
                                                             </subviews>
                                                             <color key="backgroundColor" name="systemBackground"/>
@@ -341,22 +341,22 @@
                         <sections>
                             <tableViewSection id="IMc-SE-faF">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="67" id="LpY-J9-swK">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Edit Profile Cell" rowHeight="67" id="LpY-J9-swK">
                                         <rect key="frame" x="0.0" y="163" width="414" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LpY-J9-swK" id="PJJ-Kj-Ghn">
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="LpY-J9-swK" id="PJJ-Kj-Ghn">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="67"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1R-5l-e9Q" customClass="DesignableView" customModule="Spring">
+                                                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1R-5l-e9Q" customClass="DesignableView" customModule="Spring">
                                                     <rect key="frame" x="12" y="10" width="390" height="47"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="editProfile" translatesAutoresizingMaskIntoConstraints="NO" id="hsZ-Yu-8IO">
-                                                            <rect key="frame" x="12" y="3.5" width="48" height="40"/>
+                                                            <rect key="frame" x="12" y="13.5" width="24" height="20"/>
                                                             <color key="tintColor" name="asphalt"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Editar perfil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWe-c0-cik">
-                                                            <rect key="frame" x="72" y="13" width="88.5" height="21"/>
+                                                            <rect key="frame" x="48" y="13" width="88.5" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -398,7 +398,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="67" id="gMd-3g-eia">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Contact Cell" rowHeight="67" id="gMd-3g-eia">
                                         <rect key="frame" x="0.0" y="230" width="414" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gMd-3g-eia" id="mBd-g7-Ofc">
@@ -455,7 +455,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="67" id="CML-vg-GYL">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Evaluate Cell" rowHeight="67" id="CML-vg-GYL">
                                         <rect key="frame" x="0.0" y="297" width="414" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CML-vg-GYL" id="h0Q-ep-WRj">
@@ -512,7 +512,7 @@
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="67" id="NYn-Ko-xy5">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Logoff Cell" rowHeight="67" id="NYn-Ko-xy5">
                                         <rect key="frame" x="0.0" y="364" width="414" height="67"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="NYn-Ko-xy5" id="Klc-W8-fay">
@@ -579,13 +579,75 @@
                     </tableView>
                     <navigationItem key="navigationItem" id="iHp-2p-VDu"/>
                     <connections>
+                        <outlet property="avatarImageView" destination="K3k-iF-lgI" id="QTP-ph-Rld"/>
                         <outlet property="bgImageView" destination="5db-kb-D8D" id="1EG-yo-3op"/>
                         <outlet property="bgImageViewBottomConstraint" destination="Avx-We-4it" id="hQD-di-pyV"/>
                         <outlet property="bgView" destination="U8M-a4-F2d" id="X9z-9V-Gq6"/>
                         <outlet property="headerView" destination="XyQ-hL-uhO" id="ZXO-I5-Yhp"/>
+                        <outlet property="nomeLabel" destination="0JM-qt-spg" id="MBE-2K-s2u"/>
+                        <outlet property="unloggedBgView" destination="7Nf-2a-qtO" id="cVW-J5-Jrt"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TkD-Yc-7ik" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="7Nf-2a-qtO">
+                    <rect key="frame" x="0.0" y="0.0" width="302" height="447"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="l71-Ir-fND">
+                            <rect key="frame" x="25" y="60.5" width="252" height="302"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.crop.circle.badge.exclam" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="sZB-7A-Efa">
+                                    <rect key="frame" x="0.0" y="0.5" width="252" height="99"/>
+                                    <color key="tintColor" name="greenCity"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="100" id="Hla-hS-M5j"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Você não está logado." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rpi-wK-LAj">
+                                    <rect key="frame" x="0.0" y="125" width="252" height="30"/>
+                                    <fontDescription key="fontDescription" type="system" weight="thin" pointSize="25"/>
+                                    <color key="textColor" name="secondaryFont"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Entre com seus dados ou registre-se e aproveite ao máximo o AcheAQi." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZxG-9C-GXX">
+                                    <rect key="frame" x="0.0" y="180" width="252" height="61"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="41" id="m3f-vG-zu1"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
+                                    <color key="textColor" name="tertiaryFont"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6Pq-Xs-jFE" customClass="DesignableButton" customModule="Spring">
+                                    <rect key="frame" x="0.0" y="266" width="252" height="36"/>
+                                    <color key="backgroundColor" red="0.4941176471" green="0.82745098039999998" blue="0.12941176469999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="36" id="Of7-ns-j9o"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                                    <state key="normal" title="Entrar">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="18"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
+                                    <connections>
+                                        <action selector="didTapShowLoginButton:" destination="n8D-2U-ydJ" eventType="touchUpInside" id="4Hl-EF-etX"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <color key="backgroundColor" name="backgroundGrouped"/>
+                    <constraints>
+                        <constraint firstItem="l71-Ir-fND" firstAttribute="leading" secondItem="7Nf-2a-qtO" secondAttribute="leading" constant="25" id="3Hu-hN-f9s"/>
+                        <constraint firstItem="l71-Ir-fND" firstAttribute="centerY" secondItem="7Nf-2a-qtO" secondAttribute="centerY" constant="-12" id="9aU-v1-knm"/>
+                        <constraint firstItem="Wh2-ap-zgC" firstAttribute="trailing" secondItem="l71-Ir-fND" secondAttribute="trailing" constant="25" id="wwR-t9-swZ"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="Wh2-ap-zgC"/>
+                </view>
                 <view contentMode="scaleToFill" id="U8M-a4-F2d" customClass="CustomView" customModule="AcheAQi" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="0.0" width="411" height="297"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -925,7 +987,7 @@
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                                    <color key="value" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="value" red="0.2627450980392157" green="0.2627450980392157" blue="0.2627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 </userDefinedRuntimeAttribute>
                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
                                                     <real key="value" value="5"/>
@@ -1528,12 +1590,13 @@ SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de 
         <image name="filter" width="24" height="24"/>
         <image name="magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="mappin.and.ellipse" catalog="system" width="58" height="64"/>
+        <image name="person.crop.circle.badge.exclam" catalog="system" width="64" height="50"/>
         <image name="person.fill" catalog="system" width="64" height="60"/>
         <image name="phone.fill.arrow.up.right" catalog="system" width="64" height="56"/>
         <image name="star.lefthalf.fill" catalog="system" width="64" height="58"/>
         <image name="tag.fill" catalog="system" width="64" height="58"/>
         <image name="text.bubble.fill" catalog="system" width="64" height="54"/>
-        <image name="user" width="90" height="119"/>
+        <image name="user" width="119" height="119"/>
         <image name="whatsapp" width="24" height="24"/>
         <namedColor name="asphalt">
             <color red="0.34509803921568627" green="0.4392156862745098" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1543,6 +1606,9 @@ SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de 
         </namedColor>
         <namedColor name="backgroundNavBar">
             <color red="0.79607843137254897" green="0.62352941176470589" blue="0.074509803921568626" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="greenCity">
+            <color red="0.3843137254901961" green="0.62352941176470589" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="percBg">
             <color red="0.0" green="0.0" blue="0.0" alpha="0.63999998569488525" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1557,7 +1623,7 @@ SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de 
             <color red="0.22400000691413879" green="0.22400000691413879" blue="0.22400000691413879" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="skyGradientBottom">
-            <color red="0.83137254901960789" green="0.95686274509803926" blue="0.9882352941176471" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.83099997043609619" green="0.9570000171661377" blue="0.98799997568130493" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="skyGradientTop">
             <color red="0.94900000095367432" green="0.94900000095367432" blue="0.96899998188018799" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1573,6 +1639,6 @@ SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de 
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZkN-KK-gt3"/>
+        <segue reference="Fra-f4-YSr"/>
     </inferredMetricsTieBreakers>
 </document>

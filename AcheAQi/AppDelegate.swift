@@ -8,6 +8,8 @@
 
 import UIKit
 import Alamofire
+import IQKeyboardManagerSwift
+import NVActivityIndicatorView
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,6 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Alamofire.SessionManager.default.adapter = WSRequestAdapter()
         Alamofire.SessionManager.default.retrier = WSRequestAdapter()
+        
+        IQKeyboardManager.shared.enable = true
+        NVActivityIndicatorView.DEFAULT_TYPE = .circleStrokeSpin
         
         return true
     }

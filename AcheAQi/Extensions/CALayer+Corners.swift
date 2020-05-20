@@ -37,27 +37,29 @@ extension CALayer {
             contentLayer.masksToBounds = true
             contentLayer.shouldRasterize = shouldRasterize
             contentLayer.rasterizationScale = UIScreen.main.scale
-                        
-
-            switch contentMode {
-            case .scaleAspectFit: contentLayer.contentsGravity = .resizeAspect
-            case .scaleToFill: contentLayer.contentsGravity = .resize
-            case .scaleAspectFill: contentLayer.contentsGravity = .resizeAspectFill
-            case .bottom: contentLayer.contentsGravity = .bottom
-            case .bottomLeft: contentLayer.contentsGravity = .bottomLeft
-            case .bottomRight: contentLayer.contentsGravity = .bottomRight
-            case .center: contentLayer.contentsGravity = .center
-            case .left: contentLayer.contentsGravity = .left
-            case .redraw: contentLayer.contentsGravity = .resize
-            case .right: contentLayer.contentsGravity = .right
-            case .top: contentLayer.contentsGravity = .top
-            case .topLeft: contentLayer.contentsGravity = .topLeft
-            case .topRight: contentLayer.contentsGravity = .topRight
-            default:
-                break
-            }
+            contentLayer.contentsGravity = CALayer.contentsGravity(by: contentMode)
             
             insertSublayer(contentLayer, at: 0)
+        }
+    }
+    
+    class func contentsGravity(by contentMode: UIView.ContentMode) -> CALayerContentsGravity {
+        switch contentMode {
+        case .scaleAspectFit:   return .resizeAspect
+        case .scaleToFill:      return .resize
+        case .scaleAspectFill:  return .resizeAspectFill
+        case .bottom:           return .bottom
+        case .bottomLeft:       return .bottomLeft
+        case .bottomRight:      return .bottomRight
+        case .center:           return .center
+        case .left:             return .left
+        case .redraw:           return .resize
+        case .right:            return .right
+        case .top:              return .top
+        case .topLeft:          return .topLeft
+        case .topRight:         return .topRight
+        default:
+            return .resizeAspect
         }
     }
 }

@@ -16,12 +16,11 @@ class Login {
     // MARK: Shared Instance
     static let shared = Login()
     
-    fileprivate let prefixKey = "br.com.QuadrasNet."
+    fileprivate let prefixKey = "br.com.AcheAQi."
 
     let defaults = UserDefaults.standard
     
     var userExternalID: NSNumber? {
-        
         get {
             return self.defaults.value(forKey: prefixKey + "userExternalID") as? NSNumber
         }
@@ -39,6 +38,44 @@ class Login {
         }
     }
     
+    var nickname: String? {
+        get {
+            let username = KeychainWrapper.standard.string(forKey: prefixKey + "nickname") ?? ""
+            return username
+        }
+        set {
+            KeychainWrapper.standard.set(newValue ?? "", forKey: prefixKey + "nickname")
+        }
+    }
+    
+    var email: String? {
+        get {
+            let mail = KeychainWrapper.standard.string(forKey: prefixKey + "email") ?? ""
+            return mail
+        }
+        set {
+            KeychainWrapper.standard.set(newValue ?? "", forKey: prefixKey + "email")
+        }
+    }
+    
+    var nome: String? {
+        get {
+            return self.defaults.value(forKey: prefixKey + "nome") as? String
+        }
+        set {
+            self.defaults.setValue(newValue, forKey: prefixKey + "nome")
+        }
+    }
+    
+    var avatarPath: String? {
+        get {
+            return self.defaults.value(forKey: prefixKey + "avatarPath") as? String
+        }
+        set {
+            self.defaults.setValue(newValue, forKey: prefixKey + "avatarPath")
+        }
+    }
+
     var jwtToken: String? {
         get {
             let token = KeychainWrapper.standard.string(forKey: prefixKey + "jwtToken") ?? ""
@@ -71,6 +108,10 @@ class Login {
     
     func save() {
         defaults.synchronize()
+        
+        if isLogado {
+            NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: UserDidLoginNotification), object: nil, userInfo: ["date": Date()]))
+        }
     }
     
     func clear() {
@@ -80,16 +121,21 @@ class Login {
         deviceToken = nil
     }
     
-//    func logoff() {
+    func logoff() {
 //        Device.shared.clearAndSave()
-//        
-//        clear()
-//        GIDSignIn.sharedInstance().signOut()
-//        LoginManager().logOut()
-//        
-//        save()
-//        
-//        // Post User Login Notification Center
-//        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: UserDidLogoffNotification), object: nil, userInfo: ["date": Date()]))
-//    }
+        
+        clear()
+        save()
+        
+        // Post User Login Notification Center
+        NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: UserDidLogoffNotification), object: nil, userInfo: ["date": Date()]))
+    }
+    
+    func parseUserData(json: [String: Any]) {
+        self.userExternalID = json["id"] as? NSNumber
+        self.nome = json["nome"] as? String
+        self.nickname = json["username"] as? String
+        self.email = json["email"] as? String
+        self.avatarPath = json["avatar"] as? String
+    }
 }

@@ -90,6 +90,14 @@ class DesignableImageView: UIImageView {
         }
     }
     
+    override var image: UIImage? {
+        didSet {
+            if image != nil {
+                self.redrawImageAndAddShadowIfNeeds()
+            }
+        }
+    }
+    
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     override func draw(_ rect: CGRect) {
@@ -111,13 +119,17 @@ class DesignableImageView: UIImageView {
     func layoutView() {
     }
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        
+    private func redrawImageAndAddShadowIfNeeds() {
         if cornerRadius > 0, shadowColor != .clear {
             // set the cornerRadius of the containerView's layer
             layer.addShadowIfNeeded(width: maskedCorners, radius: cornerRadius, contentMode: contentMode)
             image = nil
         }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        redrawImageAndAddShadowIfNeeds()
     }
 }

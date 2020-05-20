@@ -151,7 +151,7 @@ class AlertController: UIViewController {
     }
     
     @objc private func okHandler() {
-        if let handler = confirmAction {
+        if let handler = okAction {
             handler()
         }
         close(self)
