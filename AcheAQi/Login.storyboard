@@ -57,14 +57,14 @@
                                                         <color key="textColor" name="tertiaryFont"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nome de usuário" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zBd-36-zvo" customClass="DesignableTextField" customModule="Spring">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nome de usuário" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="zBd-36-zvo" customClass="DesignableTextField" customModule="Spring">
                                                         <rect key="frame" x="0.0" y="34" width="295" height="36"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="36" id="a7c-0l-fjR"/>
                                                         </constraints>
                                                         <color key="textColor" name="primaryFont"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="username"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="18"/>
@@ -79,15 +79,18 @@
                                                                 <real key="value" value="1"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="Q4d-bh-H3i" id="Bb6-3e-CBC"/>
+                                                        </connections>
                                                     </textField>
-                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Senha" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="nKQ-Ij-Hpa" customClass="DesignableTextField" customModule="Spring">
+                                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Senha" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="nKQ-Ij-Hpa" customClass="DesignableTextField" customModule="Spring">
                                                         <rect key="frame" x="0.0" y="82" width="295" height="36"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="36" id="0vV-tD-lJQ"/>
                                                         </constraints>
                                                         <color key="textColor" name="primaryFont"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="join" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="18"/>
@@ -102,6 +105,9 @@
                                                                 <real key="value" value="1"/>
                                                             </userDefinedRuntimeAttribute>
                                                         </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="Q4d-bh-H3i" id="uZW-87-lLT"/>
+                                                        </connections>
                                                     </textField>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ALt-n1-3W1" customClass="DesignableButton" customModule="Spring">
                                                         <rect key="frame" x="0.0" y="129.99999999999994" width="295" height="36"/>
@@ -194,7 +200,6 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="didTapSignUpButton:" destination="Q4d-bh-H3i" eventType="touchUpInside" id="fZN-Ps-imt"/>
-                                            <action selector="login:" destination="Q4d-bh-H3i" eventType="touchUpInside" id="Bnb-Dr-VGW"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="– Ou –" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dB9-U9-Cgi">
@@ -262,14 +267,14 @@
                                                                     <constraint firstAttribute="height" constant="40" id="K1s-RQ-jjg"/>
                                                                 </constraints>
                                                             </view>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Informe o seu nome" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dA7-kH-Qf0" customClass="DesignableTextField" customModule="Spring">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Informe o seu nome" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="dA7-kH-Qf0" customClass="DesignableTextField" customModule="Spring">
                                                                 <rect key="frame" x="0.0" y="52" width="295" height="36"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="36" id="t1d-pq-oev"/>
                                                                 </constraints>
                                                                 <color key="textColor" name="primaryFont"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="name"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <real key="value" value="18"/>
@@ -300,14 +305,14 @@
                                                                     <outlet property="delegate" destination="yHu-Ll-bth" id="i0F-Vv-P6Z"/>
                                                                 </connections>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jY6-jX-dK2" customClass="DesignableTextField" customModule="Spring">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="jY6-jX-dK2" customClass="DesignableTextField" customModule="Spring">
                                                                 <rect key="frame" x="0.0" y="100" width="295" height="36"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="36" id="u0C-KX-Ei8"/>
                                                                 </constraints>
                                                                 <color key="textColor" name="primaryFont"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="emailAddress" textContentType="email"/>
+                                                                <textInputTraits key="textInputTraits" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <real key="value" value="18"/>
@@ -326,14 +331,14 @@
                                                                     <outlet property="delegate" destination="yHu-Ll-bth" id="7vn-z4-nL6"/>
                                                                 </connections>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nome de usuário" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9wj-v7-d4b" customClass="DesignableTextField" customModule="Spring">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nome de usuário" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="9wj-v7-d4b" customClass="DesignableTextField" customModule="Spring">
                                                                 <rect key="frame" x="0.0" y="148" width="295" height="36"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="36" id="nCz-tK-S9F"/>
                                                                 </constraints>
                                                                 <color key="textColor" name="primaryFont"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" textContentType="username"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="next" enablesReturnKeyAutomatically="YES" textContentType="username"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <real key="value" value="18"/>
@@ -352,14 +357,14 @@
                                                                     <outlet property="delegate" destination="yHu-Ll-bth" id="Zqp-ZE-mEV"/>
                                                                 </connections>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Senha" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gVG-iZ-8gU" customClass="DesignableTextField" customModule="Spring">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Senha" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="gVG-iZ-8gU" customClass="DesignableTextField" customModule="Spring">
                                                                 <rect key="frame" x="0.0" y="196" width="295" height="36"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="36" id="LkZ-pd-wVh"/>
                                                                 </constraints>
                                                                 <color key="textColor" name="primaryFont"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="next" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <real key="value" value="18"/>
@@ -378,14 +383,14 @@
                                                                     <outlet property="delegate" destination="yHu-Ll-bth" id="h7J-s2-kER"/>
                                                                 </connections>
                                                             </textField>
-                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirmar senha" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="MXX-ZJ-htN" customClass="DesignableTextField" customModule="Spring">
+                                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Confirmar senha" textAlignment="center" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="MXX-ZJ-htN" customClass="DesignableTextField" customModule="Spring">
                                                                 <rect key="frame" x="0.0" y="244" width="295" height="36"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="36" id="7la-UL-ZT7"/>
                                                                 </constraints>
                                                                 <color key="textColor" name="primaryFont"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits" secureTextEntry="YES" textContentType="password"/>
+                                                                <textInputTraits key="textInputTraits" returnKeyType="send" enablesReturnKeyAutomatically="YES" secureTextEntry="YES" textContentType="password"/>
                                                                 <userDefinedRuntimeAttributes>
                                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                         <real key="value" value="18"/>
@@ -555,7 +560,7 @@
                                                         </constraints>
                                                         <color key="textColor" name="primaryFont"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="send" enablesReturnKeyAutomatically="YES" textContentType="email"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="send" enablesReturnKeyAutomatically="YES" textContentType="email"/>
                                                         <userDefinedRuntimeAttributes>
                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                 <real key="value" value="18"/>

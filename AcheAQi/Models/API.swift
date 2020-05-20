@@ -128,47 +128,19 @@ class API {
             switch result {
             case .success:
                 
-                if let jsonData = result.value as? [String: Any] {
-                    let jwtToken = jsonData["token"] as? String
+                if let jsonData = result.value as? [String: Any],
+                    let jwtToken = jsonData["token"] as? String,
+                    let userData = jsonData["data"] as? [String: Any] {
                     
                     let login = Login.shared
                     login.jwtToken = jwtToken
+                    login.parseUserData(json: userData)
+                    login.isLogado = true
                     login.save()
                     
-                    // Com o Token em mãos, Pega os dados do usuario logado
-                    let urlFetchUserData = baseURL + "/users/my"
-                    
-                    Alamofire.request(urlFetchUserData).validate().responseJSON(completionHandler: { response in
-                        
-                        let result = response.result
-                        
-                        switch result {
-                        case .success:
-                            
-                            if let jsonData = result.value as? [String: Any],
-                                let jwtToken = jsonData["token"] as? String,
-                                let userData = jsonData["data"] as? [String: Any] {
-                                
-                                let login = Login.shared
-                                login.jwtToken = jwtToken
-                                login.parseUserData(json: userData)
-                                login.isLogado = true
-                                login.save()
-                                
-                                completionHandler(nil, jwtToken, nil, true)
-                            } else {
-                                completionHandler(nil, nil, response.errorMessage, false)
-                            }
-
-                        case .failure(let error):
-                            debugPrint("An error ocurred when trying to feth servers from API. Error: ", error)
-                            
-                            completionHandler(nil, nil, response.errorMessage, false)
-                        }
-                    })
-                    
+                    completionHandler(nil, jwtToken, nil, true)
                 } else {
-                    completionHandler(nil, nil, nil, true)
+                    completionHandler(nil, nil, response.errorMessage, false)
                 }
                 
             case .failure(let error):

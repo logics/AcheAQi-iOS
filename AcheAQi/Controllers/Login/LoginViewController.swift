@@ -33,10 +33,6 @@ class LoginViewController: AppleSignInController {
         NotificationCenter.default.addObserver(self, selector: #selector(didLogin), name: Notification.Name(rawValue: UserDidLoginNotification), object: nil)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     // MARK: - IBActions
     
     @IBAction func login(_ sender: DesignableButton) {
@@ -64,7 +60,41 @@ class LoginViewController: AppleSignInController {
     }
     
     private func callLoginAPI() {
-        print("Login...")
+        
+        if !validate() { return }
+        
+        startAnimating()
+        
+        let username = userTextField.text!
+        let password = passTextField.text!
+        
+        API.requestAuth(username: username, password: password) { (userInfo, token, errMsg, success) in
+            self.stopAnimating()
+            
+            if !success {
+                let msg = errMsg ?? "Não foi possivel logar na plataforma AcheAQi. Por favor, entre em contato com a nossa equipe, nos envie um feedback, ou tente novamente mais tarde."
+                
+                AlertController.showAlert(message: msg)
+            }
+        }
+    }
+    
+    private func validate() -> Bool {
+        
+        var isValid = true
+        let username = userTextField.text ?? ""
+        let password = passTextField.text ?? ""
+        
+        if username.length == 0 {
+            AlertController.showAlert(message: "Informe seu usuário.")
+            isValid = false
+        }
+        else if password.length == 0 {
+            AlertController.showAlert(message: "Informe a sua senha.")
+            isValid = false
+        }
+        
+        return isValid
     }
     
     private func showRegisterVC() {
@@ -80,15 +110,18 @@ class LoginViewController: AppleSignInController {
             dismiss(animated: true, completion: nil)
         }
     }
+}
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case userTextField:         passTextField.becomeFirstResponder()
+        case passTextField:
+            passTextField.resignFirstResponder()
+            callLoginAPI()
+        default: break
+        }
+        
+        return true
     }
-    */
-
 }

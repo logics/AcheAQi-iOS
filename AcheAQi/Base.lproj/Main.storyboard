@@ -62,7 +62,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="119.5" height="117"/>
                                                             <subviews>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="churrasqueira" translatesAutoresizingMaskIntoConstraints="NO" id="8ek-Cv-LjD">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="119.50000000000011" height="117"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="119.5" height="117"/>
                                                                 </imageView>
                                                             </subviews>
                                                             <color key="backgroundColor" name="systemBackground"/>
@@ -352,11 +352,11 @@
                                                     <rect key="frame" x="12" y="10" width="390" height="47"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="editProfile" translatesAutoresizingMaskIntoConstraints="NO" id="hsZ-Yu-8IO">
-                                                            <rect key="frame" x="12" y="13.5" width="24" height="20"/>
+                                                            <rect key="frame" x="12" y="3.5" width="48" height="40"/>
                                                             <color key="tintColor" name="asphalt"/>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Editar perfil" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cWe-c0-cik">
-                                                            <rect key="frame" x="48" y="13" width="88.5" height="21"/>
+                                                            <rect key="frame" x="72" y="13" width="88.5" height="21"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -653,7 +653,7 @@
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="bottom" image="city" translatesAutoresizingMaskIntoConstraints="NO" id="5db-kb-D8D">
-                            <rect key="frame" x="0.0" y="8" width="411" height="289"/>
+                            <rect key="frame" x="0.0" y="-281" width="411" height="578"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6q2-Ax-GYQ">
                             <rect key="frame" x="0.0" y="297" width="411" height="0.0"/>

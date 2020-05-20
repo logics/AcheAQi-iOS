@@ -29,11 +29,14 @@ class Login {
         }
     }
     
+    var startedNewSection = false
+    
     var isLogado: Bool {
         get {
             return self.defaults.value(forKey: prefixKey + "isLogado") as? Bool == true
         }
         set {
+            self.startedNewSection = self.isLogado == false && newValue == true
             self.defaults.setValue(newValue, forKey: prefixKey + "isLogado")
         }
     }
@@ -109,7 +112,7 @@ class Login {
     func save() {
         defaults.synchronize()
         
-        if isLogado {
+        if isLogado && startedNewSection {
             NotificationCenter.default.post(Notification(name: Notification.Name(rawValue: UserDidLoginNotification), object: nil, userInfo: ["date": Date()]))
         }
     }

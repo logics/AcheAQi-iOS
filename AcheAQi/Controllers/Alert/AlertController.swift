@@ -74,22 +74,22 @@ class AlertController: UIViewController {
             
             if confirm != nil, let okBtn = alert.okButton {
                 
-                let confirmBtn = GradientButton()
-                confirmBtn.isBgGradientColor = true
-                confirmBtn.gradientHorizontal = true
-                confirmBtn.startColor = UIColor(r:238, g:60, b:23, alpha:1)
-                confirmBtn.endColor = UIColor(r:238, g:94, b:23, alpha:1)
+                let confirmBtn = UIButton()
+//                confirmBtn.isBgGradientColor = true
+//                confirmBtn.gradientHorizontal = true
+//                confirmBtn.startColor = UIColor(r:238, g:60, b:23, alpha:1)
+//                confirmBtn.endColor = UIColor(r:238, g:94, b:23, alpha:1)
+//                confirmBtn.backgroundColor = UIColor(named: "systemBackground")
+                confirmBtn.backgroundColor = alert.centerView.backgroundColor
                 confirmBtn.setTitle("Confirmar", for: .normal)
-                confirmBtn.setTitleColor(.white, for: .normal)
+                confirmBtn.titleLabel?.font = .systemFont(ofSize: 17)
+                confirmBtn.setTitleColor(UIColor(r:238, g:60, b:23, alpha:1), for: .normal)
                 confirmBtn.addTarget(alert, action: #selector(confirmHandler), for: .touchUpInside)
                 
                 if let stack = okBtn.superview as? UIStackView {
-                    stack.insertArrangedSubview(confirmBtn, at: 0)
+                    stack.insertArrangedSubview(confirmBtn, at: 1)
                 }
                 
-//                okBtn.isBgGradientColor = false
-                okBtn.backgroundColor = .white
-                okBtn.setTitleColor(.white, for: .normal)
                 okBtn.setTitle("Cancelar", for: .normal)
             }
 

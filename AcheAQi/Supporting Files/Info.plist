@@ -44,8 +44,12 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>Este app usa a sua camera para trocar a foto do seu usuário.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Sua localização será usada quando quiser procurar por produtos e/ou empresas próximas a você.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Este app usa a sua biblioteca de fotos para trocar a foto do seu usuário.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

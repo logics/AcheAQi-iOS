@@ -73,10 +73,6 @@ class RegisterViewController: AppleSignInController {
         setupViews()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     // MARK: - Private Functions
     
     private func setupViews() {
@@ -177,8 +173,8 @@ class RegisterViewController: AppleSignInController {
     
     private func validate() -> Bool {
         
-        if usernameTextField.text == nil || usernameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).length < 1 {
-            AlertController.showAlert(message: "Por favor, informe o nome de usuário.")
+        if firstname == nil || firstname!.trimmingCharacters(in: .whitespacesAndNewlines).length < 1 {
+            AlertController.showAlert(message: "Por favor, informe o seu nome.")
             return false
         }
         
@@ -190,9 +186,9 @@ class RegisterViewController: AppleSignInController {
             AlertController.showAlert(message: "Informe um e-mail válido.")
             return false
         }
-        
-        if firstname == nil || firstname!.trimmingCharacters(in: .whitespacesAndNewlines).length < 1 {
-            AlertController.showAlert(message: "Por favor, informe o seu nome.")
+
+        if usernameTextField.text == nil || usernameTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines).length < 1 {
+            AlertController.showAlert(message: "Por favor, informe o nome de usuário.")
             return false
         }
         
@@ -282,8 +278,10 @@ extension RegisterViewController: UITextFieldDelegate {
 // MARK: - Image Picker Delegate
 extension RegisterViewController: ImagePickerDelegate {
     func didSelect(image: UIImage?) {
-        self.avatarView.image = image
         
-        avatarData = image?.jpegData(compressionQuality: 0.7)
+        if let img = image {
+            self.avatarView.image = img
+            avatarData = img.jpegData(compressionQuality: 0.7)
+        }
     }
 }

@@ -8,6 +8,8 @@
 
 import UIKit
 import Spring
+import StoreKit
+import MessageUI
 
 fileprivate let editCell = "Edit Profile Cell"
 fileprivate let contactCell = "Contact Cell"
@@ -86,31 +88,73 @@ class PerfilViewController: UITableViewController {
         
         tabBarController?.present(vc, animated: true, completion: nil)
     }
+    
+    private func templateMessageFeedback() -> String {
+        let app = Constants.appName
+        let versaoApp = Device.shared.appVersion
+        let versaoOS = Device.shared.iosVersion
+        let build = Device.shared.buildVersion
+        let modelo = Device.shared.deviceModel
+        
+        let template = "\n\n\n----------------------------\nFavor não editar ou remover os itens abaixo. Eles são importantes para nossa engenharia.\n\nAplicativo: \(app) \nVersão: \(versaoApp) \nBuild: \(build) \nVersão iOS: \(versaoOS) \nModelo Device: \(modelo)"
+        
+        return template
+    }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        return Login.shared.isLogado ? 1 : 0
+    private func showFeedbackIfCan() {
+        if !MFMailComposeViewController.canSendMail() {
+            AlertController.showAlert(title: "Ops!", message: "Seu aparelho não possui nenhuma conta de e-mail configurada ainda. Por favor, entre no app Ajustes, configure uma conta e tente novamente.")
+            return
+        }
+        
+        let subject = String(format: "Sugestões Aplicativo %@", Constants.appName)
+        
+        presentFeedbackVC(message: templateMessageFeedback(), subject: subject, to: [Constants.feedbackEmail])
+    }
+    
+    private func presentFeedbackVC(message: String, subject: String, to recipientList: [String]) {
+        let vc = MFMailComposeViewController()
+        vc.navigationBar.tintColor = Constants.navBarDefaultColor
+        vc.setToRecipients(recipientList)
+        vc.setSubject(subject)
+        vc.setMessageBody(message, isHTML: false)
+        vc.mailComposeDelegate = self
+        
+        self.present(vc, animated: true, completion: nil)
     }
     
 
     // MARK: - Table view delegate
     
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return Login.shared.isLogado ? 1 : 0
+    }
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath)
         
-        switch cell?.reuseIdentifier {
-        case editCell:
-            openRegister()
-        case logoffCell:
-            let alert = UIAlertController(title: "Sair?", message: "Você tem certeza que deseja deslogar do AcheAQi?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Sim", style: .destructive, handler: { action in
-                Login.shared.logoff()
-            }))
-            alert.addAction(UIAlertAction(title: "Cancelar", style: .cancel, handler: nil))
-            
-            present(alert, animated: true, completion: nil)
-        default:
-            break
-        }
+        cell?.animatePop(completionHandler: { finished in
+            if finished {
+                switch cell?.reuseIdentifier {
+                case editCell:
+                    self.openRegister()
+                case contactCell:
+                    self.showFeedbackIfCan()
+                case evaluateCell:
+                    SKStoreReviewController.requestReview()
+                case logoffCell:
+                    AlertController.showAlert(title: "Sair?",
+                                              message: "Você tem certeza que deseja deslogar do AcheAQi?",
+                                              style: .normal,
+                                              confirmAction: {
+                                                  Login.shared.logoff()
+                    })
+
+                default:
+                    break
+                }
+            }
+        })
     }
     
     // MARK: - IBActions
@@ -124,8 +168,19 @@ class PerfilViewController: UITableViewController {
     }
 }
 
+// MARK: - RegisterDelegate
+
 extension PerfilViewController: RegisterDelegate {
     func didFinishRegister(success: Bool, username: String?) {
         updateViews()
+    }
+}
+
+// MARK: - MFMailComposeViewControllerDelegate
+
+extension PerfilViewController: MFMailComposeViewControllerDelegate {
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        // Dismiss the mail compose view controller.
+        controller.dismiss(animated: true, completion: nil)
     }
 }

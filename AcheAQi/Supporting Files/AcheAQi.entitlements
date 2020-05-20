@@ -8,5 +8,9 @@
 	<array>
 		<string>Default</string>
 	</array>
+	<key>keychain-access-groups</key>
+	<array>
+		<string>$(AppIdentifierPrefix)br.com.logics.AcheAQi</string>
+	</array>
 </dict>
 </plist>

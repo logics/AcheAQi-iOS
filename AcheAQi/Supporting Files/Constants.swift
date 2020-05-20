@@ -29,13 +29,15 @@ struct Constants {
     private static let apiVersion: String = Bundle.main.object(forInfoDictionaryKey: "API_VERSION") as! String
     static let APIURL = baseAPIURL + "/api/" + apiVersion
     
-    static let API_LOGIN_URL = baseAPIURL + "/api/login_check"
+    static let API_LOGIN_URL = APIURL + "/login_check"
     static let USER_TOKEN_TO_CREATE = "sa@ZSrE95ALHxoiQz!ecD8t8VPZwWYxAw$eQVVRA"
     
     static let privacyURL = baseAPIURL + "/terms/privacy?inApp=1"
     static let termsURL = baseAPIURL + "/terms/service?inApp=1"
     
     static let appID = "1451433136"
+    
+    static let appName = Bundle.main.object(forInfoDictionaryKey: "CFBundleName") as! String
     
     // Constantes p/ regras do Sistema de pagamentos com sistema anti-fraude
     // =========================================

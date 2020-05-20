@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         IQKeyboardManager.shared.enable = true
         NVActivityIndicatorView.DEFAULT_TYPE = .circleStrokeSpin
-        
+
         return true
     }
 
@@ -51,7 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             appearance.shadowImage = UIImage()
             appearance.shadowColor = .clear
 
+            UINavigationBar.appearance().isTranslucent = false
             UINavigationBar.appearance().tintColor = .white
+            UINavigationBar.appearance().barTintColor = UIColor(named: "backgroundNavBar")
             UINavigationBar.appearance().standardAppearance = appearance
             UINavigationBar.appearance().compactAppearance = appearance
             UINavigationBar.appearance().scrollEdgeAppearance = appearance
