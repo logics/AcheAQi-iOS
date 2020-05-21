@@ -17,25 +17,48 @@ class ResetPassViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        emailTextField.delegate = self
     }
     
     @IBAction func send(_ sender: UIButton) {
+        sender.animatePop { finished in
+            if finished {
+                self.sendDataToWS()
+            }
+        }
+    }
+    
+    private func sendDataToWS() {
         
-        showSuccess()
+        guard let email = emailTextField.text, email.isValidEmail() else {
+            AlertController.showAlert(message: "Por favor, informe um e-mail válido.")
+            return
+        }
+        
+        startAnimating()
+        
+        API.requestPasswordReset(usernameOrEmail: email) { response in
+            self.stopAnimating()
+            
+            if response.result.isSuccess {
+                self.showSuccess()
+            } else {
+                AlertController.showAlert(message: response.errorMessage ?? "Não foi possível redefinir a sua senha. Por favor tente novamente mais tarde.")
+            }
+        }
     }
     
     private func showSuccess() {
         
         successView.alpha = 0.0
-        self.successView.translatesAutoresizingMaskIntoConstraints = false
+        successView.translatesAutoresizingMaskIntoConstraints = false
         
-        self.view.addSubview(self.successView)
+        view.addSubview(self.successView)
                         
-        self.successView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
-        self.successView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
-        self.successView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -12).isActive = true
+        successView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 0).isActive = true
+        successView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: 0).isActive = true
+        successView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: -12).isActive = true
 
         UIView.animate(withDuration: 0.35, animations: {
             self.mainStackView.alpha = 0.0
@@ -49,17 +72,17 @@ class ResetPassViewController: UIViewController {
                 self.successView.alpha = 1.0
             }
         }
-
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+}
+extension ResetPassViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case emailTextField:
+            emailTextField.resignFirstResponder()
+            sendDataToWS()
+        default: break
+        }
+        
+        return true
     }
-    */
-
 }

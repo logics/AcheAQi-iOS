@@ -195,4 +195,18 @@ class API {
             }
         }
     }
+    
+    static func requestPasswordReset(usernameOrEmail: String, result: @escaping APIResult) {
+        
+        let url = baseURL + "/users/lostpassword"
+        
+        let params = ["usernameoremail": usernameOrEmail] as [String: Any]
+        
+        Alamofire.request(url, method: .post, parameters: params).validate().responseJSON { response in
+            if response.result.isFailure {
+                debugPrint(response.errorMessage ?? "Error when request password reset")
+            }
+            result(response)
+        }
+    }
 }

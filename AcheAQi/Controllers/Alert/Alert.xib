@@ -158,7 +158,7 @@
                         <constraints>
                             <constraint firstItem="B3y-aO-zV1" firstAttribute="centerY" secondItem="2se-8W-HQg" secondAttribute="centerY" id="8gn-Y5-GCA"/>
                             <constraint firstAttribute="trailing" secondItem="B3y-aO-zV1" secondAttribute="trailing" constant="25" id="GHc-TI-k2K"/>
-                            <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="B3y-aO-zV1" secondAttribute="bottom" constant="50" id="H10-Sp-Sb3"/>
+                            <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="B3y-aO-zV1" secondAttribute="bottom" constant="70" id="H10-Sp-Sb3"/>
                             <constraint firstItem="B3y-aO-zV1" firstAttribute="top" relation="greaterThanOrEqual" secondItem="2se-8W-HQg" secondAttribute="top" constant="50" id="XdM-dg-rcE"/>
                             <constraint firstItem="B3y-aO-zV1" firstAttribute="leading" secondItem="2se-8W-HQg" secondAttribute="leading" constant="25" id="odc-NB-ZNX"/>
                         </constraints>
