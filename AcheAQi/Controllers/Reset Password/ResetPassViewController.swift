@@ -31,8 +31,8 @@ class ResetPassViewController: UIViewController {
     
     private func sendDataToWS() {
         
-        guard let email = emailTextField.text, email.isValidEmail() else {
-            AlertController.showAlert(message: "Por favor, informe um e-mail válido.")
+        guard let email = emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines), email.length > 0 else {
+            AlertController.showAlert(message: "Por favor, informe o seu e-mail ou usuário de cadastro.")
             return
         }
         

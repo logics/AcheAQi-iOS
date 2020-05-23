@@ -1,0 +1,135 @@
+
+/* Class = "UILabel"; text = "João Maróstia Silva"; ObjectID = "0JM-qt-spg"; */
+"0JM-qt-spg.text" = "João Maróstia Silva";
+
+/* Class = "UILabel"; text = "Ligar"; ObjectID = "0Ud-ee-Bl6"; */
+"0Ud-ee-Bl6.text" = "Ligar";
+
+/* Class = "UILabel"; text = "Polishop"; ObjectID = "3re-ON-7Yk"; */
+"3re-ON-7Yk.text" = "Polishop";
+
+/* Class = "UILabel"; text = "50% OFF"; ObjectID = "48U-fV-YDG"; */
+"48U-fV-YDG.text" = "50% OFF";
+
+/* Class = "UIButton"; normalTitle = "Entrar"; ObjectID = "6Pq-Xs-jFE"; */
+"6Pq-Xs-jFE.normalTitle" = "Entrar";
+
+/* Class = "UILabel"; text = "Avaliar na loja"; ObjectID = "8xP-wN-FSa"; */
+"8xP-wN-FSa.text" = "Avaliar na loja";
+
+/* Class = "UIButton"; normalTitle = "Redefinir Filtro"; ObjectID = "8zW-hW-szd"; */
+"8zW-hW-szd.normalTitle" = "Redefinir Filtro";
+
+/* Class = "UILabel"; text = "Como chegar"; ObjectID = "9x1-hp-5P3"; */
+"9x1-hp-5P3.text" = "Como chegar";
+
+/* Class = "UILabel"; text = "Descrição"; ObjectID = "Aew-hK-Qxp"; */
+"Aew-hK-Qxp.text" = "Descrição";
+
+/* Class = "UILabel"; text = "Endereço:"; ObjectID = "AhW-CN-jX7"; */
+"AhW-CN-jX7.text" = "Endereço:";
+
+/* Class = "UILabel"; text = "Categoria A"; ObjectID = "CT2-z4-D70"; */
+"CT2-z4-D70.text" = "Categoria A";
+
+/* Class = "UILabel"; text = "Churrasqueira Steakhouse Grill Polishop"; ObjectID = "GAl-rv-a0M"; */
+"GAl-rv-a0M.text" = "Churrasqueira Steakhouse Grill Polishop";
+
+/* Class = "UILabel"; text = "Por: Polishop"; ObjectID = "GIn-J1-bYX"; */
+"GIn-J1-bYX.text" = "Por: Polishop";
+
+/* Class = "UILabel"; text = "Marca:"; ObjectID = "GZz-f0-9Ei"; */
+"GZz-f0-9Ei.text" = "Marca:";
+
+/* Class = "UILabel"; text = "Churrasqueira Steakhouse Grill Polishop"; ObjectID = "L0G-0K-NQQ"; */
+"L0G-0K-NQQ.text" = "Churrasqueira Steakhouse Grill Polishop";
+
+/* Class = "UILabel"; text = "WhatsApp"; ObjectID = "LiR-kl-rIC"; */
+"LiR-kl-rIC.text" = "WhatsApp";
+
+/* Class = "UILabel"; text = "De: R$ 699,00 por:"; ObjectID = "M3E-pg-5yh"; */
+"M3E-pg-5yh.text" = "De: R$ 699,00 por:";
+
+/* Class = "UIBarButtonItem"; title = "Item"; ObjectID = "NYj-UV-R9O"; */
+"NYj-UV-R9O.title" = "Item";
+
+/* Class = "UILabel"; text = "O churrasco feito na brasa tem um sabor especial, mas o processo pode ser muito complicado!\nSteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de forma mais fácil e em qualquer lugar... Sem precisar de habilidade, sem fazer sujeira e sem bagunça!"; ObjectID = "P5N-Du-iPZ"; */
+"P5N-Du-iPZ.text" = "O churrasco feito na brasa tem um sabor especial, mas o processo pode ser muito complicado!\nSteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de forma mais fácil e em qualquer lugar... Sem precisar de habilidade, sem fazer sujeira e sem bagunça!";
+
+/* Class = "UILabel"; text = "Você não está logado."; ObjectID = "Rpi-wK-LAj"; */
+"Rpi-wK-LAj.text" = "Você não está logado.";
+
+/* Class = "UILabel"; text = "R$ 699,00"; ObjectID = "ThW-eM-xOP"; */
+"ThW-eM-xOP.text" = "R$ 699,00";
+
+/* Class = "UITabBarItem"; title = "Ofertas"; ObjectID = "VLU-6T-Xdy"; */
+"VLU-6T-Xdy.title" = "Ofertas";
+
+/* Class = "UINavigationItem"; title = "Produtos em Oferta"; ObjectID = "Vwl-R2-YWo"; */
+"Vwl-R2-YWo.title" = "Produtos em Oferta";
+
+/* Class = "UILabel"; text = "Por: Polishop"; ObjectID = "XKD-51-oc7"; */
+"XKD-51-oc7.text" = "Por: Polishop";
+
+/* Class = "UILabel"; text = "R$ 699,99"; ObjectID = "ZkN-OF-l9F"; */
+"ZkN-OF-l9F.text" = "R$ 699,99";
+
+/* Class = "UILabel"; text = "Entre com seus dados ou registre-se e aproveite ao máximo o AcheAQi."; ObjectID = "ZxG-9C-GXX"; */
+"ZxG-9C-GXX.text" = "Entre com seus dados ou registre-se e aproveite ao máximo o AcheAQi.";
+
+/* Class = "UITableViewController"; title = "Filtro por:"; ObjectID = "bnU-yQ-NZw"; */
+"bnU-yQ-NZw.title" = "Filtro por:";
+
+/* Class = "UILabel"; text = "R$ 350,00"; ObjectID = "cQi-z1-hR2"; */
+"cQi-z1-hR2.text" = "R$ 350,00";
+
+/* Class = "UILabel"; text = "Editar perfil"; ObjectID = "cWe-c0-cik"; */
+"cWe-c0-cik.text" = "Editar perfil";
+
+/* Class = "UITabBarItem"; title = "Perfil"; ObjectID = "cg4-NJ-ssP"; */
+"cg4-NJ-ssP.title" = "Perfil";
+
+/* Class = "UILabel"; text = "Onde encontrar?"; ObjectID = "cuH-uV-tvE"; */
+"cuH-uV-tvE.text" = "Onde encontrar?";
+
+/* Class = "UILabel"; text = "Polishop"; ObjectID = "hUx-u9-BeP"; */
+"hUx-u9-BeP.text" = "Polishop";
+
+/* Class = "UILabel"; text = "50%"; ObjectID = "hbL-fA-IWa"; */
+"hbL-fA-IWa.text" = "50%";
+
+/* Class = "UILabel"; text = "Sair"; ObjectID = "hhS-iX-WaZ"; */
+"hhS-iX-WaZ.text" = "Sair";
+
+/* Class = "UILabel"; text = "Próximos a mim"; ObjectID = "i0c-wO-tB2"; */
+"i0c-wO-tB2.text" = "Próximos a mim";
+
+/* Class = "UINavigationItem"; title = "Churrasqueira Steakhouse Grill Polishop"; ObjectID = "iNh-ly-yOc"; */
+"iNh-ly-yOc.title" = "Churrasqueira Steakhouse Grill Polishop";
+
+/* Class = "UILabel"; text = "Churrasqueira Top Gril Polishop"; ObjectID = "lFc-mZ-WiY"; */
+"lFc-mZ-WiY.text" = "Churrasqueira Top Gril Polishop";
+
+/* Class = "UITabBarItem"; title = "Procurar"; ObjectID = "ll5-I1-44H"; */
+"ll5-I1-44H.title" = "Procurar";
+
+/* Class = "UILabel"; text = "De: R$ 699,00 por:"; ObjectID = "rCS-wV-HTe"; */
+"rCS-wV-HTe.text" = "De: R$ 699,00 por:";
+
+/* Class = "UILabel"; text = "Av T-14, nº 300, Absolut Business Style, Sala 803-A, Setor Bueno, Goiânia - GO"; ObjectID = "rmH-5T-KIr"; */
+"rmH-5T-KIr.text" = "Av T-14, nº 300, Absolut Business Style, Sala 803-A, Setor Bueno, Goiânia - GO";
+
+/* Class = "UILabel"; text = "Estoque disponível"; ObjectID = "uw2-CB-Wgc"; */
+"uw2-CB-Wgc.text" = "Estoque disponível";
+
+/* Class = "UILabel"; text = "Fale conosco"; ObjectID = "vCz-c4-fn3"; */
+"vCz-c4-fn3.text" = "Fale conosco";
+
+/* Class = "UILabel"; text = "Empresa:"; ObjectID = "vcK-Lr-Cwn"; */
+"vcK-Lr-Cwn.text" = "Empresa:";
+
+/* Class = "UILabel"; text = "Title"; ObjectID = "xNy-zc-pMl"; */
+"xNy-zc-pMl.text" = "Title";
+
+/* Class = "UILabel"; text = "50% OFF"; ObjectID = "yro-fF-yft"; */
+"yro-fF-yft.text" = "50% OFF";

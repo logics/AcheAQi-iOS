@@ -60,7 +60,7 @@ class Login {
             KeychainWrapper.standard.set(newValue ?? "", forKey: prefixKey + "email")
         }
     }
-    
+
     var nome: String? {
         get {
             return self.defaults.value(forKey: prefixKey + "nome") as? String
@@ -108,7 +108,16 @@ class Login {
 //        device.userExternalID = user.externalID
 //        device.save()
 //    }
+
+    func setlastEmailAppleSignIn(of userID: String, email: String?) {
+        KeychainWrapper.standard.set(email ?? "", forKey: prefixKey + userID + "email")
+    }
     
+    func lastEmailAppleSignIn(of userID: String) -> String? {
+        let mail = KeychainWrapper.standard.string(forKey: prefixKey + userID + "email")
+        return mail
+    }
+
     func save() {
         defaults.synchronize()
         

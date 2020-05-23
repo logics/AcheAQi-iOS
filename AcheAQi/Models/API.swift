@@ -15,9 +15,7 @@ typealias LoginResultHandler = (_ userInfo: [String: Any]?, _ token: String?, _ 
 
 class API {
     
-    static var baseDomain = "http://127.0.0.1:8000"
-    static var basePath = "/api/v1"
-    static var baseURL = baseDomain + basePath
+    static var baseURL = Constants.APIURL
     
     static func urlBy<T>(type: T.Type) -> String? where T : Decodable {
         switch type {
@@ -152,15 +150,18 @@ class API {
         }
     }
     
+    @available(iOS 13.0, *)
     static func requestAuthByAppleSignIn(appleIDCredential: ASAuthorizationAppleIDCredential, completionHandler: @escaping LoginResultHandler) {
         
         let url = Constants.APIURL + "/login_check_apple"
+        let uid = appleIDCredential.user
+        let email = appleIDCredential.email ?? (Login.shared.lastEmailAppleSignIn(of: uid) ?? "")
         
         let params = [
-            "uid": appleIDCredential.user,
+            "uid": uid,
             "identityToken": String(data: appleIDCredential.identityToken!, encoding: .utf8) ?? "",
             "authCode": String(data: appleIDCredential.authorizationCode!, encoding: .utf8) ?? "",
-            "email": appleIDCredential.email ?? "",
+            "email": email,
             "firstname": appleIDCredential.fullName?.givenName ?? "",
             "lastname": appleIDCredential.fullName?.familyName ?? "",
         ]

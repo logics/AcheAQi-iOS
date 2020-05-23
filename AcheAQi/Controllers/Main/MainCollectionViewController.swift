@@ -20,7 +20,6 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     @IBOutlet weak var filterButton: UIBarButtonItem!
     
     var searchController: UISearchController!
-    var resultsController: MainResultsTableController!
     var produtos: [Produto] = []
     var filters = Filters()
     var currentLocation: CLLocationCoordinate2D?
@@ -70,10 +69,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     // MARK: - Private Functions
     
     private func setupSearchBar() {
-        
-        resultsController = self.storyboard?.instantiateViewController(withIdentifier: "MainResultsTableController") as? MainResultsTableController
-        resultsController.tableView.delegate = self
-        
+                
         searchController = UISearchController(searchResultsController: nil)
         searchController.delegate = self
         searchController.searchResultsUpdater = self //resultsController
@@ -88,7 +84,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
             textFieldInsideSearchBar.layer.cornerRadius = 18
             textFieldInsideSearchBar.layer.masksToBounds = true
             
-            let attrString = NSAttributedString(string: "Procure no AcheAQi", attributes: [.foregroundColor: UIColor.white])
+            let attrString = NSAttributedString(string: "Procure no AcheAQi", attributes: [.foregroundColor: UIColor.lightGray])
             
             textFieldInsideSearchBar.attributedPlaceholder = attrString
         }
@@ -158,13 +154,15 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     // MARK: - IBActions
     
     @IBAction func openFilter(_ sender: UIBarButtonItem) {
-        let filtroVC = self.storyboard!.instantiateViewController(identifier: "MainFiltroViewController") as! FiltroTableViewController
+        let filtroVC = self.storyboard!.instantiateViewController(withIdentifier: "MainFiltroViewController") as! FiltroTableViewController
         filtroVC.filters = self.filters
         filtroVC.filtroDelegate = self
         
         let vc = UINavigationController(rootViewController: filtroVC)
-        vc.navigationBar.barTintColor = .clear
-        vc.navigationBar.backgroundColor = .clear
+        vc.navigationBar.barTintColor = UIColor(named: "backgroundNavBar")
+        vc.navigationBar.tintColor = .white
+        vc.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        vc.navigationBar.backgroundColor = UIColor(named: "backgroundNavBar")
         
         vc.modalPresentationStyle = .popover
         
@@ -172,6 +170,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         popover.permittedArrowDirections = .up
         popover.barButtonItem = sender
         popover.delegate = self
+        popover.backgroundColor = UIColor(named: "backgroundNavBar")
         
         present(vc, animated: true, completion: nil)
     }

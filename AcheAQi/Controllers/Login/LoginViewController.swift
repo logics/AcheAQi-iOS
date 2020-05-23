@@ -12,7 +12,7 @@ import Spring
 
 fileprivate var segueRegister = "Register Segue"
 
-class LoginViewController: AppleSignInController {
+class LoginViewController: UIViewController {
 
     @IBOutlet weak var stackCenterView: UIStackView!
     @IBOutlet weak var userTextField: DesignableTextField!
@@ -20,8 +20,17 @@ class LoginViewController: AppleSignInController {
     @IBOutlet weak var sendButton: DesignableButton!
     @IBOutlet weak var lostPasswordButton: UIButton!
     @IBOutlet weak var registerButton: DesignableButton!
+    @IBOutlet weak var orLabel: UILabel!
     
-    var userIdentifier: String?
+    @available(iOS 13.0, *)
+    var appleSignInController: AppleSignInController? {
+        let signInController = AppleSignInController(nibName: nil, bundle: Bundle.main)
+        signInController.delegate = self
+        signInController.loadViewIfNeeded()
+        self.addChild(signInController)
+
+        return signInController
+    }
     
     // MARK: - Life Cycle
     
@@ -54,8 +63,14 @@ class LoginViewController: AppleSignInController {
     // MARK: - Private Methods
     
     private func setupViews() {
-        // Add SignIn 
-        stackCenterView.addArrangedSubview(appleLoginButton)
+        
+        if #available(iOS 13.0, *), let siginBtn = appleSignInController?.appleLoginButton {
+            // Add SignIn 
+            stackCenterView.addArrangedSubview(siginBtn)
+        } else {
+            orLabel.removeFromSuperview()
+            addCloseButton()
+        }
         lostPasswordButton.applyUnderline()
     }
     
@@ -65,8 +80,8 @@ class LoginViewController: AppleSignInController {
         
         startAnimating()
         
-        let username = userTextField.text!
-        let password = passTextField.text!
+        let username = userTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
+        let password = passTextField.text!.trimmingCharacters(in: .whitespacesAndNewlines)
         
         API.requestAuth(username: username, password: password) { (userInfo, token, errMsg, success) in
             self.stopAnimating()
@@ -82,8 +97,8 @@ class LoginViewController: AppleSignInController {
     private func validate() -> Bool {
         
         var isValid = true
-        let username = userTextField.text ?? ""
-        let password = passTextField.text ?? ""
+        let username = userTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+        let password = passTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
         
         if username.length == 0 {
             AlertController.showAlert(message: "Informe seu usuário.")
@@ -123,5 +138,11 @@ extension LoginViewController: UITextFieldDelegate {
         }
         
         return true
+    }
+}
+
+extension LoginViewController: AppleSignInDelegate {
+    func presentationAnchor() -> ASPresentationAnchor {
+        return view.window!
     }
 }

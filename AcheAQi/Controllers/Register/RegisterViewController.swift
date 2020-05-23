@@ -17,7 +17,7 @@ protocol RegisterDelegate {
     func didFinishRegister(success: Bool, username: String?)
 }
 
-class RegisterViewController: AppleSignInController {
+class RegisterViewController: UIViewController {
 
     @IBOutlet weak var avatarView: AvatarStroked!
     @IBOutlet weak var mainStackView: UIStackView!
@@ -28,9 +28,20 @@ class RegisterViewController: AppleSignInController {
     @IBOutlet weak var passwordConfTextField: DesignableTextField!
     @IBOutlet weak var sendButton: DesignableButton!
     @IBOutlet weak var orLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
     
     var avatarData: Data?
     var delegate: RegisterDelegate?
+    
+    @available(iOS 13.0, *)
+    var appleSignInController: AppleSignInController? {
+        let signInController = AppleSignInController()
+        signInController.delegate = self
+        signInController.loadViewIfNeeded()
+        self.addChild(signInController)
+        
+        return signInController
+    }
     
     var firstname: String? {
         let nome = nomeTextField.text
@@ -80,7 +91,14 @@ class RegisterViewController: AppleSignInController {
 
         if login.isLogado {
             orLabel.removeFromSuperview()
+            backButton.removeFromSuperview()
             
+            // if iOS < 13.0
+            switch UIDevice.current.systemVersion.compare("13.0", options: .numeric) {
+            case .orderedAscending: addCloseButton()
+            default: break
+            }
+
             if let path = login.avatarPath, path.length > 0 {
                 let url = URL(wsURLWithPath: path)
                 
@@ -98,7 +116,11 @@ class RegisterViewController: AppleSignInController {
             sendButton.setTitle("Salvar", for: .normal)
 
         } else {
-            mainStackView.addArrangedSubview(appleLoginButton)
+            if #available(iOS 13.0, *), let siginBtn = appleSignInController?.appleLoginButton {
+                mainStackView.addArrangedSubview(siginBtn)
+            } else {
+                orLabel.removeFromSuperview()
+            }
         }
     }
     
@@ -111,9 +133,9 @@ class RegisterViewController: AppleSignInController {
         let login = Login.shared
         
         var params = [
-            "username" : usernameTextField.text ?? "",
-            "email" : emailTextField.text ?? "",
-            "firstname" : firstname ?? "",
+            "username" : usernameTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "",
+            "email" : emailTextField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "",
+            "firstname" : firstname?.trimmingCharacters(in: .whitespacesAndNewlines) ?? "",
             "lastname" : lastname ?? "",
         ] as [String : Any]
         
@@ -145,7 +167,9 @@ class RegisterViewController: AppleSignInController {
                     if let delegate = self.delegate {
                         delegate.didFinishRegister(success: true, username: self.usernameTextField.text)
                     }
-                    self.dismiss(animated: true, completion: nil)
+                    if !isUpdating {
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 })
             }
             else if result.isFailure {
@@ -224,18 +248,6 @@ class RegisterViewController: AppleSignInController {
             }
         }
     }
-    
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 // MARK: - TextField Delegate
@@ -283,5 +295,12 @@ extension RegisterViewController: ImagePickerDelegate {
             self.avatarView.image = img
             avatarData = img.jpegData(compressionQuality: 0.7)
         }
+    }
+}
+
+// MARK: - AppleSignInDelegate
+extension RegisterViewController: AppleSignInDelegate {
+    func presentationAnchor() -> ASPresentationAnchor {
+        return view.window!
     }
 }

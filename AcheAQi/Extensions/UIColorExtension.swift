@@ -30,7 +30,11 @@ extension UIColor {
         let scanner   = Scanner(string: hexString)
         
         if (hexString.hasPrefix("#")) {
-            scanner.currentIndex = String.Index(utf16Offset: 1, in: hexString)
+            if #available(iOS 13.0, *) {
+                scanner.currentIndex = String.Index(utf16Offset: 1, in: hexString)
+            } else {
+                // Fallback on earlier versions
+            }
         }
         
         var color: UInt64 = 0

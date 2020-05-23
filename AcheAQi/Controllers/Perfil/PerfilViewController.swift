@@ -53,6 +53,7 @@ class PerfilViewController: UITableViewController {
         let login = Login.shared
         
         if login.isLogado {
+            navigationItem.title = nil
             
             if let imgPath = login.avatarPath, imgPath.length > 0 {
                 avatarImageView.af_setImage(withURL: URL(wsURLWithPath: imgPath), imageTransition: .crossDissolve(0.2))
@@ -63,6 +64,7 @@ class PerfilViewController: UITableViewController {
             navigationController?.navigationBar.shadowImage = nil
             tableView.tableHeaderView?.alpha = 1.0
         } else {
+            navigationItem.title = "Perfil"
             tableView.tableHeaderView?.alpha = 0.0
         }
 
@@ -144,7 +146,7 @@ class PerfilViewController: UITableViewController {
                     SKStoreReviewController.requestReview()
                 case logoffCell:
                     AlertController.showAlert(title: "Sair?",
-                                              message: "Você tem certeza que deseja deslogar do AcheAQi?",
+                                              message: "Você tem certeza que deseja sair do AcheAQi?",
                                               style: .normal,
                                               confirmAction: {
                                                   Login.shared.logoff()

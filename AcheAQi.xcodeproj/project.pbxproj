@@ -59,7 +59,6 @@
 		A37EAC2923FDB0CC00FF0F7C /* Empresa.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EAC2823FDB0CC00FF0F7C /* Empresa.swift */; };
 		A37EAC2B23FDB14A00FF0F7C /* Categoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EAC2A23FDB14A00FF0F7C /* Categoria.swift */; };
 		A37EAC2D23FDB6C000FF0F7C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EAC2C23FDB6C000FF0F7C /* API.swift */; };
-		A37EAC2F23FF0DE500FF0F7C /* MainResultsTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EAC2E23FF0DE500FF0F7C /* MainResultsTableController.swift */; };
 		A38226952423A4470051D2D8 /* Foto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38226942423A4470051D2D8 /* Foto.swift */; };
 		A38C5A9C247344010018EB7B /* AppleSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38C5A9B247344010018EB7B /* AppleSignInController.swift */; };
 		A390986323FD7E0C0068E997 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = A390986223FD7E0C0068E997 /* AlamofireImage */; };
@@ -72,6 +71,7 @@
 		A3A4543F244E53B300C9CA13 /* DesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4543E244E53B300C9CA13 /* DesignableImageView.swift */; };
 		A3A45443244F570200C9CA13 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A45442244F570200C9CA13 /* UIView+Animations.swift */; };
 		A3A45445244F852700C9CA13 /* Marca.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A45444244F852600C9CA13 /* Marca.swift */; };
+		A3ABCDF82476C7BB0067E205 /* Siren in Frameworks */ = {isa = PBXBuildFile; productRef = A3ABCDF72476C7BB0067E205 /* Siren */; };
 		A3B35CE7246DF96F00261F47 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35CE6246DF96F00261F47 /* UIButton+Extension.swift */; };
 		A3B35CE9246E103E00261F47 /* ResetPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35CE8246E103E00261F47 /* ResetPassViewController.swift */; };
 		A3B35CEC246E269900261F47 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35CEB246E269900261F47 /* ImagePicker.swift */; };
@@ -122,7 +122,6 @@
 		A37EAC2823FDB0CC00FF0F7C /* Empresa.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Empresa.swift; sourceTree = "<group>"; };
 		A37EAC2A23FDB14A00FF0F7C /* Categoria.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Categoria.swift; sourceTree = "<group>"; };
 		A37EAC2C23FDB6C000FF0F7C /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
-		A37EAC2E23FF0DE500FF0F7C /* MainResultsTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainResultsTableController.swift; sourceTree = "<group>"; };
 		A38226942423A4470051D2D8 /* Foto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Foto.swift; sourceTree = "<group>"; };
 		A38C5A9B247344010018EB7B /* AppleSignInController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInController.swift; sourceTree = "<group>"; };
 		A3942C51241A594300AACEC7 /* String+PhoneCall.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+PhoneCall.swift"; sourceTree = "<group>"; };
@@ -132,6 +131,8 @@
 		A3A4543E244E53B300C9CA13 /* DesignableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableImageView.swift; sourceTree = "<group>"; };
 		A3A45442244F570200C9CA13 /* UIView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		A3A45444244F852600C9CA13 /* Marca.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marca.swift; sourceTree = "<group>"; };
+		A3A8DFDD24781BB8007CDB5F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
+		A3A8DFDE24781BB8007CDB5F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		A3B35CE6246DF96F00261F47 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		A3B35CE8246E103E00261F47 /* ResetPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassViewController.swift; sourceTree = "<group>"; };
 		A3B35CEB246E269900261F47 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -189,6 +190,7 @@
 				A3F50F902416E49200FD387B /* MaterialDesignWidgets in Frameworks */,
 				A390986323FD7E0C0068E997 /* AlamofireImage in Frameworks */,
 				A39098A923FDA8010068E997 /* Spring in Frameworks */,
+				A3ABCDF82476C7BB0067E205 /* Siren in Frameworks */,
 				A318D15924648B6D00B31DB1 /* IQKeyboardManagerSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,7 +220,6 @@
 			isa = PBXGroup;
 			children = (
 				A35B7C8C24098F4E00B709DC /* FiltroTableViewController.swift */,
-				A37EAC2E23FF0DE500FF0F7C /* MainResultsTableController.swift */,
 				A35B7C912409A3D800B709DC /* UseLocationFilterCell.swift */,
 			);
 			path = Filtros;
@@ -444,6 +445,7 @@
 				A3942C4F241A478600AACEC7 /* Karte */,
 				A318D15824648B6D00B31DB1 /* IQKeyboardManagerSwift */,
 				A345CC9E2470C8BF005C9843 /* NVActivityIndicatorView */,
+				A3ABCDF72476C7BB0067E205 /* Siren */,
 			);
 			productName = AcheAQi;
 			productReference = A3D07C6D23F33E27000EFED7 /* AcheAQi.app */;
@@ -466,11 +468,11 @@
 			};
 			buildConfigurationList = A3D07C6823F33E26000EFED7 /* Build configuration list for PBXProject "AcheAQi" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = en;
+			developmentRegion = "pt-BR";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = A3D07C6423F33E26000EFED7;
 			packageReferences = (
@@ -481,6 +483,7 @@
 				A3942C4E241A478600AACEC7 /* XCRemoteSwiftPackageReference "Karte" */,
 				A318D15724648B6D00B31DB1 /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				A345CC9D2470C8BF005C9843 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */,
+				A3ABCDF62476C7BA0067E205 /* XCRemoteSwiftPackageReference "Siren" */,
 			);
 			productRefGroup = A3D07C6E23F33E27000EFED7 /* Products */;
 			projectDirPath = "";
@@ -584,7 +587,6 @@
 				A3740483240ED5520093C6B9 /* UIDeviceExtension.swift in Sources */,
 				A398209D246C7D78000D62D0 /* RegisterViewController.swift in Sources */,
 				A3740485240ED5520093C6B9 /* UIPickerExtension.swift in Sources */,
-				A37EAC2F23FF0DE500FF0F7C /* MainResultsTableController.swift in Sources */,
 				A30671EA2422C92500600A3F /* FotoProdutoCell.swift in Sources */,
 				A3740490240ED7320093C6B9 /* SwiftKeychainWrapper.swift in Sources */,
 				A3D07C7323F33E27000EFED7 /* SceneDelegate.swift in Sources */,
@@ -614,6 +616,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A3D07C7723F33E27000EFED7 /* Base */,
+				A3A8DFDD24781BB8007CDB5F /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -622,6 +625,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				A3D07C7C23F33E2C000EFED7 /* Base */,
+				A3A8DFDE24781BB8007CDB5F /* pt-BR */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -633,6 +637,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -679,7 +684,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -693,6 +698,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -733,7 +739,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -750,17 +756,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ATS_ALLOW_ARBITRARY_LOADS = YES;
 				CODE_SIGN_ENTITLEMENTS = "AcheAQi/Supporting Files/AcheAQi.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = L6W3TBRD57;
 				INFOPLIST_FILE = "$(SRCROOT)/AcheAQi/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.logics.AcheAQi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "AcheAQi Dev";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -773,17 +780,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ATS_ALLOW_ARBITRARY_LOADS = NO;
 				CODE_SIGN_ENTITLEMENTS = "AcheAQi/Supporting Files/AcheAQi.entitlements";
-				CODE_SIGN_IDENTITY = "Apple Distribution";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = L6W3TBRD57;
 				INFOPLIST_FILE = "$(SRCROOT)/AcheAQi/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = br.com.logics.AcheAQi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = "AcheAQi Dist";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -853,6 +861,14 @@
 				minimumVersion = 4.1.0;
 			};
 		};
+		A3ABCDF62476C7BA0067E205 /* XCRemoteSwiftPackageReference "Siren" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ArtSabintsev/Siren";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.4.0;
+			};
+		};
 		A3D07C8423F4CD0E000EFED7 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -896,6 +912,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A3942C4E241A478600AACEC7 /* XCRemoteSwiftPackageReference "Karte" */;
 			productName = Karte;
+		};
+		A3ABCDF72476C7BB0067E205 /* Siren */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3ABCDF62476C7BA0067E205 /* XCRemoteSwiftPackageReference "Siren" */;
+			productName = Siren;
 		};
 		A3D07C8523F4CD0F000EFED7 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

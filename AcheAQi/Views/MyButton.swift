@@ -133,7 +133,11 @@ open class MyButton: UIControl {
             imageView = UIImageView(image: image)
         }
         
-        imageView.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 27)
+        if #available(iOS 13.0, *) {
+            imageView.preferredSymbolConfiguration = UIImage.SymbolConfiguration(pointSize: 27)
+        } else {
+            // Fallback on earlier versions
+        }
         imageView.sizeToFit()
         
         if self.label == nil {

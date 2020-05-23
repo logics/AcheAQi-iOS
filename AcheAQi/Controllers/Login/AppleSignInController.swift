@@ -9,10 +9,19 @@
 import UIKit
 import AuthenticationServices
 
+/// Criado para dar a possibilidade de uso de target do projeto < 13.0
+protocol AppleSignInDelegate {
+    func presentationAnchor() -> ASPresentationAnchor
+}
+
+
+@available(iOS 13.0, *)
 class AppleSignInController: UIViewController {
     
     var appleUid: String?
     var appleIDCredential: ASAuthorizationAppleIDCredential?
+    var presentationAnchor: ASPresentationAnchor!
+    var delegate: AppleSignInDelegate!
     
     var appleLoginButton: ASAuthorizationAppleIDButton {
         let btn = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: .whiteOutline)
@@ -35,6 +44,13 @@ class AppleSignInController: UIViewController {
     private func signInWithAppleInWS() {
         startAnimating()
         
+        /// After the first Sign In witth Apple, the AuthenticationServices doesn't return email anymore, so
+        /// Here we save the email to get it back if have a problem on this SignIn for a second time
+        if let uid = appleIDCredential?.user, let email = appleIDCredential?.email {
+            Login.shared.setlastEmailAppleSignIn(of: uid, email: email)
+            Login.shared.save()
+        }
+        
         API.requestAuthByAppleSignIn(appleIDCredential: appleIDCredential!) { (userInfo, token, errMsg, success) in
             self.stopAnimating()
             
@@ -45,6 +61,7 @@ class AppleSignInController: UIViewController {
     }
 }
 
+@available(iOS 13.0, *)
 extension AppleSignInController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     @objc func handleAuthorizationAppleIDButtonPress() {
@@ -81,7 +98,7 @@ extension AppleSignInController: ASAuthorizationControllerDelegate, ASAuthorizat
     }
 
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-        return self.view.window!
+        return self.delegate.presentationAnchor()
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {

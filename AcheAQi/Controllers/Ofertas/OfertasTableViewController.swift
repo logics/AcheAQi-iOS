@@ -25,8 +25,10 @@ class OfertasTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupSearchBar()
+        navigationItem.title = "Produtos em oferta"
+        
         setupRefreshControl()
+        setupSearchBar()
         
         tableView.tableFooterView = UIView()
         tableView.beginRefreshing()
@@ -62,25 +64,38 @@ class OfertasTableViewController: UITableViewController {
         searchController.searchBar.delegate = self // Monitor when the search button is tapped.
         
         let searchBar = searchController.searchBar
+        
 
         if let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField {
             textFieldInsideSearchBar.backgroundColor = UIColor(named: "inputBG")
+            textFieldInsideSearchBar.background = nil
             textFieldInsideSearchBar.layer.cornerRadius = 18
             textFieldInsideSearchBar.layer.masksToBounds = true
 
-            let attrString = NSAttributedString(string: "Procurar", attributes: [.foregroundColor: UIColor.white])
+            let attrString = NSAttributedString(string: "Procurar ofertas", attributes: [.foregroundColor: UIColor.lightGray])
 
             textFieldInsideSearchBar.attributedPlaceholder = attrString
         }
-        
-        navigationItem.searchController = searchController
-        navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
+        navigationItem.hidesSearchBarWhenScrolling = false
+
+        if #available(iOS 13.0, *) {
+            navigationItem.searchController = searchController
+        } else {
+            navigationItem.titleView = searchBar
+        }
     }
 
     private func setupRefreshControl() {
-        self.refreshControl = UIRefreshControl()
-        refreshControl!.addTarget(self, action: #selector(fetchRemoteData), for: .valueChanged)
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(fetchRemoteData), for: .valueChanged)
+        
+//        tableView.addSubview(refreshControl)
+        tableView.refreshControl = refreshControl
+        
+//        for subview in refreshControl.subviews {
+//            view.addSubview(subview)
+//        }
     }
     
     @objc private func fetchRemoteData() {
