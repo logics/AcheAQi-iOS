@@ -33,6 +33,7 @@ struct Filters {
             self.categorias.remove(at: index)
         }
         else {
+            categorias.removeAll()
             categorias.append(categoria)
         }
     }

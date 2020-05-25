@@ -14,6 +14,7 @@ fileprivate let categoriaCellID = "Categoria Cell"
 
 protocol MainFiltroDelegate {
     func didChangeFilters(filters: Filters)
+    func didRefresh(categorias: Categorias)
 }
 
 class FiltroTableViewController: UITableViewController {
@@ -38,8 +39,10 @@ class FiltroTableViewController: UITableViewController {
         
         super.viewWillAppear(animated)
         
-        // Fetch Remote Data and refresh tableView
-        tableView.beginRefreshing()
+        if categorias.count < 1 {
+            // Fetch Remote Data and refresh tableView
+            tableView.beginRefreshing()
+        }
     }
     
     // MARK: Private Functions
@@ -64,6 +67,7 @@ class FiltroTableViewController: UITableViewController {
     @objc private func fetchRemoteCategorias() {
         API.fetchCategorias { response in
             self.categorias = response.result.value ?? Categorias()
+            self.filtroDelegate?.didRefresh(categorias: self.categorias)
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -154,9 +158,7 @@ class FiltroTableViewController: UITableViewController {
 
             filters.toogleCategoria(categoria)
             
-            let cell = tableView.cellForRow(at: indexPath)
-            
-            cell?.accessoryType = filters.categorias.contains(categoria) ? .checkmark : .none
+            tableView.reloadData()
         }
         
         filtroDelegate?.didChangeFilters(filters: self.filters)

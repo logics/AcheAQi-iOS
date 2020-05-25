@@ -20,11 +20,11 @@ struct Constants {
     
 //    static let baseAPIURL: String = Bundle.main.object(forInfoDictionaryKey: "API_BASE_URL") as! String
 
-//    #if DEBUG
-//        static let baseAPIURL: String = "http://localhost:8000"
-//    #else
+    #if DEBUG
+        static let baseAPIURL: String = "http://localhost:8000"
+    #else
         static let baseAPIURL: String = "https://app.acheaqi.com.br"
-//    #endif
+    #endif
 
     private static let apiVersion: String = Bundle.main.object(forInfoDictionaryKey: "API_VERSION") as! String
     static let APIURL = baseAPIURL + "/api/" + apiVersion

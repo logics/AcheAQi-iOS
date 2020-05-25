@@ -21,6 +21,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     
     var searchController: UISearchController!
     var produtos: [Produto] = []
+    var categorias = Categorias()
     var filters = Filters()
     var currentLocation: CLLocationCoordinate2D?
     var isUpdatingLocation: Bool = false
@@ -40,6 +41,9 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Fetch Categorias
+        fetchRemoteCategorias()
         
         // Setup Views
         setupSearchBar()
@@ -113,6 +117,12 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         isUpdatingLocation = true
     }
     
+    private func fetchRemoteCategorias() {
+        API.fetchCategorias { response in
+            self.categorias = response.result.value ?? Categorias()
+        }
+    }
+    
     @objc private func fetchRemoteData() {
         var params = [String: Any]()
         
@@ -122,13 +132,13 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
             }
             
             if filters.categorias.count > 0 {
-                params["categoria.nome"] = filters.categorias.map { return $0.nome }
+                params["categoria"] = filters.categorias.map { return $0.id }
             }
         }
         
         if searchTerm.count > 2 {
             
-            /// Se o usuário já tiver selecionado uma ou mais categorias no Filtro, não preicsa usar este termo para filtrar por categoria
+            /// Se o usuário já tiver selecionado uma ou mais categorias no Filtro, não precisa usar este termo para filtrar por categoria
             if filters.categorias.count == 0 {
                 params["categoria.nome"] = searchTerm
             }
@@ -156,6 +166,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     @IBAction func openFilter(_ sender: UIBarButtonItem) {
         let filtroVC = self.storyboard!.instantiateViewController(withIdentifier: "MainFiltroViewController") as! FiltroTableViewController
         filtroVC.filters = self.filters
+        filtroVC.categorias = self.categorias
         filtroVC.filtroDelegate = self
         
         let vc = UINavigationController(rootViewController: filtroVC)
@@ -248,6 +259,10 @@ extension MainCollectionViewController: MainFiltroDelegate {
         DispatchQueue.main.async {
             self.collectionView.beginRefreshing()
         }
+    }
+    
+    func didRefresh(categorias: Categorias) {
+        self.categorias = categorias
     }
 }
 
