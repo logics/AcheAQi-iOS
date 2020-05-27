@@ -34,4 +34,10 @@ extension UICollectionView {
     public func endRefreshing() {
         refreshControl?.endRefreshing()
     }
+    
+    public func setupRefreshControl(_ target: Any?, selector: Selector) {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(target, action: selector, for: .valueChanged)
+        self.refreshControl = refreshControl
+    }
 }

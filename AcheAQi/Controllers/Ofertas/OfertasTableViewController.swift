@@ -90,12 +90,7 @@ class OfertasTableViewController: UITableViewController {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(fetchRemoteData), for: .valueChanged)
         
-//        tableView.addSubview(refreshControl)
         tableView.refreshControl = refreshControl
-        
-//        for subview in refreshControl.subviews {
-//            view.addSubview(subview)
-//        }
     }
     
     @objc private func fetchRemoteData() {
@@ -108,6 +103,7 @@ class OfertasTableViewController: UITableViewController {
             params["categoria.nome"] = searchTerm
             params["nome"] = searchTerm
             params["empresa.nome"] = searchTerm
+            params["marca.nome"] = searchTerm
         }
         
         API.fetchProdutos(page: 1, params: params) { response in

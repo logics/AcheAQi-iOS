@@ -26,10 +26,13 @@ class API {
         }
     }
     
-    static func fetchProdutos(page: Int = 1, params: Parameters?, completionHandler: @escaping (DataResponse<Produtos>) -> Void) {
+    static func fetchProdutos(page: Int = 1, params: Parameters, completionHandler: @escaping (DataResponse<Produtos>) -> Void) {
         guard let url = urlBy(type: Produtos.self) else { return }
         
-        Alamofire.request(url, method: .get, parameters: params).responseProdutos { response in
+        var parameters = params
+        parameters["page"] = page
+        
+        Alamofire.request(url, method: .get, parameters: parameters).responseProdutos { response in
             completionHandler(response)
         }
     }
@@ -37,7 +40,9 @@ class API {
     static func fetchCategorias(page: Int = 1, completionHandler: @escaping (DataResponse<Categorias>) -> Void) {
         guard let url = urlBy(type: Categorias.self) else { return }
         
-        Alamofire.request(url, method: .get).responseCategorias { response in
+        let params = ["page" : page]
+
+        Alamofire.request(url, method: .get, parameters: params).responseCategorias { response in
             completionHandler(response)
         }
     }

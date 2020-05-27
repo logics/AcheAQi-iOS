@@ -10,7 +10,7 @@ import Foundation
 import Alamofire
 
 // MARK: - Produto
-class Produto: NSObject, Codable {
+class Produto: Codable {
     let id: Int
     let empresa: Empresa
     let categoria: Categoria
@@ -138,5 +138,34 @@ extension Produto {
 
     func jsonString(encoding: String.Encoding = .utf8) throws -> String? {
         return String(data: try self.jsonData(), encoding: encoding)
+    }
+}
+
+// MARK: - Equatable
+extension Produto: Equatable {
+    static func ==(lhs: Produto, rhs: Produto) -> Bool {
+        return lhs.id == rhs.id
+    }
+}
+
+extension Produtos where Element: Produto {
+    func filter(term: String, filters: Filters? = nil) -> Produtos {
+        var result = self
+        
+        if term.length > 0 {
+            result = filter { item -> Bool in
+                let stringData = NSString(string: item.nome + item.empresa.nome + item.categoria.nome + (item.marca?.nome ?? ""))
+                
+                return stringData.localizedStandardContains(term)
+            }
+        }
+        
+        if let categoria = filters?.categorias.first {
+            result = result.filter({ item -> Bool in
+                return item.categoria == categoria
+            })
+        }
+        
+        return result
     }
 }

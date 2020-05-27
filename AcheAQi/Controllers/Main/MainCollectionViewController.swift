@@ -21,12 +21,17 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     
     var searchController: UISearchController!
     var produtos: [Produto] = []
+    var produtosCached = Produtos()
     var categorias = Categorias()
     var filters = Filters()
     var currentLocation: CLLocationCoordinate2D?
     var isUpdatingLocation: Bool = false
     var produtoSelected: Produto?
     var searchTerm: String = ""
+    var loadingView: LoadingCollectionViewCell?
+    var page: Int = 1
+    var isLoading: Bool = false
+    var isTotalFetched: Bool = false
     
     lazy var locationManager: CLLocationManager = {
         let locationManager = CLLocationManager()
@@ -51,10 +56,15 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         // Reload Data
         collectionView.beginRefreshing()
+
+        //Register Loading Reuseable View
+        let loadingReusableNib = UINib(nibName: "LoadingCollectionViewCell", bundle: nil)
+        collectionView.register(loadingReusableNib,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
+                                withReuseIdentifier: LoadingCollectionViewCell.cellID)
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
         // Para corrigir bug na NavBar quando passa de uma com SerchBar para outra que não tem SearchBar na NavBar
         navigationController?.view.setNeedsLayout()
         navigationController?.view.layoutIfNeeded()
@@ -100,10 +110,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     }
 
     private func setupRefreshControl() {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(fetchRemoteData), for: .valueChanged)
-        
-        collectionView.refreshControl = refreshControl
+        collectionView.setupRefreshControl(self, selector: #selector(fetchRemoteData))
     }
     
     private func startMySignificantLocationChanges() {
@@ -124,6 +131,9 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     }
     
     @objc private func fetchRemoteData() {
+        
+        if isTotalFetched || isLoading { return }
+        
         var params = [String: Any]()
         
         if filters.count > 0 {
@@ -136,7 +146,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
             }
         }
         
-        if searchTerm.count > 2 {
+        if searchTerm.count > 0 {
             
             /// Se o usuário já tiver selecionado uma ou mais categorias no Filtro, não precisa usar este termo para filtrar por categoria
             if filters.categorias.count == 0 {
@@ -148,17 +158,48 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
             params["marca.nome"] = searchTerm
         }
         
-        API.fetchProdutos(page: 1, params: params) { response in
-            
+        isLoading = true
+        
+        API.fetchProdutos(page: self.page, params: params) { response in
             if let errorMsg = response.errorMessage {
                 AlertController.showAlert(message: errorMsg)
             }
             
-            self.produtos = response.result.value ?? Produtos()
-            self.collectionView.reloadData()
+            let results = response.result.value ?? Produtos()
             
+            // If the page is bigger than 1, its
+            if self.page == 1 {
+                self.produtos = results
+            }
+            
+            for item in results {
+                if !self.produtos.contains(item), self.page > 1 {
+                    self.produtos.append(item)
+                }
+                
+                if !self.produtosCached.contains(item) {
+                    self.produtosCached.append(item)
+                }
+            }
+            
+            self.isTotalFetched = self.produtos.count >= (response.totalCount ?? 0)
+            
+            if !self.isTotalFetched {
+                self.page += 1
+            }
+            // If is total fetched force collectionView to call referenceSizeForFooterInSection to hide loading
+            self.collectionView.setNeedsLayout()
+            
+            self.collectionView.reloadData()
             self.collectionView.endRefreshing()
+            self.isLoading = false
         }
+    }
+    
+    private func resetSearchFlags() {
+        page = 1
+        isTotalFetched = false
+        isLoading = false
     }
     
     // MARK: - IBActions
@@ -219,12 +260,11 @@ extension MainCollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProdutoCollectionViewCell
-    
         let produto = produtos[indexPath.row]
         
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! ProdutoCollectionViewCell
         cell.produto = produto
-    
+        
         return cell
     }
 
@@ -237,6 +277,50 @@ extension MainCollectionViewController {
             self.produtoSelected = self.produtos[indexPath.item]            
             self.performSegue(withIdentifier: segueShowProduto, sender: self)
         })
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionFooter {
+            loadingView = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                          withReuseIdentifier: LoadingCollectionViewCell.cellID,
+                                                                          for: indexPath) as? LoadingCollectionViewCell
+            loadingView?.activityIndicator.startAnimating()
+            
+            return loadingView!
+        }
+        return UICollectionReusableView()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if self.isLoading || self.isTotalFetched {
+            return CGSize.zero
+        } else {
+            return CGSize(width: collectionView.bounds.size.width, height: 55)
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == produtos.count - 10 && !self.isLoading {
+            fetchRemoteData()
+        }
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter, !self.isTotalFetched {
+            self.loadingView?.activityIndicator.startAnimating()
+            
+            if !isLoading {
+                self.fetchRemoteData()
+            }
+        } else {
+            self.loadingView?.activityIndicator.stopAnimating()
+        }
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, didEndDisplayingSupplementaryView view: UICollectionReusableView, forElementOfKind elementKind: String, at indexPath: IndexPath) {
+        if elementKind == UICollectionView.elementKindSectionFooter {
+            self.loadingView?.activityIndicator.stopAnimating()
+        }
     }
 }
 
@@ -254,6 +338,9 @@ extension MainCollectionViewController: MainFiltroDelegate {
         if filters.useLocation, isUpdatingLocation == false {
             startMySignificantLocationChanges()
         }
+        
+        // Reset the search flags to start pagination again
+        resetSearchFlags()
         
         // Update Results
         DispatchQueue.main.async {
@@ -278,8 +365,25 @@ extension MainCollectionViewController: UISearchControllerDelegate, UISearchResu
         let term = searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
         
         if term != searchTerm {
+            
+            // Reset the search flags to start pagination again
+            resetSearchFlags()
+
             searchTerm = term
-            fetchRemoteData()
+
+            // Search Locally
+            self.produtos = produtosCached.filter(term: searchTerm, filters: filters)
+            
+            if searchTerm.length > 0 {
+                // To prevent multiple remote call while the user is typing
+                NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(fetchRemoteData), object: nil)
+                self.perform(#selector(fetchRemoteData), with: nil, afterDelay: 0.5)
+                
+            } else {
+                self.fetchRemoteData()
+            }
+            
+            self.collectionView.reloadData()
         }
     }
     
@@ -288,6 +392,23 @@ extension MainCollectionViewController: UISearchControllerDelegate, UISearchResu
         if searchTerm == "" {
             searchController.isActive = false
         }
+        
+        // Search Locally
+        self.produtos = produtosCached.filter(term: searchTerm, filters: filters)
+        self.collectionView.reloadData()
+        
+        self.fetchRemoteData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchTerm = ""
+        
+        resetSearchFlags()
+                
+        // Search Locally
+        self.produtos = produtosCached.filter(term: searchTerm, filters: filters)
+        self.collectionView.reloadData()
+        self.fetchRemoteData()
     }
 }
 
@@ -324,5 +445,18 @@ extension MainCollectionViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print("Falha no LocationManager error:: \(error)")
+    }
+}
+
+// MARK: - UIScrollViewDelegate
+
+extension MainCollectionViewController {
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        
+        if (offsetY > contentHeight - scrollView.frame.height * 4) && !isLoading {
+            fetchRemoteData()
+        }
     }
 }

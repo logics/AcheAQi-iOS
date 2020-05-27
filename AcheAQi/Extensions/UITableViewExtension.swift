@@ -33,7 +33,6 @@ extension UITableView {
     }
     
     public func beginRefreshing() {
-        
         // Make sure that a refresh control to be shown was actually set on the view
         // controller and the it is not already animating. Otherwise there's nothing
         // to refresh.
@@ -55,5 +54,12 @@ extension UITableView {
     
     public func endRefreshing() {
         refreshControl?.endRefreshing()
+    }
+    
+    public func setupRefreshControl(_ target: Any?, selector: Selector) {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(target, action: selector, for: .valueChanged)
+        refreshControl.beginRefreshing()
+        self.refreshControl = refreshControl
     }
 }

@@ -32,4 +32,36 @@ extension DataResponse {
         
         return nil
     }
+    
+    public var currentPage: Int? {
+        guard let page = response?.allHeaderFields["X-Current-Page"] as? String else {
+            return nil
+        }
+        
+        return Int(page)
+    }
+    
+    public var itemsPerPage: Int? {
+        guard let items = response?.allHeaderFields["X-Items-Per-Page"] as? String else {
+            return nil
+        }
+        
+        return Int(items)
+    }
+    
+    public var lastPage: Int? {
+        guard let page = response?.allHeaderFields["X-Last-Page"] as? String else {
+            return nil
+        }
+        
+        return Int(page)
+    }
+
+    public var totalCount: Int? {
+        guard let count = response?.allHeaderFields["X-Total-Count"] as? String else {
+            return nil
+        }
+        
+        return Int(count)
+    }
 }

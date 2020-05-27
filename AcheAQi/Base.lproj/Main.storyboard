@@ -1048,7 +1048,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8gl-cD-61z" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2849" y="-742"/>
+            <point key="canvasLocation" x="2847.826086956522" y="-742.63392857142856"/>
         </scene>
         <!--Churrasqueira Steakhouse Grill Polishop-->
         <scene sceneID="Uf4-eH-8kv">
@@ -1645,6 +1645,6 @@ SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de 
         </namedColor>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ZkN-KK-gt3"/>
+        <segue reference="Fra-f4-YSr"/>
     </inferredMetricsTieBreakers>
 </document>
