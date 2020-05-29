@@ -34,7 +34,7 @@ extension DataResponse {
     }
     
     public var currentPage: Int? {
-        guard let page = response?.allHeaderFields["X-Current-Page"] as? String else {
+        guard let page = response?.allHeaderFields["x-current-page"] as? String else {
             return nil
         }
         
@@ -42,7 +42,7 @@ extension DataResponse {
     }
     
     public var itemsPerPage: Int? {
-        guard let items = response?.allHeaderFields["X-Items-Per-Page"] as? String else {
+        guard let items = response?.allHeaderFields["x-items-per-page"] as? String else {
             return nil
         }
         
@@ -50,7 +50,7 @@ extension DataResponse {
     }
     
     public var lastPage: Int? {
-        guard let page = response?.allHeaderFields["X-Last-Page"] as? String else {
+        guard let page = response?.allHeaderFields["x-last-page"] as? String else {
             return nil
         }
         
@@ -58,7 +58,7 @@ extension DataResponse {
     }
 
     public var totalCount: Int? {
-        guard let count = response?.allHeaderFields["X-Total-Count"] as? String else {
+        guard let count = response?.allHeaderFields["x-total-count"] as? String else {
             return nil
         }
         

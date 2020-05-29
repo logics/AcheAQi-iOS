@@ -935,6 +935,7 @@
                                                     <constraints>
                                                         <constraint firstItem="Hew-LI-fZF" firstAttribute="leading" secondItem="Vbw-hn-sMy" secondAttribute="leading" id="8VK-7s-KUe"/>
                                                         <constraint firstAttribute="bottom" secondItem="zg9-NL-wZI" secondAttribute="bottom" id="JCk-92-qMk"/>
+                                                        <constraint firstAttribute="width" secondItem="Vbw-hn-sMy" secondAttribute="height" multiplier="32:27" id="LUT-4t-qjY"/>
                                                         <constraint firstItem="zg9-NL-wZI" firstAttribute="top" secondItem="Vbw-hn-sMy" secondAttribute="top" id="WB9-lj-gKe"/>
                                                         <constraint firstAttribute="trailing" secondItem="zg9-NL-wZI" secondAttribute="trailing" id="YEs-tu-58m"/>
                                                         <constraint firstItem="Hew-LI-fZF" firstAttribute="top" secondItem="Vbw-hn-sMy" secondAttribute="top" id="fja-qG-MSk"/>
@@ -1252,12 +1253,12 @@
                                                                         <rect key="frame" x="8" y="8" width="102" height="54"/>
                                                                         <subviews>
                                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" ambiguous="YES" image="phoneArrowUpRight" translatesAutoresizingMaskIntoConstraints="NO" id="4pa-Aq-wpx">
-                                                                                <rect key="frame" x="26" y="0.0" width="50" height="33"/>
+                                                                                <rect key="frame" x="26" y="0.0" width="50" height="50"/>
                                                                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="25"/>
                                                                             </imageView>
                                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Ligar" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="0Ud-ee-Bl6">
-                                                                                <rect key="frame" x="35" y="37" width="32.5" height="17"/>
+                                                                                <rect key="frame" x="35" y="54" width="32.5" height="0.0"/>
                                                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                 <nil key="highlightedColor"/>

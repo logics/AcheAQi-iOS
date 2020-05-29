@@ -298,7 +298,7 @@ extension MainCollectionViewController {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
         if self.isLoading || self.isTotalFetched {
-            return CGSize.zero
+            return .zero
         } else {
             return CGSize(width: collectionView.bounds.size.width, height: 55)
         }
@@ -459,7 +459,7 @@ extension MainCollectionViewController {
         let offsetY = scrollView.contentOffset.y
         let contentHeight = scrollView.contentSize.height
         
-        if (offsetY > contentHeight - scrollView.frame.height * 4) && !isLoading {
+        if (offsetY > contentHeight - scrollView.frame.height * 4) && !isLoading && !isTotalFetched {
             fetchRemoteData()
         }
     }
