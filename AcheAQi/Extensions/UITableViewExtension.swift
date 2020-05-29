@@ -59,7 +59,6 @@ extension UITableView {
     public func setupRefreshControl(_ target: Any?, selector: Selector) {
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(target, action: selector, for: .valueChanged)
-        refreshControl.beginRefreshing()
         self.refreshControl = refreshControl
     }
 }

@@ -39,7 +39,6 @@ class ProdutoCollectionViewCell: UICollectionViewCell {
     
     lazy var widthConstraint: NSLayoutConstraint = {
         let width = contentView.widthAnchor.constraint(equalToConstant: ProdutoCollectionViewCell.width)
-        width.isActive = true
         return width
     }()
 
@@ -48,8 +47,15 @@ class ProdutoCollectionViewCell: UICollectionViewCell {
         
         imageView.image = #imageLiteral(resourceName: "Placeholder")
 
+        invalidateIntrinsicContentSize()
+        contentView.invalidateIntrinsicContentSize()
+        
         self.translatesAutoresizingMaskIntoConstraints = false
         contentView.translatesAutoresizingMaskIntoConstraints = false
+
+        widthConstraint.isActive = true
+        
+        self.widthAnchor.constraint(equalToConstant: ProdutoCollectionViewCell.width).isActive = true
         
         layoutIfNeeded()
     }
@@ -58,10 +64,14 @@ class ProdutoCollectionViewCell: UICollectionViewCell {
         super.prepareForReuse()
         
         imageView.image = #imageLiteral(resourceName: "Placeholder")
+        
+        layoutIfNeeded()
     }
     
     override func systemLayoutSizeFitting(_ targetSize: CGSize, withHorizontalFittingPriority horizontalFittingPriority: UILayoutPriority, verticalFittingPriority: UILayoutPriority) -> CGSize {
-        widthConstraint.constant = ProdutoCollectionViewCell.width
-        return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: (ProdutoCollectionViewCell.width * 1.8)))
+        
+        return contentView.systemLayoutSizeFitting(CGSize(width: targetSize.width, height: (ProdutoCollectionViewCell.width * 1.8)),
+                                                   withHorizontalFittingPriority: horizontalFittingPriority,
+                                                   verticalFittingPriority: verticalFittingPriority)
     }
 }

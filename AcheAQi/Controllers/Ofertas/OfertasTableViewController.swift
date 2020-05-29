@@ -17,7 +17,12 @@ class OfertasTableViewController: UITableViewController {
     var searchController: UISearchController!
     var searchTerm: String = ""
     var produtos: [Produto] = []
+    var produtosCached = Produtos()
     var produtoSelected: Produto?
+    var loadingView: LoadingTableViewCell?
+    var page: Int = 1
+    var isLoading: Bool = false
+    var isTotalFetched: Bool = false
 
     
     // MARK: - Life Cycle
@@ -30,6 +35,7 @@ class OfertasTableViewController: UITableViewController {
         setupRefreshControl()
         setupSearchBar()
         
+        tableView.register(UINib(nibName: "LoadingTableViewCell", bundle: nil), forCellReuseIdentifier: LoadingTableViewCell.cellID)
         tableView.tableFooterView = UIView()
         tableView.beginRefreshing()
     }
@@ -87,36 +93,82 @@ class OfertasTableViewController: UITableViewController {
     }
 
     private func setupRefreshControl() {
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(fetchRemoteData), for: .valueChanged)
-        
-        tableView.refreshControl = refreshControl
+        tableView.setupRefreshControl(self, selector: #selector(resetFlagsAndFetchRemoteData))
+    }
+    
+    @objc private func resetFlagsAndFetchRemoteData() {
+        resetSearchFlags()
+        fetchRemoteData()
     }
     
     @objc private func fetchRemoteData() {
+        
+        if isTotalFetched || isLoading {
+            return
+        }
+        
+        // Show loading cell
+        if !tableView.refreshControl!.isRefreshing, tableView.numberOfRows(inSection: 1) == 0 {
+            tableView.beginUpdates()
+            tableView.reloadSections([1], with: .automatic)
+            tableView.endUpdates()
+        }
+
         var params = [String: Any]()
         
         params["emPromocao"] =  true
         
         if searchTerm.count > 2 {
-            
             params["categoria.nome"] = searchTerm
             params["nome"] = searchTerm
             params["empresa.nome"] = searchTerm
             params["marca.nome"] = searchTerm
         }
         
-        API.fetchProdutos(page: 1, params: params) { response in
+        isLoading = true
+        
+        API.fetchProdutos(page: page, params: params) { response in
             
             if let errorMsg = response.errorMessage {
                 AlertController.showAlert(message: errorMsg)
             }
             
-            self.produtos = response.result.value ?? Produtos()
-            self.tableView.reloadData()
+            let results = response.result.value ?? Produtos()
             
+            // If the page is bigger than 1, its
+            if self.page == 1 {
+                self.produtos = results
+            }
+            
+            for item in results {
+                if !self.produtos.contains(item), self.page > 1 {
+                    self.produtos.append(item)
+                }
+                
+                if !self.produtosCached.contains(item) {
+                    self.produtosCached.append(item)
+                }
+            }
+            
+            self.isTotalFetched = self.produtos.count >= (response.totalCount ?? 0)
+            
+            if !self.isTotalFetched {
+                self.page += 1
+            }
+            self.tableView.reloadData()
             self.tableView.endRefreshing()
+            self.isLoading = false
         }
+    }
+    
+    private func resetSearchFlags() {
+        page = 1
+        isTotalFetched = false
+        isLoading = false
+    }
+    
+    private func shouldShowLoadingCell() -> Bool {
+        return !self.isLoading && !isTotalFetched
     }
 
     
@@ -135,20 +187,32 @@ extension OfertasTableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
+        return 2
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return produtos.count
+        if section == 0 {
+            return produtos.count
+        } else {
+            return shouldShowLoadingCell() ? 1 : 0
+        }
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let produto = produtos[indexPath.item]
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! OfertaCell
-        
-        cell.produto = produto
-        
-        return cell
+        if indexPath.section == 0 {
+            let produto = produtos[indexPath.item]
+            let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! OfertaCell
+            
+            cell.produto = produto
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: LoadingTableViewCell.cellID, for: indexPath) as! LoadingTableViewCell
+            cell.activityIndicator.startAnimating()
+            cell.backgroundColor = .clear
+            
+            return cell
+        }
     }
     
     // MARK: - Table View Delegate
@@ -160,6 +224,31 @@ extension OfertasTableViewController {
             self.produtoSelected = self.produtos[indexPath.item]
             self.performSegue(withIdentifier: segueShowProduto, sender: self)
         })
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 0 {
+            return UITableView.automaticDimension
+        } else {
+            return 55
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == produtos.count - 10 && !self.isLoading && !isTotalFetched {
+            fetchRemoteData()
+        }
+    }
+    
+    // MARK: - ScrollView Delegate
+    
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+
+        if (offsetY > contentHeight - scrollView.frame.height * 4) && !isLoading && page > 1 && !isTotalFetched {
+            fetchRemoteData()
+        }
     }
 }
 
@@ -174,8 +263,24 @@ extension OfertasTableViewController: UISearchControllerDelegate, UISearchResult
         let term = searchController.searchBar.text!.trimmingCharacters(in: whitespaceCharacterSet)
         
         if term != searchTerm {
+            
+            // Reset the search flags to start pagination again
+            resetSearchFlags()
+
             searchTerm = term
-            fetchRemoteData()
+
+            // Search Locally
+            self.produtos = produtosCached.filter(term: searchTerm)
+            self.tableView.reloadData()
+            
+            if searchTerm.length > 0 {
+                // To prevent multiple remote call while the user is typing
+                NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(resetFlagsAndFetchRemoteData), object: nil)
+                self.perform(#selector(resetFlagsAndFetchRemoteData), with: nil, afterDelay: 0.5)
+                
+            } else {
+                self.fetchRemoteData()
+            }
         }
     }
     
@@ -184,6 +289,22 @@ extension OfertasTableViewController: UISearchControllerDelegate, UISearchResult
         if searchTerm == "" {
             searchController.isActive = false
         }
+        
+        // Search Locally
+        self.produtos = produtosCached.filter(term: searchTerm)
+        self.tableView.reloadData()
+
+        self.resetFlagsAndFetchRemoteData()
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchTerm = ""
+        
+        resetSearchFlags()
+                
+        // Search Locally
+        self.produtos = produtosCached.filter(term: searchTerm)
+        self.tableView.reloadData()
+        self.fetchRemoteData()
     }
 }
-

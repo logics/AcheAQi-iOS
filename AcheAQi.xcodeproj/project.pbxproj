@@ -13,6 +13,7 @@
 		A318D15B24648BAC00B31DB1 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A318D15A24648BAB00B31DB1 /* Login.storyboard */; };
 		A318D15D24649D6100B31DB1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A318D15C24649D6100B31DB1 /* LoginViewController.swift */; };
 		A3398EBF2417C7BE00C3712B /* MyButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3398EBE2417C7BE00C3712B /* MyButton.swift */; };
+		A33F73F8247E77B70049E134 /* LoadingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A33F73F7247E77B60049E134 /* LoadingTableViewCell.xib */; };
 		A345CC9F2470C8BF005C9843 /* NVActivityIndicatorView in Frameworks */ = {isa = PBXBuildFile; productRef = A345CC9E2470C8BF005C9843 /* NVActivityIndicatorView */; };
 		A35588CA2412CB2300DED77E /* UICollectionViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35588C92412CB2300DED77E /* UICollectionViewExtension.swift */; };
 		A35588CE2412DAA200DED77E /* Alert.xib in Resources */ = {isa = PBXBuildFile; fileRef = A35588CC2412DAA100DED77E /* Alert.xib */; };
@@ -104,6 +105,7 @@
 		A318D15A24648BAB00B31DB1 /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		A318D15C24649D6100B31DB1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		A3398EBE2417C7BE00C3712B /* MyButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyButton.swift; sourceTree = "<group>"; };
+		A33F73F7247E77B60049E134 /* LoadingTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadingTableViewCell.xib; sourceTree = "<group>"; };
 		A35588C92412CB2300DED77E /* UICollectionViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewExtension.swift; sourceTree = "<group>"; };
 		A35588CC2412DAA100DED77E /* Alert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Alert.xib; sourceTree = "<group>"; };
 		A35588CD2412DAA100DED77E /* AlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertController.swift; sourceTree = "<group>"; };
@@ -334,6 +336,7 @@
 				A3F14E42247C4F5200AAD23D /* LoadingTableViewCell.swift */,
 				A3F14E44247C4F6200AAD23D /* LoadingCollectionViewCell.swift */,
 				A30E5CA2247D5512009C3189 /* LoadingCollectionViewCell.xib */,
+				A33F73F7247E77B60049E134 /* LoadingTableViewCell.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				A30E5CA3247D5512009C3189 /* LoadingCollectionViewCell.xib in Resources */,
 				A318D15B24648BAC00B31DB1 /* Login.storyboard in Resources */,
 				A3D07C7823F33E27000EFED7 /* Main.storyboard in Resources */,
+				A33F73F8247E77B70049E134 /* LoadingTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -770,6 +774,7 @@
 				CODE_SIGN_ENTITLEMENTS = "AcheAQi/Supporting Files/AcheAQi.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = L6W3TBRD57;
 				INFOPLIST_FILE = "$(SRCROOT)/AcheAQi/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -794,6 +799,7 @@
 				CODE_SIGN_ENTITLEMENTS = "AcheAQi/Supporting Files/AcheAQi.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_TEAM = L6W3TBRD57;
 				INFOPLIST_FILE = "$(SRCROOT)/AcheAQi/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

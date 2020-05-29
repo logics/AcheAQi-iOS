@@ -56,7 +56,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         // Reload Data
         collectionView.beginRefreshing()
-
+        
         //Register Loading Reuseable View
         let loadingReusableNib = UINib(nibName: "LoadingCollectionViewCell", bundle: nil)
         collectionView.register(loadingReusableNib,
@@ -110,7 +110,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
     }
 
     private func setupRefreshControl() {
-        collectionView.setupRefreshControl(self, selector: #selector(fetchRemoteData))
+        collectionView.setupRefreshControl(self, selector: #selector(resetFlagsAndFetchRemoteData))
     }
     
     private func startMySignificantLocationChanges() {
@@ -130,6 +130,11 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         }
     }
     
+    @objc private func resetFlagsAndFetchRemoteData() {
+        resetSearchFlags()
+        fetchRemoteData()
+    }
+
     @objc private func fetchRemoteData() {
         
         if isTotalFetched || isLoading { return }
@@ -373,7 +378,8 @@ extension MainCollectionViewController: UISearchControllerDelegate, UISearchResu
 
             // Search Locally
             self.produtos = produtosCached.filter(term: searchTerm, filters: filters)
-            
+            self.collectionView.reloadData()
+
             if searchTerm.length > 0 {
                 // To prevent multiple remote call while the user is typing
                 NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(fetchRemoteData), object: nil)
@@ -382,8 +388,6 @@ extension MainCollectionViewController: UISearchControllerDelegate, UISearchResu
             } else {
                 self.fetchRemoteData()
             }
-            
-            self.collectionView.reloadData()
         }
     }
     

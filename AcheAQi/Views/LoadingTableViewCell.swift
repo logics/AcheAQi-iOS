@@ -9,5 +9,6 @@
 import UIKit
 
 class LoadingTableViewCell: UITableViewCell {
+    public static var cellID = "Loading Cell"
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 }
