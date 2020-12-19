@@ -30,6 +30,10 @@ class Produto: Codable {
     var valorAtual: Float {
         return emPromocao ? (valorPromocional ?? valor) : valor
     }
+    
+    var fotoPrincipal: Foto? {
+        return fotos.first
+    }
 
     init(id: Int, empresa: Empresa, categoria: Categoria, marca: Marca?, nome: String, banner: String?, createdAt: String, updatedAt: String, descricao: String?, emEstoque: Bool, mostraValor: Bool, valor: Float, emPromocao: Bool, percDesconto: Float?, valorPromocional: Float?, fotos: Fotos?) {
         self.id = id

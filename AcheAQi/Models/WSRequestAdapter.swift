@@ -6,7 +6,7 @@
 //  Copyright © 2017 Oconcurs. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Alamofire
 
 class WSRequestAdapter: RequestAdapter, RequestRetrier {
@@ -44,7 +44,10 @@ class WSRequestAdapter: RequestAdapter, RequestRetrier {
             // Show Login VC
             DispatchQueue.main.async {
                 completion(false, 0.0)
-                self.showLoginScreen()
+                
+                AlertController.showLoginAlert {
+                    self.showLoginScreen()
+                }
             }
         } else {
             completion(false, 0.0)
@@ -54,8 +57,12 @@ class WSRequestAdapter: RequestAdapter, RequestRetrier {
     // MARK: - Private Methods
     
     private func showLoginScreen() {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDelegate.showLoginScreen()
+        
+        guard let loginVC = UIStoryboard(name: "Login", bundle: Bundle.main).instantiateInitialViewController() else { return }
+        
+        if let vc = UIApplication.shared.currentViewController() {
+            vc.present(loginVC, animated: true, completion: nil)
+        }
     }
 }
 

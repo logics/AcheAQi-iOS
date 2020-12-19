@@ -21,7 +21,7 @@ struct Constants {
 //    static let baseAPIURL: String = Bundle.main.object(forInfoDictionaryKey: "API_BASE_URL") as! String
 
     #if DEBUG
-        static let baseAPIURL: String = "http://localhost:8000"
+        static let baseAPIURL: String = "http://127.0.0.1:8000"
     #else
         static let baseAPIURL: String = "https://app.acheaqi.com.br"
     #endif
@@ -31,7 +31,7 @@ struct Constants {
     
     static let API_LOGIN_URL = APIURL + "/login_check"
     static let USER_TOKEN_TO_CREATE = "sa@ZSrE95ALHxoiQz!ecD8t8VPZwWYxAw$eQVVRA"
-    
+
     static let privacyURL = baseAPIURL + "/terms/privacy?inApp=1"
     static let termsURL = baseAPIURL + "/terms/service?inApp=1"
     

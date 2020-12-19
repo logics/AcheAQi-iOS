@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Cart" representedClassName="Cart" syncable="YES">
+        <attribute name="cartao" optional="YES" attributeType="Binary"/>
+        <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="empresa" optional="YES" attributeType="Binary"/>
+        <attribute name="endereco" optional="YES" attributeType="Binary"/>
+        <attribute name="entrega" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="formaPagamento" optional="YES" attributeType="String"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CartItem" inverseName="cart" inverseEntity="CartItem"/>
+    </entity>
+    <entity name="CartItem" representedClassName="CartItem" syncable="YES">
+        <attribute name="addedAt" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="produto" attributeType="Binary"/>
+        <attribute name="produtoId" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="qtd" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="valorUnitario" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="cart" maxCount="1" deletionRule="Cascade" destinationEntity="Cart" inverseName="items" inverseEntity="Cart"/>
+    </entity>
+    <elements>
+        <element name="Cart" positionX="-260.7666015625" positionY="-266.553955078125" width="128" height="148"/>
+        <element name="CartItem" positionX="36.864990234375" positionY="-251.5402526855469" width="128" height="119"/>
+    </elements>
+</model>

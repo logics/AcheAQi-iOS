@@ -8,6 +8,7 @@
 
 import UIKit
 import Spring
+import DynamicBlurView
 
 enum AlertStyle {
     case normal
@@ -22,6 +23,13 @@ class AlertController: UIViewController {
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var confirmButton: GradientButton!
     @IBOutlet weak var centerView: SpringView!
+    
+    lazy var blurView: DynamicBlurView = {
+        let blurredView = DynamicBlurView(frame: self.view.bounds)
+        blurredView.blurRadius = 30
+        
+        return blurredView
+    }()
 
     var confirmAction: (() -> ())?
     var okAction: (() -> ())?
@@ -53,6 +61,9 @@ class AlertController: UIViewController {
         title: String = "Ops!",
         message: String,
         style: AlertStyle = .normal,
+        isConfirmStyled: Bool = true,
+        confirmTitle: String = "Confirmar",
+        okTitle: String = "OK",
         confirmAction confirm: (() -> ())? = nil,
         okAction okAct: (() -> ())? = nil) {
         
@@ -63,10 +74,15 @@ class AlertController: UIViewController {
             alert.view.translatesAutoresizingMaskIntoConstraints = true
             alert.title = title
             alert.message = message
-            alert.centerView.backgroundColor = alert.colorFromStyle(style: style)
-            
             alert.confirmAction = confirm
             alert.okAction = okAct
+            alert.okButton.setTitle(okTitle, for: .normal)
+            alert.okButton.titleLabel?.font = isConfirmStyled ? .boldSystemFont(ofSize: 17) : .systemFont(ofSize: 17)
+            
+            let okColor = isConfirmStyled ? alert.colorFromStyle(style: .normal) : alert.colorFromStyle(style: .warning)
+            let confirmColor = isConfirmStyled ? alert.colorFromStyle(style: .warning) : alert.colorFromStyle(style: .normal)
+            
+            alert.okButton.setTitleColor(okColor, for: .normal)
             
             if okAct != nil {
                 alert.okButton.addTarget(alert, action: #selector(okHandler), for: .touchUpInside)
@@ -81,26 +97,20 @@ class AlertController: UIViewController {
 //                confirmBtn.endColor = UIColor(r:238, g:94, b:23, alpha:1)
 //                confirmBtn.backgroundColor = UIColor(named: "systemBackground")
                 confirmBtn.backgroundColor = alert.centerView.backgroundColor
-                confirmBtn.setTitle("Confirmar", for: .normal)
-                confirmBtn.titleLabel?.font = .systemFont(ofSize: 17)
-                confirmBtn.setTitleColor(UIColor(r:238, g:60, b:23, alpha:1), for: .normal)
+                confirmBtn.setTitle(confirmTitle, for: .normal)
+                confirmBtn.titleLabel?.font = isConfirmStyled ? .systemFont(ofSize: 17) : .boldSystemFont(ofSize: 17)
+                confirmBtn.setTitleColor(confirmColor, for: .normal)
                 confirmBtn.addTarget(alert, action: #selector(confirmHandler), for: .touchUpInside)
                 
                 if let stack = okBtn.superview as? UIStackView {
-                    stack.insertArrangedSubview(confirmBtn, at: 1)
+                    stack.insertArrangedSubview(confirmBtn, at: 0)
                 }
-                
-                okBtn.setTitle("Cancelar", for: .normal)
             }
-
-            let window = UIApplication.shared.windows.first
             
-            if var vc = window?.rootViewController {
-                while let presentedViewController = vc.presentedViewController {
-                    vc = presentedViewController
-                }
-                
+            if let vc = UIApplication.shared.currentViewController() {
                 // vc should now be your topmost view controller
+                
+                vc.view.addSubview(alert.blurView)
                 vc.view.addSubview(alert.view)
                 vc.addChild(alert)
                 vc.didMove(toParent: alert)
@@ -111,11 +121,11 @@ class AlertController: UIViewController {
     func colorFromStyle(style: AlertStyle) -> UIColor {
         switch style {
         case .warning:
-            return UIColor.white
+            return UIColor(r:238, g:60, b:23, alpha:1)
         case .error:
             return UIColor(red:1, green:0.149, blue:0, alpha:1)
-        default:
-            return UIColor.white
+        case .normal:
+            return UIColor.systemBlue
         }
     }
 
@@ -131,14 +141,25 @@ class AlertController: UIViewController {
             if success {
                 UIView.animate(withDuration: 0.5, animations: {
                     self.view.alpha = 0
+                    self.blurView.blurRadius = 0
                 }, completion: { success in
                     if success {
+                        self.blurView.removeFromSuperview()
                         self.view.removeFromSuperview()
                         self.removeFromParent()
                     }
                 })
             }
         }
+    }
+    
+    class func showLoginAlert(confirmAction confirm: @escaping (() -> ()), okAction okAct: (() -> ())? = nil) {
+        AlertController.showAlert(message: "Você precisa efetivar login para prosseguir.\nDeseja ir para a tela de login?",
+                                  isConfirmStyled: false,
+                                  confirmTitle: "Login",
+                                  okTitle: "Cancelar",
+                                  confirmAction: confirm,
+                                  okAction: okAct)
     }
     
     // MARK: Private Methods

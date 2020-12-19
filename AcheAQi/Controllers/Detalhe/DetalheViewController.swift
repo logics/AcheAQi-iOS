@@ -12,6 +12,7 @@ import MapKit
 import MaterialDesignWidgets
 import Spring
 import Karte
+import CoreData
 
 class DetalheViewController: UIViewController {
 
@@ -38,6 +39,7 @@ class DetalheViewController: UIViewController {
     @IBOutlet weak var zapBtnContainer: DesignableView!
     @IBOutlet weak var telBtnContainer: DesignableView!
     @IBOutlet weak var fotosStackView: UIStackView!
+    @IBOutlet weak var qtdTextField: UITextField!
     
     var originalImageHeight: CGFloat!
     var produto: Produto! {
@@ -47,6 +49,16 @@ class DetalheViewController: UIViewController {
     }
     var empresa: Empresa!
     var userLocation: CLLocationCoordinate2D?
+    var qtd = 1 {
+        didSet {
+            qtdTextField.text = String(qtd)
+        }
+    }
+    
+    private lazy var moc: NSManagedObjectContext = {
+        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    }()
+
 
     // MARK: - VC Life Cycle
     
@@ -155,6 +167,38 @@ class DetalheViewController: UIViewController {
             }
             
             phone.makeACall()
+        }
+    }
+    
+    @IBAction func increaseQtd(_ sender: Any) {
+        qtd += 1
+    }
+    
+    @IBAction func decreaseQtd(_ sender: Any) {
+        if qtd > 1 {
+            qtd += 1
+        }
+    }
+    
+    @IBAction func addToCart(_ sender: DesignableButton) {
+        sender.animatePop { success in
+            if success {
+                CartViewController.addProdutoToCart(produto: self.produto, qtd: self.qtd, context: self.moc)
+            }
+        }
+    }
+    
+    @IBAction func buyNow(_ sender: DesignableButton) {
+        CartViewController.addProdutoToCart(produto: produto, qtd: qtd, context: moc) {
+            sender.animatePop { success in
+                if success {
+                    let cartSb = UIStoryboard(name: "Carrinho", bundle: nil)
+                    
+                    if let vc = cartSb.instantiateInitialViewController() {
+                        self.present(vc, animated: true, completion: nil)
+                    }
+                }
+            }
         }
     }
 }

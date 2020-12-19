@@ -21,6 +21,7 @@ class API {
         switch type {
         case is Produtos.Type:      return baseURL + "/produtos"
         case is Categorias.Type:    return baseURL + "/categorias"
+        case is Cartoes.Type:       return baseURL + "/cartoes"
         default:
             return nil
         }
@@ -47,6 +48,32 @@ class API {
         }
     }
     
+    static func fetchPedidoAberto(page: Int = 1, completionHandler: @escaping (Bool, Pedido?) -> Void) {
+        guard let url = urlBy(type: Pedidos.self) else { return }
+        
+        let params: [String: Any] = [
+            "page": page,
+            "finalizado": false,
+        ]
+        
+        Alamofire.request(url, method: .get, parameters: params).responseModel { (response: DataResponse<Pedidos>) in
+            let success = response.result.isSuccess
+            let pedido = response.result.value?.first
+            
+            completionHandler(success, pedido)
+        }
+    }
+
+    static func fetchModel<T: Codable>(page: Int = 1, completionHandler: @escaping (DataResponse<T>) -> Void) {
+        guard let url = urlBy(type: T.self) else { return }
+        
+        let params = ["page" : page]
+        
+        Alamofire.request(url, method: .get, parameters: params).responseModel{ (response: DataResponse<T>) in
+            completionHandler(response)
+        }
+    }
+
     // MARK: - Devices
 
     static func saveDevice(_ device: Device, result: @escaping APIResult) {
@@ -213,6 +240,42 @@ class API {
                 debugPrint(response.errorMessage ?? "Error when request password reset")
             }
             result(response)
+        }
+    }
+    
+    // MARK: - CARTOES
+    
+    static func fetchCards(page: Int = 1, params: Parameters = Parameters(), completionHandler: @escaping (DataResponse<Cartoes>) -> Void) {
+        guard let url = urlBy(type: Cartoes.self) else { return }
+        
+        var parameters = params
+        parameters["page"] = page
+        
+        Alamofire.request(url, method: .get, parameters: parameters).validate().responseModel { (response: DataResponse<Cartoes>) in
+            completionHandler(response)
+        }
+    }
+    
+    static func tokenizeCard(cartao: Cartao, completionHandler: @escaping APIResult) {
+        guard let url = urlBy(type: Cartoes.self) else { return }
+        
+        let params = cartao.dictionary
+        
+        Alamofire.request(url + "/tokenize", method: .post, parameters: params).validate().responseJSON { response in
+            completionHandler(response)
+        }
+    }
+    
+    
+    // MARK: - ENDERECOS
+    
+    static func createAddress(endereco: Endereco, completionHandler: @escaping APIResult) {
+        guard let url = urlBy(type: Endereco.self) else { return }
+        
+        let params = endereco.dictionary
+        
+        Alamofire.request(url, method: .post, parameters: params).validate().responseJSON { response in
+            completionHandler(response)
         }
     }
 }

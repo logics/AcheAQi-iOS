@@ -13,6 +13,11 @@ typealias Empresas = [Empresa]
 typealias Produtos = [Produto]
 typealias Categorias = [Categoria]
 typealias Fotos = [Foto]
+typealias Cartoes = [Cartao]
+typealias Enderecos = [Endereco]
+typealias Pagamentos = [Pagamento]
+typealias Pedidos = [Pedido]
+typealias PedidoItens = [PedidoItem]
 
 extension Array where Element == Produtos.Element {
     init(data: Data) throws {
@@ -94,6 +99,12 @@ extension DataRequest {
     
     @discardableResult
     func responseFotos(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<Fotos>) -> Void) -> Self {
+        return responseDecodable(queue: queue, completionHandler: completionHandler)
+    }
+    
+    /// GENERIC
+    @discardableResult
+    func responseModel<T: Codable>(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
         return responseDecodable(queue: queue, completionHandler: completionHandler)
     }
 }

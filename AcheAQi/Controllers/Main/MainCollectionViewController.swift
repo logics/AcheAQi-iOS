@@ -41,11 +41,24 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         return locationManager
     }()
+    
+    lazy var revealVC: RevealViewController = {
+        return self.storyboard!.instantiateViewController(withIdentifier: "RevealViewController") as! RevealViewController
+    }()
+    
+    var navBarController: NavigationViewController? {
+        return self.navigationController as? NavigationViewController
+    }
 
     // MARK: - VC Life Cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navBarController?.statusBarStyle = .default
+        revealVC.show {
+            self.navBarController?.statusBarStyle = .lightContent
+        }
         
         // Fetch Categorias
         fetchRemoteCategorias()
@@ -56,7 +69,7 @@ class MainCollectionViewController: UICollectionViewController, UICollectionView
         
         // Reload Data
         collectionView.beginRefreshing()
-        
+                
         //Register Loading Reuseable View
         let loadingReusableNib = UINib(nibName: "LoadingCollectionViewCell", bundle: nil)
         collectionView.register(loadingReusableNib,
