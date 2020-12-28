@@ -95,7 +95,7 @@ enum CardType {
         case "DISCOVER": return .discover
         case "JCB":      return .jcb
         case "VISA":     return .visa
-        case "MASTER":   return .masterCard
+        case "MASTER", "MASTERCARD":   return .masterCard
             
         default:  return nil
         }
@@ -103,12 +103,12 @@ enum CardType {
     
     func iconImage(colored: Bool = false) -> UIImage {
         switch self {
-        case .amex:      return !colored ? #imageLiteral(resourceName: "amex") : #imageLiteral(resourceName: "amexClr")
-        case .diners:    return !colored ? #imageLiteral(resourceName: "diners-club") : #imageLiteral(resourceName: "dinersClr")
+        case .amex:      return !colored ? #imageLiteral(resourceName: "amex") : #imageLiteral(resourceName: "amexOn")
+        case .diners:    return !colored ? #imageLiteral(resourceName: "diners-club") : #imageLiteral(resourceName: "dinersOn")
         case .discover:  return !colored ? #imageLiteral(resourceName: "generic-card") : #imageLiteral(resourceName: "generic-card")
         case .jcb:       return !colored ? #imageLiteral(resourceName: "generic-card") : #imageLiteral(resourceName: "generic-card")
-        case .visa:       return !colored ? #imageLiteral(resourceName: "visa") : #imageLiteral(resourceName: "visaClr")
-        case .masterCard: return !colored ? #imageLiteral(resourceName: "mastercard") : #imageLiteral(resourceName: "mastercardClr")
+        case .visa:       return !colored ? #imageLiteral(resourceName: "visa") : #imageLiteral(resourceName: "visaOn")
+        case .masterCard: return !colored ? #imageLiteral(resourceName: "mastercard") : #imageLiteral(resourceName: "mastercardOn")
         }
     }
 }

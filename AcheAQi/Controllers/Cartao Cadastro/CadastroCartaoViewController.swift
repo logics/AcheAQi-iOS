@@ -10,11 +10,15 @@ import UIKit
 import Alamofire
 import NVActivityIndicatorView
 import CoreData
+import DynamicBlurView
+import Spring
 
 private let segueShowForm = "Show Form Segue"
 private let segueClose = "Close Segue"
 
 class CadastroCartaoViewController: UIViewController {
+
+    @IBOutlet weak var centerView: DesignableView!
 
     var formVC: FormCartaoTableViewController!
     var empresa: Empresa!
@@ -24,10 +28,6 @@ class CadastroCartaoViewController: UIViewController {
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         return appDelegate.persistentContainer.viewContext
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     @IBAction func hideKeyboard(_ sender: Any) {
         formVC.currentResponder?.resignFirstResponder()

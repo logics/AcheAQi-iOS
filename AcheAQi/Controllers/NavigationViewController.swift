@@ -73,7 +73,7 @@ class NavigationViewController: UINavigationController {
         
         notificationCenter.addObserver(self,
                                        selector: #selector(mocObjectsDidChange(notification:)),
-                                       name: .NSManagedObjectContextObjectsDidChange,
+                                       name: .NSManagedObjectContextDidSave,
                                        object: self.moc)
     }
     
@@ -122,18 +122,19 @@ class NavigationViewController: UINavigationController {
         var isChanged = false
         
         if let inserts = userInfo[NSInsertedObjectsKey] as? Set<CartItem>, inserts.count > 0 {
-            debugPrint("Insert on %@", inserts)
             isChanged = true
         }
         
         if let updates = userInfo[NSUpdatedObjectsKey] as? Set<CartItem>, updates.count > 0 {
-            debugPrint("Update on %@", updates)
             isChanged = true
         }
         
-        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<CartItem>, deletes.count > 0 {
-            debugPrint("Delete on %@", deletes)
-            isChanged = true
+        if let deletes = userInfo[NSDeletedObjectsKey] as? Set<NSManagedObject>, deletes.count > 0 {
+            for item in deletes {
+                if item.entity.name == "Cart" || item.entity.name == "CartItem", !isChanged {
+                    isChanged = true
+                }
+            }
         }
 
         if isChanged {

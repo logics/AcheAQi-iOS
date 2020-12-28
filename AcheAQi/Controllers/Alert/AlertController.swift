@@ -153,13 +153,15 @@ class AlertController: UIViewController {
         }
     }
     
-    class func showLoginAlert(confirmAction confirm: @escaping (() -> ()), okAction okAct: (() -> ())? = nil) {
+    class func showLoginAlert(cancelAction cancelAct: (() -> ())? = nil) {
         AlertController.showAlert(message: "Você precisa efetivar login para prosseguir.\nDeseja ir para a tela de login?",
                                   isConfirmStyled: false,
                                   confirmTitle: "Login",
                                   okTitle: "Cancelar",
-                                  confirmAction: confirm,
-                                  okAction: okAct)
+                                  confirmAction: {
+                                    AlertController.showLoginScreen()
+                                  },
+                                  okAction: cancelAct)
     }
     
     // MARK: Private Methods
@@ -176,5 +178,14 @@ class AlertController: UIViewController {
             handler()
         }
         close(self)
+    }
+    
+    fileprivate class func showLoginScreen() {
+        
+        guard let loginVC = UIStoryboard(name: "Login", bundle: Bundle.main).instantiateInitialViewController() else { return }
+        
+        if let vc = UIApplication.shared.currentViewController() {
+            vc.present(loginVC, animated: true, completion: nil)
+        }
     }
 }

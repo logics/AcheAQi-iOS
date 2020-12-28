@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17511" systemVersion="20B29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="17709" systemVersion="20C69" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Cart" representedClassName="Cart" syncable="YES">
         <attribute name="cartao" optional="YES" attributeType="Binary"/>
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
@@ -7,7 +7,7 @@
         <attribute name="endereco" optional="YES" attributeType="Binary"/>
         <attribute name="entrega" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="formaPagamento" optional="YES" attributeType="String"/>
-        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CartItem" inverseName="cart" inverseEntity="CartItem"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="No Action" destinationEntity="CartItem" inverseName="cart" inverseEntity="CartItem"/>
     </entity>
     <entity name="CartItem" representedClassName="CartItem" syncable="YES">
         <attribute name="addedAt" attributeType="Date" usesScalarValueType="NO"/>
@@ -18,7 +18,7 @@
         <relationship name="cart" maxCount="1" deletionRule="Cascade" destinationEntity="Cart" inverseName="items" inverseEntity="Cart"/>
     </entity>
     <elements>
-        <element name="Cart" positionX="-260.7666015625" positionY="-266.553955078125" width="128" height="148"/>
+        <element name="Cart" positionX="-260.7666015625" positionY="-266.553955078125" width="128" height="134"/>
         <element name="CartItem" positionX="36.864990234375" positionY="-251.5402526855469" width="128" height="119"/>
     </elements>
 </model>

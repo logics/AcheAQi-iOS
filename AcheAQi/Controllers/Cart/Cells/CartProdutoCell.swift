@@ -49,7 +49,7 @@ class CartProdutoCell: UITableViewCell {
     }
 
     @IBAction func excluir(_ sender: Any) {
-        delegate.deleteCartItem(id: item.objectID)
+        delegate.deleteCartItem(item)
     }
     
     @IBAction func increase(_ sender: Any) {
@@ -62,5 +62,5 @@ class CartProdutoCell: UITableViewCell {
 }
 
 protocol CartItemDeletable {
-    func deleteCartItem(id: NSManagedObjectID) -> Void
+    func deleteCartItem(_ item: CartItem) -> Void
 }

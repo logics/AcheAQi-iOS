@@ -23,36 +23,26 @@ class CartViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var btnAvancar: DesignableButton!
+    @IBOutlet weak var footerView: UIView!
+    @IBOutlet var emptyView: UIView!
     
     // Models
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
+    let defaultTableViewBottomSpace: CGFloat = 151.5
+    
+    var itemsConfPerSection: Int!
+
     var vlrTotal: Float = 0.0 {
         didSet {
             totalLabel.text = self.vlrTotal.toCurrency()
         }
     }
-    var cart: Cart {
-        return cartFetchedResultsController.fetchedObjects?.first ?? Cart(context: self.moc)
+    var cart: Cart? {
+        return Cart.findPendingOrCreate(context: self.moc)
     }
     
     private lazy var moc: NSManagedObjectContext = {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    }()
-    
-    fileprivate lazy var cartFetchedResultsController: NSFetchedResultsController<Cart> = {
-        // Create Fetch Request
-        let fetchRequest: NSFetchRequest<Cart> = Cart.fetchRequest()
-        
-        // Configure Fetch Request
-        fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \Cart.createdAt, ascending: false)]
-        fetchRequest.fetchLimit = 1
-        
-        // Create Fetched Results Controller
-        let fetchedResultsController = NSFetchedResultsController(fetchRequest: fetchRequest, managedObjectContext: self.moc, sectionNameKeyPath: nil, cacheName: nil)
-        
-        // Configure Fetched Results Controller
-        fetchedResultsController.delegate = self
-        
-        return fetchedResultsController
     }()
     
     fileprivate lazy var itemsFetchedResultsController: NSFetchedResultsController<CartItem> = {
@@ -60,7 +50,7 @@ class CartViewController: UIViewController {
         let fetchRequest: NSFetchRequest<CartItem> = CartItem.fetchRequest()
         
         // Configure Fetch Request
-        fetchRequest.predicate = NSPredicate(format: "cart == %@", self.cart)
+        fetchRequest.predicate = NSPredicate(format: "cart == %@", self.cart ?? Cart())
         fetchRequest.sortDescriptors = [NSSortDescriptor(keyPath: \CartItem.addedAt, ascending: true)]
         
         // Create Fetched Results Controller
@@ -71,6 +61,31 @@ class CartViewController: UIViewController {
         
         return fetchedResultsController
     }()
+    
+    // MARK: - View Controller life cycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        do {
+            try itemsFetchedResultsController.performFetch()
+        } catch {
+            let fetchError = error as NSError
+            print("Unable to Perform Fetch Request")
+            print("\(fetchError), \(fetchError.localizedDescription)")
+        }
+        
+        itemsConfPerSection = countItems() > 0 ? 1 : 0
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        updateViews()
+    }
 
     // MARK: - Private Methods
     
@@ -86,6 +101,27 @@ class CartViewController: UIViewController {
             default:
                 fatalError()
         }
+    }
+    
+    private func updateViews() {
+        if countItems() <= 0 {
+            tableView.backgroundView = emptyView
+            tableViewBottomConstraint.constant = 0
+        } else {
+            tableView.backgroundView = nil
+            tableViewBottomConstraint.constant = defaultTableViewBottomSpace
+        }
+        
+        self.vlrTotal = 0.0
+        
+        itemsFetchedResultsController.fetchedObjects?.forEach({ item in
+            self.vlrTotal += item.valorUnitario * Float(item.qtd)
+        })
+    }
+    
+    private func countItems() -> Int {
+        guard let items = itemsFetchedResultsController.fetchedObjects else { return 0 }
+        return items.count
     }
     
     // MARK: - Static methods
@@ -105,7 +141,7 @@ class CartViewController: UIViewController {
 
             item.produtoId = Int16(produto.id)
             item.produto = produtoData
-            item.valorUnitario = produto.valor
+            item.valorUnitario = produto.valorAtual
             item.addedAt = Date()
             item.qtd = Int16(qtd)
             
@@ -113,34 +149,6 @@ class CartViewController: UIViewController {
             
             context.saveObject()
         }
-    }
-    
-    // MARK: - View Controller life cycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        do {
-            try cartFetchedResultsController.performFetch()
-            try itemsFetchedResultsController.performFetch()
-        } catch {
-            let fetchError = error as NSError
-            print("Unable to Perform Fetch Request")
-            print("\(fetchError), \(fetchError.localizedDescription)")
-        }
-        
-        tableView.delegate = self
-        tableView.dataSource = self
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-//        view.blur(blurRadius: 0.98)
-        
-        itemsFetchedResultsController.fetchedObjects?.forEach({ item in
-            self.vlrTotal += item.valorUnitario * Float(item.qtd)
-        })
     }
     
     // MARK: - IBActions
@@ -167,11 +175,13 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         switch section {
             case 0:
-                return itemsFetchedResultsController.fetchedObjects?.count ?? 0
+                guard let sectionInfo = itemsFetchedResultsController.sections?[section] else { return 0 }
+                return sectionInfo.numberOfObjects
             case 1, 2:
-                return 1
+                return itemsConfPerSection
                 
             default: return 0
         }
@@ -184,6 +194,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
                 let item = itemsFetchedResultsController.object(at: indexPath)
                 
                 cell.item = item
+                cell.delegate = self
                 
                 return cell
             case 1:
@@ -202,6 +213,13 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
+        if cell.reuseIdentifier != productCellID {
+            guard Login.shared.isLogado else {
+                AlertController.showLoginAlert()
+                return
+            }
+        }
+        
         cell.animatePop { finished in
             if finished {
                 switch cell.reuseIdentifier {
@@ -215,7 +233,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section > 0 { return nil }
+        if section > 0 || countItems() == 0 { return nil }
         
         let view = tableView.dequeueReusableCell(withIdentifier: sectionCellID)
         
@@ -223,7 +241,7 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section > 0 ? CGFloat(0.0) : CGFloat(40)
+        return section > 0 || countItems() == 0 ? CGFloat(0.0) : CGFloat(40)
     }
 }
 
@@ -236,21 +254,56 @@ extension CartViewController: NSFetchedResultsControllerDelegate {
         
         switch type {
             case .insert:
-                tableView.insertRows(at: [newIndexPath!], with: .automatic)
+                tableView.insertRows(at: [newIndexPath!], with: .fade)
             case .delete:
-                tableView.deleteRows(at: [indexPath!], with: .automatic)
+                tableView.deleteRows(at: [indexPath!], with: .fade)
             case .update:
-                let cell = tableView.cellForRow(at: indexPath!)!
-                configure(cell: cell, at: indexPath!)
+                tableView.reloadRows(at: [indexPath!], with: .fade)
             case .move:
-                tableView.deleteRows(at: [indexPath!], with: .automatic)
-                tableView.insertRows(at: [newIndexPath!], with: .automatic)
+                tableView.moveRow(at: indexPath!, to: newIndexPath!)
             @unknown default:
                 print("Unexpected NSFetchedResultsChangeType")
         }
     }
     
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        
+        let indexSet = IndexSet(integer: sectionIndex)
+        
+        switch type {
+            case .insert:
+                tableView.insertSections(indexSet, with: .fade)
+            default:
+                tableView.deleteSections(indexSet, with: .fade)
+        }
+    }
+    
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         tableView.endUpdates()
+        
+        /// To fix error when delete a product item, and hide another model's cells
+        itemsConfPerSection = countItems() > 0 ? 1 : 0
+    }
+}
+
+extension CartViewController: CartItemDeletable {
+    func deleteCartItem(_ item: CartItem) {
+        let cart = item.cart
+        
+        moc.delete(item)
+        moc.saveObject()
+        
+        if let qtd = itemsFetchedResultsController.fetchedObjects?.count, qtd == 0 {
+            moc.delete(cart!)
+            moc.saveObject()
+//            tableView.reloadData()
+//            tableView.deleteSections(IndexSet(integer: 1), with: .fade)
+        }
+        
+        tableView.reloadData()
+        
+        if itemsFetchedResultsController.fetchedObjects?.count == 0 {
+            updateViews()
+        }
     }
 }

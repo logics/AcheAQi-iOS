@@ -45,9 +45,7 @@ class WSRequestAdapter: RequestAdapter, RequestRetrier {
             DispatchQueue.main.async {
                 completion(false, 0.0)
                 
-                AlertController.showLoginAlert {
-                    self.showLoginScreen()
-                }
+                AlertController.showLoginAlert()
             }
         } else {
             completion(false, 0.0)
