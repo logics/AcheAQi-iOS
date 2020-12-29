@@ -13,20 +13,10 @@ class CartPaymentMethodCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    var cart: Cart! {
+    var payMethod: PaymentMethod! {
         didSet {
-            
-            var cartao: Cartao?
-            
-            if let cardData = cart.cartao {
-                do {
-                    try cartao = Cartao(data: cardData)
-                } catch {}
-            }
-            
-            titleLabel.text = cart.formaPagamento == FormaPagamento.cartao.rawValue ?
-                cartao?.maskedNumber() :
-                "Dinheiro"
+            titleLabel.text = payMethod.title
+            iconImageView.image = payMethod.image
         }
     }
 

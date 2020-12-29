@@ -287,7 +287,7 @@
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ji-Xw-e0n">
+                                                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Ji-Xw-e0n">
                                                                                     <rect key="frame" x="328" y="0.0" width="50" height="60"/>
                                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                     <constraints>
@@ -378,9 +378,11 @@
                     <connections>
                         <outlet property="tableView" destination="ByY-f9-hYM" id="IjR-eh-lJZ"/>
                         <segue destination="ahH-Sh-dK4" kind="presentation" identifier="Show Form Card Segue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Kti-co-7NE"/>
+                        <segue destination="iht-L2-dz1" kind="unwind" identifier="Close Segue" unwindAction="unwindToCartVC:" id="Mky-H3-b1m"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ILv-mf-vpT" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="iht-L2-dz1" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="7675" y="-812"/>
         </scene>
@@ -1305,13 +1307,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cartão Principal" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fkL-4Y-jKs">
-                                                    <rect key="frame" x="10" y="14" width="305" height="16"/>
+                                                    <rect key="frame" x="10" y="14" width="299" height="16"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                     <color key="textColor" red="0.1194859974" green="0.1194859974" blue="0.1194859974" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9zM-nV-qyh">
-                                                    <rect key="frame" x="323" y="6.5" width="51" height="31"/>
+                                                    <rect key="frame" x="317" y="6.5" width="51" height="31"/>
                                                     <color key="onTintColor" red="0.0" green="0.98823529409999999" blue="0.76862745099999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 </switch>
                                             </subviews>

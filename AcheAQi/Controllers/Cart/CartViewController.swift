@@ -30,6 +30,8 @@ class CartViewController: UIViewController {
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
     let defaultTableViewBottomSpace: CGFloat = 151.5
     
+    var paymentMethodSelected = PaymentMethod.money()
+    
     var itemsConfPerSection: Int!
 
     var vlrTotal: Float = 0.0 {
@@ -77,6 +79,10 @@ class CartViewController: UIViewController {
         
         itemsConfPerSection = countItems() > 0 ? 1 : 0
         
+        if let cartaoData = cart?.cartao {
+            paymentMethodSelected = PaymentMethod.from(cartaoData: cartaoData)
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -95,7 +101,7 @@ class CartViewController: UIViewController {
                 let item = itemsFetchedResultsController.object(at: indexPath)
                 (cell as! CartProdutoCell).item = item
             case 1:
-                (cell as! CartPaymentMethodCell).cart = cart
+                (cell as! CartPaymentMethodCell).payMethod = paymentMethodSelected
             case 2:
                 (cell as! CartShippingMethodCell).cart = cart
             default:
@@ -154,18 +160,40 @@ class CartViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func avancar(_ sender: Any) {
     }
- 
     
-    /*
+    @IBAction func unwindToCartVC(_ unwindSegue: UIStoryboardSegue) {
+        
+        if let sourceViewController = unwindSegue.source as? PaymentMethodViewController {
+            
+            self.paymentMethodSelected = sourceViewController.selectedItem
+            
+            var cartaoData: Data? = nil
+
+            if let cartao = paymentMethodSelected.cartao {
+                do {
+                    cartaoData = try cartao.jsonData()
+                } catch {}
+            }
+            
+            cart?.cartao = cartaoData
+            cart?.formaPagamento = paymentMethodSelected.cartao != nil ? "cartao" : "dinheiro"
+            
+            moc.saveObject()
+
+            tableView.reloadSections(IndexSet(integer: 1), with: .fade)
+        }
+    }
+ 
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == segueShowFormaPagamento {
+            if let nvc = segue.destination as? UINavigationController,
+               let vc = nvc.viewControllers.first as? PaymentMethodViewController {
+                vc.selectedItem = self.paymentMethodSelected
+            }
+        }
     }
-    */
-
 }
 
 extension CartViewController: UITableViewDelegate, UITableViewDataSource {
@@ -296,8 +324,6 @@ extension CartViewController: CartItemDeletable {
         if let qtd = itemsFetchedResultsController.fetchedObjects?.count, qtd == 0 {
             moc.delete(cart!)
             moc.saveObject()
-//            tableView.reloadData()
-//            tableView.deleteSections(IndexSet(integer: 1), with: .fade)
         }
         
         tableView.reloadData()
