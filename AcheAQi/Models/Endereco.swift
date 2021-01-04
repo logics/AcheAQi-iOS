@@ -11,11 +11,12 @@ import Foundation
 // MARK: - Endereco
 class Endereco: Codable {
     let id: Int
-    let tipo, logradouro, complemento, numero: String
+    let tipo, logradouro, complemento: String
+    let numero: String?
     let estado, cidade, bairro, cep: String
     let createdAt, updatedAt: String
     
-    init(id: Int, tipo: String, logradouro: String, complemento: String, numero: String, estado: String, cidade: String, bairro: String, cep: String, createdAt: String, updatedAt: String) {
+    init(id: Int, tipo: String, logradouro: String, complemento: String, numero: String?, estado: String, cidade: String, bairro: String, cep: String, createdAt: String, updatedAt: String) {
         self.id = id
         self.tipo = tipo
         self.logradouro = logradouro

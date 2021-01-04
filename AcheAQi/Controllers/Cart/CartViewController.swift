@@ -13,6 +13,7 @@ import CoreData
 class CartViewController: UIViewController {
 
     let segueShowFormaPagamento = "Show Forma Pagamento Segue"
+    let segueShowDeliveryMethod = "Show Address Segue"
 
     let sectionCellID = "Section Cell"
     let productCellID = "Product Cell"
@@ -31,6 +32,7 @@ class CartViewController: UIViewController {
     let defaultTableViewBottomSpace: CGFloat = 151.5
     
     var paymentMethodSelected = PaymentMethod.money()
+    var deliveryMethodSelected = DeliveryMethod.retirarPessoalmente()
     
     var itemsConfPerSection: Int!
 
@@ -103,7 +105,7 @@ class CartViewController: UIViewController {
             case 1:
                 (cell as! CartPaymentMethodCell).payMethod = paymentMethodSelected
             case 2:
-                (cell as! CartShippingMethodCell).cart = cart
+                (cell as! CartShippingMethodCell).deliveryMethod = deliveryMethodSelected
             default:
                 fatalError()
         }
@@ -182,16 +184,44 @@ class CartViewController: UIViewController {
 
             tableView.reloadSections(IndexSet(integer: 1), with: .fade)
         }
+        else if let sourceViewController = unwindSegue.source as? DeliveryMethodViewController {
+            deliveryMethodSelected = sourceViewController.selectedItem
+
+            var endData: Data?
+            
+            if let address = deliveryMethodSelected.endereco {
+                do {
+                    endData = try address.jsonData()
+                } catch {}
+            }
+            
+            cart?.entrega = deliveryMethodSelected.endereco != nil
+            cart?.endereco = endData
+            
+            moc.saveObject()
+            
+            tableView.reloadSections(IndexSet(integer: 2), with: .fade)
+        }
     }
  
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == segueShowFormaPagamento {
-            if let nvc = segue.destination as? UINavigationController,
-               let vc = nvc.viewControllers.first as? PaymentMethodViewController {
-                vc.selectedItem = self.paymentMethodSelected
-            }
+        switch segue.identifier {
+            case segueShowFormaPagamento:
+                if let nvc = segue.destination as? UINavigationController,
+                   let vc = nvc.viewControllers.first as? PaymentMethodViewController {
+                    vc.selectedItem = self.paymentMethodSelected
+                }
+                
+            case segueShowDeliveryMethod:
+                if let nvc = segue.destination as? UINavigationController,
+                   let vc = nvc.viewControllers.first as? DeliveryMethodViewController {
+                    vc.selectedItem = self.deliveryMethodSelected
+                }
+
+            default:
+                break
         }
     }
 }
@@ -251,8 +281,10 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         cell.animatePop { finished in
             if finished {
                 switch cell.reuseIdentifier {
-                    case "Payment Cell":
+                    case self.paymentCellID:
                         self.performSegue(withIdentifier: self.segueShowFormaPagamento, sender: cell)
+                    case self.shippingCellID:
+                        self.performSegue(withIdentifier: self.segueShowDeliveryMethod, sender: cell)
                     default:
                         break
                 }

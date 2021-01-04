@@ -13,9 +13,9 @@ class CartShippingMethodCell: UITableViewCell {
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     
-    var cart: Cart! {
+    var deliveryMethod: DeliveryMethod! {
         didSet {
-            titleLabel.text = cart.entrega ? "---" : "Retirar pessoalmente"
+            titleLabel.text = deliveryMethod.description
         }
     }
     

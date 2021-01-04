@@ -19,11 +19,12 @@ class API {
     
     static func urlBy<T>(type: T.Type) -> String? where T : Decodable {
         switch type {
-        case is Produtos.Type:      return baseURL + "/produtos"
-        case is Categorias.Type:    return baseURL + "/categorias"
-        case is Cartoes.Type:       return baseURL + "/cartoes"
-        default:
-            return nil
+            case is Produtos.Type:      return baseURL + "/produtos"
+            case is Categorias.Type:    return baseURL + "/categorias"
+            case is Cartoes.Type:       return baseURL + "/cartoes"
+            case is Enderecos.Type:     return baseURL + "/enderecos"
+            default:
+                return nil
         }
     }
     
@@ -69,7 +70,7 @@ class API {
         
         let params = ["page" : page]
         
-        Alamofire.request(url, method: .get, parameters: params).responseModel{ (response: DataResponse<T>) in
+        Alamofire.request(url, method: .get, parameters: params).validate().responseModel{ (response: DataResponse<T>) in
             completionHandler(response)
         }
     }
