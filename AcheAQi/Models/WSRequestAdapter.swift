@@ -45,6 +45,8 @@ class WSRequestAdapter: RequestAdapter, RequestRetrier {
             DispatchQueue.main.async {
                 completion(false, 0.0)
                 
+                Login.shared.isLogado = false
+                Login.shared.save()
                 AlertController.showLoginAlert()
             }
         } else {

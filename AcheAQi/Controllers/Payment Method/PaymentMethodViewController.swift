@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import DynamicBlurView
 
 struct PaymentMethod {
     var cartao: Cartao?
@@ -55,8 +54,9 @@ class PaymentMethodViewController: UIViewController {
     let segueShowFormCard = "Show Form Card Segue"
     let segueClose = "Close Segue"
     
-    lazy var blurredView: DynamicBlurView = {
-        let blurredView = DynamicBlurView(frame: self.view.bounds)
+    lazy var blurredView: UIView = {
+        let blurredView = UIView(frame: self.view.bounds)
+        blurredView.addBlur(radius: 15, from: navigationController!.view)
         
         return blurredView
     }()
@@ -124,8 +124,10 @@ class PaymentMethodViewController: UIViewController {
         
         navigationController?.view.addSubview(blurredView)
 
+        self.blurredView.alpha = 0.0
+        
         UIView.animate(withDuration: 0.3) {
-            self.blurredView.blurRadius = 20
+            self.blurredView.alpha = 1.0
         } completion: { (finished) in
             if finished {
                 self.performSegue(withIdentifier: self.segueShowFormCard, sender: sender)
@@ -137,7 +139,7 @@ class PaymentMethodViewController: UIViewController {
         fetchRemoteData()
         
         UIView.animate(withDuration: 0.3) {
-            self.blurredView.blurRadius = 0
+            self.blurredView.alpha = 0
         } completion: { (finished) in
             if finished {
                 self.blurredView.removeFromSuperview()

@@ -42,6 +42,7 @@
 		A35B7C922409A3D800B709DC /* UseLocationFilterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A35B7C912409A3D800B709DC /* UseLocationFilterCell.swift */; };
 		A36895BA25867B74000AA8F4 /* PaymentMethodViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36895B925867B74000AA8F4 /* PaymentMethodViewController.swift */; };
 		A36895C025867EE0000AA8F4 /* PaymentMethodCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36895BF25867EE0000AA8F4 /* PaymentMethodCell.swift */; };
+		A36DD3FD25A3A29D00FF9BE0 /* EnderecoFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36DD3FC25A3A29D00FF9BE0 /* EnderecoFormViewController.swift */; };
 		A36ED764244A6674004A4768 /* OfertasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36ED763244A6674004A4768 /* OfertasTableViewController.swift */; };
 		A36ED767244A669A004A4768 /* OfertaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36ED766244A669A004A4768 /* OfertaCell.swift */; };
 		A36EE66D2450F25E0029B7ED /* PerfilViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A36EE66C2450F25E0029B7ED /* PerfilViewController.swift */; };
@@ -95,6 +96,7 @@
 		A3A45443244F570200C9CA13 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A45442244F570200C9CA13 /* UIView+Animations.swift */; };
 		A3A45445244F852700C9CA13 /* Marca.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A45444244F852600C9CA13 /* Marca.swift */; };
 		A3ABCDF82476C7BB0067E205 /* Siren in Frameworks */ = {isa = PBXBuildFile; productRef = A3ABCDF72476C7BB0067E205 /* Siren */; };
+		A3ADABB625AA373400F518F5 /* MIBlurPopup.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3ADABB525AA373400F518F5 /* MIBlurPopup.swift */; };
 		A3B35CE7246DF96F00261F47 /* UIButton+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35CE6246DF96F00261F47 /* UIButton+Extension.swift */; };
 		A3B35CE9246E103E00261F47 /* ResetPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35CE8246E103E00261F47 /* ResetPassViewController.swift */; };
 		A3B35CEC246E269900261F47 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35CEB246E269900261F47 /* ImagePicker.swift */; };
@@ -103,7 +105,6 @@
 		A3C96CFC24463F1E004ACB88 /* UIView+Corners.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C96CFB24463F1E004ACB88 /* UIView+Corners.swift */; };
 		A3CF3714258E07ED00EFB80F /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CF3713258E07ED00EFB80F /* UIApplicationExtension.swift */; };
 		A3CF3717258E385900EFB80F /* UIViewBlurrableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CF3716258E385900EFB80F /* UIViewBlurrableExtension.swift */; };
-		A3CF371B258E6E0500EFB80F /* DynamicBlurView in Frameworks */ = {isa = PBXBuildFile; productRef = A3CF371A258E6E0500EFB80F /* DynamicBlurView */; };
 		A3D07C7123F33E27000EFED7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D07C7023F33E27000EFED7 /* AppDelegate.swift */; };
 		A3D07C7323F33E27000EFED7 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3D07C7223F33E27000EFED7 /* SceneDelegate.swift */; };
 		A3D07C7823F33E27000EFED7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A3D07C7623F33E27000EFED7 /* Main.storyboard */; };
@@ -165,6 +166,7 @@
 		A35B7C912409A3D800B709DC /* UseLocationFilterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UseLocationFilterCell.swift; sourceTree = "<group>"; };
 		A36895B925867B74000AA8F4 /* PaymentMethodViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodViewController.swift; sourceTree = "<group>"; };
 		A36895BF25867EE0000AA8F4 /* PaymentMethodCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentMethodCell.swift; sourceTree = "<group>"; };
+		A36DD3FC25A3A29D00FF9BE0 /* EnderecoFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnderecoFormViewController.swift; sourceTree = "<group>"; };
 		A36ED763244A6674004A4768 /* OfertasTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfertasTableViewController.swift; sourceTree = "<group>"; };
 		A36ED766244A669A004A4768 /* OfertaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfertaCell.swift; sourceTree = "<group>"; };
 		A36EE66C2450F25E0029B7ED /* PerfilViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerfilViewController.swift; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 		A3A45444244F852600C9CA13 /* Marca.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marca.swift; sourceTree = "<group>"; };
 		A3A8DFDD24781BB8007CDB5F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		A3A8DFDE24781BB8007CDB5F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		A3ADABB525AA373400F518F5 /* MIBlurPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIBlurPopup.swift; sourceTree = "<group>"; };
 		A3B35CE6246DF96F00261F47 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
 		A3B35CE8246E103E00261F47 /* ResetPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassViewController.swift; sourceTree = "<group>"; };
 		A3B35CEB246E269900261F47 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
@@ -260,7 +263,6 @@
 				A3F185BD256078FD00627F2B /* Alamofire in Frameworks */,
 				A345CC9F2470C8BF005C9843 /* NVActivityIndicatorView in Frameworks */,
 				A3F50F902416E49200FD387B /* MaterialDesignWidgets in Frameworks */,
-				A3CF371B258E6E0500EFB80F /* DynamicBlurView in Frameworks */,
 				A39098A923FDA8010068E997 /* Spring in Frameworks */,
 				A3ABCDF82476C7BB0067E205 /* Siren in Frameworks */,
 				A318D15924648B6D00B31DB1 /* IQKeyboardManagerSwift in Frameworks */,
@@ -334,6 +336,14 @@
 				A36895BF25867EE0000AA8F4 /* PaymentMethodCell.swift */,
 			);
 			path = "Payment Method";
+			sourceTree = "<group>";
+		};
+		A36DD3FF25A3A2A400FF9BE0 /* Endereco Cadastro */ = {
+			isa = PBXGroup;
+			children = (
+				A36DD3FC25A3A29D00FF9BE0 /* EnderecoFormViewController.swift */,
+			);
+			path = "Endereco Cadastro";
 			sourceTree = "<group>";
 		};
 		A36ED765244A667E004A4768 /* Ofertas */ = {
@@ -438,6 +448,7 @@
 				A3102C97257E7FF50076F1DA /* Cartao Cadastro */,
 				A36895BC25867C21000AA8F4 /* Payment Method */,
 				A3E29BE5259BDB8B00D1EC2A /* Delivery Method */,
+				A36DD3FF25A3A2A400FF9BE0 /* Endereco Cadastro */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -562,6 +573,7 @@
 				A3102CA8257ED0430076F1DA /* Pagamento.swift */,
 				A3102CAB257ED11C0076F1DA /* Pedido.swift */,
 				A3102CAE257ED1AF0076F1DA /* PedidoItem.swift */,
+				A3ADABB525AA373400F518F5 /* MIBlurPopup.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -601,7 +613,6 @@
 				A3ABCDF72476C7BB0067E205 /* Siren */,
 				A3F185BC256078FD00627F2B /* Alamofire */,
 				A3F185D225609FB200627F2B /* AlamofireImage */,
-				A3CF371A258E6E0500EFB80F /* DynamicBlurView */,
 			);
 			productName = AcheAQi;
 			productReference = A3D07C6D23F33E27000EFED7 /* AcheAQi.app */;
@@ -640,7 +651,6 @@
 				A3ABCDF62476C7BA0067E205 /* XCRemoteSwiftPackageReference "Siren" */,
 				A3F185BB256078FD00627F2B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A3F185D125609FB200627F2B /* XCRemoteSwiftPackageReference "AlamofireImage" */,
-				A3CF3719258E6E0500EFB80F /* XCRemoteSwiftPackageReference "DynamicBlurView" */,
 			);
 			productRefGroup = A3D07C6E23F33E27000EFED7 /* Products */;
 			projectDirPath = "";
@@ -700,6 +710,7 @@
 				A3740472240ED45F0093C6B9 /* Constants.swift in Sources */,
 				A3F50F862416BE6E00FD387B /* DetalheViewController.swift in Sources */,
 				A3947244259C1DBA007ACB00 /* DeliveryMethodViewController.swift in Sources */,
+				A36DD3FD25A3A29D00FF9BE0 /* EnderecoFormViewController.swift in Sources */,
 				A3CF3714258E07ED00EFB80F /* UIApplicationExtension.swift in Sources */,
 				A3D07C8D23F6D76C000EFED7 /* CustomView.swift in Sources */,
 				A3740481240ED5520093C6B9 /* StringExtension.swift in Sources */,
@@ -790,6 +801,7 @@
 				A3DB42C725841F4300A8BEE4 /* NSmanagedObjectContext+Convenience.swift in Sources */,
 				A3740476240ED5520093C6B9 /* Date+Formatter.swift in Sources */,
 				A3740480240ED5520093C6B9 /* String+Validator.swift in Sources */,
+				A3ADABB625AA373400F518F5 /* MIBlurPopup.swift in Sources */,
 				A38226952423A4470051D2D8 /* Foto.swift in Sources */,
 				A35B7C8D24098F4E00B709DC /* FiltroTableViewController.swift in Sources */,
 				A3102C9C257E87D60076F1DA /* MonthYearPickerView.swift in Sources */,
@@ -1057,14 +1069,6 @@
 				minimumVersion = 5.4.0;
 			};
 		};
-		A3CF3719258E6E0500EFB80F /* XCRemoteSwiftPackageReference "DynamicBlurView" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/KyoheiG3/DynamicBlurView";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.0.4;
-			};
-		};
 		A3F185BB256078FD00627F2B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1118,11 +1122,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A3ABCDF62476C7BA0067E205 /* XCRemoteSwiftPackageReference "Siren" */;
 			productName = Siren;
-		};
-		A3CF371A258E6E0500EFB80F /* DynamicBlurView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A3CF3719258E6E0500EFB80F /* XCRemoteSwiftPackageReference "DynamicBlurView" */;
-			productName = DynamicBlurView;
 		};
 		A3F185BC256078FD00627F2B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

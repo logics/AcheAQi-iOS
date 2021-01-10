@@ -74,6 +74,33 @@ class API {
             completionHandler(response)
         }
     }
+    
+    // MARK: - Save Address
+    
+    static func saveAddress(_ address: Endereco, result: @escaping (DataResponse<Endereco>) -> ()) {
+        let url = urlBy(type: Endereco.self)!
+        
+        let params = [
+            "tipo": "entrega",
+            "logradouro": address.logradouro,
+            "complemento": address.complemento ?? "",
+            "numero": address.numero ?? "",
+            "estado": address.estado,
+            "cidade": address.cidade,
+            "bairro": address.bairro,
+            "cep": address.cep
+        ] as [String: Any]
+        
+        Alamofire.request(url, method: .post, parameters: params).validate().responseModel { (response: DataResponse<Endereco>) in
+            
+            if response.result.isFailure {
+                debugPrint(response.error ?? "")
+                debugPrint(response.errorMessage ?? "Error saving address")
+            }
+            
+            result(response)
+        }
+    }
 
     // MARK: - Devices
 

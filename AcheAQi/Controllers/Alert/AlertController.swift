@@ -8,7 +8,6 @@
 
 import UIKit
 import Spring
-import DynamicBlurView
 
 enum AlertStyle {
     case normal
@@ -24,11 +23,10 @@ class AlertController: UIViewController {
     @IBOutlet weak var confirmButton: GradientButton!
     @IBOutlet weak var centerView: SpringView!
     
-    lazy var blurView: DynamicBlurView = {
-        let blurredView = DynamicBlurView(frame: self.view.bounds)
-        blurredView.blurRadius = 30
+    lazy var blurImageView: UIImageView = {
+        let imgView = UIImageView(frame: self.view.bounds)
         
-        return blurredView
+        return imgView
     }()
 
     var confirmAction: (() -> ())?
@@ -110,8 +108,9 @@ class AlertController: UIViewController {
             if let vc = UIApplication.shared.currentViewController() {
                 // vc should now be your topmost view controller
                 
-                vc.view.addSubview(alert.blurView)
+                alert.view.addBlur(radius: 15, from: vc.view)
                 vc.view.addSubview(alert.view)
+                                
                 vc.addChild(alert)
                 vc.didMove(toParent: alert)
             }
@@ -141,10 +140,11 @@ class AlertController: UIViewController {
             if success {
                 UIView.animate(withDuration: 0.5, animations: {
                     self.view.alpha = 0
-                    self.blurView.blurRadius = 0
+                    self.blurImageView.alpha = 0
                 }, completion: { success in
                     if success {
-                        self.blurView.removeFromSuperview()
+                        self.blurImageView.removeFromSuperview()
+                        
                         self.view.removeFromSuperview()
                         self.removeFromParent()
                     }
@@ -187,5 +187,143 @@ class AlertController: UIViewController {
         if let vc = UIApplication.shared.currentViewController() {
             vc.present(loginVC, animated: true, completion: nil)
         }
+    }
+}
+
+extension UIView {
+    
+    func asImage(nonAlphaBackgroundColor: UIColor?) -> UIImage {
+        let savedColor = backgroundColor
+        let savedCornerRadius = layer.cornerRadius
+        layer.cornerRadius = 0
+        backgroundColor = nonAlphaBackgroundColor
+        
+        defer {
+            backgroundColor = savedColor
+            layer.cornerRadius = savedCornerRadius
+        }
+        
+        let format = UIGraphicsImageRendererFormat.default()
+        format.opaque = false
+        let renderer = UIGraphicsImageRenderer(bounds: bounds, format: format)
+        return renderer.image { _ in self.drawHierarchy(in: bounds, afterScreenUpdates: true) }
+    }
+    
+    func addBlur(radius: Float, from view: UIView? = nil) {
+        var bgView = self
+        
+        if view != nil {
+            bgView = view!
+        }
+        
+        let blurImageView = UIImageView(frame: bgView.bounds)
+        blurImageView.tag = 2000
+        
+        blurImageView.image = bgView
+            .asImage(nonAlphaBackgroundColor: UIColor(r: 0, g: 0, b: 0, alpha: 1))
+            .applyGaussianBlur(radius: radius)
+        
+        insertSubview(blurImageView, at: 0)
+    }
+    
+    func removeBlur() {
+        if let blurView = self.viewWithTag(2000) {
+            UIView.animate(withDuration: 0.2) {
+                blurView.alpha = 0.0
+            } completion: { finished in
+                if finished {
+                    blurView.removeFromSuperview()
+                }
+            }
+        }
+    }
+}
+
+import Accelerate
+
+extension UIImage {
+    
+    // MARK: - Types
+    
+    private struct BlurComponents {
+        
+        /// Blur Radius. Mutable proeprty, feel free to change it
+        static let GAUSIAN_TO_TENT_RADIUS_RADIO: Float = 8.0
+        
+        static func arg888format() -> vImage_CGImageFormat {
+            return vImage_CGImageFormat(
+                bitsPerComponent: 8,
+                bitsPerPixel: 32,
+                colorSpace: nil,
+                bitmapInfo: CGBitmapInfo(rawValue: CGImageAlphaInfo.noneSkipFirst.rawValue),
+                version: 0,
+                decode: nil,
+                renderingIntent: .defaultIntent
+            )
+        }
+    }
+    
+    // MARK: - Public Methods
+    
+    func applyGaussianBlur(radius: Float) -> UIImage {
+        assert(radius > 0)
+        guard let sourceCgImage = cgImage else { return self }
+        
+        guard var srcBuffer = createBuffer(sourceImage: sourceCgImage) else { return self }
+        let pixelBuffer = malloc(srcBuffer.rowBytes * Int(srcBuffer.height))
+        defer { free(pixelBuffer) }
+        
+        var outputBuffer = vImage_Buffer(
+            data: pixelBuffer,
+            height: srcBuffer.height,
+            width: srcBuffer.width,
+            rowBytes: srcBuffer.rowBytes
+        )
+        
+        var boxSize = UInt32(floor(radius * BlurComponents.GAUSIAN_TO_TENT_RADIUS_RADIO))
+        boxSize |= 1
+        
+        let error = vImageTentConvolve_ARGB8888(
+            &srcBuffer,
+            &outputBuffer,
+            nil,
+            0, 0,
+            boxSize,
+            boxSize,
+            nil,
+            UInt32(kvImageEdgeExtend)
+        )
+        
+        guard error == vImage_Error(kvImageNoError) else { return self }
+        
+        var format = BlurComponents.arg888format()
+        guard
+            let cgResult = vImageCreateCGImageFromBuffer(
+                &outputBuffer,
+                &format,
+                nil,
+                nil,
+                vImage_Flags(kvImageNoFlags),
+                nil)
+        else { return self }
+        
+        let result = UIImage(
+            cgImage: cgResult.takeRetainedValue(),
+            scale: scale,
+            orientation: imageOrientation)
+        
+        return result
+    }
+    
+    // MARK: - Private Methods
+    
+    private func createBuffer(sourceImage: CGImage) -> vImage_Buffer? {
+        var srcBuffer = vImage_Buffer()
+        
+        var format = BlurComponents.arg888format()
+        let error = vImageBuffer_InitWithCGImage(&srcBuffer, &format, nil, sourceImage, vImage_Flags(kvImageNoFlags))
+        
+        guard error == vImage_Error(kvImageNoError) else { free(srcBuffer.data); return nil }
+        return srcBuffer
     }
 }

@@ -10,7 +10,6 @@ import UIKit
 import Alamofire
 import NVActivityIndicatorView
 import CoreData
-import DynamicBlurView
 import Spring
 
 private let segueShowForm = "Show Form Segue"

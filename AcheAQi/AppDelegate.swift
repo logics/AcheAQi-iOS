@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Alamofire.SessionManager.default.retrier = WSRequestAdapter()
         
         IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.keyboardDistanceFromTextField = 20.0
         NVActivityIndicatorView.DEFAULT_TYPE = .circleStrokeSpin
 
         return true

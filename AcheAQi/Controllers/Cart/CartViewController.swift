@@ -132,6 +132,10 @@ class CartViewController: UIViewController {
         return items.count
     }
     
+    fileprivate func goToNext() {
+        
+    }
+    
     // MARK: - Static methods
     static func addProdutoToCart(produto: Produto, qtd: Int, context: NSManagedObjectContext, completionHandler: (() -> Void)? = nil) {
         
@@ -160,7 +164,18 @@ class CartViewController: UIViewController {
     }
     
     // MARK: - IBActions
-    @IBAction func avancar(_ sender: Any) {
+    @IBAction func avancar(_ sender: UIButton) {
+        
+        guard Login.shared.isLogado else {
+            AlertController.showLoginAlert()
+            return
+        }
+        
+        sender.animatePop { finished in
+            if finished {
+                self.goToNext()
+            }
+        }
     }
     
     @IBAction func unwindToCartVC(_ unwindSegue: UIStoryboardSegue) {
@@ -207,6 +222,7 @@ class CartViewController: UIViewController {
     // MARK: - Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         switch segue.identifier {
             case segueShowFormaPagamento:
                 if let nvc = segue.destination as? UINavigationController,
@@ -269,6 +285,12 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard Login.shared.isLogado else {
+            AlertController.showLoginAlert()
+            return
+        }
+        
         guard let cell = tableView.cellForRow(at: indexPath) else { return }
         
         if cell.reuseIdentifier != productCellID {
