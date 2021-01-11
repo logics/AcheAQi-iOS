@@ -22,7 +22,8 @@ class API {
             case is Produtos.Type:      return baseURL + "/produtos"
             case is Categorias.Type:    return baseURL + "/categorias"
             case is Cartoes.Type:       return baseURL + "/cartoes"
-            case is Enderecos.Type, is Endereco.Type:     return baseURL + "/enderecos"
+            case is Pedidos.Type:       return baseURL + "/pedidos"
+            case is Enderecos.Type,     is Endereco.Type:     return baseURL + "/enderecos"
             default:
                 return nil
         }
@@ -75,36 +76,6 @@ class API {
         }
     }
     
-    // MARK: - Save Address
-    
-    static func saveAddress(_ address: Endereco, result: @escaping (DataResponse<Endereco>) -> ()) {
-        let url = urlBy(type: Enderecos.self)!
-        
-        let params = [
-            "tipo": "entrega",
-            "logradouro": address.logradouro,
-            "complemento": address.complemento ?? "",
-            "numero": address.numero ?? "",
-            "estado": address.estado,
-            "cidade": address.cidade,
-            "bairro": address.bairro,
-            "cep": address.cep
-        ] as [String: Any]
-        
-        Alamofire
-            .request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
-            .validate()
-            .responseModel { (response: DataResponse<Endereco>) in
-            
-            if response.result.isFailure {
-                debugPrint(response.error ?? "")
-                debugPrint(response.errorMessage ?? "Error saving address")
-            }
-            
-            result(response)
-        }
-    }
-
     // MARK: - Devices
 
     static func saveDevice(_ device: Device, result: @escaping APIResult) {
@@ -300,13 +271,31 @@ class API {
     
     // MARK: - ENDERECOS
     
-    static func createAddress(endereco: Endereco, completionHandler: @escaping APIResult) {
-        guard let url = urlBy(type: Endereco.self) else { return }
+    static func saveAddress(_ address: Endereco, result: @escaping (DataResponse<Endereco>) -> ()) {
+        let url = urlBy(type: Enderecos.self)!
         
-        let params = endereco.dictionary
+        let params = [
+            "tipo": "entrega",
+            "logradouro": address.logradouro,
+            "complemento": address.complemento ?? "",
+            "numero": address.numero ?? "",
+            "estado": address.estado,
+            "cidade": address.cidade,
+            "bairro": address.bairro,
+            "cep": address.cep
+        ] as [String: Any]
         
-        Alamofire.request(url, method: .post, parameters: params).validate().responseJSON { response in
-            completionHandler(response)
-        }
+        Alamofire
+            .request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
+            .validate()
+            .responseModel { (response: DataResponse<Endereco>) in
+                
+                if response.result.isFailure {
+                    debugPrint(response.error ?? "")
+                    debugPrint(response.errorMessage ?? "Error saving address")
+                }
+                
+                result(response)
+            }
     }
 }

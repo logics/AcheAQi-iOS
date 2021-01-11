@@ -85,10 +85,7 @@ class EnderecoFormViewController: UIViewController {
     }
     
     @IBAction func resignFirstResponder(_ sender: Any) {
-        UIApplication
-            .shared
-            .sendAction(#selector(UIApplication.resignFirstResponder),
-                        to: nil, from: nil, for: nil)
+        UIApplication.shared.resignCurrentResponder()
     }
     
     // MARK: - Private Methods

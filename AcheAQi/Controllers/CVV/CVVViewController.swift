@@ -9,18 +9,35 @@
 import UIKit
 import Spring
 import Veil
+import CoreData
 
 class CVVViewController: UIViewController {
 
     @IBOutlet weak var cvvView: CVVCardView!
+    @IBOutlet weak var brandImageView: UIImageView!
     @IBOutlet weak var cvvTextField: DesignableTextField!
     @IBOutlet weak var sendButton: DesignableButton!
     
-    var card: Cartao?
+    var cart: Cart? {
+        return Cart.findPendingOrCreate(context: self.moc)
+    }
+    var cartao: Cartao!
+    
+    private lazy var moc: NSManagedObjectContext = {
+        return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        setupViews()
         cvvTextField.addTarget(self, action: #selector(didChangeCVVText(_:)), for: .allEditingEvents)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        cvvTextField.becomeFirstResponder()
     }
     
     @IBAction func send(_ sender: UIButton) {
@@ -31,11 +48,45 @@ class CVVViewController: UIViewController {
         }
     }
     
+    @IBAction func dismissKeyboard(_ sender: Any) {
+        UIApplication.shared.resignCurrentResponder()
+    }
+    
     @objc private func didChangeCVVText(_ sender: UITextField) {
         cvvView.cvv = sender.text ?? ""
     }
+    
+    private func setupViews() {
+        cvvView.cardNumber = cartao.maskedNumber()
+        cvvView.titular = cartao.titular
+
+        switch CardType.fromString(cartao.brand.uppercased()) {
+            case .amex:
+                brandImageView.image = UIImage(named: "amex-logo-gray")
+            case .diners:
+                brandImageView.image = UIImage(named: "diners-club-logo-gray")
+            case .masterCard:
+                brandImageView.image = UIImage(named: "mastercard-gray")
+            case .visa:
+                brandImageView.image = UIImage(named: "visa-logo-gray")
+            default:
+                brandImageView.image = nil
+                brandImageView.isHidden = true
+        }
+    }
 
     private func sendDataToWS() {
+        cvvTextField.resignFirstResponder()
+        
+        guard let cvv = cvvTextField.text?.trimmingCharacters(in: .whitespaces), cvv.length == 3 else {
+            AlertController.showAlert(message: "Por favor informe o Codigo de Segurança do cartão.", okAction: {
+                self.cvvTextField.becomeFirstResponder()
+            })
+            return
+        }
+        
+        startAnimating()
+        
         
     }
     

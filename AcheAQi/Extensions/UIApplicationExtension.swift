@@ -23,4 +23,8 @@ extension UIApplication {
         
         return window?.rootViewController
     }
+    
+    func resignCurrentResponder() {
+        sendAction(#selector(UIApplication.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
 }

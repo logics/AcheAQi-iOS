@@ -15,6 +15,7 @@ class CartViewController: UIViewController {
     let segueShowFormaPagamento = "Show Forma Pagamento Segue"
     let segueShowDeliveryMethod = "Show Address Segue"
     let segueShowCVV = "Show CVV Segue"
+    let segueShowFinished = "Show Cart Finished Segue"
 
     let sectionCellID = "Section Cell"
     let productCellID = "Product Cell"
@@ -86,6 +87,10 @@ class CartViewController: UIViewController {
             paymentMethodSelected = PaymentMethod.from(cartaoData: cartaoData)
         }
         
+        if let endData = cart?.endereco {
+            deliveryMethodSelected = DeliveryMethod.from(enderecoData: endData)
+        }
+        
         tableView.delegate = self
         tableView.dataSource = self
     }
@@ -134,7 +139,9 @@ class CartViewController: UIViewController {
     }
     
     fileprivate func goToNext() {
-        performSegue(withIdentifier: segueShowCVV, sender: self)
+        let segueID = paymentMethodSelected.cartao != nil ? segueShowCVV : segueShowFinished
+
+        performSegue(withIdentifier: segueID, sender: self)
     }
     
     // MARK: - Static methods
@@ -237,9 +244,10 @@ class CartViewController: UIViewController {
                     vc.selectedItem = self.deliveryMethodSelected
                 }
                 
-//            case segueShowCVV:
-//                if let vc = segue.destination as? CVVViewController
-//                vc.card = self.paymentMethodSelected.
+            case segueShowCVV:
+                if let vc = segue.destination as? CVVViewController {
+                    vc.cartao = self.paymentMethodSelected.cartao!
+                }
 
             default:
                 break
