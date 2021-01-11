@@ -14,6 +14,7 @@ class CartViewController: UIViewController {
 
     let segueShowFormaPagamento = "Show Forma Pagamento Segue"
     let segueShowDeliveryMethod = "Show Address Segue"
+    let segueShowCVV = "Show CVV Segue"
 
     let sectionCellID = "Section Cell"
     let productCellID = "Product Cell"
@@ -133,7 +134,7 @@ class CartViewController: UIViewController {
     }
     
     fileprivate func goToNext() {
-        
+        performSegue(withIdentifier: segueShowCVV, sender: self)
     }
     
     // MARK: - Static methods
@@ -235,6 +236,10 @@ class CartViewController: UIViewController {
                    let vc = nvc.viewControllers.first as? DeliveryMethodViewController {
                     vc.selectedItem = self.deliveryMethodSelected
                 }
+                
+//            case segueShowCVV:
+//                if let vc = segue.destination as? CVVViewController
+//                vc.card = self.paymentMethodSelected.
 
             default:
                 break

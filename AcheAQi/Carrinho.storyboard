@@ -752,6 +752,8 @@
                         <outlet property="totalLabel" destination="fzh-7Y-IES" id="ZMH-e4-TFF"/>
                         <segue destination="73G-Of-ihl" kind="presentation" identifier="Show Forma Pagamento Segue" id="IFS-91-LPn"/>
                         <segue destination="sRb-EN-TyW" kind="presentation" identifier="Show Address Segue" id="9aB-Nn-Z43"/>
+                        <segue destination="T48-9U-ntv" kind="show" identifier="Show CVV Segue" id="frz-4c-71l"/>
+                        <segue destination="srk-LL-5FW" kind="show" identifier="Show Cart Finished Segue" id="3ka-T4-tds"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x74-P5-5O1" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -797,6 +799,117 @@
                 </view>
             </objects>
             <point key="canvasLocation" x="5852" y="-461"/>
+        </scene>
+        <!--CVV-->
+        <scene sceneID="ejI-ov-PIY">
+            <objects>
+                <viewController id="T48-9U-ntv" customClass="CVVViewController" customModule="AcheAQi" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lbK-lO-Oat">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YDx-29-WUa" customClass="CVVCardView" customModule="AcheAQi" customModuleProvider="target">
+                                <rect key="frame" x="28" y="112" width="358" height="215"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="215" id="sCn-H4-bSM"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Informe o código de segurança do seu cartão" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jq-aE-YGo">
+                                <rect key="frame" x="20" y="344" width="374" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="8Js-cB-qGv"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QIT-Xh-htc" customClass="DesignableTextField" customModule="Spring">
+                                <rect key="frame" x="167" y="383" width="80" height="34"/>
+                                <color key="backgroundColor" name="inputBG"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="80" id="Ks5-6K-O03"/>
+                                    <constraint firstAttribute="height" constant="34" id="buO-Pd-XZp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="18"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" name="lightGray"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <outlet property="delegate" destination="T48-9U-ntv" id="3xr-Mp-zdb"/>
+                                </connections>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OQ4-pY-hNe" customClass="DesignableButton" customModule="Spring">
+                                <rect key="frame" x="28" y="439" width="358" height="50"/>
+                                <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="Psg-VE-yhi"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                <state key="normal" title="Finalizar compra">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="15"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="send:" destination="T48-9U-ntv" eventType="touchUpInside" id="FjK-pF-4vL"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qj9-MG-Fvh"/>
+                        <color key="backgroundColor" name="backgroundGrouped"/>
+                        <constraints>
+                            <constraint firstItem="QIT-Xh-htc" firstAttribute="centerX" secondItem="lbK-lO-Oat" secondAttribute="centerX" id="3z1-uI-MNe"/>
+                            <constraint firstItem="qj9-MG-Fvh" firstAttribute="trailing" secondItem="5jq-aE-YGo" secondAttribute="trailing" constant="20" id="5um-pW-u6b"/>
+                            <constraint firstItem="qj9-MG-Fvh" firstAttribute="trailing" secondItem="YDx-29-WUa" secondAttribute="trailing" constant="28" id="8L9-9v-StY"/>
+                            <constraint firstItem="QIT-Xh-htc" firstAttribute="top" secondItem="5jq-aE-YGo" secondAttribute="bottom" constant="18" id="LGS-aE-4i5"/>
+                            <constraint firstItem="YDx-29-WUa" firstAttribute="top" secondItem="qj9-MG-Fvh" secondAttribute="top" constant="24" id="LmL-gH-gj7"/>
+                            <constraint firstItem="5jq-aE-YGo" firstAttribute="leading" secondItem="qj9-MG-Fvh" secondAttribute="leading" constant="20" id="VIn-7R-YrA"/>
+                            <constraint firstItem="qj9-MG-Fvh" firstAttribute="trailing" secondItem="OQ4-pY-hNe" secondAttribute="trailing" constant="28" id="Vme-pW-rbq"/>
+                            <constraint firstItem="OQ4-pY-hNe" firstAttribute="top" secondItem="QIT-Xh-htc" secondAttribute="bottom" constant="22" id="ai4-LW-0Nd"/>
+                            <constraint firstItem="OQ4-pY-hNe" firstAttribute="leading" secondItem="qj9-MG-Fvh" secondAttribute="leading" constant="28" id="amf-zP-ZAY"/>
+                            <constraint firstItem="YDx-29-WUa" firstAttribute="leading" secondItem="qj9-MG-Fvh" secondAttribute="leading" constant="28" id="hrn-1l-dnE"/>
+                            <constraint firstItem="5jq-aE-YGo" firstAttribute="top" secondItem="YDx-29-WUa" secondAttribute="bottom" constant="17" id="t9R-rW-tIT"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="CVV" id="8Zq-tJ-XCh"/>
+                    <connections>
+                        <outlet property="cvvTextField" destination="QIT-Xh-htc" id="dUj-rZ-6WA"/>
+                        <outlet property="cvvView" destination="YDx-29-WUa" id="WiT-8O-C0t"/>
+                        <outlet property="sendButton" destination="OQ4-pY-hNe" id="kFi-mL-ee0"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ylr-Ky-Hoi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4925" y="360"/>
+        </scene>
+        <!--Pedido Finalizado-->
+        <scene sceneID="KWF-qe-vKK">
+            <objects>
+                <viewController id="srk-LL-5FW" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Bk3-sL-cOz">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="bK9-Pu-d1u"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Pedido Finalizado" id="gwA-lY-90f"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="E17-Ju-OQQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5851" y="360"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="YyE-CK-jxk">
@@ -2071,8 +2184,14 @@
         <designable name="LQZ-o1-gjL">
             <size key="intrinsicContentSize" width="68" height="32"/>
         </designable>
+        <designable name="OQ4-pY-hNe">
+            <size key="intrinsicContentSize" width="139" height="35"/>
+        </designable>
         <designable name="PaV-Ps-t2d">
             <size key="intrinsicContentSize" width="167" height="18.5"/>
+        </designable>
+        <designable name="QIT-Xh-htc">
+            <size key="intrinsicContentSize" width="4" height="18.5"/>
         </designable>
         <designable name="RtZ-co-qrB">
             <size key="intrinsicContentSize" width="91" height="18.5"/>
@@ -2115,6 +2234,9 @@
         </namedColor>
         <namedColor name="greenCity">
             <color red="0.3843137254901961" green="0.62352941176470589" blue="0.67450980392156867" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="inputBG">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="lightGray">
             <color red="0.83700001239776611" green="0.83700001239776611" blue="0.83700001239776611" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
