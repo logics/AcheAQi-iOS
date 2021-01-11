@@ -102,6 +102,7 @@
 		A3B35CEC246E269900261F47 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35CEB246E269900261F47 /* ImagePicker.swift */; };
 		A3B35E972464D4BC006830A6 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35E962464D4BB006830A6 /* Device.swift */; };
 		A3B96BF92562B26500DCD3FD /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B96BF82562B26500DCD3FD /* CartViewController.swift */; };
+		A3C6724125AC8AD20099097E /* Veil in Frameworks */ = {isa = PBXBuildFile; productRef = A3C6724025AC8AD20099097E /* Veil */; };
 		A3C96CFC24463F1E004ACB88 /* UIView+Corners.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C96CFB24463F1E004ACB88 /* UIView+Corners.swift */; };
 		A3CF3714258E07ED00EFB80F /* UIApplicationExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CF3713258E07ED00EFB80F /* UIApplicationExtension.swift */; };
 		A3CF3717258E385900EFB80F /* UIViewBlurrableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3CF3716258E385900EFB80F /* UIViewBlurrableExtension.swift */; };
@@ -264,6 +265,7 @@
 				A345CC9F2470C8BF005C9843 /* NVActivityIndicatorView in Frameworks */,
 				A3F50F902416E49200FD387B /* MaterialDesignWidgets in Frameworks */,
 				A39098A923FDA8010068E997 /* Spring in Frameworks */,
+				A3C6724125AC8AD20099097E /* Veil in Frameworks */,
 				A3ABCDF82476C7BB0067E205 /* Siren in Frameworks */,
 				A318D15924648B6D00B31DB1 /* IQKeyboardManagerSwift in Frameworks */,
 			);
@@ -613,6 +615,7 @@
 				A3ABCDF72476C7BB0067E205 /* Siren */,
 				A3F185BC256078FD00627F2B /* Alamofire */,
 				A3F185D225609FB200627F2B /* AlamofireImage */,
+				A3C6724025AC8AD20099097E /* Veil */,
 			);
 			productName = AcheAQi;
 			productReference = A3D07C6D23F33E27000EFED7 /* AcheAQi.app */;
@@ -651,6 +654,7 @@
 				A3ABCDF62476C7BA0067E205 /* XCRemoteSwiftPackageReference "Siren" */,
 				A3F185BB256078FD00627F2B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A3F185D125609FB200627F2B /* XCRemoteSwiftPackageReference "AlamofireImage" */,
+				A3C6723F25AC8AD20099097E /* XCRemoteSwiftPackageReference "Veil" */,
 			);
 			productRefGroup = A3D07C6E23F33E27000EFED7 /* Products */;
 			projectDirPath = "";
@@ -1069,6 +1073,14 @@
 				minimumVersion = 5.4.0;
 			};
 		};
+		A3C6723F25AC8AD20099097E /* XCRemoteSwiftPackageReference "Veil" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/DanielCardonaRojas/Veil";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.0;
+			};
+		};
 		A3F185BB256078FD00627F2B /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -1122,6 +1134,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A3ABCDF62476C7BA0067E205 /* XCRemoteSwiftPackageReference "Siren" */;
 			productName = Siren;
+		};
+		A3C6724025AC8AD20099097E /* Veil */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A3C6723F25AC8AD20099097E /* XCRemoteSwiftPackageReference "Veil" */;
+			productName = Veil;
 		};
 		A3F185BC256078FD00627F2B /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;

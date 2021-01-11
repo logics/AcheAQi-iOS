@@ -22,7 +22,7 @@ class API {
             case is Produtos.Type:      return baseURL + "/produtos"
             case is Categorias.Type:    return baseURL + "/categorias"
             case is Cartoes.Type:       return baseURL + "/cartoes"
-            case is Enderecos.Type:     return baseURL + "/enderecos"
+            case is Enderecos.Type, is Endereco.Type:     return baseURL + "/enderecos"
             default:
                 return nil
         }
@@ -78,7 +78,7 @@ class API {
     // MARK: - Save Address
     
     static func saveAddress(_ address: Endereco, result: @escaping (DataResponse<Endereco>) -> ()) {
-        let url = urlBy(type: Endereco.self)!
+        let url = urlBy(type: Enderecos.self)!
         
         let params = [
             "tipo": "entrega",
@@ -91,7 +91,10 @@ class API {
             "cep": address.cep
         ] as [String: Any]
         
-        Alamofire.request(url, method: .post, parameters: params).validate().responseModel { (response: DataResponse<Endereco>) in
+        Alamofire
+            .request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
+            .validate()
+            .responseModel { (response: DataResponse<Endereco>) in
             
             if response.result.isFailure {
                 debugPrint(response.error ?? "")

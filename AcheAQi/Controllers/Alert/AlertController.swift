@@ -175,7 +175,10 @@ class AlertController: UIViewController {
     
     @objc private func okHandler() {
         if let handler = okAction {
-            handler()
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+                handler()
+            }
         }
         close(self)
     }

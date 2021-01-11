@@ -28,7 +28,7 @@ open class MIBlurPopup: NSObject {
         viewControllerToPresent.transitioningDelegate = shared
         
         if !(viewControllerToPresent is MIBlurPopupDelegate) {
-            debugPrint("ERROR: \(viewControllerToPresent) does not conform to protocol 'MIBlurPopupDelegate'")
+            assertionFailure("Err: \(viewControllerToPresent) does not conform to protocol 'MIBlurPopupDelegate'")
         }
         
         parentViewController.present(viewControllerToPresent, animated: true, completion: nil)

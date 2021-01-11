@@ -8,6 +8,7 @@
 
 import UIKit
 import Spring
+import Veil
 
 class EnderecoFormViewController: UIViewController {
 
@@ -64,6 +65,8 @@ class EnderecoFormViewController: UIViewController {
         
         statePicker.delegate = self
         statePicker.dataSource = self
+        
+        cepTextField.addTarget(self, action: #selector(cepDidChange(_:)), for: .allEditingEvents)
         
         updateViews()
     }
@@ -155,16 +158,15 @@ class EnderecoFormViewController: UIViewController {
         return true
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc private func cepDidChange(_ sender: UITextField) {
+        let cepMask = Veil(pattern: "#####-###")
+        
+        guard let currentText = sender.text else  {
+            return
+        }
+        
+        sender.text = cepMask.mask(input: currentText, exhaustive: false)
     }
-    */
-
 }
 
 extension EnderecoFormViewController: UIPickerViewDelegate, UIPickerViewDataSource {
@@ -187,10 +189,6 @@ extension EnderecoFormViewController: UIPickerViewDelegate, UIPickerViewDataSour
 }
 
 extension EnderecoFormViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-//        firstResponder = textField
-    }
-    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         
         switch textField {
