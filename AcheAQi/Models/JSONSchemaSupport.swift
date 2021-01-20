@@ -67,9 +67,13 @@ func newJSONEncoder() -> JSONEncoder {
 extension DataRequest {
     fileprivate func decodableResponseSerializer<T: Decodable>() -> DataResponseSerializer<T> {
         return DataResponseSerializer { _, response, data, error in
-            guard error == nil else { return .failure(error!) }
+            guard error == nil else {
+                debugPrint(error!, response!)
+                return .failure(error!)
+            }
 
             guard let data = data else {
+                debugPrint("Error serializing data. Type: \(T.self)")
                 return .failure(AFError.responseSerializationFailed(reason: .inputDataNil))
             }
             
@@ -107,4 +111,8 @@ extension DataRequest {
     func responseModel<T: Codable>(queue: DispatchQueue? = nil, completionHandler: @escaping (DataResponse<T>) -> Void) -> Self {
         return responseDecodable(queue: queue, completionHandler: completionHandler)
     }
+}
+
+extension DataResponse {
+    
 }

@@ -15,25 +15,30 @@ class CartFinishedViewController: UIViewController {
     @IBOutlet weak var paymentMethodLabel: UILabel!
     @IBOutlet weak var deliveryMethodLabel: UILabel!
     
+    var pedido: Pedido!
+    var pagamento: Pagamento!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        setupViews()
     }
     
+    private func setupViews() {
+        nrPedidoLabel.text = String(pedido.id!)
+        dataLabel.text = pedido.createdAt?.formattedDate(dateFormat: "dd/MM/yyyy HH:mm:ss")
+        paymentMethodLabel.text = pedido.formaPagamento.capitalizingFirstLetter()
+        
+        var enderecoDescription = DeliveryMethod.retirarPessoalmente().description
+        
+        if pedido.entrega, let enderecoEntrega = pedido.endereco {
+            enderecoDescription = DeliveryMethod.from(endereco: enderecoEntrega).description
+        }
+        
+        deliveryMethodLabel.text = enderecoDescription
+    }
 
     @IBAction func close(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

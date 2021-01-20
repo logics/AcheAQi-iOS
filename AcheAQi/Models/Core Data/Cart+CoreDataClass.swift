@@ -51,4 +51,57 @@ public class Cart: NSManagedObject {
             return item.produtoId == produtoId
         }
     }
+    
+    func asPedido() -> Pedido {
+        
+        /// Pedido
+        let pedido = Pedido(formaPagamento: formaPagamento!, entrega: entrega)
+        
+        /// Items
+        var pedidoItems = PedidoItens()
+        
+        if let items = items as? Set<CartItem> {
+        
+            items.forEach({ (item: CartItem) in
+                
+                do {
+                    if let prodData = item.produto {
+                        
+                        let produto = try Produto(data: prodData)
+                                
+                        let pedidoItem = PedidoItem(produto: produto,
+                                                    qtd: Int(item.qtd),
+                                                    valorUnitario: item.valorUnitario,
+                                                    pedido: pedido)
+                        
+                        pedidoItems.append(pedidoItem)
+                    }
+                } catch {
+                    fatalError()
+                }
+            })
+        }
+        pedido.itens = pedidoItems
+        
+        /// Pagamento em Cartão
+        if let cardData = cartao {
+            do {
+                let cartao = try Cartao(data: cardData)
+                pedido.cartao = cartao
+            } catch {
+                fatalError()
+            }
+        }
+        
+        if let endData = endereco {
+            do {
+                let endereco = try Endereco(data: endData)
+                pedido.endereco = endereco
+            } catch {
+                fatalError()
+            }
+        }
+        
+        return pedido
+    }
 }

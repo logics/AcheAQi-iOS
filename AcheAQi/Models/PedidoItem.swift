@@ -10,14 +10,14 @@ import Foundation
 
 // MARK: - PedidoItem
 class PedidoItem: Codable {
-    let id: Int
+    let id: Int?
     let produto: Produto
-    let valorUnitario: Int
+    let valorUnitario: Float
     var qtd: Int
     let pedido: Pedido
-    let createdAt, updatedAt: Date
+    let createdAt, updatedAt: Date?
     
-    init(id: Int, produto: Produto, qtd: Int, valorUnitario: Int, pedido: Pedido, createdAt: Date, updatedAt: Date) {
+    init(id: Int? = nil, produto: Produto, qtd: Int, valorUnitario: Float, pedido: Pedido, createdAt: Date? = nil, updatedAt: Date? = nil) {
         self.id = id
         self.produto = produto
         self.qtd = qtd
@@ -60,7 +60,7 @@ extension PedidoItem {
         id: Int? = nil,
         produto: Produto? = nil,
         qtd: Int? = nil,
-        valorUnitario: Int? = nil,
+        valorUnitario: Float? = nil,
         pedido: Pedido? = nil,
         createdAt: Date? = nil,
         updatedAt: Date? = nil

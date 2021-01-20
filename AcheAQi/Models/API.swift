@@ -23,6 +23,7 @@ class API {
             case is Categorias.Type:    return baseURL + "/categorias"
             case is Cartoes.Type:       return baseURL + "/cartoes"
             case is Pedidos.Type:       return baseURL + "/pedidos"
+            case is Pagamentos.Type:    return baseURL + "/pagamentos"
             case is Enderecos.Type,     is Endereco.Type:     return baseURL + "/enderecos"
             default:
                 return nil
@@ -222,10 +223,7 @@ class API {
                     completionHandler(nil, nil, response.errorMessage, false)
                 }
                 
-            case .failure(let error):
-                
-                debugPrint("An error ocurred when trying to auth user by social from API. Error: ", error)
-                
+            case .failure:
                 completionHandler(nil, nil, response.errorMessage, false)
             }
         }
@@ -238,9 +236,6 @@ class API {
         let params = ["usernameoremail": usernameOrEmail] as [String: Any]
         
         Alamofire.request(url, method: .post, parameters: params).validate().responseJSON { response in
-            if response.result.isFailure {
-                debugPrint(response.errorMessage ?? "Error when request password reset")
-            }
             result(response)
         }
     }
@@ -289,12 +284,59 @@ class API {
             .request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
             .validate()
             .responseModel { (response: DataResponse<Endereco>) in
-                
-                if response.result.isFailure {
-                    debugPrint(response.error ?? "")
-                    debugPrint(response.errorMessage ?? "Error saving address")
-                }
-                
+                result(response)
+            }
+    }
+    
+    // MARK: - Pedidos
+    
+    static func savePedido(_ pedido: Pedido, result: @escaping (DataResponse<Pedido>) -> ()) {
+        let url = urlBy(type: Pedidos.self)!
+
+        var items = [[String: Any]]()
+        
+        for item in pedido.itens {
+            items.append([
+                "produto": item.produto.id,
+                "qtd": item.qtd,
+                "valorUnitario": item.valorUnitario,
+            ])
+        }
+
+        var params = [
+            "formaPagamento": "cartao",
+            "cartao": 1,
+            "entrega": false,
+            "items": items,
+        ] as [String : Any]
+        
+        if let endereco = pedido.endereco {
+            params["endereco"] = endereco.id!
+        }
+        
+        Alamofire
+            .request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
+            .validate()
+            .responseModel { (response: DataResponse<Pedido>) in
+                result(response)
+            }
+    }
+    
+    // MARK: - Pagamentos
+    
+    static func processPayment(pedido: Pedido, cvv: Int, result: @escaping (DataResponse<Pagamento>) -> ()) {
+        let url = urlBy(type: Pagamentos.self)!
+        
+        let params = [
+            "nomeCliente": Login.shared.nome!,
+            "cartao": pedido.cartao!.id,
+            "pedido": pedido.id!,
+        ] as [String: Any]
+        
+        Alamofire
+            .request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
+            .validate()
+            .responseModel { (response: DataResponse<Pagamento>) in
                 result(response)
             }
     }

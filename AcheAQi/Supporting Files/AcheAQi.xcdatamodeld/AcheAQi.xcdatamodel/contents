@@ -3,7 +3,6 @@
     <entity name="Cart" representedClassName="Cart" syncable="YES">
         <attribute name="cartao" optional="YES" attributeType="Binary"/>
         <attribute name="createdAt" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="empresa" optional="YES" attributeType="Binary"/>
         <attribute name="endereco" optional="YES" attributeType="Binary"/>
         <attribute name="entrega" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="formaPagamento" optional="YES" attributeType="String"/>
@@ -18,7 +17,7 @@
         <relationship name="cart" maxCount="1" deletionRule="Nullify" destinationEntity="Cart" inverseName="items" inverseEntity="Cart"/>
     </entity>
     <elements>
-        <element name="Cart" positionX="-260.7666015625" positionY="-266.553955078125" width="128" height="134"/>
+        <element name="Cart" positionX="-260.7666015625" positionY="-266.553955078125" width="128" height="119"/>
         <element name="CartItem" positionX="36.864990234375" positionY="-251.5402526855469" width="128" height="119"/>
     </elements>
 </model>

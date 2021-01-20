@@ -10,18 +10,22 @@ import UIKit
 import Spring
 import Veil
 import CoreData
+import Alamofire
 
 class CVVViewController: UIViewController {
+    
+    let segueShowFinished = "Show Cart Finished Segue"
 
     @IBOutlet weak var cvvView: CVVCardView!
     @IBOutlet weak var brandImageView: UIImageView!
     @IBOutlet weak var cvvTextField: DesignableTextField!
     @IBOutlet weak var sendButton: DesignableButton!
     
-    var cart: Cart? {
+    var cart: Cart {
         return Cart.findPendingOrCreate(context: self.moc)
     }
     var cartao: Cartao!
+    var pagamento: Pagamento?
     
     private lazy var moc: NSManagedObjectContext = {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -85,9 +89,35 @@ class CVVViewController: UIViewController {
             return
         }
         
-        startAnimating()
+        startAnimating(message: "Criando pedido...")
         
-        
+        /// Criando Pedido
+        API.savePedido(cart.asPedido()) { (response: DataResponse<Pedido>) in
+            
+            self.stopAnimating()
+            
+            guard response.result.isSuccess, let pedido = response.result.value else {
+                AlertController.showAlert(message: "Não conseguimos concluir o seu pedido. Por favor tente novamente mais tarde, ou entre em contado com nossa central de atendimento.")
+                return
+            }
+            
+            self.startAnimating(message: "Processando pagamento...")
+            
+            /// Processando pagamento
+            API.processPayment(pedido: pedido, cvv: Int(cvv)!) { (response: DataResponse<Pagamento>) in
+                
+                self.stopAnimating()
+                
+                guard let pag = response.result.value else {
+                    AlertController.showAlert(message: "Não conseguimos encontrar seu pagamento. Por favor entre em contato com a nossa central de atendimento.")
+                    return
+                }
+                
+                self.pagamento = pag
+                
+                self.performSegue(withIdentifier: self.segueShowFinished, sender: self)
+            }
+        }
     }
     
     /*

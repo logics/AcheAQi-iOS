@@ -2,8 +2,8 @@
 //  Cart+CoreDataProperties.swift
 //  AcheAQi
 //
-//  Created by Romeu Godoi on 11/12/20.
-//  Copyright © 2020 Logics Software. All rights reserved.
+//  Created by Romeu Godoi on 12/01/21.
+//  Copyright © 2021 Logics Software. All rights reserved.
 //
 //
 
@@ -17,12 +17,11 @@ extension Cart {
         return NSFetchRequest<Cart>(entityName: "Cart")
     }
 
+    @NSManaged public var cartao: Data?
     @NSManaged public var createdAt: Date?
     @NSManaged public var endereco: Data?
-    @NSManaged public var formaPagamento: String?
     @NSManaged public var entrega: Bool
-    @NSManaged public var cartao: Data?
-    @NSManaged public var empresa: Data?
+    @NSManaged public var formaPagamento: String?
     @NSManaged public var items: NSSet?
 
 }

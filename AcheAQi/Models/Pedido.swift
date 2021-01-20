@@ -15,20 +15,23 @@ enum FormaPagamento: String {
 
 // MARK: - Pedido
 class Pedido: Codable {
-    let id: Int
-    let empresa: Empresa
+    let id: Int?
     let formaPagamento: String
     let entrega: Bool
-    let itens: PedidoItens
-    let cartao: Cartao?
-    
-    init(id: Int, empresa: Empresa, formaPagamento: String, entrega: Bool, itens: PedidoItens?, cartao: Cartao?) {
+    var endereco: Endereco?
+    var itens: PedidoItens
+    var cartao: Cartao?
+    let createdAt, updatedAt: Date?
+
+    init(id: Int? = nil, formaPagamento: String, entrega: Bool, endereco: Endereco? = nil, itens: PedidoItens = PedidoItens(), cartao: Cartao? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) {
         self.id = id
-        self.empresa = empresa
         self.formaPagamento = formaPagamento
+        self.endereco = endereco
         self.entrega = entrega
-        self.itens = itens ?? PedidoItens()
+        self.itens = itens
         self.cartao = cartao
+        self.createdAt = createdAt
+        self.updatedAt = updatedAt
     }
     
     
@@ -39,7 +42,7 @@ class Pedido: Codable {
 extension Pedido {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Pedido.self, from: data)
-        self.init(id: me.id, empresa: me.empresa, formaPagamento: me.formaPagamento, entrega: me.entrega, itens: me.itens, cartao: me.cartao)
+        self.init(id: me.id, formaPagamento: me.formaPagamento, entrega: me.entrega, endereco: me.endereco, itens: me.itens, cartao: me.cartao, createdAt: me.createdAt, updatedAt: me.updatedAt)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -55,19 +58,23 @@ extension Pedido {
     
     func with(
         id: Int? = nil,
-        empresa: Empresa? = nil,
         formaPagamento: String? = nil,
         entrega: Bool? = nil,
+        endereco: Endereco? = nil,
         itens: PedidoItens? = nil,
-        cartao: Cartao? = nil
+        cartao: Cartao? = nil,
+        createdAt: Date? = nil,
+        updatedAt: Date? = nil
     ) -> Pedido {
         return Pedido(
             id: id ?? self.id,
-            empresa: empresa ?? self.empresa,
             formaPagamento: formaPagamento ?? self.formaPagamento,
             entrega: entrega ?? self.entrega,
+            endereco: endereco ?? self.endereco,
             itens: itens ?? self.itens,
-            cartao: cartao ?? self.cartao
+            cartao: cartao ?? self.cartao,
+            createdAt: createdAt ?? self.createdAt,
+            updatedAt: updatedAt ?? self.updatedAt
         )
     }
     
