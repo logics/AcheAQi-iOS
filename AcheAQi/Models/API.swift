@@ -277,7 +277,7 @@ class API {
     // MARK: - ENDERECOS
     
     static func saveAddress(_ address: Endereco, result: @escaping (DataResponse<Endereco>) -> ()) {
-        let url = urlBy(type: Enderecos.self)!
+        var url = urlBy(type: Enderecos.self)!
         
         let params = [
             "tipo": "entrega",
@@ -290,8 +290,15 @@ class API {
             "cep": address.cep
         ] as [String: Any]
         
+        var method = HTTPMethod.post
+        
+        if let id = address.id {
+            method = .put
+            url = String(format: "%@/%d", url, id)
+        }
+        
         Alamofire
-            .request(url, method: .post, parameters: params, encoding: JSONEncoding.default)
+            .request(url, method: method, parameters: params, encoding: JSONEncoding.default)
             .validate()
             .responseModel { (response: DataResponse<Endereco>) in
                 result(response)

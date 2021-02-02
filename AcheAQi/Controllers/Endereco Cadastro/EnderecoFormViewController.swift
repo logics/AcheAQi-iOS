@@ -92,13 +92,31 @@ class EnderecoFormViewController: UIViewController {
     
     private func updateViews() {
         estadoTextField.inputView = statePicker
+        
+        if let address = endereco {
+            title = "Editando endereço"
+            sendButton.setTitle("Salvar", for: .normal)
+            
+            // Preenchendo o form
+            logradouroTextField.text = address.logradouro
+            numeroTextField.text = address.numero
+            complementoTextField.text = address.complemento
+            cepTextField.text = address.cep
+            bairroTextField.text = address.bairro
+            cidadeTextField.text = address.cidade
+            estadoTextField.text = address.estado
+        } else {
+            title = "Novo Endereço"
+            sendButton.setTitle("Registrar", for: .normal)
+        }
     }
     
     fileprivate func validateAndSendDataToWS() {
         
         guard isValid() else { return }
         
-        let address = Endereco(logradouro: logradouroTextField.text!,
+        let address = Endereco(id: endereco?.id,
+                               logradouro: logradouroTextField.text!,
                                complemento: complementoTextField.text ?? "",
                                numero: numeroTextField.text ?? "SN",
                                estado: estadoTextField.text!,
@@ -118,7 +136,7 @@ class EnderecoFormViewController: UIViewController {
             
             self.endereco = response.result.value
             
-            AlertController.showAlert(title: "Sucesso", message: "Endereço cadastrado com sucesso!", okAction:  {
+            AlertController.showAlert(title: "Sucesso", message: "Endereço salvo com sucesso!", okAction:  {
                 self.navigationController?.popViewController(animated: true)
             })
         }

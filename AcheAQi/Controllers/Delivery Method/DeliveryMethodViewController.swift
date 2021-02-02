@@ -79,21 +79,19 @@ class DeliveryMethodViewController: UIViewController {
     
     // MARK: - IBActions
     
-    @IBAction func didTapAddButton(_ sender: Any) {
-        
-//        navigationController?.view.addSubview(blurredView)
-        
-//        UIView.animate(withDuration: 0.3) {
-//            self.blurredView.blurRadius = 20
-//        } completion: { (finished) in
-//            if finished {
-//                self.performSegue(withIdentifier: self.segueShowFormCard, sender: sender)
-//            }
-//        }
-    }
-    
     @IBAction func unwindToPayMenthodViewController(_ unwindSegue: UIStoryboardSegue) {
         fetchRemoteData()
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueShowFormCard,
+           !chooseToCart,
+           let address = self.selectedItem.endereco,
+           let vc = segue.destination as? EnderecoFormViewController {
+            vc.endereco = address
+        }
     }
 }
 
@@ -178,9 +176,10 @@ struct DeliveryMethod: Equatable {
     
     static func from(endereco: Endereco) -> DeliveryMethod {
         
-        let description = String(format: "%@, %@ %@, %@ - %@",
+        let description = String(format: "%@, %@ %@ %@ %@ - %@",
                                  endereco.logradouro,
-                                 endereco.numero != nil ? endereco.numero! + "," : "",
+                                 endereco.numero != nil ? endereco.numero! : "",
+                                 endereco.complemento != nil ? endereco.complemento! : "",
                                  endereco.bairro,
                                  endereco.cidade,
                                  endereco.estado)
