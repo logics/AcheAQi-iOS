@@ -14,6 +14,7 @@ class DeliveryMethodViewController: UIViewController {
     let sectionCellID = "Section Cell"
     let personalCellID = "Retirar Pessoalmente Cell"
     let addressCellID = "Delivery Method Cell"
+    let detalheCellID = "Detalhe Cell"
     let segueShowFormCard = "Show Form Segue"
     let segueClose = "Close Segue"
 
@@ -25,13 +26,15 @@ class DeliveryMethodViewController: UIViewController {
     var selectedItem: DeliveryMethod!
     
     var delegate: DeliveryMethodDelegate?
+    
+    var chooseToCart = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        items = [pessoalmenteItem]
+        items = chooseToCart ? [pessoalmenteItem] : []
         
-        if selectedItem == nil {
+        if selectedItem == nil, chooseToCart {
             selectedItem = pessoalmenteItem
         }
         
@@ -39,6 +42,8 @@ class DeliveryMethodViewController: UIViewController {
         tableView.dataSource = self
         
         tableView.reloadData()
+        
+        title = chooseToCart ? "Forma de Entrega" : "Endereços de Entrega"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +62,7 @@ class DeliveryMethodViewController: UIViewController {
             
             self.stopAnimating()
             
-            self.items = [self.pessoalmenteItem]
+            self.items = self.chooseToCart ? [self.pessoalmenteItem] : []
             
             if let enderecos = response.result.value {
                 for endereco in enderecos {
@@ -89,14 +94,6 @@ class DeliveryMethodViewController: UIViewController {
     
     @IBAction func unwindToPayMenthodViewController(_ unwindSegue: UIStoryboardSegue) {
         fetchRemoteData()
-        
-//        UIView.animate(withDuration: 0.3) {
-//            self.blurredView.blurRadius = 0
-//        } completion: { (finished) in
-//            if finished {
-//                self.blurredView.removeFromSuperview()
-//            }
-//        }
     }
 }
 
@@ -109,14 +106,19 @@ extension DeliveryMethodViewController: UITableViewDataSource, UITableViewDelega
 
         let item = items[indexPath.row]
 
-        let cellID = item.endereco == nil ? personalCellID : addressCellID
+        let cellID = item.endereco == nil ? personalCellID : (chooseToCart ? addressCellID : detalheCellID)
         
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID) as? DeliveryMethodCell else { return UITableViewCell() }
         
-        cell.titleLabel.text = item.title
-        cell.statusButton.isSelected = item == selectedItem
+        if cellID != detalheCellID {
+            cell.titleLabel.text = item.title
+            cell.statusButton.isSelected = item == selectedItem
+        }
 
-        if cell.reuseIdentifier == addressCellID {
+        // Implementar depois
+        cell.statusButton.isHidden = !chooseToCart
+
+        if cell.reuseIdentifier == addressCellID || cell.reuseIdentifier == detalheCellID {
             cell.descriptionLabel.text = item.description
         }
         
@@ -124,7 +126,11 @@ extension DeliveryMethodViewController: UITableViewDataSource, UITableViewDelega
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableCell(withIdentifier: sectionCellID)
+        return chooseToCart ? tableView.dequeueReusableCell(withIdentifier: sectionCellID) : nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return chooseToCart ? 40.0 : 0
     }
     
     /// Selecting a item
@@ -142,10 +148,13 @@ extension DeliveryMethodViewController: UITableViewDataSource, UITableViewDelega
         self.delegate?.didSetDeliveryMethod(method: selectedItem)
         
         if let cell = tableView.cellForRow(at: indexPath) as? DeliveryMethodCell {
-            cell.animatePop { finished in
-                self.performSegue(withIdentifier: self.segueClose, sender: self)
-            }
+
             cell.statusButton.isSelected = true
+            
+            cell.animatePop { finished in
+                let segue = self.chooseToCart ? self.segueClose : self.segueShowFormCard
+                self.performSegue(withIdentifier: segue, sender: self)
+            }
         }
     }
 }

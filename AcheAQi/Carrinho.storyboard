@@ -1998,6 +1998,98 @@
                                             <outlet property="titleLabel" destination="b3d-Eo-asp" id="8Ie-Lh-ZgQ"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="Detalhe Cell" id="EX1-Lh-eP2" customClass="DeliveryMethodCell" customModule="AcheAQi" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="257" width="414" height="97"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="EX1-Lh-eP2" id="Vju-w4-eAW">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="97"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZKh-gv-sNs" customClass="DesignableView" customModule="Spring">
+                                                    <rect key="frame" x="12" y="6" width="390" height="85"/>
+                                                    <subviews>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jey-sQ-T9w">
+                                                            <rect key="frame" x="0.0" y="0.0" width="390" height="85"/>
+                                                            <subviews>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="asq-vh-Gv1">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="390" height="85"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="f5D-if-hA5">
+                                                                            <rect key="frame" x="12" y="12" width="378" height="61"/>
+                                                                            <subviews>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Av. Central, Qd 10 Lote 2 casa 7, Residencial Jeová Rafá, Aparecida de Goiânia - GO" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmd-fv-dps">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="316" height="61"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                    <nil key="textColor"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                                <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="s6L-6C-fvP">
+                                                                                    <rect key="frame" x="328" y="0.0" width="50" height="61"/>
+                                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                                    <constraints>
+                                                                                        <constraint firstAttribute="width" constant="50" id="U59-YI-MR8"/>
+                                                                                    </constraints>
+                                                                                    <color key="tintColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                                    <state key="normal" image="star" catalog="system">
+                                                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
+                                                                                    </state>
+                                                                                    <state key="selected" image="star.fill" catalog="system">
+                                                                                        <preferredSymbolConfiguration key="preferredSymbolConfiguration" configurationType="pointSize" pointSize="22"/>
+                                                                                    </state>
+                                                                                </button>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                    </subviews>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <constraints>
+                                                                        <constraint firstItem="f5D-if-hA5" firstAttribute="top" secondItem="asq-vh-Gv1" secondAttribute="top" constant="12" id="Hex-et-u0l"/>
+                                                                        <constraint firstItem="f5D-if-hA5" firstAttribute="leading" secondItem="asq-vh-Gv1" secondAttribute="leading" constant="12" id="S0Q-UX-ZOT"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="f5D-if-hA5" secondAttribute="bottom" constant="12" id="tgQ-Ru-xn2"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="f5D-if-hA5" secondAttribute="trailing" id="xCQ-7x-x6H"/>
+                                                                    </constraints>
+                                                                </view>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                    <color key="backgroundColor" name="systemBackground"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="trailing" secondItem="jey-sQ-T9w" secondAttribute="trailing" id="HId-7s-ieV"/>
+                                                        <constraint firstItem="jey-sQ-T9w" firstAttribute="top" secondItem="ZKh-gv-sNs" secondAttribute="top" id="LpO-Z4-JhN"/>
+                                                        <constraint firstAttribute="bottom" secondItem="jey-sQ-T9w" secondAttribute="bottom" id="RTD-2D-7qK"/>
+                                                        <constraint firstItem="jey-sQ-T9w" firstAttribute="leading" secondItem="ZKh-gv-sNs" secondAttribute="leading" id="mOS-QY-MpN"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                                            <real key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                                            <real key="value" value="0.14999999999999999"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetY">
+                                                            <real key="value" value="2"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                                            <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="12"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" secondItem="ZKh-gv-sNs" secondAttribute="trailing" constant="12" id="0hr-0A-URN"/>
+                                                <constraint firstItem="ZKh-gv-sNs" firstAttribute="top" secondItem="Vju-w4-eAW" secondAttribute="top" constant="6" id="FBD-X1-QrW"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZKh-gv-sNs" secondAttribute="bottom" constant="6" id="Qqk-kk-EXj"/>
+                                                <constraint firstItem="ZKh-gv-sNs" firstAttribute="leading" secondItem="Vju-w4-eAW" secondAttribute="leading" constant="12" id="jP4-nh-u7s"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <outlet property="descriptionLabel" destination="wmd-fv-dps" id="pcH-YK-cRf"/>
+                                            <outlet property="statusButton" destination="s6L-6C-fvP" id="qSK-b5-99V"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <sections/>
                             </tableView>
@@ -2526,6 +2618,8 @@
         <image name="mastercard" width="42" height="30"/>
         <image name="mastercard-gray" width="49" height="30"/>
         <image name="money" width="25" height="23"/>
+        <image name="star" catalog="system" width="128" height="116"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="succcess" width="100" height="100"/>
         <image name="visa" width="42" height="30"/>
         <namedColor name="asphalt">

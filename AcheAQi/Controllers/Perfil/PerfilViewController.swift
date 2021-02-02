@@ -183,6 +183,10 @@ class PerfilViewController: UITableViewController {
                 if let vc = segue.destination as? PaymentMethodViewController {
                     vc.chooseToCart = false
                 }
+            case segueShowDelivery:
+                if let vc = segue.destination as? DeliveryMethodViewController {
+                    vc.chooseToCart = false
+                }
             default:
                 break
         }
