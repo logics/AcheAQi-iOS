@@ -15,6 +15,8 @@ import Karte
 import CoreData
 
 class DetalheViewController: UIViewController {
+    
+    let segueBuyNow = "Show Compra Direta"
 
     @IBOutlet weak var headerFotos: DesignableView!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -40,6 +42,8 @@ class DetalheViewController: UIViewController {
     @IBOutlet weak var telBtnContainer: DesignableView!
     @IBOutlet weak var fotosStackView: UIStackView!
     @IBOutlet weak var qtdTextField: UITextField!
+    @IBOutlet weak var buyButton: DesignableButton!
+    @IBOutlet weak var addToCartButton: DesignableButton!
     
     var originalImageHeight: CGFloat!
     var produto: Produto! {
@@ -58,8 +62,13 @@ class DetalheViewController: UIViewController {
     private lazy var moc: NSManagedObjectContext = {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     }()
-
-
+    
+    var cart: Cart {
+        return Cart.findPendingOrCreate(context: self.moc)
+    }
+    
+    var cartDirect: Cart?
+    
     // MARK: - VC Life Cycle
     
     override func viewDidLoad() {
@@ -91,6 +100,15 @@ class DetalheViewController: UIViewController {
         if !produto.emPromocao {
             oldValueLabel.removeFromSuperview()
             percLabel.removeFromSuperview()
+        }
+        
+        /// Verifica se o carrinho esta vazio ou se existe algum produto do mesmo vendedor
+        /// para poder adicionar mais produtosdo mesmo vendedor ao carirnho
+        
+        if let items = cart.items?.allObjects as? [CartItem], items.count > 0 {
+            if Int(cart.empresaId) != produto.empresa.id {
+                addToCartButton.removeFromSuperview()
+            }
         }
     }
     
@@ -189,16 +207,30 @@ class DetalheViewController: UIViewController {
     }
     
     @IBAction func buyNow(_ sender: DesignableButton) {
-        CartViewController.addProdutoToCart(produto: produto, qtd: qtd, context: moc) {
-            sender.animatePop { success in
-                if success {
-                    let cartSb = UIStoryboard(name: "Carrinho", bundle: nil)
-                    
-                    if let vc = cartSb.instantiateInitialViewController() {
-                        self.present(vc, animated: true, completion: nil)
-                    }
+        sender.animatePop { success in
+            if success {
+                
+                if let cartPendente = Cart.findPending(compraDireta: true, context: self.moc) {
+                    self.moc.delete(cartPendente)
+                    self.moc.saveObject()
+                }
+                
+                self.cartDirect = Cart.findPendingOrCreate(compraDireta: true, context: self.moc)
+                
+                CartViewController.addProdutoToCart(produto: self.produto, qtd: self.qtd, compraDireta: true, context: self.moc) {
+                    self.performSegue(withIdentifier: self.segueBuyNow, sender: sender)
                 }
             }
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == segueBuyNow, let nvc = segue.destination as? UINavigationController {
+            guard let vc = nvc.viewControllers.first as? CartViewController else { return }
+            
+            vc.cart = self.cartDirect
         }
     }
 }
@@ -218,7 +250,6 @@ extension DetalheViewController: UIScrollViewDelegate {
             var currentTop = defaultTop
             
             if offset < 0 { // Whenever we go too high run this code block
-                
                 // The new top (y position) of the imageview
                 currentTop = offset
                 

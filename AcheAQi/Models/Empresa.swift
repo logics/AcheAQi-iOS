@@ -31,8 +31,9 @@ class Empresa: Codable {
     let createdAt, updatedAt: String
     let status: Bool
     let logomarca, complemento: String?
+    let taxaEntrega: Float
 
-    init(id: Int, nome: String, telefone: String, whatsapp: String, logomarca: String?, cep: String, logradouro: String, cidade: String, bairro: String, numero: Int?, complemento: String?, estado: String, latitude: Double, longitude: Double, createdAt: String, updatedAt: String, status: Bool) {
+    init(id: Int, nome: String, telefone: String, whatsapp: String, logomarca: String?, cep: String, logradouro: String, cidade: String, bairro: String, numero: Int?, complemento: String?, estado: String, latitude: Double, longitude: Double, createdAt: String, updatedAt: String, status: Bool, taxaEntrega: Float) {
         self.id = id
         self.nome = nome
         self.telefone = telefone
@@ -50,6 +51,7 @@ class Empresa: Codable {
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.status = status
+        self.taxaEntrega = taxaEntrega
     }
     
     func enderecoCompleto() -> String {
@@ -74,7 +76,7 @@ class Empresa: Codable {
 extension Empresa {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Empresa.self, from: data)
-        self.init(id: me.id, nome: me.nome, telefone: me.telefone, whatsapp: me.whatsapp, logomarca: me.logomarca, cep: me.cep, logradouro: me.logradouro, cidade: me.cidade, bairro: me.bairro, numero: me.numero, complemento: me.complemento, estado: me.estado, latitude: me.latitude, longitude: me.longitude, createdAt: me.createdAt, updatedAt: me.updatedAt, status: me.status)
+        self.init(id: me.id, nome: me.nome, telefone: me.telefone, whatsapp: me.whatsapp, logomarca: me.logomarca, cep: me.cep, logradouro: me.logradouro, cidade: me.cidade, bairro: me.bairro, numero: me.numero, complemento: me.complemento, estado: me.estado, latitude: me.latitude, longitude: me.longitude, createdAt: me.createdAt, updatedAt: me.updatedAt, status: me.status, taxaEntrega: me.taxaEntrega)
     }
 
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -105,7 +107,8 @@ extension Empresa {
         longitude: Double? = nil,
         createdAt: String? = nil,
         updatedAt: String? = nil,
-        status: Bool? = nil
+        status: Bool? = nil,
+        taxaEntrega: Float? = nil
     ) -> Empresa {
         return Empresa(
             id: id ?? self.id,
@@ -124,7 +127,8 @@ extension Empresa {
             longitude: longitude ?? self.longitude,
             createdAt: createdAt ?? self.createdAt,
             updatedAt: updatedAt ?? self.updatedAt,
-            status: status ?? self.status
+            status: status ?? self.status,
+            taxaEntrega: taxaEntrega ?? self.taxaEntrega
         )
     }
 

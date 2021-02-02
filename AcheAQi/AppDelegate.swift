@@ -11,6 +11,7 @@ import Alamofire
 import IQKeyboardManagerSwift
 import NVActivityIndicatorView
 import CoreData
+import SwiftRater
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,6 +27,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.keyboardDistanceFromTextField = 20.0
         NVActivityIndicatorView.DEFAULT_TYPE = .circleStrokeSpin
+        
+        setupStoreRating()
 
         return true
     }
@@ -129,6 +132,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UINavigationBar.appearance().barTintColor = UIColor(named: "backgroundNavBar")
             UINavigationBar.appearance().isTranslucent = false
         }
+    }
+    
+    private func setupStoreRating() {
+        SwiftRater.daysUntilPrompt = 7
+        SwiftRater.usesUntilPrompt = 7
+        SwiftRater.daysBeforeReminding = 7
+        SwiftRater.showLaterButton = true
+        
+        SwiftRater.appLaunched()
     }
 }
 

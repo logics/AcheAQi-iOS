@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Alamofire
 
 struct PaymentMethod {
     var cartao: Cartao?
@@ -70,12 +71,14 @@ class PaymentMethodViewController: UIViewController {
     
     var delegate: PaymentMethodDelegate?
     
+    var chooseToCart = true
+    
     // MARK: - Life Cycle Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        items = [dinheiroItem]
+        items = chooseToCart ? [dinheiroItem] : []
         
         if selectedItem == nil {
             selectedItem = dinheiroItem
@@ -83,6 +86,7 @@ class PaymentMethodViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.allowsSelection = chooseToCart
         
         tableView.reloadData()
     }
@@ -103,7 +107,7 @@ class PaymentMethodViewController: UIViewController {
             
             self.stopAnimating()
             
-            self.items = [self.dinheiroItem]
+            self.items = self.chooseToCart ? [self.dinheiroItem] : []
             
             if let myCards = response.result.value {
                 for card in myCards {
@@ -115,6 +119,16 @@ class PaymentMethodViewController: UIViewController {
             }
             
             self.tableView.reloadData()
+        }
+    }
+    
+    private func deleteCard(cartao: Cartao) {
+        
+        startAnimating()
+        
+        API.removeCard(cartao: cartao) { response in
+            self.stopAnimating()
+            self.fetchRemoteData()
         }
     }
     
@@ -160,12 +174,17 @@ extension PaymentMethodViewController: UITableViewDataSource, UITableViewDelegat
         cell.iconImageView.image = item.image
         cell.titleLabel.text = item.title
         cell.statusButton.isSelected = item == selectedItem
+        cell.statusButton.isHidden = !chooseToCart
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return tableView.dequeueReusableCell(withIdentifier: sectionCellID)
+        return chooseToCart ? tableView.dequeueReusableCell(withIdentifier: sectionCellID) : nil
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return chooseToCart ? 40.0 : 0
     }
     
     /// Selecting a item
@@ -181,12 +200,38 @@ extension PaymentMethodViewController: UITableViewDataSource, UITableViewDelegat
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedItem = items[indexPath.row]
         
-        if let cell = tableView.cellForRow(at: indexPath) as? PaymentMethodCell {
-            cell.animatePop(completionHandler: nil)
+        if let cell = tableView.cellForRow(at: indexPath) as? PaymentMethodCell, chooseToCart {
+            
             cell.statusButton.isSelected = true
+            
+            cell.animatePop(completionHandler: { finished in
+                self.performSegue(withIdentifier: self.segueClose, sender: self)
+            })
         }
+    }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let item = items[indexPath.row]
         
-        performSegue(withIdentifier: segueClose, sender: self)
+        return item.cartao != nil
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            let item = items[indexPath.row]
+            
+            guard let cartao = item.cartao else { return }
+            
+            AlertController.showAlert(title: "Atenção!",
+                                      message: "Você tem certeza que deseja deletar este cartão?",
+                                      isConfirmStyled: true,
+                                      confirmTitle: "Sim",
+                                      okTitle: "Cancelar",
+                                      confirmAction: {
+                self.deleteCard(cartao: cartao)
+                                      }, okAction: {})
+        }
     }
 }
 

@@ -92,7 +92,7 @@ class CVVViewController: UIViewController {
         startAnimating(message: "Criando pedido...")
         
         /// Criando Pedido
-        API.savePedido(cart.asPedido()) { (response: DataResponse<Pedido>) in
+        API.savePedido(cart.asPedido(), empresaId: cart.empresaId) { (response: DataResponse<Pedido>) in
             
             self.stopAnimating()
             

@@ -13,11 +13,15 @@ import MessageUI
 
 fileprivate let editCell = "Edit Profile Cell"
 fileprivate let contactCell = "Contact Cell"
-fileprivate let evaluateCell = "Evaluate Cell"
+fileprivate let deliveryCell = "Delivery Cell"
+fileprivate let cardCell = "Card Cell"
 fileprivate let logoffCell = "Logoff Cell"
 
 class PerfilViewController: UITableViewController {
 
+    let segueShowDelivery = "Show Delivery Segue"
+    let segueShowPaymentMethod = "Show PaymentMethod Segue"
+    
     @IBOutlet var unloggedBgView: UIView!
     @IBOutlet var bgView: CustomView!
     @IBOutlet weak var bgImageView: UIImageView!
@@ -142,8 +146,10 @@ class PerfilViewController: UITableViewController {
                     self.openRegister()
                 case contactCell:
                     self.showFeedbackIfCan()
-                case evaluateCell:
-                    SKStoreReviewController.requestReview()
+                case deliveryCell:
+                    self.performSegue(withIdentifier: self.segueShowDelivery, sender: cell)
+                case cardCell:
+                    self.performSegue(withIdentifier: self.segueShowPaymentMethod, sender: cell)
                 case logoffCell:
                     AlertController.showAlert(title: "Sair?",
                                               message: "Você tem certeza que deseja sair do AcheAQi?",
@@ -166,6 +172,19 @@ class PerfilViewController: UITableViewController {
             if completed {
                 self.showLogin()
             }
+        }
+    }
+    
+    // MARK: - Navigation
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segue.identifier {
+            case segueShowPaymentMethod:
+                if let vc = segue.destination as? PaymentMethodViewController {
+                    vc.chooseToCart = false
+                }
+            default:
+                break
         }
     }
 }

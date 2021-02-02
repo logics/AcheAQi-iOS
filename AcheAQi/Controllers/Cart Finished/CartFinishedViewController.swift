@@ -14,6 +14,7 @@ class CartFinishedViewController: UIViewController {
     @IBOutlet weak var dataLabel: UILabel!
     @IBOutlet weak var paymentMethodLabel: UILabel!
     @IBOutlet weak var deliveryMethodLabel: UILabel!
+    @IBOutlet weak var valorTotalLabel: UILabel!
     
     var pedido: Pedido!
     var pagamento: Pagamento!
@@ -25,7 +26,7 @@ class CartFinishedViewController: UIViewController {
     }
     
     private func setupViews() {
-        nrPedidoLabel.text = String(pedido.id!)
+        nrPedidoLabel.text = "#" + String(pedido.id!)
         dataLabel.text = pedido.createdAt?.formattedDate(dateFormat: "dd/MM/yyyy HH:mm:ss")
         paymentMethodLabel.text = pedido.formaPagamento.capitalizingFirstLetter()
         
@@ -36,6 +37,7 @@ class CartFinishedViewController: UIViewController {
         }
         
         deliveryMethodLabel.text = enderecoDescription
+        valorTotalLabel.text = pedido.valorTotal?.toCurrency()
     }
 
     @IBAction func close(_ sender: Any) {

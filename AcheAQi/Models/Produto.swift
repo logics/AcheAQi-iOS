@@ -21,21 +21,18 @@ class Produto: Codable {
     let valor: Float
     let emPromocao: Bool
     let percDesconto, valorPromocional: Float?
+    var valorAtual: Float
     var fotos: Fotos
     
     var percClean: String {
         return ((percDesconto ?? 0.0) * 100.0).rounded().clean
     }
     
-    var valorAtual: Float {
-        return emPromocao ? (valorPromocional ?? valor) : valor
-    }
-    
     var fotoPrincipal: Foto? {
         return fotos.first
     }
 
-    init(id: Int, empresa: Empresa, categoria: Categoria, marca: Marca?, nome: String, banner: String?, createdAt: String, updatedAt: String, descricao: String?, emEstoque: Bool, mostraValor: Bool, valor: Float, emPromocao: Bool, percDesconto: Float?, valorPromocional: Float?, fotos: Fotos?) {
+    init(id: Int, empresa: Empresa, categoria: Categoria, marca: Marca?, nome: String, banner: String?, createdAt: String, updatedAt: String, descricao: String?, emEstoque: Bool, mostraValor: Bool, valor: Float, emPromocao: Bool, percDesconto: Float?, valorPromocional: Float?, valorAtual: Float, fotos: Fotos? = nil) {
         self.id = id
         self.empresa = empresa
         self.categoria = categoria
@@ -51,6 +48,7 @@ class Produto: Codable {
         self.emPromocao = emPromocao
         self.percDesconto = percDesconto
         self.valorPromocional = valorPromocional
+        self.valorAtual = valorAtual
         self.fotos = fotos ?? Fotos()
     }
     
@@ -70,6 +68,7 @@ class Produto: Codable {
         case emPromocao
         case percDesconto
         case valorPromocional
+        case valorAtual
         case fotos
     }
 
@@ -84,7 +83,7 @@ class Produto: Codable {
 extension Produto {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Produto.self, from: data)
-        self.init(id: me.id, empresa: me.empresa, categoria: me.categoria, marca: me.marca, nome: me.nome, banner: me.banner, createdAt: me.createdAt, updatedAt: me.updatedAt, descricao: me.descricao, emEstoque: me.emEstoque, mostraValor: me.mostraValor, valor: me.valor, emPromocao: me.emPromocao, percDesconto: me.percDesconto, valorPromocional: me.valorPromocional, fotos: me.fotos)
+        self.init(id: me.id, empresa: me.empresa, categoria: me.categoria, marca: me.marca, nome: me.nome, banner: me.banner, createdAt: me.createdAt, updatedAt: me.updatedAt, descricao: me.descricao, emEstoque: me.emEstoque, mostraValor: me.mostraValor, valor: me.valor, emPromocao: me.emPromocao, percDesconto: me.percDesconto, valorPromocional: me.valorPromocional, valorAtual: me.valorAtual, fotos: me.fotos)
     }
 
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -114,6 +113,7 @@ extension Produto {
         emPromocao: Bool = false,
         percDesconto: Float? = nil,
         valorPromocional: Float? = nil,
+        valorAtual: Float? = nil,
         fotos: Fotos? = nil
     ) -> Produto {
         return Produto(
@@ -132,6 +132,7 @@ extension Produto {
             emPromocao: emPromocao,
             percDesconto: percDesconto ?? self.percDesconto,
             valorPromocional: valorPromocional ?? self.valorPromocional,
+            valorAtual: valorAtual ?? self.valorAtual,
             fotos: fotos ?? self.fotos
         )
     }

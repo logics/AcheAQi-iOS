@@ -9,6 +9,12 @@
 import UIKit
 import Spring
 import CoreData
+import Alamofire
+
+enum TipoCompra {
+    case carrinho
+    case compraDireta
+}
 
 class CartViewController: UIViewController {
 
@@ -25,13 +31,14 @@ class CartViewController: UIViewController {
     // Views
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalLabel: UILabel!
+    @IBOutlet weak var taxaEntregaLabel: UILabel!
     @IBOutlet weak var btnAvancar: DesignableButton!
     @IBOutlet weak var footerView: UIView!
     @IBOutlet var emptyView: UIView!
     
     // Models
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
-    let defaultTableViewBottomSpace: CGFloat = 151.5
+    let defaultTableViewBottomSpace: CGFloat = 150
     
     var paymentMethodSelected = PaymentMethod.money()
     var deliveryMethodSelected = DeliveryMethod.retirarPessoalmente()
@@ -43,9 +50,9 @@ class CartViewController: UIViewController {
             totalLabel.text = self.vlrTotal.toCurrency()
         }
     }
-    var cart: Cart? {
-        return Cart.findPendingOrCreate(context: self.moc)
-    }
+    
+    var cart: Cart?
+    var pedido: Pedido?
     
     private lazy var moc: NSManagedObjectContext = {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -73,6 +80,10 @@ class CartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        if cart == nil {
+            cart = Cart.findPendingOrCreate(context: self.moc)
+        }
+        
         do {
             try itemsFetchedResultsController.performFetch()
         } catch {
@@ -93,21 +104,42 @@ class CartViewController: UIViewController {
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        updateViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+    }
+    
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
         
-        updateViews()
+        // Capturing Back button action
+        if parent == nil {
+            self.deleteTmpCart()
+        }
     }
 
     // MARK: - Private Methods
+    
+    func deleteTmpCart() {
+        if let carrinho = cart, carrinho.compraDireta {
+            moc.delete(carrinho)
+            moc.saveObject()
+        }
+    }
     
     private func configure(cell: UITableViewCell, at indexPath: IndexPath) {
         switch indexPath.section {
             case 0:
                 let item = itemsFetchedResultsController.object(at: indexPath)
-                (cell as! CartProdutoCell).item = item
+                
+                if let cell = cell as? CartProdutoCell {
+                    cell.delegate = self
+                    cell.item = item
+                    cell.tipoCompra = cart!.compraDireta ? .compraDireta : .carrinho
+                }
             case 1:
                 (cell as! CartPaymentMethodCell).payMethod = paymentMethodSelected
             case 2:
@@ -120,7 +152,7 @@ class CartViewController: UIViewController {
     private func updateViews() {
         if countItems() <= 0 {
             tableView.backgroundView = emptyView
-            tableViewBottomConstraint.constant = 0
+            tableViewBottomConstraint.constant = -34.5  // Height of the bottom Safe Area, to hide footer too
         } else {
             tableView.backgroundView = nil
             tableViewBottomConstraint.constant = defaultTableViewBottomSpace
@@ -131,6 +163,19 @@ class CartViewController: UIViewController {
         itemsFetchedResultsController.fetchedObjects?.forEach({ item in
             self.vlrTotal += item.valorUnitario * Float(item.qtd)
         })
+        
+        if cart?.endereco != nil {
+            taxaEntregaLabel.text = cart!.taxaEntrega.toCurrency()
+            self.vlrTotal += cart!.taxaEntrega
+        } else {
+            taxaEntregaLabel.text = Float(0).toCurrency()
+        }
+        
+        
+        title = cart!.compraDireta ? "Resumo do Pedido" : "Carrinho de Compra"
+        
+        let titleAvancar = cart!.compraDireta ? "Finalizar Pedido" : "Continuar a compra"
+        btnAvancar.setTitle(titleAvancar, for: .normal)
     }
     
     private func countItems() -> Int {
@@ -139,17 +184,46 @@ class CartViewController: UIViewController {
     }
     
     fileprivate func goToNext() {
-        let segueID = paymentMethodSelected.cartao != nil ? segueShowCVV : segueShowFinished
-
-        performSegue(withIdentifier: segueID, sender: self)
+        
+        if paymentMethodSelected.cartao != nil {
+            // Pagamento por cartão
+            performSegue(withIdentifier: segueShowCVV, sender: self)
+        } else {
+            // Pagamento pessoalmente
+            registraPedidoWS()
+        }
+    }
+    
+    private func registraPedidoWS() {
+        
+        guard let cart = self.cart else { return }
+        
+        startAnimating(message: "Criando pedido...")
+        
+        /// Criando Pedido
+        API.savePedido(cart.asPedido(), empresaId: cart.empresaId) { (response: DataResponse<Pedido>) in
+            
+            self.stopAnimating()
+            
+            guard response.result.isSuccess, let pedido = response.result.value else {
+                let msg = response.errorMessage ?? "Não conseguimos concluir o seu pedido. Por favor tente novamente mais tarde, ou entre em contado com nossa central de atendimento."
+                AlertController.showAlert(message: msg)
+                return
+            }
+            
+            self.pedido = pedido
+                
+            self.performSegue(withIdentifier: self.segueShowFinished, sender: self)
+        }
     }
     
     // MARK: - Static methods
-    static func addProdutoToCart(produto: Produto, qtd: Int, context: NSManagedObjectContext, completionHandler: (() -> Void)? = nil) {
+    static func addProdutoToCart(produto: Produto, qtd: Int, compraDireta: Bool = false, context: NSManagedObjectContext, completionHandler: (() -> Void)? = nil) {
         
-        let cart = Cart.findPendingOrCreate(context: context)
+        let cart = Cart.findPendingOrCreate(compraDireta: compraDireta, context: context)
             
-        if !cart.contains(produtoId: produto.id, context: context) {
+        if !cart.contains(produtoId: produto.id, context: context),
+           (cart.empresaId == 0 || Int(cart.empresaId) == produto.empresa.id) {
             
             var produtoData: Data?
             
@@ -165,9 +239,18 @@ class CartViewController: UIViewController {
             item.addedAt = Date()
             item.qtd = Int16(qtd)
             
+            let empresa = produto.empresa
+            
+            cart.empresaId = Int16(empresa.id)
+            cart.taxaEntrega = empresa.taxaEntrega
+            
             cart.addToItems(item)
             
             context.saveObject()
+        }
+        
+        if let handler = completionHandler {
+            handler()
         }
     }
     
@@ -223,6 +306,8 @@ class CartViewController: UIViewController {
             
             moc.saveObject()
             
+            updateViews()
+            
             tableView.reloadSections(IndexSet(integer: 2), with: .fade)
         }
     }
@@ -247,6 +332,16 @@ class CartViewController: UIViewController {
             case segueShowCVV:
                 if let vc = segue.destination as? CVVViewController {
                     vc.cartao = self.paymentMethodSelected.cartao!
+                }
+                
+            case segueShowFinished:
+                if let vc = segue.destination as? CartFinishedViewController {
+                    vc.pedido = pedido!
+                    
+                    if let cartTmp = self.cart {
+                        self.moc.delete(cartTmp)
+                        self.moc.saveObject()
+                    }
                 }
 
             default:
@@ -278,10 +373,8 @@ extension CartViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.section {
             case 0:
                 let cell = tableView.dequeueReusableCell(withIdentifier: productCellID, for: indexPath) as! CartProdutoCell
-                let item = itemsFetchedResultsController.object(at: indexPath)
                 
-                cell.item = item
-                cell.delegate = self
+                configure(cell: cell, at: indexPath)
                 
                 return cell
             case 1:
@@ -378,6 +471,8 @@ extension CartViewController: NSFetchedResultsControllerDelegate {
         
         /// To fix error when delete a product item, and hide another model's cells
         itemsConfPerSection = countItems() > 0 ? 1 : 0
+        
+        updateViews()
     }
 }
 
@@ -398,5 +493,9 @@ extension CartViewController: CartItemDeletable {
         if itemsFetchedResultsController.fetchedObjects?.count == 0 {
             updateViews()
         }
+    }
+    
+    func itemUpdated(_ item: CartItem) {
+        
     }
 }

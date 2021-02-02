@@ -83,6 +83,7 @@
 		A37EAC2B23FDB14A00FF0F7C /* Categoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EAC2A23FDB14A00FF0F7C /* Categoria.swift */; };
 		A37EAC2D23FDB6C000FF0F7C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EAC2C23FDB6C000FF0F7C /* API.swift */; };
 		A38226952423A4470051D2D8 /* Foto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38226942423A4470051D2D8 /* Foto.swift */; };
+		A38BD69825C9DFF80098D800 /* SwiftRater in Frameworks */ = {isa = PBXBuildFile; productRef = A38BD69725C9DFF80098D800 /* SwiftRater */; };
 		A38C5A9C247344010018EB7B /* AppleSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38C5A9B247344010018EB7B /* AppleSignInController.swift */; };
 		A39098A923FDA8010068E997 /* Spring in Frameworks */ = {isa = PBXBuildFile; productRef = A39098A823FDA8010068E997 /* Spring */; };
 		A3942C50241A478600AACEC7 /* Karte in Frameworks */ = {isa = PBXBuildFile; productRef = A3942C4F241A478600AACEC7 /* Karte */; };
@@ -268,6 +269,7 @@
 				A3942C50241A478600AACEC7 /* Karte in Frameworks */,
 				A3F185D325609FB200627F2B /* AlamofireImage in Frameworks */,
 				A3F185BD256078FD00627F2B /* Alamofire in Frameworks */,
+				A38BD69825C9DFF80098D800 /* SwiftRater in Frameworks */,
 				A345CC9F2470C8BF005C9843 /* NVActivityIndicatorView in Frameworks */,
 				A3F50F902416E49200FD387B /* MaterialDesignWidgets in Frameworks */,
 				A39098A923FDA8010068E997 /* Spring in Frameworks */,
@@ -641,6 +643,7 @@
 				A3F185BC256078FD00627F2B /* Alamofire */,
 				A3F185D225609FB200627F2B /* AlamofireImage */,
 				A3C6724025AC8AD20099097E /* Veil */,
+				A38BD69725C9DFF80098D800 /* SwiftRater */,
 			);
 			productName = AcheAQi;
 			productReference = A3D07C6D23F33E27000EFED7 /* AcheAQi.app */;
@@ -680,6 +683,7 @@
 				A3F185BB256078FD00627F2B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A3F185D125609FB200627F2B /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				A3C6723F25AC8AD20099097E /* XCRemoteSwiftPackageReference "Veil" */,
+				A38BD69625C9DFF80098D800 /* XCRemoteSwiftPackageReference "SwiftRater" */,
 			);
 			productRefGroup = A3D07C6E23F33E27000EFED7 /* Products */;
 			projectDirPath = "";
@@ -1077,6 +1081,14 @@
 				minimumVersion = 4.8.0;
 			};
 		};
+		A38BD69625C9DFF80098D800 /* XCRemoteSwiftPackageReference "SwiftRater" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/takecian/SwiftRater";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.0;
+			};
+		};
 		A39098A723FDA8010068E997 /* XCRemoteSwiftPackageReference "Spring" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/romeugodoi/Spring";
@@ -1147,6 +1159,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A345CC9D2470C8BF005C9843 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
 			productName = NVActivityIndicatorView;
+		};
+		A38BD69725C9DFF80098D800 /* SwiftRater */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A38BD69625C9DFF80098D800 /* XCRemoteSwiftPackageReference "SwiftRater" */;
+			productName = SwiftRater;
 		};
 		A39098A823FDA8010068E997 /* Spring */ = {
 			isa = XCSwiftPackageProductDependency;

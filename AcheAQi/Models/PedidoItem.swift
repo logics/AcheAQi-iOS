@@ -14,10 +14,10 @@ class PedidoItem: Codable {
     let produto: Produto
     let valorUnitario: Float
     var qtd: Int
-    let pedido: Pedido
+    let pedido: Pedido?
     let createdAt, updatedAt: Date?
     
-    init(id: Int? = nil, produto: Produto, qtd: Int, valorUnitario: Float, pedido: Pedido, createdAt: Date? = nil, updatedAt: Date? = nil) {
+    init(id: Int? = nil, produto: Produto, qtd: Int, valorUnitario: Float, pedido: Pedido? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) {
         self.id = id
         self.produto = produto
         self.qtd = qtd

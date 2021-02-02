@@ -13,16 +13,18 @@ import CoreData
 @objc(Cart)
 public class Cart: NSManagedObject {
     
-    static func findPendingOrCreate(context: NSManagedObjectContext) -> Cart {
+    static func findPendingOrCreate(compraDireta: Bool = false, context: NSManagedObjectContext) -> Cart {
         
-        if let cart = Cart.findPending(context: context) {
+        if let cart = Cart.findPending(compraDireta: compraDireta, context: context) {
             return cart
         } else {
             
             let cart = NSEntityDescription.insertNewObject(forEntityName: "Cart", into: context) as! Cart
             
             cart.createdAt = Date()
+            cart.formaPagamento = FormaPagamento.dinheiro.rawValue
             cart.entrega = false
+            cart.compraDireta = compraDireta
             
             context.saveObject()
             
@@ -30,9 +32,10 @@ public class Cart: NSManagedObject {
         }
     }
     
-    static func findPending(context: NSManagedObjectContext) -> Cart? {
+    static func findPending(compraDireta: Bool = false, context: NSManagedObjectContext) -> Cart? {
         
         let request: NSFetchRequest<Cart> = Cart.fetchRequest()
+        request.predicate = NSPredicate(format: "compraDireta = %@", NSNumber(value: compraDireta))
         request.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: false)]
         
         do {

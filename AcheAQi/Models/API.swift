@@ -263,6 +263,16 @@ class API {
         }
     }
     
+    static func removeCard(cartao: Cartao, completionHandler: @escaping APIResult) {
+        guard let url = urlBy(type: Cartoes.self) else { return }
+        
+        let path = String(format: "%@/%d", url, cartao.id)
+        
+        Alamofire.request(path, method: .delete).validate().responseJSON { response in
+            completionHandler(response)
+        }
+    }
+    
     
     // MARK: - ENDERECOS
     
@@ -290,7 +300,7 @@ class API {
     
     // MARK: - Pedidos
     
-    static func savePedido(_ pedido: Pedido, result: @escaping (DataResponse<Pedido>) -> ()) {
+    static func savePedido(_ pedido: Pedido, empresaId: Int16, result: @escaping (DataResponse<Pedido>) -> ()) {
         let url = urlBy(type: Pedidos.self)!
 
         var items = [[String: Any]]()
@@ -304,14 +314,18 @@ class API {
         }
 
         var params = [
-            "formaPagamento": "cartao",
-            "cartao": 1,
-            "entrega": false,
-            "items": items,
+            "formaPagamento": pedido.formaPagamento,
+            "empresa": empresaId,
+            "entrega": pedido.entrega,
+            "itens": items,
         ] as [String : Any]
         
         if let endereco = pedido.endereco {
             params["endereco"] = endereco.id!
+        }
+        
+        if let cartao = pedido.cartao {
+            params["cartao"] = cartao.id
         }
         
         Alamofire
@@ -328,9 +342,11 @@ class API {
         let url = urlBy(type: Pagamentos.self)!
         
         let params = [
+            "empresa": pedido.empresa!,
             "nomeCliente": Login.shared.nome!,
             "cartao": pedido.cartao!.id,
             "pedido": pedido.id!,
+            "cvv": cvv,
         ] as [String: Any]
         
         Alamofire

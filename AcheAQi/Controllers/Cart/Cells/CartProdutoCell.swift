@@ -16,9 +16,20 @@ class CartProdutoCell: UITableViewCell {
     @IBOutlet weak var nomeLabel: UILabel!
     @IBOutlet weak var qtdTextField: UITextField!
     @IBOutlet weak var valorLabel: UILabel!
+    @IBOutlet weak var lineView: UIView!
+    @IBOutlet weak var deleteButton: UIButton!
     
     var delegate: CartItemDeletable!
     var produto: Produto!
+    
+    var tipoCompra: TipoCompra! {
+        didSet {
+            if tipoCompra == .compraDireta, let lineView = lineView, let deleteBtn = deleteButton {
+                lineView.removeFromSuperview()
+                deleteBtn.removeFromSuperview()
+            }
+        }
+    }
     
     var item: CartItem! {
         didSet {
@@ -54,13 +65,16 @@ class CartProdutoCell: UITableViewCell {
     
     @IBAction func increase(_ sender: Any) {
         item.increase()
+        delegate.itemUpdated(item)
     }
     
     @IBAction func decrease(_ sender: Any) {
         item.decrease()
+        delegate.itemUpdated(item)
     }
 }
 
 protocol CartItemDeletable {
     func deleteCartItem(_ item: CartItem) -> Void
+    func itemUpdated(_ item: CartItem) -> Void
 }

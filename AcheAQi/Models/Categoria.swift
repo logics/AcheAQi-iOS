@@ -28,7 +28,7 @@ class Categoria: Codable {
     let nome, createdAt, updatedAt: String
     let foto: String?
 
-    init(id: Int, foto: String?, nome: String, createdAt: String, updatedAt: String) {
+    init(id: Int, foto: String? = nil, nome: String, createdAt: String, updatedAt: String) {
         self.id = id
         self.foto = foto
         self.nome = nome
