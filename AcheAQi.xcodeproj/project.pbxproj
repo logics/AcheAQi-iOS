@@ -198,7 +198,6 @@
 		A3A4543E244E53B300C9CA13 /* DesignableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableImageView.swift; sourceTree = "<group>"; };
 		A3A45442244F570200C9CA13 /* UIView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		A3A45444244F852600C9CA13 /* Marca.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marca.swift; sourceTree = "<group>"; };
-		A3A8DFDD24781BB8007CDB5F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Main.strings"; sourceTree = "<group>"; };
 		A3A8DFDE24781BB8007CDB5F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		A3ADABB525AA373400F518F5 /* MIBlurPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MIBlurPopup.swift; sourceTree = "<group>"; };
 		A3B35CE6246DF96F00261F47 /* UIButton+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIButton+Extension.swift"; sourceTree = "<group>"; };
@@ -856,7 +855,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				A3D07C7723F33E27000EFED7 /* Base */,
-				A3A8DFDD24781BB8007CDB5F /* pt-BR */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";

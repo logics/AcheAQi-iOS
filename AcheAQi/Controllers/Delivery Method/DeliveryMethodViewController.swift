@@ -76,6 +76,16 @@ class DeliveryMethodViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+        
+    private func deleteAddress(id: Int) {
+        
+        startAnimating()
+        
+        API.deleteAddress(id: id) { response in
+            self.stopAnimating()
+            self.fetchRemoteData()
+        }
+    }
     
     // MARK: - IBActions
     
@@ -153,6 +163,33 @@ extension DeliveryMethodViewController: UITableViewDataSource, UITableViewDelega
                 let segue = self.chooseToCart ? self.segueClose : self.segueShowFormCard
                 self.performSegue(withIdentifier: segue, sender: self)
             }
+        }
+    }
+    
+    /// Editando / Deletando item
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        let item = items[indexPath.row]
+        
+        return item.endereco != nil
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            
+            let item = items[indexPath.row]
+            
+            guard let endereco = item.endereco, let id = endereco.id else { return }
+            
+            AlertController.showAlert(title: "Atenção!",
+                                      message: "Você tem certeza que deseja deletar este endereço?",
+                                      isConfirmStyled: true,
+                                      confirmTitle: "Sim",
+                                      okTitle: "Cancelar",
+                                      confirmAction: {
+                                        self.deleteAddress(id: id)
+                                      }, okAction: {})
+
         }
     }
 }

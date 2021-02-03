@@ -14,9 +14,10 @@ class Pagamento: Codable {
     let empresa: Empresa
     let gateway, nomeCliente: String
     let cartao: Cartao
-    let pedidoID, valor: Int
-    let proofOfSale, tid, paymentID, authorizationCode: String
-    let returnCode, status, returnMessage: String
+    let pedidoID: Int
+    let valor: Float
+    let proofOfSale, paymentID, authorizationCode, returnMessage: String?
+    let tid, returnCode, status: String
     let pedido: Pedido
     let usuario: String
     let cvv: Int
@@ -31,7 +32,7 @@ class Pagamento: Codable {
         case authorizationCode, returnCode, status, returnMessage, createdAt, updatedAt, pedido, usuario, cvv
     }
     
-    init(id: Int, empresa: Empresa, gateway: String, nomeCliente: String, cartao: Cartao, pedidoID: Int, valor: Int, proofOfSale: String, tid: String, paymentID: String, authorizationCode: String, returnCode: String, status: String, returnMessage: String, createdAt: Date, updatedAt: Date, pedido: Pedido, usuario: String, cvv: Int) {
+    init(id: Int, empresa: Empresa, gateway: String, nomeCliente: String, cartao: Cartao, pedidoID: Int, valor: Float, proofOfSale: String?, tid: String, paymentID: String?, authorizationCode: String?, returnCode: String, status: String, returnMessage: String?, createdAt: Date, updatedAt: Date, pedido: Pedido, usuario: String, cvv: Int) {
         self.id = id
         self.empresa = empresa
         self.gateway = gateway
@@ -80,7 +81,7 @@ extension Pagamento {
         nomeCliente: String? = nil,
         cartao: Cartao? = nil,
         pedidoID: Int? = nil,
-        valor: Int? = nil,
+        valor: Float? = nil,
         proofOfSale: String? = nil,
         tid: String? = nil,
         paymentID: String? = nil,

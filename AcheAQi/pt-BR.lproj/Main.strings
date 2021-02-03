@@ -14,8 +14,8 @@
 /* Class = "UIButton"; normalTitle = "Entrar"; ObjectID = "6Pq-Xs-jFE"; */
 "6Pq-Xs-jFE.normalTitle" = "Entrar";
 
-/* Class = "UILabel"; text = "Avaliar na loja"; ObjectID = "8xP-wN-FSa"; */
-"8xP-wN-FSa.text" = "Avaliar na loja";
+/* Class = "UILabel"; text = "Endereços de entrega"; ObjectID = "8xP-wN-FSa"; */
+"8xP-wN-FSa.text" = "Endereços de entrega";
 
 /* Class = "UIButton"; normalTitle = "Redefinir Filtro"; ObjectID = "8zW-hW-szd"; */
 "8zW-hW-szd.normalTitle" = "Redefinir Filtro";

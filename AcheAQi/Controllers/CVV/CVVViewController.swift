@@ -109,7 +109,7 @@ class CVVViewController: UIViewController {
                 self.stopAnimating()
                 
                 guard let pag = response.result.value else {
-                    AlertController.showAlert(message: "Não conseguimos encontrar seu pagamento. Por favor entre em contato com a nossa central de atendimento.")
+                    AlertController.showAlert(message: "Não conseguimos processar o seu pagamento. Por favor entre em contato com a nossa central de atendimento.")
                     return
                 }
                 
@@ -120,16 +120,17 @@ class CVVViewController: UIViewController {
         }
     }
     
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+        if let vc = segue.destination as? CartFinishedViewController {
 
+            vc.pedido = pagamento!.pedido
+            
+            self.moc.delete(cart)
+            self.moc.saveObject()
+        }
+    }
 }
 
 extension CVVViewController: UITextFieldDelegate {

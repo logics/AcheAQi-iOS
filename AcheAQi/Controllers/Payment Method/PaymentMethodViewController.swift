@@ -126,7 +126,7 @@ class PaymentMethodViewController: UIViewController {
         
         startAnimating()
         
-        API.removeCard(cartao: cartao) { response in
+        API.deleteCard(cartao: cartao) { response in
             self.stopAnimating()
             self.fetchRemoteData()
         }

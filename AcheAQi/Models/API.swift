@@ -263,7 +263,7 @@ class API {
         }
     }
     
-    static func removeCard(cartao: Cartao, completionHandler: @escaping APIResult) {
+    static func deleteCard(cartao: Cartao, completionHandler: @escaping APIResult) {
         guard let url = urlBy(type: Cartoes.self) else { return }
         
         let path = String(format: "%@/%d", url, cartao.id)
@@ -303,6 +303,14 @@ class API {
             .responseModel { (response: DataResponse<Endereco>) in
                 result(response)
             }
+    }
+    
+    static func deleteAddress(id: Int, completionHandler: @escaping APIResult) {
+        let url = String(format: "%@/%d", urlBy(type: Enderecos.self)!, id)
+        
+        Alamofire.request(url, method: .delete, encoding: JSONEncoding.default).validate().responseJSON { response in
+            completionHandler(response)
+        }
     }
     
     // MARK: - Pedidos
@@ -349,7 +357,7 @@ class API {
         let url = urlBy(type: Pagamentos.self)!
         
         let params = [
-            "empresa": pedido.empresa!,
+            "empresa": pedido.empresa!.id,
             "nomeCliente": Login.shared.nome!,
             "cartao": pedido.cartao!.id,
             "pedido": pedido.id!,
