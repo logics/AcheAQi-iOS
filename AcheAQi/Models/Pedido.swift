@@ -13,6 +13,16 @@ enum FormaPagamento: String {
     case cartao = "cartao"
 }
 
+enum StatusInfoPag: String {
+    case Processando = "Processando"
+    case Autorizado = "Autorizado"
+    case Pago = "Pago"
+    case Reembolsado = "Reembolsado"
+    case Aguardando = "Aguardando pagamento"
+    case ReembolsoPendente = "Reembolso pendente"
+    case Recusado = "Recusado"
+}
+
 // MARK: - Pedido
 class Pedido: Codable {
     let id: Int?
@@ -24,8 +34,29 @@ class Pedido: Codable {
     var cartao: Cartao?
     let valorTotal: Float?
     let createdAt, updatedAt: Date?
+    let pagamentos: Pagamentos?
+    
+    var statusInfo: StatusInfoPag {
+        let status = StatusInfoPag.Aguardando
+        
+        if let pagamento = self.pagamentos?.first {
+            
+            switch pagamento.status {
+                case "processing":      return StatusInfoPag.Processando
+                case "authorized":      return StatusInfoPag.Autorizado
+                case "paid":            return StatusInfoPag.Pago
+                case "refunded":        return StatusInfoPag.Reembolsado
+                case "waiting_payment": return StatusInfoPag.Aguardando
+                case "pending_refund":  return StatusInfoPag.ReembolsoPendente
+                case "refused":         return StatusInfoPag.Recusado
+                default: return status
+            }
+        }
+        
+        return status
+    }
 
-    init(id: Int? = nil, empresa: Empresa? = nil, formaPagamento: String, entrega: Bool, endereco: Endereco? = nil, itens: PedidoItens = PedidoItens(), cartao: Cartao? = nil, valorTotal: Float? = nil, createdAt: Date? = nil, updatedAt: Date? = nil) {
+    init(id: Int? = nil, empresa: Empresa? = nil, formaPagamento: String, entrega: Bool, endereco: Endereco? = nil, itens: PedidoItens = PedidoItens(), cartao: Cartao? = nil, valorTotal: Float? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, pagamentos: Pagamentos? = nil) {
         self.id = id
         self.empresa = empresa
         self.formaPagamento = formaPagamento
@@ -36,9 +67,8 @@ class Pedido: Codable {
         self.valorTotal = valorTotal
         self.createdAt = createdAt
         self.updatedAt = updatedAt
+        self.pagamentos = pagamentos
     }
-    
-    
 }
 
 // MARK: Pedido convenience initializers and mutators
@@ -46,7 +76,7 @@ class Pedido: Codable {
 extension Pedido {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Pedido.self, from: data)
-        self.init(id: me.id, empresa: me.empresa, formaPagamento: me.formaPagamento, entrega: me.entrega, endereco: me.endereco, itens: me.itens, cartao: me.cartao, valorTotal: me.valorTotal, createdAt: me.createdAt, updatedAt: me.updatedAt)
+        self.init(id: me.id, empresa: me.empresa, formaPagamento: me.formaPagamento, entrega: me.entrega, endereco: me.endereco, itens: me.itens, cartao: me.cartao, valorTotal: me.valorTotal, createdAt: me.createdAt, updatedAt: me.updatedAt, pagamentos: me.pagamentos)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -70,7 +100,8 @@ extension Pedido {
         cartao: Cartao? = nil,
         valorTotal: Float? = nil,
         createdAt: Date? = nil,
-        updatedAt: Date? = nil
+        updatedAt: Date? = nil,
+        pagamentos: Pagamentos? = nil
     ) -> Pedido {
         return Pedido(
             id: id ?? self.id,
@@ -82,7 +113,8 @@ extension Pedido {
             cartao: cartao ?? self.cartao,
             valorTotal: valorTotal ?? self.valorTotal,
             createdAt: createdAt ?? self.createdAt,
-            updatedAt: updatedAt ?? self.updatedAt
+            updatedAt: updatedAt ?? self.updatedAt,
+            pagamentos: pagamentos ?? self.pagamentos
         )
     }
     

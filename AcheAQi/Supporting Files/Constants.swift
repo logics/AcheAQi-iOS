@@ -62,6 +62,8 @@ struct Constants {
     
     static let feedbackEmail = "suporte@logics.com.br"
     
+    static let defaultAPIErrorMsg = "Houve um problema ao processar os dados, por favor tente novamente mais tarde, ou entre em contato conosco."
+    
 //    static let defaultBlueBarTint = UIColor(r: 0, g: 172, b: 236, alpha: 1)
     
     static let createdAt = "createdAt"

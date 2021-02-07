@@ -37,7 +37,8 @@ class OfertasTableViewController: UITableViewController {
         
         tableView.register(UINib(nibName: "LoadingTableViewCell", bundle: nil), forCellReuseIdentifier: LoadingTableViewCell.cellID)
         tableView.tableFooterView = UIView()
-        tableView.beginRefreshing()
+        
+        resetFlagsAndFetchRemoteData()
     }
     
     override func viewWillAppear(_ animated: Bool) {

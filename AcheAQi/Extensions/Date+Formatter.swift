@@ -49,10 +49,19 @@ extension Date {
         return littleTime
     }
     
-    func formattedDate(dateFormat: String) -> String {
+    func formattedDate(dateFormat: String = "dd/MM/yyyy") -> String {
         
         let formatter = DateFormatter()
-        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.timeZone = TimeZone.current
+        formatter.dateFormat = dateFormat
+        
+        return formatter.string(from: self)
+    }
+    
+    func formattedDateTime(dateFormat: String = "dd/MM/yyyy HH:mm:ss") -> String {
+        
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone.current
         formatter.dateFormat = dateFormat
         
         return formatter.string(from: self)

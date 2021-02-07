@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A304496025CDC6BA00429437 /* PedidosTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A304495F25CDC6BA00429437 /* PedidosTableViewController.swift */; };
+		A304496825CDC6F900429437 /* PedidoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A304496725CDC6F900429437 /* PedidoTableViewCell.swift */; };
 		A304CE902562EC4A00916004 /* AcheAQi.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A304CE8E2562EC4A00916004 /* AcheAQi.xcdatamodeld */; };
 		A304CE952562F6CD00916004 /* CartItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = A304CE932562F6CD00916004 /* CartItem+CoreDataClass.swift */; };
 		A304CE962562F6CD00916004 /* CartItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A304CE942562F6CD00916004 /* CartItem+CoreDataProperties.swift */; };
@@ -134,9 +136,15 @@
 		A3F185D325609FB200627F2B /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = A3F185D225609FB200627F2B /* AlamofireImage */; };
 		A3F50F862416BE6E00FD387B /* DetalheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3F50F852416BE6E00FD387B /* DetalheViewController.swift */; };
 		A3F50F902416E49200FD387B /* MaterialDesignWidgets in Frameworks */ = {isa = PBXBuildFile; productRef = A3F50F8F2416E49200FD387B /* MaterialDesignWidgets */; };
+		A3FEEAD025CF0EAC000946F4 /* PageInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEEACD25CF0EAC000946F4 /* PageInfo.swift */; };
+		A3FEEAD125CF0EAC000946F4 /* NewPageLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEEACE25CF0EAC000946F4 /* NewPageLoad.swift */; };
+		A3FEEAD225CF0EAC000946F4 /* PageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEEACF25CF0EAC000946F4 /* PageInteractor.swift */; };
+		A3FEEAD325CF0EAC000946F4 /* PageableService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3FEEACC25CF0EAC000946F4 /* PageableService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A304495F25CDC6BA00429437 /* PedidosTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidosTableViewController.swift; sourceTree = "<group>"; };
+		A304496725CDC6F900429437 /* PedidoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidoTableViewCell.swift; sourceTree = "<group>"; };
 		A304CE8F2562EC4A00916004 /* AcheAQi.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = AcheAQi.xcdatamodel; sourceTree = "<group>"; };
 		A304CE932562F6CD00916004 /* CartItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartItem+CoreDataClass.swift"; sourceTree = "<group>"; };
 		A304CE942562F6CD00916004 /* CartItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CartItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -258,6 +266,10 @@
 		A3F14E42247C4F5200AAD23D /* LoadingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingTableViewCell.swift; sourceTree = "<group>"; };
 		A3F14E44247C4F6200AAD23D /* LoadingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingCollectionViewCell.swift; sourceTree = "<group>"; };
 		A3F50F852416BE6E00FD387B /* DetalheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetalheViewController.swift; sourceTree = "<group>"; };
+		A3FEEACC25CF0EAC000946F4 /* PageableService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageableService.swift; sourceTree = "<group>"; };
+		A3FEEACD25CF0EAC000946F4 /* PageInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInfo.swift; sourceTree = "<group>"; };
+		A3FEEACE25CF0EAC000946F4 /* NewPageLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPageLoad.swift; sourceTree = "<group>"; };
+		A3FEEACF25CF0EAC000946F4 /* PageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +293,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		A304496225CDC6C200429437 /* Pedidos */ = {
+			isa = PBXGroup;
+			children = (
+				A304495F25CDC6BA00429437 /* PedidosTableViewController.swift */,
+				A304496725CDC6F900429437 /* PedidoTableViewCell.swift */,
+			);
+			path = Pedidos;
+			sourceTree = "<group>";
+		};
 		A304CE982562F6D300916004 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -451,6 +472,7 @@
 				A3D07C9123F6D92F000EFED7 /* Extensions */,
 				A3E924A823FB293700AD4149 /* Models */,
 				A3E924A723FB290C00AD4149 /* Supporting Files */,
+				A3FEEAD625CF0EBF000946F4 /* Libraries */,
 			);
 			path = AcheAQi;
 			sourceTree = "<group>";
@@ -476,6 +498,7 @@
 				A36DD3FF25A3A2A400FF9BE0 /* Endereco Cadastro */,
 				A3C6724925ACB4D90099097E /* CVV */,
 				A3C6724E25ACD50B0099097E /* Cart Finished */,
+				A304496225CDC6C200429437 /* Pedidos */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -613,6 +636,25 @@
 				A3F50F852416BE6E00FD387B /* DetalheViewController.swift */,
 			);
 			path = Detalhe;
+			sourceTree = "<group>";
+		};
+		A3FEEAD525CF0EB5000946F4 /* Pageable */ = {
+			isa = PBXGroup;
+			children = (
+				A3FEEACE25CF0EAC000946F4 /* NewPageLoad.swift */,
+				A3FEEACC25CF0EAC000946F4 /* PageableService.swift */,
+				A3FEEACD25CF0EAC000946F4 /* PageInfo.swift */,
+				A3FEEACF25CF0EAC000946F4 /* PageInteractor.swift */,
+			);
+			path = Pageable;
+			sourceTree = "<group>";
+		};
+		A3FEEAD625CF0EBF000946F4 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				A3FEEAD525CF0EB5000946F4 /* Pageable */,
+			);
+			path = Libraries;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -755,7 +797,9 @@
 				A3D07C8E23F6D76C000EFED7 /* AvatarView.swift in Sources */,
 				A3740479240ED5520093C6B9 /* FloatExtension.swift in Sources */,
 				A3740473240ED54B0093C6B9 /* UIColorExtension.swift in Sources */,
+				A3FEEAD225CF0EAC000946F4 /* PageInteractor.swift in Sources */,
 				A374047C240ED5520093C6B9 /* Sequence+Convenience.swift in Sources */,
+				A3FEEAD125CF0EAC000946F4 /* NewPageLoad.swift in Sources */,
 				A37A72D423F81DE800DD6C16 /* NavigationViewController.swift in Sources */,
 				A3102C9F257E941E0076F1DA /* Cartao.swift in Sources */,
 				A374048A240ED5520093C6B9 /* URL+WS.swift in Sources */,
@@ -786,6 +830,7 @@
 				A37EAC2923FDB0CC00FF0F7C /* Empresa.swift in Sources */,
 				A3740482240ED5520093C6B9 /* UICollectionViewCell+Animations.swift in Sources */,
 				A3C6724725ACB4D10099097E /* CVVViewController.swift in Sources */,
+				A304496025CDC6BA00429437 /* PedidosTableViewController.swift in Sources */,
 				A3B35E972464D4BC006830A6 /* Device.swift in Sources */,
 				A35B7C922409A3D800B709DC /* UseLocationFilterCell.swift in Sources */,
 				A39CA3802481CBE2007A6FD7 /* RevealViewController.swift in Sources */,
@@ -798,6 +843,7 @@
 				A36ED767244A669A004A4768 /* OfertaCell.swift in Sources */,
 				A3740474240ED5520093C6B9 /* Array+Convenience.swift in Sources */,
 				A3A45443244F570200C9CA13 /* UIView+Animations.swift in Sources */,
+				A304496825CDC6F900429437 /* PedidoTableViewCell.swift in Sources */,
 				A3DB42CB2584215A00A8BEE4 /* BasicDataModelProtocol.swift in Sources */,
 				A36ED764244A6674004A4768 /* OfertasTableViewController.swift in Sources */,
 				A3740487240ED5520093C6B9 /* UITapGestureRecognizer+Label.swift in Sources */,
@@ -828,10 +874,12 @@
 				A3C6724425ACB1330099097E /* CVVCardView.swift in Sources */,
 				A3D07C8823F5B54E000EFED7 /* SearchTableViewController.swift in Sources */,
 				A398209B246C6669000D62D0 /* AvatarStroked.swift in Sources */,
+				A3FEEAD325CF0EAC000946F4 /* PageableService.swift in Sources */,
 				A3740470240ED4400093C6B9 /* WSRequestAdapter.swift in Sources */,
 				A3102C94257E7FEF0076F1DA /* CadastroCartaoViewController.swift in Sources */,
 				A374048C240ED6E10093C6B9 /* Login.swift in Sources */,
 				A3A4543F244E53B300C9CA13 /* DesignableImageView.swift in Sources */,
+				A3FEEAD025CF0EAC000946F4 /* PageInfo.swift in Sources */,
 				A38C5A9C247344010018EB7B /* AppleSignInController.swift in Sources */,
 				A3DB42C725841F4300A8BEE4 /* NSmanagedObjectContext+Convenience.swift in Sources */,
 				A3740476240ED5520093C6B9 /* Date+Formatter.swift in Sources */,
@@ -1084,7 +1132,7 @@
 			repositoryURL = "https://github.com/takecian/SwiftRater";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 1.9.0;
+				minimumVersion = 1.9.1;
 			};
 		};
 		A39098A723FDA8010068E997 /* XCRemoteSwiftPackageReference "Spring" */ = {

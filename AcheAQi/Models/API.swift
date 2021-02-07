@@ -315,6 +315,19 @@ class API {
     
     // MARK: - Pedidos
     
+    static func fetchPedidos(page: Int = 1, result: @escaping (DataResponse<Pedidos>) -> ()) {
+        let url = urlBy(type: Pedidos.self)!
+        
+        let params = ["page": page]
+        
+        Alamofire
+            .request(url, parameters: params)
+            .validate()
+            .responseModel { (response: DataResponse<Pedidos>) in
+                result(response)
+            }
+    }
+    
     static func savePedido(_ pedido: Pedido, empresaId: Int16, result: @escaping (DataResponse<Pedido>) -> ()) {
         let url = urlBy(type: Pedidos.self)!
 
