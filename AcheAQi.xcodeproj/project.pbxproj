@@ -104,6 +104,10 @@
 		A3B35CE9246E103E00261F47 /* ResetPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35CE8246E103E00261F47 /* ResetPassViewController.swift */; };
 		A3B35CEC246E269900261F47 /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35CEB246E269900261F47 /* ImagePicker.swift */; };
 		A3B35E972464D4BC006830A6 /* Device.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B35E962464D4BB006830A6 /* Device.swift */; };
+		A3B5322F25D5739400B925FE /* PedidoDetalheViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B5322E25D5739400B925FE /* PedidoDetalheViewController.swift */; };
+		A3B5323425D573BE00B925FE /* PedidoDetalheHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B5323325D573BE00B925FE /* PedidoDetalheHeader.swift */; };
+		A3B5323725D573CF00B925FE /* PedidoDetalheProdutoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B5323625D573CF00B925FE /* PedidoDetalheProdutoCell.swift */; };
+		A3B5323B25D6DB6800B925FE /* PedidoDetalheSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B5323A25D6DB6800B925FE /* PedidoDetalheSectionCell.swift */; };
 		A3B96BF92562B26500DCD3FD /* CartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3B96BF82562B26500DCD3FD /* CartViewController.swift */; };
 		A3C6724125AC8AD20099097E /* Veil in Frameworks */ = {isa = PBXBuildFile; productRef = A3C6724025AC8AD20099097E /* Veil */; };
 		A3C6724425ACB1330099097E /* CVVCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3C6724325ACB1330099097E /* CVVCardView.swift */; };
@@ -212,6 +216,10 @@
 		A3B35CE8246E103E00261F47 /* ResetPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPassViewController.swift; sourceTree = "<group>"; };
 		A3B35CEB246E269900261F47 /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		A3B35E962464D4BB006830A6 /* Device.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Device.swift; sourceTree = "<group>"; };
+		A3B5322E25D5739400B925FE /* PedidoDetalheViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidoDetalheViewController.swift; sourceTree = "<group>"; };
+		A3B5323325D573BE00B925FE /* PedidoDetalheHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidoDetalheHeader.swift; sourceTree = "<group>"; };
+		A3B5323625D573CF00B925FE /* PedidoDetalheProdutoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidoDetalheProdutoCell.swift; sourceTree = "<group>"; };
+		A3B5323A25D6DB6800B925FE /* PedidoDetalheSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PedidoDetalheSectionCell.swift; sourceTree = "<group>"; };
 		A3B96BF82562B26500DCD3FD /* CartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CartViewController.swift; sourceTree = "<group>"; };
 		A3C6724325ACB1330099097E /* CVVCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVVCardView.swift; sourceTree = "<group>"; };
 		A3C6724625ACB4D10099097E /* CVVViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CVVViewController.swift; sourceTree = "<group>"; };
@@ -418,6 +426,17 @@
 			path = "Reset Password";
 			sourceTree = "<group>";
 		};
+		A3B5323125D5739B00B925FE /* Pedido Detalhe */ = {
+			isa = PBXGroup;
+			children = (
+				A3B5322E25D5739400B925FE /* PedidoDetalheViewController.swift */,
+				A3B5323325D573BE00B925FE /* PedidoDetalheHeader.swift */,
+				A3B5323625D573CF00B925FE /* PedidoDetalheProdutoCell.swift */,
+				A3B5323A25D6DB6800B925FE /* PedidoDetalheSectionCell.swift */,
+			);
+			path = "Pedido Detalhe";
+			sourceTree = "<group>";
+		};
 		A3B96BFB2562B26F00DCD3FD /* Cart */ = {
 			isa = PBXGroup;
 			children = (
@@ -485,7 +504,7 @@
 				A39CA37F2481CBE2007A6FD7 /* RevealViewController.swift */,
 				A3E924A623FB28FC00AD4149 /* Main */,
 				A35588D02412DAAF00DED77E /* Alert */,
-				A3F50F872416BE7900FD387B /* Detalhe */,
+				A3F50F872416BE7900FD387B /* Detalhe Produto */,
 				A36ED765244A667E004A4768 /* Ofertas */,
 				A36EE66E2450F2640029B7ED /* Perfil */,
 				A318D15E24649D6900B31DB1 /* Login */,
@@ -499,6 +518,7 @@
 				A3C6724925ACB4D90099097E /* CVV */,
 				A3C6724E25ACD50B0099097E /* Cart Finished */,
 				A304496225CDC6C200429437 /* Pedidos */,
+				A3B5323125D5739B00B925FE /* Pedido Detalhe */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -629,13 +649,13 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		A3F50F872416BE7900FD387B /* Detalhe */ = {
+		A3F50F872416BE7900FD387B /* Detalhe Produto */ = {
 			isa = PBXGroup;
 			children = (
 				A30671E92422C92500600A3F /* FotoProdutoCell.swift */,
 				A3F50F852416BE6E00FD387B /* DetalheViewController.swift */,
 			);
-			path = Detalhe;
+			path = "Detalhe Produto";
 			sourceTree = "<group>";
 		};
 		A3FEEAD525CF0EB5000946F4 /* Pageable */ = {
@@ -779,6 +799,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A3C6724D25ACD5050099097E /* CartFinishedViewController.swift in Sources */,
+				A3B5322F25D5739400B925FE /* PedidoDetalheViewController.swift in Sources */,
 				A304CE952562F6CD00916004 /* CartItem+CoreDataClass.swift in Sources */,
 				A35588CF2412DAA200DED77E /* AlertController.swift in Sources */,
 				A3D07C8F23F6D76C000EFED7 /* GradientButton.swift in Sources */,
@@ -793,6 +814,7 @@
 				A3740488240ED5520093C6B9 /* UIView+Shadow.swift in Sources */,
 				A3DB42C325841F2200A8BEE4 /* NSManagedObject+Convenience.swift in Sources */,
 				A374047D240ED5520093C6B9 /* String+CpfCnpj.swift in Sources */,
+				A3B5323725D573CF00B925FE /* PedidoDetalheProdutoCell.swift in Sources */,
 				A3102CA9257ED0430076F1DA /* Pagamento.swift in Sources */,
 				A3D07C8E23F6D76C000EFED7 /* AvatarView.swift in Sources */,
 				A3740479240ED5520093C6B9 /* FloatExtension.swift in Sources */,
@@ -818,6 +840,7 @@
 				A37EAC2723FDB03800FF0F7C /* JSONSchemaSupport.swift in Sources */,
 				A36EE66D2450F25E0029B7ED /* PerfilViewController.swift in Sources */,
 				A35B7C8F24099BCB00B709DC /* Filters.swift in Sources */,
+				A3B5323B25D6DB6800B925FE /* PedidoDetalheSectionCell.swift in Sources */,
 				A3398EBF2417C7BE00C3712B /* MyButton.swift in Sources */,
 				A374047A240ED5520093C6B9 /* NSNotification+Convenience.swift in Sources */,
 				A374047F240ED5520093C6B9 /* String+QRBarCode.swift in Sources */,
@@ -841,6 +864,7 @@
 				A3740493240EDD760093C6B9 /* UIBarButtonItemExtension.swift in Sources */,
 				A3102CAC257ED11C0076F1DA /* Pedido.swift in Sources */,
 				A36ED767244A669A004A4768 /* OfertaCell.swift in Sources */,
+				A3B5323425D573BE00B925FE /* PedidoDetalheHeader.swift in Sources */,
 				A3740474240ED5520093C6B9 /* Array+Convenience.swift in Sources */,
 				A3A45443244F570200C9CA13 /* UIView+Animations.swift in Sources */,
 				A304496825CDC6F900429437 /* PedidoTableViewCell.swift in Sources */,
@@ -978,6 +1002,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Debug;
 		};
@@ -1033,6 +1058,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1084,6 +1110,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "AcheAQi Dist";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
+				TVOS_DEPLOYMENT_TARGET = 12.0;
 			};
 			name = Release;
 		};

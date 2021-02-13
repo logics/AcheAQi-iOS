@@ -513,6 +513,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="deleteButton" destination="UTW-UG-Yd7" id="hfT-1d-1fL"/>
+                                            <outlet property="fotoContainerView" destination="9kk-Ua-8RN" id="MdH-jp-WyL"/>
                                             <outlet property="fotoImageView" destination="wzz-Q4-Fk0" id="wNe-Yq-K7N"/>
                                             <outlet property="lineView" destination="uYy-US-Do2" id="s1J-2M-mpw"/>
                                             <outlet property="nomeLabel" destination="DRJ-CH-E9q" id="5AZ-LQ-D3a"/>

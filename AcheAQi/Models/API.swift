@@ -366,15 +366,42 @@ class API {
     
     // MARK: - Pagamentos
     
-    static func processPayment(pedido: Pedido, cvv: Int, result: @escaping (DataResponse<Pagamento>) -> ()) {
+    static func processPayment(pedido: Pedido, empresaId: Int16, cvv: Int, result: @escaping (DataResponse<Pagamento>) -> ()) {
         let url = urlBy(type: Pagamentos.self)!
         
+        // Pedido params
+        var items = [[String: Any]]()
+        
+        for item in pedido.itens {
+            items.append([
+                "produto": item.produto.id,
+                "qtd": item.qtd,
+                "valorUnitario": item.valorUnitario,
+            ])
+        }
+        
+        var pedidoParams = [
+            "formaPagamento": pedido.formaPagamento,
+            "empresa": empresaId,
+            "entrega": pedido.entrega,
+            "itens": items,
+        ] as [String : Any]
+        
+        if let endereco = pedido.endereco {
+            pedidoParams["endereco"] = endereco.id!
+        }
+        
+        if let cartao = pedido.cartao {
+            pedidoParams["cartao"] = cartao.id
+        }
+        
+        // Payment Params
         let params = [
-            "empresa": pedido.empresa!.id,
+            "empresa": empresaId,
             "nomeCliente": Login.shared.nome!,
             "cartao": pedido.cartao!.id,
-            "pedido": pedido.id!,
             "cvv": cvv,
+            "pedido": pedidoParams,
         ] as [String: Any]
         
         Alamofire

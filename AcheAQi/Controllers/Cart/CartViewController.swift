@@ -291,7 +291,9 @@ class CartViewController: UIViewController {
             tableView.reloadSections(IndexSet(integer: 1), with: .fade)
         }
         else if let sourceViewController = unwindSegue.source as? DeliveryMethodViewController {
-            deliveryMethodSelected = sourceViewController.selectedItem
+            guard let deliveryMethod = sourceViewController.selectedItem else { return }
+            
+            deliveryMethodSelected = deliveryMethod
 
             var endData: Data?
             
@@ -331,6 +333,7 @@ class CartViewController: UIViewController {
                 
             case segueShowCVV:
                 if let vc = segue.destination as? CVVViewController {
+                    vc.cart = cart!
                     vc.cartao = self.paymentMethodSelected.cartao!
                 }
                 

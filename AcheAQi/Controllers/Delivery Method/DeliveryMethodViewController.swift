@@ -23,7 +23,7 @@ class DeliveryMethodViewController: UIViewController {
     var items: [DeliveryMethod]!
     let pessoalmenteItem = DeliveryMethod.retirarPessoalmente()
     
-    var selectedItem: DeliveryMethod!
+    var selectedItem: DeliveryMethod?
     
     var delegate: DeliveryMethodDelegate?
     
@@ -98,7 +98,8 @@ class DeliveryMethodViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == segueShowFormCard,
            !chooseToCart,
-           let address = self.selectedItem.endereco,
+           let item = selectedItem,
+           let address = item.endereco,
            let vc = segue.destination as? EnderecoFormViewController {
             vc.endereco = address
         }
@@ -153,7 +154,8 @@ extension DeliveryMethodViewController: UITableViewDataSource, UITableViewDelega
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedItem = items[indexPath.row]
-        self.delegate?.didSetDeliveryMethod(method: selectedItem)
+        
+        self.delegate?.didSetDeliveryMethod(method: selectedItem!)
         
         if let cell = tableView.cellForRow(at: indexPath) as? DeliveryMethodCell {
 

@@ -68,7 +68,7 @@ extension DataRequest {
     fileprivate func decodableResponseSerializer<T: Decodable>() -> DataResponseSerializer<T> {
         return DataResponseSerializer { _, response, data, error in
             guard error == nil else {
-                debugPrint(error!, response!)
+                debugPrint(error!, response ?? "")
                 return .failure(error!)
             }
 

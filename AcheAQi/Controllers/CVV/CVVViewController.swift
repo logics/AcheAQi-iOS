@@ -21,11 +21,10 @@ class CVVViewController: UIViewController {
     @IBOutlet weak var cvvTextField: DesignableTextField!
     @IBOutlet weak var sendButton: DesignableButton!
     
-    var cart: Cart {
-        return Cart.findPendingOrCreate(context: self.moc)
-    }
+    var cart: Cart!
     var cartao: Cartao!
     var pagamento: Pagamento?
+    var pedido: Pedido?
     
     private lazy var moc: NSManagedObjectContext = {
         return (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
@@ -82,41 +81,34 @@ class CVVViewController: UIViewController {
     private func sendDataToWS() {
         cvvTextField.resignFirstResponder()
         
-        guard let cvv = cvvTextField.text?.trimmingCharacters(in: .whitespaces), cvv.length == 3 else {
+        guard let cvvText = cvvTextField.text?.trimmingCharacters(in: .whitespaces), cvvText.length == 3, let cvv = Int(cvvText) else {
             AlertController.showAlert(message: "Por favor informe o Codigo de Segurança do cartão.", okAction: {
                 self.cvvTextField.becomeFirstResponder()
             })
             return
         }
         
-        startAnimating(message: "Criando pedido...")
+        self.processPaymentWS(pedido: cart.asPedido(), empresaId: cart.empresaId, cvv: cvv)
+    }
+    
+    private func processPaymentWS(pedido: Pedido, empresaId: Int16, cvv: Int) {
         
-        /// Criando Pedido
-        API.savePedido(cart.asPedido(), empresaId: cart.empresaId) { (response: DataResponse<Pedido>) in
+        self.startAnimating(message: "Processando pagamento...")
+        
+        /// Processando pagamento
+        API.processPayment(pedido: pedido, empresaId: empresaId, cvv: cvv) { (response: DataResponse<Pagamento>) in
             
             self.stopAnimating()
             
-            guard response.result.isSuccess, let pedido = response.result.value else {
-                AlertController.showAlert(message: "Não conseguimos concluir o seu pedido. Por favor tente novamente mais tarde, ou entre em contado com nossa central de atendimento.")
+            guard let pag = response.result.value else {
+                let msg = response.errorMessage ?? "Não conseguimos processar o seu pagamento. Por favor entre em contato com a nossa central de atendimento."
+                AlertController.showAlert(message: msg)
                 return
             }
             
-            self.startAnimating(message: "Processando pagamento...")
+            self.pagamento = pag
             
-            /// Processando pagamento
-            API.processPayment(pedido: pedido, cvv: Int(cvv)!) { (response: DataResponse<Pagamento>) in
-                
-                self.stopAnimating()
-                
-                guard let pag = response.result.value else {
-                    AlertController.showAlert(message: "Não conseguimos processar o seu pagamento. Por favor entre em contato com a nossa central de atendimento.")
-                    return
-                }
-                
-                self.pagamento = pag
-                
-                self.performSegue(withIdentifier: self.segueShowFinished, sender: self)
-            }
+            self.performSegue(withIdentifier: self.segueShowFinished, sender: self)
         }
     }
     

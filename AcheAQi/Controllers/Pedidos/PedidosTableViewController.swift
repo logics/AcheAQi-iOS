@@ -10,8 +10,12 @@ import UIKit
 
 class PedidosTableViewController: UITableViewController {
     
+    let segueShowDetalhe = "Show Detalhe Segue"
+    
     let itemCellID = "Pedido Item Cell"
     let loadingCellID = LoadingTableViewCell.cellID
+    
+    @IBOutlet var noContentView: UIView!
     
     var totalCount: Int = 0
     var completelyFetched = false
@@ -25,6 +29,8 @@ class PedidosTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableView.setupRefreshControl(self, selector: #selector(refreshAll))
+        
+        updateViews()
         setupPageInteractor()
     }
     
@@ -33,6 +39,14 @@ class PedidosTableViewController: UITableViewController {
     }
     
     // MARK: - Private Methods
+    
+    private func updateViews() {
+        if pageInteractor.count() <= 0 {
+            tableView.backgroundView = noContentView
+        } else {
+            tableView.backgroundView = nil
+        }
+    }
     
     @objc private func refreshAll() {
         pageInteractor.refreshPage()
@@ -82,22 +96,35 @@ class PedidosTableViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        guard indexPath.row < pageInteractor.count() else { return } // Evita erro indexOf bounds por conta do loading
+        
         pedidoSelected = pageInteractor.item(for: indexPath.row)
+
+        if let cell = tableView.cellForRow(at: indexPath) {
+            
+            cell.animatePop(completionHandler: { finished in
+                if finished {
+                    self.performSegue(withIdentifier: self.segueShowDetalhe, sender: cell)
+                }
+            })
+        }
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         pageInteractor.shouldPrefetch(index: indexPath.row)
     }
+    
+    
 
-    /*
     // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == segueShowDetalhe, let pedidoSelected = self.pedidoSelected {
+            let vc = segue.destination as! PedidoDetalheViewController
+            vc.pedido = pedidoSelected
+        }
     }
-    */
 }
 
 extension PedidosTableViewController: PageableService {
@@ -123,10 +150,13 @@ extension PedidosTableViewController: PageableService {
             let info: PageInfo<Pedido> = PageInfo(types: items, page: page, totalPageCount: self.totalCount)
             
             completion(info)
+            
+            self.updateViews()
         }
     }
     
     func cancelAllRequests() {
         completelyFetched = false
+        self.updateViews()
     }
 }

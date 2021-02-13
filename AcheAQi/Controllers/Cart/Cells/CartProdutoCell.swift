@@ -9,9 +9,11 @@
 import UIKit
 import AlamofireImage
 import CoreData
+import Spring
 
 class CartProdutoCell: UITableViewCell {
 
+    @IBOutlet weak var fotoContainerView: CustomView!
     @IBOutlet weak var fotoImageView: UIImageView!
     @IBOutlet weak var nomeLabel: UILabel!
     @IBOutlet weak var qtdTextField: UITextField!
@@ -27,6 +29,7 @@ class CartProdutoCell: UITableViewCell {
             if tipoCompra == .compraDireta, let lineView = lineView, let deleteBtn = deleteButton {
                 lineView.removeFromSuperview()
                 deleteBtn.removeFromSuperview()
+                fotoContainerView.cornerBL = true
             }
         }
     }

@@ -24,21 +24,7 @@ class PedidoTableViewCell: UITableViewCell {
             
             let status = pedido?.statusInfo
             statusLabel.text = status?.rawValue
-            
-            var statusColor = UIColor.darkGray
-            
-            switch status {
-                case .Aguardando, .ReembolsoPendente, .Autorizado, .Processando:
-                    statusColor = UIColor(named: "pendente")!
-                case .Pago, .Reembolsado:
-                    statusColor = UIColor(named: "pago")!
-                case .Recusado:
-                    statusColor = UIColor(named: "recusado")!
-                case .none:
-                    break
-            }
-            
-            statusLabel.textColor = statusColor
+            statusLabel.textColor = pedido?.statusColor
         }
     }
     

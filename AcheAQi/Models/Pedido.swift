@@ -6,7 +6,7 @@
 //  Copyright © 2020 Logics Software. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 enum FormaPagamento: String {
     case dinheiro = "dinheiro"
@@ -32,7 +32,7 @@ class Pedido: Codable {
     var endereco: Endereco?
     var itens: PedidoItens
     var cartao: Cartao?
-    let valorTotal: Float?
+    let valorTotal, taxaEntregaTotal: Float?
     let createdAt, updatedAt: Date?
     let pagamentos: Pagamentos?
     
@@ -55,8 +55,24 @@ class Pedido: Codable {
         
         return status
     }
+    
+    var statusColor: UIColor {
+        
+        var statusColor = UIColor.darkGray
+        
+        switch statusInfo {
+            case .Aguardando, .ReembolsoPendente, .Autorizado, .Processando:
+                statusColor = UIColor(named: "pendente")!
+            case .Pago, .Reembolsado:
+                statusColor = UIColor(named: "pago")!
+            case .Recusado:
+                statusColor = UIColor(named: "recusado")!
+        }
 
-    init(id: Int? = nil, empresa: Empresa? = nil, formaPagamento: String, entrega: Bool, endereco: Endereco? = nil, itens: PedidoItens = PedidoItens(), cartao: Cartao? = nil, valorTotal: Float? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, pagamentos: Pagamentos? = nil) {
+        return statusColor
+    }
+
+    init(id: Int? = nil, empresa: Empresa? = nil, formaPagamento: String, entrega: Bool, endereco: Endereco? = nil, itens: PedidoItens = PedidoItens(), cartao: Cartao? = nil, valorTotal: Float? = nil, taxaEntregaTotal: Float? = nil, createdAt: Date? = nil, updatedAt: Date? = nil, pagamentos: Pagamentos? = nil) {
         self.id = id
         self.empresa = empresa
         self.formaPagamento = formaPagamento
@@ -65,6 +81,7 @@ class Pedido: Codable {
         self.itens = itens
         self.cartao = cartao
         self.valorTotal = valorTotal
+        self.taxaEntregaTotal = taxaEntregaTotal
         self.createdAt = createdAt
         self.updatedAt = updatedAt
         self.pagamentos = pagamentos
@@ -76,7 +93,7 @@ class Pedido: Codable {
 extension Pedido {
     convenience init(data: Data) throws {
         let me = try newJSONDecoder().decode(Pedido.self, from: data)
-        self.init(id: me.id, empresa: me.empresa, formaPagamento: me.formaPagamento, entrega: me.entrega, endereco: me.endereco, itens: me.itens, cartao: me.cartao, valorTotal: me.valorTotal, createdAt: me.createdAt, updatedAt: me.updatedAt, pagamentos: me.pagamentos)
+        self.init(id: me.id, empresa: me.empresa, formaPagamento: me.formaPagamento, entrega: me.entrega, endereco: me.endereco, itens: me.itens, cartao: me.cartao, valorTotal: me.valorTotal, taxaEntregaTotal: me.taxaEntregaTotal, createdAt: me.createdAt, updatedAt: me.updatedAt, pagamentos: me.pagamentos)
     }
     
     convenience init(_ json: String, using encoding: String.Encoding = .utf8) throws {
@@ -99,6 +116,7 @@ extension Pedido {
         itens: PedidoItens? = nil,
         cartao: Cartao? = nil,
         valorTotal: Float? = nil,
+        taxaEntregaTotal: Float? = nil,
         createdAt: Date? = nil,
         updatedAt: Date? = nil,
         pagamentos: Pagamentos? = nil
@@ -112,6 +130,7 @@ extension Pedido {
             itens: itens ?? self.itens,
             cartao: cartao ?? self.cartao,
             valorTotal: valorTotal ?? self.valorTotal,
+            taxaEntregaTotal: taxaEntregaTotal ?? self.taxaEntregaTotal,
             createdAt: createdAt ?? self.createdAt,
             updatedAt: updatedAt ?? self.updatedAt,
             pagamentos: pagamentos ?? self.pagamentos
