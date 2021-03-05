@@ -44,7 +44,7 @@
             <objects>
                 <tableViewController id="5LY-km-XU6" customClass="OfertasTableViewController" customModule="AcheAQi" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ffL-FB-dZu">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="backgroundGrouped"/>
                         <prototypes>
@@ -269,7 +269,7 @@
             <objects>
                 <tableViewController id="n8D-2U-ydJ" customClass="PerfilViewController" customModule="AcheAQi" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" dataMode="static" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ej1-OA-F8D">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="backgroundGrouped"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="XyQ-hL-uhO">
@@ -281,24 +281,42 @@
                                     <color key="backgroundColor" name="backgroundNavBar"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="BTJ-af-H8f">
-                                    <rect key="frame" x="20" y="5" width="374" height="115.5"/>
+                                    <rect key="frame" x="20" y="10" width="374" height="115.5"/>
                                     <subviews>
-                                        <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="K3k-iF-lgI" customClass="DesignableImageView" customModule="AcheAQi" customModuleProvider="target">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5ms-Fx-d27" customClass="DesignableView" customModule="Spring">
                                             <rect key="frame" x="144" y="0.0" width="86" height="86"/>
-                                            <color key="backgroundColor" red="0.92549019607843142" green="0.93725490196078431" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <color key="tintColor" name="asphalt"/>
+                                            <subviews>
+                                                <imageView opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="K3k-iF-lgI" customClass="DesignableImageView" customModule="Spring">
+                                                    <rect key="frame" x="0.0" y="0.0" width="86" height="86"/>
+                                                    <color key="backgroundColor" red="0.92549019607843142" green="0.93725490196078431" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="tintColor" name="asphalt"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="86" id="Eut-87-Grc"/>
+                                                        <constraint firstAttribute="height" constant="86" id="Zhw-n2-myr"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <real key="value" value="43"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                            <real key="value" value="3"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <constraints>
-                                                <constraint firstAttribute="width" constant="86" id="Eut-87-Grc"/>
-                                                <constraint firstAttribute="height" constant="86" id="Zhw-n2-myr"/>
+                                                <constraint firstAttribute="height" constant="86" id="5Ob-AO-vUu"/>
+                                                <constraint firstItem="K3k-iF-lgI" firstAttribute="leading" secondItem="5ms-Fx-d27" secondAttribute="leading" id="IXy-li-7dU"/>
+                                                <constraint firstAttribute="trailing" secondItem="K3k-iF-lgI" secondAttribute="trailing" id="IuI-uh-oTl"/>
+                                                <constraint firstAttribute="bottom" secondItem="K3k-iF-lgI" secondAttribute="bottom" id="MLo-cq-aKQ"/>
+                                                <constraint firstAttribute="width" constant="86" id="Sm8-0U-247"/>
+                                                <constraint firstItem="K3k-iF-lgI" firstAttribute="top" secondItem="5ms-Fx-d27" secondAttribute="top" id="w7w-ah-yRp"/>
                                             </constraints>
                                             <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                    <real key="value" value="43"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="cornerTL" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="cornerTR" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="cornerBL" value="YES"/>
-                                                <userDefinedRuntimeAttribute type="boolean" keyPath="cornerBR" value="YES"/>
                                                 <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                                     <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </userDefinedRuntimeAttribute>
@@ -311,14 +329,8 @@
                                                 <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetY">
                                                     <real key="value" value="2"/>
                                                 </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
-                                                    <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </userDefinedRuntimeAttribute>
-                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
-                                                    <real key="value" value="3"/>
-                                                </userDefinedRuntimeAttribute>
                                             </userDefinedRuntimeAttributes>
-                                        </imageView>
+                                        </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="João Maróstia Silva" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0JM-qt-spg">
                                             <rect key="frame" x="97.5" y="89" width="179.5" height="26.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="light" pointSize="22"/>
@@ -333,9 +345,9 @@
                                 <constraint firstAttribute="trailing" secondItem="2d5-uR-epC" secondAttribute="trailing" id="4zC-dd-JVb"/>
                                 <constraint firstAttribute="trailing" secondItem="BTJ-af-H8f" secondAttribute="trailing" constant="20" symbolic="YES" id="I2d-3K-AQz"/>
                                 <constraint firstItem="2d5-uR-epC" firstAttribute="top" secondItem="XyQ-hL-uhO" secondAttribute="top" id="K8s-RF-8mU"/>
+                                <constraint firstItem="BTJ-af-H8f" firstAttribute="centerY" secondItem="XyQ-hL-uhO" secondAttribute="centerY" id="Z00-0h-rmn"/>
                                 <constraint firstItem="BTJ-af-H8f" firstAttribute="leading" secondItem="XyQ-hL-uhO" secondAttribute="leading" constant="20" symbolic="YES" id="dQ2-sf-uWZ"/>
                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BTJ-af-H8f" secondAttribute="bottom" id="i4r-8s-H0D"/>
-                                <constraint firstItem="K3k-iF-lgI" firstAttribute="top" secondItem="2d5-uR-epC" secondAttribute="bottom" constant="-42" id="kC8-IB-4y7"/>
                                 <constraint firstItem="2d5-uR-epC" firstAttribute="leading" secondItem="XyQ-hL-uhO" secondAttribute="leading" id="mb8-O6-Vh4"/>
                                 <constraint firstItem="BTJ-af-H8f" firstAttribute="top" relation="greaterThanOrEqual" secondItem="XyQ-hL-uhO" secondAttribute="top" constant="5" id="ssg-s9-ZrE"/>
                             </constraints>
@@ -809,7 +821,7 @@
             <objects>
                 <tableViewController id="CTx-vJ-38w" customClass="PedidosTableViewController" customModule="AcheAQi" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ZEn-jX-WYG">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="backgroundGrouped"/>
                         <prototypes>
@@ -1208,7 +1220,7 @@
             <objects>
                 <collectionViewController definesPresentationContext="YES" id="xAH-4t-xNJ" customClass="MainCollectionViewController" customModule="AcheAQi" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="prototypes" id="JdQ-LR-6Ez">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="backgroundGrouped"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" sectionInsetReference="safeArea" id="nRL-Ww-7KR">
@@ -2108,7 +2120,7 @@ SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de 
             <objects>
                 <tableViewController title="Detalhe do Pedido" id="ndq-XJ-bhW" customClass="PedidoDetalheViewController" customModule="AcheAQi" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="5Kk-gD-bQ4">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" name="backgroundGrouped"/>
                         <prototypes>
@@ -2536,7 +2548,7 @@ SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de 
                                 </connections>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="Section Cell" rowHeight="44" id="Dtt-HM-Emh" customClass="PedidoDetalheSectionCell" customModule="AcheAQi" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="372" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="371.5" width="414" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinY="YES"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Dtt-HM-Emh" id="qtk-I9-iOO">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -2737,6 +2749,9 @@ SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de 
         <designable name="8zW-hW-szd">
             <size key="intrinsicContentSize" width="106" height="30"/>
         </designable>
+        <designable name="K3k-iF-lgI">
+            <size key="intrinsicContentSize" width="119" height="119"/>
+        </designable>
         <designable name="iTI-FB-zcc">
             <size key="intrinsicContentSize" width="128" height="35"/>
         </designable>
@@ -2745,7 +2760,7 @@ SteakHouse Grill Polishop chegou para você saborear o tradicional churrasco de 
         </designable>
     </designables>
     <inferredMetricsTieBreakers>
-        <segue reference="ZkN-KK-gt3"/>
+        <segue reference="Fra-f4-YSr"/>
     </inferredMetricsTieBreakers>
     <resources>
         <image name="Placeholder" width="152" height="129"/>

@@ -21,7 +21,7 @@ class RevealViewController: UIViewController {
     open var isShowing: Bool = false
     
     lazy var window: UIWindow? = {
-        return UIApplication.shared.keyWindow
+        return UIApplication.shared.windows.filter({$0.isKeyWindow}).first
     }()
 
     @IBOutlet weak var logoImageView: UIImageView!

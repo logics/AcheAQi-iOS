@@ -10,6 +10,7 @@ import UIKit
 import Spring
 import StoreKit
 import MessageUI
+import Alamofire
 
 fileprivate let editCell = "Edit Profile Cell"
 fileprivate let pedidosCell = "Pedidos Cell"

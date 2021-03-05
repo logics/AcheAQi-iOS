@@ -1,5 +1,5 @@
 //
-//  DesignableImageView.swift
+//  DesignableImageViewCustom.swift
 //  AcheAQi
 //
 //  Created by Romeu Godoi on 20/04/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DesignableImageView: UIImageView {
+class DesignableImageViewCustom: UIImageView {
     
     var maskedCorners = CACornerMask()
     

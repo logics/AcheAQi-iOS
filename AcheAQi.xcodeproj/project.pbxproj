@@ -85,7 +85,6 @@
 		A37EAC2B23FDB14A00FF0F7C /* Categoria.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EAC2A23FDB14A00FF0F7C /* Categoria.swift */; };
 		A37EAC2D23FDB6C000FF0F7C /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37EAC2C23FDB6C000FF0F7C /* API.swift */; };
 		A38226952423A4470051D2D8 /* Foto.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38226942423A4470051D2D8 /* Foto.swift */; };
-		A38BD69825C9DFF80098D800 /* SwiftRater in Frameworks */ = {isa = PBXBuildFile; productRef = A38BD69725C9DFF80098D800 /* SwiftRater */; };
 		A38C5A9C247344010018EB7B /* AppleSignInController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A38C5A9B247344010018EB7B /* AppleSignInController.swift */; };
 		A39098A923FDA8010068E997 /* Spring in Frameworks */ = {isa = PBXBuildFile; productRef = A39098A823FDA8010068E997 /* Spring */; };
 		A3942C50241A478600AACEC7 /* Karte in Frameworks */ = {isa = PBXBuildFile; productRef = A3942C4F241A478600AACEC7 /* Karte */; };
@@ -94,8 +93,9 @@
 		A398209B246C6669000D62D0 /* AvatarStroked.swift in Sources */ = {isa = PBXBuildFile; fileRef = A398209A246C6669000D62D0 /* AvatarStroked.swift */; };
 		A398209D246C7D78000D62D0 /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A398209C246C7D78000D62D0 /* RegisterViewController.swift */; };
 		A39CA3802481CBE2007A6FD7 /* RevealViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A39CA37F2481CBE2007A6FD7 /* RevealViewController.swift */; };
+		A39CF91725F15B8700771254 /* SwiftRater in Frameworks */ = {isa = PBXBuildFile; productRef = A39CF91625F15B8700771254 /* SwiftRater */; };
 		A3A4543D244E2F8A00C9CA13 /* CALayer+Corners.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4543C244E2F8A00C9CA13 /* CALayer+Corners.swift */; };
-		A3A4543F244E53B300C9CA13 /* DesignableImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4543E244E53B300C9CA13 /* DesignableImageView.swift */; };
+		A3A4543F244E53B300C9CA13 /* DesignableImageViewCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A4543E244E53B300C9CA13 /* DesignableImageViewCustom.swift */; };
 		A3A45443244F570200C9CA13 /* UIView+Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A45442244F570200C9CA13 /* UIView+Animations.swift */; };
 		A3A45445244F852700C9CA13 /* Marca.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3A45444244F852600C9CA13 /* Marca.swift */; };
 		A3ABCDF82476C7BB0067E205 /* Siren in Frameworks */ = {isa = PBXBuildFile; productRef = A3ABCDF72476C7BB0067E205 /* Siren */; };
@@ -207,7 +207,7 @@
 		A398209C246C7D78000D62D0 /* RegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterViewController.swift; sourceTree = "<group>"; };
 		A39CA37F2481CBE2007A6FD7 /* RevealViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RevealViewController.swift; sourceTree = "<group>"; };
 		A3A4543C244E2F8A00C9CA13 /* CALayer+Corners.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+Corners.swift"; sourceTree = "<group>"; };
-		A3A4543E244E53B300C9CA13 /* DesignableImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableImageView.swift; sourceTree = "<group>"; };
+		A3A4543E244E53B300C9CA13 /* DesignableImageViewCustom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableImageViewCustom.swift; sourceTree = "<group>"; };
 		A3A45442244F570200C9CA13 /* UIView+Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Animations.swift"; sourceTree = "<group>"; };
 		A3A45444244F852600C9CA13 /* Marca.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Marca.swift; sourceTree = "<group>"; };
 		A3A8DFDE24781BB8007CDB5F /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -288,7 +288,7 @@
 				A3942C50241A478600AACEC7 /* Karte in Frameworks */,
 				A3F185D325609FB200627F2B /* AlamofireImage in Frameworks */,
 				A3F185BD256078FD00627F2B /* Alamofire in Frameworks */,
-				A38BD69825C9DFF80098D800 /* SwiftRater in Frameworks */,
+				A39CF91725F15B8700771254 /* SwiftRater in Frameworks */,
 				A345CC9F2470C8BF005C9843 /* NVActivityIndicatorView in Frameworks */,
 				A3F50F902416E49200FD387B /* MaterialDesignWidgets in Frameworks */,
 				A39098A923FDA8010068E997 /* Spring in Frameworks */,
@@ -530,7 +530,7 @@
 				A3D07C8A23F6D76C000EFED7 /* CustomView.swift */,
 				A3D07C8B23F6D76C000EFED7 /* GradientButton.swift */,
 				A3398EBE2417C7BE00C3712B /* MyButton.swift */,
-				A3A4543E244E53B300C9CA13 /* DesignableImageView.swift */,
+				A3A4543E244E53B300C9CA13 /* DesignableImageViewCustom.swift */,
 				A398209A246C6669000D62D0 /* AvatarStroked.swift */,
 				A3F14E42247C4F5200AAD23D /* LoadingTableViewCell.swift */,
 				A3F14E44247C4F6200AAD23D /* LoadingCollectionViewCell.swift */,
@@ -688,6 +688,7 @@
 				A3D07C6A23F33E27000EFED7 /* Frameworks */,
 				A3D07C6B23F33E27000EFED7 /* Resources */,
 				A35588CB2412D8DA00DED77E /* ShellScript */,
+				A3CB68A225F142B8003DE5F5 /* Bump Build Number */,
 			);
 			buildRules = (
 			);
@@ -704,7 +705,7 @@
 				A3F185BC256078FD00627F2B /* Alamofire */,
 				A3F185D225609FB200627F2B /* AlamofireImage */,
 				A3C6724025AC8AD20099097E /* Veil */,
-				A38BD69725C9DFF80098D800 /* SwiftRater */,
+				A39CF91625F15B8700771254 /* SwiftRater */,
 			);
 			productName = AcheAQi;
 			productReference = A3D07C6D23F33E27000EFED7 /* AcheAQi.app */;
@@ -744,7 +745,7 @@
 				A3F185BB256078FD00627F2B /* XCRemoteSwiftPackageReference "Alamofire" */,
 				A3F185D125609FB200627F2B /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 				A3C6723F25AC8AD20099097E /* XCRemoteSwiftPackageReference "Veil" */,
-				A38BD69625C9DFF80098D800 /* XCRemoteSwiftPackageReference "SwiftRater" */,
+				A39CF91525F15B8700771254 /* XCRemoteSwiftPackageReference "SwiftRater" */,
 			);
 			productRefGroup = A3D07C6E23F33E27000EFED7 /* Products */;
 			projectDirPath = "";
@@ -790,6 +791,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nTAGS=\"TODO:|FIXME:\"\nERRORTAG=\"ERROR:\"\nfind \"${SRCROOT}\" \\( -name \"*.h\" -or -name \"*.m\" -or -name \"*.swift\" \\) -print0 | xargs -0 egrep --with-filename --line-number --only-matching \"($TAGS).*\\$|($ERRORTAG).*\\$\" | perl -p -e \"s/($TAGS)/ warning: \\$1/\" | perl -p -e \"s/($ERRORTAG)/ error: \\$1/\"\n";
+		};
+		A3CB68A225F142B8003DE5F5 /* Bump Build Number */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Bump Build Number";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nbuildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleVersion\" \"${INFOPLIST_FILE}\")\nbuildNumber=$(($buildNumber + 1))\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${INFOPLIST_FILE}\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -902,7 +921,7 @@
 				A3740470240ED4400093C6B9 /* WSRequestAdapter.swift in Sources */,
 				A3102C94257E7FEF0076F1DA /* CadastroCartaoViewController.swift in Sources */,
 				A374048C240ED6E10093C6B9 /* Login.swift in Sources */,
-				A3A4543F244E53B300C9CA13 /* DesignableImageView.swift in Sources */,
+				A3A4543F244E53B300C9CA13 /* DesignableImageViewCustom.swift in Sources */,
 				A3FEEAD025CF0EAC000946F4 /* PageInfo.swift in Sources */,
 				A38C5A9C247344010018EB7B /* AppleSignInController.swift in Sources */,
 				A3DB42C725841F4300A8BEE4 /* NSmanagedObjectContext+Convenience.swift in Sources */,
@@ -995,7 +1014,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1052,7 +1071,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1072,10 +1091,10 @@
 				CODE_SIGN_ENTITLEMENTS = "AcheAQi/Supporting Files/AcheAQi.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = L6W3TBRD57;
 				INFOPLIST_FILE = "$(SRCROOT)/AcheAQi/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1097,10 +1116,10 @@
 				CODE_SIGN_ENTITLEMENTS = "AcheAQi/Supporting Files/AcheAQi.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 2;
+				CURRENT_PROJECT_VERSION = 34;
 				DEVELOPMENT_TEAM = L6W3TBRD57;
 				INFOPLIST_FILE = "$(SRCROOT)/AcheAQi/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1154,14 +1173,6 @@
 				minimumVersion = 4.8.0;
 			};
 		};
-		A38BD69625C9DFF80098D800 /* XCRemoteSwiftPackageReference "SwiftRater" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/takecian/SwiftRater";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.9.1;
-			};
-		};
 		A39098A723FDA8010068E997 /* XCRemoteSwiftPackageReference "Spring" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/romeugodoi/Spring";
@@ -1176,6 +1187,14 @@
 			requirement = {
 				kind = upToNextMajorVersion;
 				minimumVersion = 4.1.0;
+			};
+		};
+		A39CF91525F15B8700771254 /* XCRemoteSwiftPackageReference "SwiftRater" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/romeugodoi/SwiftRater";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.9.2;
 			};
 		};
 		A3ABCDF62476C7BA0067E205 /* XCRemoteSwiftPackageReference "Siren" */ = {
@@ -1233,11 +1252,6 @@
 			package = A345CC9D2470C8BF005C9843 /* XCRemoteSwiftPackageReference "NVActivityIndicatorView" */;
 			productName = NVActivityIndicatorView;
 		};
-		A38BD69725C9DFF80098D800 /* SwiftRater */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = A38BD69625C9DFF80098D800 /* XCRemoteSwiftPackageReference "SwiftRater" */;
-			productName = SwiftRater;
-		};
 		A39098A823FDA8010068E997 /* Spring */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = A39098A723FDA8010068E997 /* XCRemoteSwiftPackageReference "Spring" */;
@@ -1247,6 +1261,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = A3942C4E241A478600AACEC7 /* XCRemoteSwiftPackageReference "Karte" */;
 			productName = Karte;
+		};
+		A39CF91625F15B8700771254 /* SwiftRater */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = A39CF91525F15B8700771254 /* XCRemoteSwiftPackageReference "SwiftRater" */;
+			productName = SwiftRater;
 		};
 		A3ABCDF72476C7BB0067E205 /* Siren */ = {
 			isa = XCSwiftPackageProductDependency;
